@@ -1,0 +1,258 @@
+/*
+ * Coded by /a/non, for /a/non
+ */
+
+package anonscanlations.downloader;
+
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import java.lang.reflect.*;
+
+import org.yaml.snakeyaml.*;
+
+/**
+ *
+ * @author /a/non
+ */
+public class DownloaderUtils
+{
+    public static void debug(String message)
+    {
+        System.out.println("DEBUG: " + message);
+    }
+    public static void error(String message)
+    {
+        System.err.println("ERROR: " + message);
+    }
+
+    public static String getPage(String url, String encoding) throws IOException
+    {
+        URL u = new URL(url);
+
+        BufferedReader stream = new BufferedReader(new InputStreamReader(u.openStream(), encoding));
+
+	String string = "", line;
+
+	while((line = stream.readLine()) != null)
+	    string += line;
+
+        return(string);
+    }
+
+    public static boolean downloadFile(URL url, String localFile) throws IOException
+    {
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
+            return(false);
+
+        BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(localFile));
+
+        InputStream in = conn.getInputStream();
+        byte[] buf = new byte[1024];
+        int read;
+        while((read = in.read(buf)) != -1)
+            output.write(buf, 0, read);
+
+        output.close();
+        return(true);
+    }
+
+    // Source http://www.rgagnon.com/javadetails/java-0307.html
+    private static final HashMap<String,String> htmlEntities = new HashMap<String,String>();
+    static
+    {
+        htmlEntities.put("&lt;","<")    ;   htmlEntities.put("&gt;",">");
+        htmlEntities.put("&amp;","&")   ;   htmlEntities.put("&quot;","\"");
+        htmlEntities.put("&agrave;","à");   htmlEntities.put("&Agrave;","À");
+        htmlEntities.put("&acirc;","â") ;   htmlEntities.put("&auml;","ä");
+        htmlEntities.put("&Auml;","Ä")  ;   htmlEntities.put("&Acirc;","Â");
+        htmlEntities.put("&aring;","å") ;   htmlEntities.put("&Aring;","Å");
+        htmlEntities.put("&aelig;","æ") ;   htmlEntities.put("&AElig;","Æ" );
+        htmlEntities.put("&ccedil;","ç");   htmlEntities.put("&Ccedil;","Ç");
+        htmlEntities.put("&eacute;","é");   htmlEntities.put("&Eacute;","É" );
+        htmlEntities.put("&egrave;","è");   htmlEntities.put("&Egrave;","È");
+        htmlEntities.put("&ecirc;","ê") ;   htmlEntities.put("&Ecirc;","Ê");
+        htmlEntities.put("&euml;","ë")  ;   htmlEntities.put("&Euml;","Ë");
+        htmlEntities.put("&iuml;","ï")  ;   htmlEntities.put("&Iuml;","Ï");
+        htmlEntities.put("&ocirc;","ô") ;   htmlEntities.put("&Ocirc;","Ô");
+        htmlEntities.put("&ouml;","ö")  ;   htmlEntities.put("&Ouml;","Ö");
+        htmlEntities.put("&oslash;","ø");   htmlEntities.put("&Oslash;","Ø");
+        htmlEntities.put("&szlig;","ß") ;   htmlEntities.put("&ugrave;","ù");
+        htmlEntities.put("&Ugrave;","Ù");   htmlEntities.put("&ucirc;","û");
+        htmlEntities.put("&Ucirc;","Û") ;   htmlEntities.put("&uuml;","ü");
+        htmlEntities.put("&Uuml;","Ü")  ;   htmlEntities.put("&nbsp;"," ");
+        htmlEntities.put("&copy;","\u00a9");
+        htmlEntities.put("&reg;","\u00ae");
+        htmlEntities.put("&euro;","\u20a0");
+    }
+    
+    public static String unescapeHTML(String source)
+    {
+        int i, j;
+
+        boolean continueLoop;
+        int skip = 0;
+        do
+        {
+            continueLoop = false;
+            i = source.indexOf("&", skip);
+            if(i > -1)
+            {
+                j = source.indexOf(";", i);
+                if(j > i)
+                {
+                    String entityToLookFor = source.substring(i, j + 1);
+                    String value = htmlEntities.get(entityToLookFor);
+                    if (value != null)
+                    {
+                        source = source.substring(0, i)
+                                + value + source.substring(j + 1);
+                        continueLoop = true;
+                    }
+                    else if (value == null)
+                    {
+                        skip = i+1;
+                        continueLoop = true;
+                    }
+                }
+            }
+        }
+        while(continueLoop);
+        return(source);
+    }
+
+    public static SaveData readYAML(String file) throws IOException
+    {
+        return(readYAML(new FileInputStream(file)));
+    }
+
+    public static SaveData readYAML(InputStream stream) throws IOException
+    {
+        SaveData data = new SaveData();
+
+        TreeMap<String, Magazine> magazines = new TreeMap<String, Magazine>();
+
+        Yaml yaml = new Yaml();
+        Object obj = yaml.load(stream);
+        
+        Map<String, Object> root = (Map<String, Object>)obj;
+        for(Map.Entry<String, Object> magEntry : root.entrySet())
+        {
+            if(magEntry.getKey().equals("date"))
+            {
+                data.setDate((Date)magEntry.getValue());
+                continue;
+            }
+
+            // not a date
+            if(magEntry.getValue() instanceof Map)
+            {
+                Map<String, Object> magMap = (Map<String, Object>)magEntry.getValue();
+                Class c = findClass(magMap);
+                if(c == null)
+                    continue;
+                Constructor cons = findConstructor(c, Map.class);
+                if(cons == null)
+                    continue;
+                Magazine mag = (Magazine)newInstance(cons, magMap);
+                if(mag == null)
+                    continue;
+
+                buildMagazine(mag, magMap);
+                magazines.put(mag.getOriginalTitle(), mag);
+            }
+        }
+
+        data.setMagazines(magazines);
+
+        return(data);
+    }
+
+    private static void buildMagazine(Magazine mag, Map<String, Object> magMap)
+    {
+        for(Map.Entry<String, Object> seriesEntry : magMap.entrySet())
+        {
+            if(seriesEntry.getValue() instanceof Map)
+            {
+                Map<String, Object> seriesMap = (Map<String, Object>)seriesEntry.getValue();
+                Class c = findClass(seriesMap);
+                if(c == null)
+                    continue;
+                Constructor cons = findConstructor(c, Magazine.class, Map.class);
+                if(cons == null)
+                    continue;
+                Series series = (Series)newInstance(cons, mag, seriesMap);
+                if(series == null)
+                    continue;
+
+                buildSeries(series, seriesMap);
+                mag.addSeries(series);
+            }
+        }
+    }
+
+    private static void buildSeries(Series series, Map<String, Object> seriesMap)
+    {
+        for(Map.Entry<String, Object> chapterEntry : seriesMap.entrySet())
+        {
+            if(chapterEntry.getValue() instanceof Map)
+            {
+                Map<String, Object> chapterMap = (Map<String, Object>)chapterEntry.getValue();
+                Class c = findClass(chapterMap);
+                if(c == null)
+                    continue;
+                Constructor cons = findConstructor(c, Series.class, Map.class);
+                if(cons == null)
+                    continue;
+                Chapter chapter = (Chapter)newInstance(cons, series, chapterMap);
+                if(chapter == null)
+                    continue;
+
+                series.addChapter(chapter);
+            }
+        }
+    }
+
+    private static Class findClass(Map<String, Object> map)
+    {
+        Class c = null;
+        try
+        {
+            c = Class.forName((String)map.get("class"));
+        }
+        catch(ClassNotFoundException cnfe)
+        {
+            DownloaderUtils.error("class not found; non-fatal error");
+        }
+        return(c);
+    }
+
+    private static Constructor findConstructor(Class c, Class... paramTypes)
+    {
+        Constructor constructor = null;
+        try
+        {
+            constructor = c.getConstructor(paramTypes);
+        }
+        catch(NoSuchMethodException nsme)
+        {
+            DownloaderUtils.error("constructor not found; non-fatal error");
+        }
+        return(constructor);
+    }
+
+    private static Object newInstance(Constructor cons, Object... param)
+    {
+        Object obj = null;
+        try
+        {
+            obj = cons.newInstance(param);
+        }
+        catch(Exception e)
+        {
+            DownloaderUtils.error("couldn't construct new object; non-fatal error");
+        }
+        return(obj);
+    }
+}
