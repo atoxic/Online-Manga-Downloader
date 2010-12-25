@@ -28,12 +28,17 @@ public class WindowPrefsSaver extends WindowAdapter
 {
     private String key;
     private boolean size;
-    public WindowPrefsSaver(String myKey, Window w, boolean size)
+    private WindowPrefsSaver(String myKey, Window w, boolean size)
     {
         key = myKey;
         this.size = size;
         DownloadInfoServer.loadWindowPrefs(key, w, size);
         w.addWindowListener(this);
+    }
+
+    public static void add(String myKey, Window w, boolean size)
+    {
+        WindowPrefsSaver saver = new WindowPrefsSaver(myKey, w, size);
     }
 
     @Override

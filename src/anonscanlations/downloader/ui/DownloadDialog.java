@@ -59,7 +59,7 @@ public class DownloadDialog extends JDialog
 
     private void setupUI()
     {
-        new WindowPrefsSaver("progressDialog", this, false);
+        WindowPrefsSaver.add("progressDialog", this, false);
 
         content = new JPanel();
         setContentPane(content);
@@ -95,8 +95,7 @@ public class DownloadDialog extends JDialog
                 }
                 catch(Exception ie)
                 {
-                    // TODO: handle download error
-                    DownloaderUtils.error("ERROR: download error");
+                    DownloaderUtils.errorGUI("Download error", false);
                 }
                 DownloadDialog.this.dispose();
             }

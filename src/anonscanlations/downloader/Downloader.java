@@ -30,7 +30,7 @@ public class Downloader
         }
         catch(Exception e)
         {
-            DownloaderUtils.error("Couldn't load info on series or magazines");
+            DownloaderUtils.errorGUI("Couldn't load info on series or magazines", true);
         }
 
         DownloadInfoServer.SITES.put(SundaySite.SITE.getName(), SundaySite.SITE);
@@ -46,7 +46,6 @@ public class Downloader
         }
         else
         {
-            //sundayDemo();
             client();
         }
     }
@@ -68,8 +67,7 @@ public class Downloader
             catch(IOException ioe)
             {
                 DownloaderUtils.error("Could not get data on magazine \""
-                                    + entry.getKey() + "\"");
-                System.exit(1);
+                                    + entry.getKey() + "\"", false);
             }
             magazines.putAll(siteMagazines);
         }
@@ -83,8 +81,7 @@ public class Downloader
         }
         catch(IOException ioe)
         {
-            DownloaderUtils.error("Could not save data");
-            System.exit(1);
+            DownloaderUtils.error("Could not save data", true);
         }
     }
 
@@ -101,45 +98,13 @@ public class Downloader
             final DownloaderWindow window = new DownloaderWindow(data);
 
             if(DownloadInfoServer.PREFS.getBoolean("serverCheck", true))
-                retreiveFromServer(window);
+                DownloaderUtils.refreshFromServer(window);
 
             window.setVisible(true);
         }
         catch(Exception e)
         {
-            DownloaderUtils.error("Could not retreive data from file");
+            DownloaderUtils.errorGUI("Could not retreive data from file", true);
         }
-    }
-
-    private static void retreiveFromServer(DownloaderWindow w)
-    {
-        final DownloaderWindow window = w;
-
-        window.setTreeState(false);
-        Thread serverRetreiver = new Thread()
-        {
-            @Override
-            public void run()
-            {
-                try
-                {
-                    URL object = new URL("https://dl.dropbox.com/u/6792608/manga_download_info.yml");
-
-                    SaveData data = DownloaderUtils.readYAML(object.openStream());
-
-                    window.addSaveData(data);
-                }
-                catch(Exception e)
-                {
-                    // TODO: display status on error
-                    DownloaderUtils.error("couldn't retreive data from server");
-                }
-                finally
-                {
-                    window.setTreeState(true);
-                }
-            }
-        };
-        serverRetreiver.start();
     }
 }

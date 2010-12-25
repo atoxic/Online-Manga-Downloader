@@ -52,7 +52,7 @@ public abstract class DisplayField
             }
             catch(Exception e)
             {
-                DownloaderUtils.error("couldn't browse to page: " + url);
+                DownloaderUtils.errorGUI("couldn't browse to page: " + url, false);
             }
         }
     }

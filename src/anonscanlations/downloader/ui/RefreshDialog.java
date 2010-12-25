@@ -36,7 +36,7 @@ class RefreshDialog extends JDialog
         window = myWindow;
         selected = new TreeSet<String>();
 
-        new WindowPrefsSaver("refreshDialog", this, false);
+        WindowPrefsSaver.add("refreshDialog", this, false);
 
         content = new JPanel(new BorderLayout());
         content.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -121,8 +121,7 @@ class RefreshDialog extends JDialog
                         }
                         catch(IOException ioe)
                         {
-                            // TODO: error handling for inability to refresh
-                            DownloaderUtils.error("couldn't refresh!");
+                            DownloaderUtils.errorGUI("Refresh error", false);
                         }
                     }
                 };

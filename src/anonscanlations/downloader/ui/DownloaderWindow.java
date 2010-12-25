@@ -42,7 +42,7 @@ public class DownloaderWindow extends JFrame
 
         setupUI();
 
-        new WindowPrefsSaver("mainWindow", this, true);
+        WindowPrefsSaver.add("mainWindow", this, true);
 
         addWindowListener(new WindowAdapter()
         {
@@ -59,7 +59,7 @@ public class DownloaderWindow extends JFrame
                 }
                 catch(IOException ioe)
                 {
-                    DownloaderUtils.error("ERROR: couldn't save data to file");
+                    DownloaderUtils.error("Couldn't save data to file", false);
                 }
 
                 System.exit(0);
@@ -98,16 +98,29 @@ public class DownloaderWindow extends JFrame
         file.setMnemonic(KeyEvent.VK_F);
         menuBar.add(file);
 
-        JMenuItem refresh = new JMenuItem("Manually Refresh");
-        refresh.setMnemonic(KeyEvent.VK_M);
-        refresh.setAccelerator(KeyStroke.getKeyStroke(
+        JMenuItem manuallyRefresh = new JMenuItem("Manually Refresh");
+        manuallyRefresh.setMnemonic(KeyEvent.VK_M);
+        manuallyRefresh.setAccelerator(KeyStroke.getKeyStroke(
                 KeyEvent.VK_M, ActionEvent.CTRL_MASK));
-        refresh.addActionListener(new ActionListener()
+        manuallyRefresh.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent ae)
             {
                 RefreshDialog dialog = new RefreshDialog(DownloaderWindow.this);
                 dialog.setVisible(true);
+            }
+        });
+        file.add(manuallyRefresh);
+
+        JMenuItem refresh = new JMenuItem("Refresh from Server");
+        refresh.setMnemonic(KeyEvent.VK_R);
+        refresh.setAccelerator(KeyStroke.getKeyStroke(
+                KeyEvent.VK_R, ActionEvent.CTRL_MASK));
+        refresh.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                DownloaderUtils.refreshFromServer(DownloaderWindow.this);
             }
         });
         file.add(refresh);

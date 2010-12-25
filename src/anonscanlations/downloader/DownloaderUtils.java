@@ -5,11 +5,14 @@
 package anonscanlations.downloader;
 
 import java.io.*;
+import javax.swing.*;
 import java.net.*;
 import java.util.*;
 import java.lang.reflect.*;
 
 import org.yaml.snakeyaml.*;
+
+import anonscanlations.downloader.ui.*;
 
 /**
  *
@@ -21,9 +24,20 @@ public class DownloaderUtils
     {
         System.out.println("DEBUG: " + message);
     }
-    public static void error(String message)
+    public static void error(String message, boolean fatal)
     {
-        System.err.println("ERROR: " + message);
+        if(!fatal)
+            System.err.print("NON-");
+        System.err.println("FATAL ERROR: " + message);
+        if(fatal)
+            System.exit(1);
+    }
+    public static void errorGUI(String message, boolean fatal)
+    {
+        String msg = (fatal ? "" : "NON-") + "FATAL ERROR: " + message;
+        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+        if(fatal)
+            System.exit(1);
     }
 
     public static String getPage(String url, String encoding) throws IOException
@@ -223,7 +237,7 @@ public class DownloaderUtils
         }
         catch(ClassNotFoundException cnfe)
         {
-            DownloaderUtils.error("class not found; non-fatal error");
+            DownloaderUtils.error("Class not found", false);
         }
         return(c);
     }
@@ -237,7 +251,7 @@ public class DownloaderUtils
         }
         catch(NoSuchMethodException nsme)
         {
-            DownloaderUtils.error("constructor not found; non-fatal error");
+            DownloaderUtils.error("Constructor not found", false);
         }
         return(constructor);
     }
@@ -251,8 +265,39 @@ public class DownloaderUtils
         }
         catch(Exception e)
         {
-            DownloaderUtils.error("couldn't construct new object; non-fatal error");
+            DownloaderUtils.error("couldn't construct new object; non-fatal error", false);
         }
         return(obj);
+    }
+
+    public static void refreshFromServer(DownloaderWindow w)
+    {
+        final DownloaderWindow window = w;
+
+        window.setTreeState(false);
+        Thread serverRetreiver = new Thread()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    URL object = new URL("https://dl.dropbox.com/u/6792608/manga_download_info.yml");
+
+                    SaveData data = DownloaderUtils.readYAML(object.openStream());
+
+                    window.addSaveData(data);
+                }
+                catch(Exception e)
+                {
+                    DownloaderUtils.errorGUI("couldn't retreive data from server", false);
+                }
+                finally
+                {
+                    window.setTreeState(true);
+                }
+            }
+        };
+        serverRetreiver.start();
     }
 }

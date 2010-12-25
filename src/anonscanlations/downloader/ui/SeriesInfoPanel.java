@@ -168,8 +168,7 @@ public class SeriesInfoPanel extends JPanel
                     }
                     catch(IOException ioe)
                     {
-                        // TODO error on submission
-                        DownloaderUtils.error("couldn't submit");
+                        DownloaderUtils.errorGUI("Couldn't submit", false);
                     }
                 }
             }
