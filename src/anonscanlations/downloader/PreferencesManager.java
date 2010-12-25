@@ -16,7 +16,9 @@ public class PreferencesManager
 {
     public static final Preferences PREFS = Preferences.userRoot().node("anonscanlations.downloader");
 
-    public static final String KEY_SERVERCHECK = "serverCheck", KEY_SUBMIT = "submit";
+    public static final String KEY_SERVERCHECK = "serverCheck", 
+                                KEY_SUBMIT = "submit",
+                                KEY_DOWNLOADDIR = "downloadDir";
 
     // set preferences to default values if they haven't been touched at all
     public static void initializePrefs()
@@ -26,6 +28,7 @@ public class PreferencesManager
             PREFS.putBoolean("initialized", true);
             PREFS.putBoolean(KEY_SERVERCHECK, true);
             PREFS.putBoolean(KEY_SUBMIT, false);
+            PREFS.put(KEY_DOWNLOADDIR, "./downloads/");
         }
     }
 

@@ -5,6 +5,8 @@
 
 package anonscanlations.downloader;
 
+import java.io.*;
+
 /**
  *
  * @author Administrator
@@ -12,20 +14,16 @@ package anonscanlations.downloader;
 public abstract class DownloadListener
 {
     private boolean aborted;
-    protected String dir;
-    public DownloadListener()
-    {
-        dir = PreferencesManager.PREFS.get("downloadDir", "./");
-    }
-    public DownloadListener(String myDir)
+    protected DownloadDirectory directory;
+    public DownloadListener(DownloadDirectory myDir)
     {
         aborted = false;
-        dir = myDir;
+        directory = myDir;
     }
 
     public abstract void downloadProgressed(Chapter c, int page);
     public abstract void downloadFinished(Chapter c);
-    public abstract void setDownloadLength(int length);
+    public abstract void setDownloadRange(int min, int max);
     
     public synchronized void abortDownload()
     {
@@ -36,14 +34,11 @@ public abstract class DownloadListener
         return(aborted);
     }
     
-    public synchronized String getDownloadDirectory()
+    public synchronized String downloadPath(Chapter c, int i) throws IOException
     {
-        return(dir);
-    }
-    public synchronized boolean downloadFile()
-    {
-        if(aborted)
-            return(false);
-        return(true);
+        String saveTitle = c.getSeries().getTranslatedTitle() + "_c" + c.getTitle()
+                            + "_" + String.format("%03d", i) + ".jpg";
+        saveTitle = saveTitle.replace(' ', '_');
+        return((new File(directory.getFile(), saveTitle)).getAbsolutePath());
     }
 }

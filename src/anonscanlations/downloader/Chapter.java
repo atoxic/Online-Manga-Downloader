@@ -15,7 +15,8 @@ public abstract class Chapter implements YAMLable, Serializable
 {
     public abstract Series getSeries();
     public abstract String getTitle();
-    public abstract int getNumPages();
+    public abstract int getMin();
+    public abstract int getMax();
 
     @Override
     public String toString()

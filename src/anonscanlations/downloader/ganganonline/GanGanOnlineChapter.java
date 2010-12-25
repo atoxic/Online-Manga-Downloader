@@ -76,26 +76,27 @@ public class GanGanOnlineChapter extends Chapter implements Serializable
         return(title);
     }
 
-    public int getNumPages()
+    public int getMin()
     {
-        return(total);
+        return(start);
+    }
+    public int getMax()
+    {
+        return(total - start);
     }
 
     public boolean download(DownloadListener dl) throws IOException
     {
         URL baseURL = new URL(new URL(url), "images/2/");
 
-        String saveTitle = series.getTranslatedTitle() + "_c" + getTitle() + "_";
-        saveTitle = saveTitle.replace(' ', '_');
-
         for(int i = start;
             DownloaderUtils.downloadFile(new URL(baseURL, i + ".jpg"),
-                saveTitle + String.format("%03d", i) + ".jpg");
+                dl.downloadPath(this, i));
             i++)
         {
             if(dl.isDownloadAborted())
                 return(true);
-            dl.downloadProgressed(this, i - (start - 1));
+            dl.downloadProgressed(this, i);
         }
 
         dl.downloadFinished(this);

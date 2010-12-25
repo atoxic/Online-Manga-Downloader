@@ -38,6 +38,11 @@ public class DownloadDialog extends JDialog
 
     private class DownloadDialogListener extends DownloadListener
     {
+        public DownloadDialogListener(DownloadDirectory myDir)
+        {
+            super(myDir);
+        }
+
         public void downloadProgressed(Chapter c, int page)
         {
             DownloaderUtils.debug("download progess: " + page);
@@ -49,10 +54,11 @@ public class DownloadDialog extends JDialog
             DownloaderUtils.debug("download finished!");
             dispose();
         }
-        public void setDownloadLength(int length)
+        public void setDownloadRange(int min, int max)
         {
-            DownloaderUtils.debug("setting download length: " + length);
-            progressBar.setMaximum(length);
+            DownloaderUtils.debug("setting download range: " + min + " to " + max);
+            progressBar.setMaximum(max);
+            progressBar.setMinimum(min - 1);
             progressBar.setIndeterminate(false);
         }
     }
@@ -65,7 +71,6 @@ public class DownloadDialog extends JDialog
         setContentPane(content);
 
         progressBar = new JProgressBar();
-        progressBar.setMinimum(0);
         progressBar.setStringPainted(true);
         
         content.add(progressBar);
@@ -76,11 +81,25 @@ public class DownloadDialog extends JDialog
     {
         final Chapter chapter = c;
 
-        final DownloadListener dl = new DownloadDialogListener();
+        final DownloadDirectory dir = DownloadDirectory.makeDirectory(
+                                        PreferencesManager.PREFS.get(
+                                            PreferencesManager.KEY_DOWNLOADDIR,
+                                            "./downloads/"));
+
+        if(dir == null)
+        {
+            DownloaderUtils.errorGUI("Download error: couldn't create directory", null, false);
+            return;
+        }
+
+        final DownloadListener dl = new DownloadDialogListener(dir);
 
         progressBar.setValue(0);
-        if(chapter.getNumPages() != -1)
-            progressBar.setMaximum(chapter.getNumPages());
+        if(chapter.getMin() != -1)
+        {
+            progressBar.setMinimum(chapter.getMin() - 1);
+            progressBar.setMaximum(chapter.getMax());
+        }
         else
             progressBar.setIndeterminate(true);
 

@@ -69,7 +69,13 @@ public class SundayChapter extends Chapter
     {
         return(key4.substring(0, key4.indexOf('-')));
     }
-    public int getNumPages()
+
+    // Dunno right now
+    public int getMin()
+    {
+        return(-1);
+    }
+    public int getMax()
     {
         return(-1);
     }
@@ -129,7 +135,7 @@ public class SundayChapter extends Chapter
         int min = Integer.parseInt(list[0]),
             max = Integer.parseInt(list[1]);
 
-        dl.setDownloadLength(max - min + 1);
+        dl.setDownloadRange(min, max);
 
         DownloaderUtils.debug("serverTimestamp: " + serverTimestamp);
         DownloaderUtils.debug("availTimestamp: " + availTimestamp);
@@ -146,9 +152,6 @@ public class SundayChapter extends Chapter
         String origURL = server + "data/" + key1 + "/" + key2 + "/" + key3 + "/" + key4 + "/bin/";
 
         File temp = File.createTempFile("pcviewer_temp", ".bin");
-
-        String saveTitle = series.getTranslatedTitle() + "_c" + getTitle() + "_";
-        saveTitle = saveTitle.replace(' ', '_');
 
         for(int i = min; i <= max; i++)
         {
@@ -175,9 +178,9 @@ public class SundayChapter extends Chapter
 
             DownloaderUtils.downloadFile(new URL(url), temp.getAbsolutePath());
             PCViewerDecrypt.decryptFile(temp.getAbsolutePath(),
-                saveTitle + String.format("%03d", i) + ".jpg");
+                dl.downloadPath(this, i));
 
-            dl.downloadProgressed(this, i - (min - 1));
+            dl.downloadProgressed(this, i);
         }
 
         dl.downloadFinished(this);

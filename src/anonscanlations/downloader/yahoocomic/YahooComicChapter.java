@@ -98,17 +98,19 @@ public class YahooComicChapter extends Chapter implements Serializable
         return(key1.substring(key1.lastIndexOf('-') + 1));
     }
 
-    public int getNumPages()
+    public int getMin()
     {
-        return(rangeEnd - rangeStart);
+        return(rangeStart);
+    }
+
+    public int getMax()
+    {
+        return(rangeEnd);
     }
 
     public boolean download(DownloadListener dl) throws IOException
     {
         URL baseURL = new URL(xmlurl);
-
-        String saveTitle = series.getTranslatedTitle() + "_c" + getTitle() + "_";
-        saveTitle = saveTitle.replace(' ', '_');
 
         File temp = File.createTempFile("pcviewer_temp", ".bin");
 
@@ -122,9 +124,9 @@ public class YahooComicChapter extends Chapter implements Serializable
                             shd + "&re=0&ad=0&pre=&pno=" + i + "&p=" + dataFolder);
             DownloaderUtils.downloadFile(url, temp.getAbsolutePath());
             PCViewerDecrypt.decryptFile(temp.getAbsolutePath(),
-                    saveTitle + String.format("%03d", i) + ".jpg");
+                    dl.downloadPath(this, i));
 
-            dl.downloadProgressed(this, i - (rangeStart - 1));
+            dl.downloadProgressed(this, i);
         }
 
         dl.downloadFinished(this);
