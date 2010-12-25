@@ -4,11 +4,8 @@
 
 package anonscanlations.downloader;
 
-import java.awt.*;
 import java.io.*;
-import java.net.*;
 import java.util.*;
-import java.util.prefs.*;
 
 import org.yaml.snakeyaml.*;
 
@@ -45,9 +42,26 @@ public class DownloadInfoServer
         input.close();
     }
 
+    public static void saveInfo(String file, Map<String, HashMap> infoMap) throws IOException
+    {
+        Yaml yaml = new Yaml();
+
+        String output = yaml.dumpAll(infoMap.values().iterator());
+
+        FileWriter out = new FileWriter(file);
+        out.write(output);
+        out.close();
+    }
+
     public static void loadAllInfo() throws IOException
     {
         loadInfo("data/series.yml", SERIES_INFO);
         loadInfo("data/magazines.yml", MAGAZINE_INFO);
+    }
+
+    public static void saveAllInfo() throws IOException
+    {
+        saveInfo("data/series.yml", SERIES_INFO);
+        saveInfo("data/magazines.yml", MAGAZINE_INFO);
     }
 }

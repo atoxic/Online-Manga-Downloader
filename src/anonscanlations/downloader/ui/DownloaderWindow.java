@@ -31,7 +31,6 @@ public class DownloaderWindow extends JFrame
     DownloadDialog downloader;
 
     private SaveData data;
-    private TreeMap<String, SortedTreeNode> seriesNodeMap;
 
     public DownloaderWindow(SaveData myData)
     {
@@ -54,6 +53,7 @@ public class DownloaderWindow extends JFrame
                 try
                 {
                     data.dumpYAML("data/manga_download_info.yml");
+                    DownloadInfoServer.saveAllInfo();
 
                     DownloaderUtils.debug("data saved");
                 }
@@ -197,15 +197,12 @@ public class DownloaderWindow extends JFrame
     {
         SortedTreeNode top = new SortedTreeNode("Magazines");
 
-        seriesNodeMap = new TreeMap<String, SortedTreeNode>();
-
         for(Map.Entry<String, Magazine> mag : data.getMagazines().entrySet())
         {
             SortedTreeNode magazineNode = new SortedTreeNode(mag.getValue().getTranslatedTitle());
             for(Series series : mag.getValue().getSeries())
             {
                 SortedTreeNode seriesNode = new SortedTreeNode(series);
-                seriesNodeMap.put(series.getOriginalTitle(), seriesNode);
                 for(Chapter chapter : series.getChapters())
                 {
                     SortedTreeNode chapterNode = new SortedTreeNode(chapter);
@@ -219,19 +216,6 @@ public class DownloaderWindow extends JFrame
         DefaultTreeModel model = new DefaultTreeModel(top);
 
         tree.setModel(model);
-    }
-
-    /** Force a node that may have changed to be put in its right place
-     * 
-     * @param name
-     */
-    public void reorderSeriesNode(String name)
-    {
-        SortedTreeNode seriesNode = seriesNodeMap.get(name);
-        if(seriesNode != null)
-        {
-            ((SortedTreeNode)seriesNode.getParent()).add(seriesNode);
-        }
     }
 
     public void addSaveData(SaveData data)

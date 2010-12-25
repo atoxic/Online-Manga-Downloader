@@ -13,6 +13,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
+import javax.swing.tree.*;
 
 import java.io.*;
 import java.util.*;
@@ -47,12 +48,14 @@ public class SeriesInfoPanel extends JPanel
     
     private HashMap<String, JTextField> fieldMap;
     private Chapter chapter;
+    private SortedTreeNode node;
 
     public SeriesInfoPanel(DownloaderWindow myWindow)
     {
         window = myWindow;
         fieldMap = new HashMap<String, JTextField>();
         chapter = null;
+        node = null;
 
         setupUI();
     }
@@ -87,9 +90,10 @@ public class SeriesInfoPanel extends JPanel
         fieldMap.clear();
     }
 
-    public void displaySeriesInfo(Series series, Chapter c)
+    public void displaySeriesInfo(Series series, Chapter c, SortedTreeNode seriesNode)
     {
         HashMap seriesInfo = series.getSeriesInfo();
+        this.node = seriesNode;
         
         // get information
         if(seriesInfo == null)
@@ -115,7 +119,7 @@ public class SeriesInfoPanel extends JPanel
     {
         buttonPanel = new JPanel();
 
-        submitButton = new JButton("Submit Information");
+        submitButton = new JButton("Save");
         submitButton.addActionListener(new ActionListener()
         {
             private String getSubmitURL(String ... keys) throws UnsupportedEncodingException
@@ -139,6 +143,7 @@ public class SeriesInfoPanel extends JPanel
             }
             public void actionPerformed(ActionEvent ae)
             {
+                // Save information
                 String name = fieldMap.get("name").getText();
                 HashMap info = DownloadInfoServer.SERIES_INFO.get(name);
                 if(info == null)
@@ -150,8 +155,19 @@ public class SeriesInfoPanel extends JPanel
                 {
                     info.put(fieldEntry.getKey(), FIELDS_MAP.get(fieldEntry.getKey()).getValue(fieldEntry.getValue()));
                 }
-                window.reorderSeriesNode(name);
 
+                // Refresh node
+                if(node != null)
+                {
+                    SortedTreeNode parent = (SortedTreeNode)node.getParent();
+                    DefaultTreeModel model = (DefaultTreeModel)window.tree.getModel();
+                    parent.remove(node);
+                    parent.add(node);
+                    model.nodeStructureChanged(parent);
+                    node = null;
+                }
+
+                // Submit info in needed
                 if(PreferencesManager.PREFS.getBoolean(PreferencesManager.KEY_SUBMIT, false))
                 {
                     try

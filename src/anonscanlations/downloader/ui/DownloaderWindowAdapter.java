@@ -44,11 +44,12 @@ class DownloaderWindowAdapter extends MouseAdapter
             {
                 if(selPath.getPathCount() >= 3)
                 {
-                    Series series = (Series) ((DefaultMutableTreeNode)selPath.getPathComponent(2)).getUserObject();
+                    Series series = (Series) ((SortedTreeNode)selPath.getPathComponent(2)).getUserObject();
                     Chapter c = null;
                     if(selPath.getPathCount() == 4)
-                        c = (Chapter) ((DefaultMutableTreeNode)selPath.getPathComponent(3)).getUserObject();
-                    window.info.displaySeriesInfo(series, c);
+                        c = (Chapter) ((SortedTreeNode)selPath.getPathComponent(3)).getUserObject();
+                    window.info.displaySeriesInfo(series, c,
+                            (SortedTreeNode)selPath.getPathComponent(2));
                 }
                 else
                 {

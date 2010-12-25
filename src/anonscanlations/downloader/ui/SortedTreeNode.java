@@ -34,6 +34,11 @@ public class SortedTreeNode extends DefaultMutableTreeNode
     @Override
     public void add(MutableTreeNode node)
     {
+        insert(node, getIndexIfInserted(node));
+    }
+
+    public int getIndexIfInserted(MutableTreeNode node)
+    {
         DefaultMutableTreeNode n = (DefaultMutableTreeNode)node;
         Enumeration e = children();
         int i;
@@ -43,6 +48,6 @@ public class SortedTreeNode extends DefaultMutableTreeNode
             if((n.getUserObject().toString()).compareTo(each.getUserObject().toString()) <= 0)
                 break;
         }
-        insert(node, i);
+        return(i);
     }
 }
