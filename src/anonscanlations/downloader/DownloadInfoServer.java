@@ -18,10 +18,6 @@ import org.yaml.snakeyaml.*;
  */
 public class DownloadInfoServer
 {
-    //public static final String SAVE_LOCATION = "E:/dropbox/My Dropbox/Public/manga_download_info.yml";
-    public static final String SAVE_LOCATION = "C:/Users/Administrator/Documents/"
-                                        + "My Dropbox/Public/manga_download_info.yml";
-    
     public static final Map<String, HashMap> SERIES_INFO = Collections.synchronizedMap(new TreeMap<String, HashMap>()),
                                                 MAGAZINE_INFO = Collections.synchronizedMap(new TreeMap<String, HashMap>());
 
@@ -48,7 +44,7 @@ public class DownloadInfoServer
 
         String output = yaml.dumpAll(infoMap.values().iterator());
 
-        FileWriter out = new FileWriter(file);
+        OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
         out.write(output);
         out.close();
     }

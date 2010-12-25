@@ -70,7 +70,7 @@ public class SaveData implements Serializable
 
         String output = yaml.dump(data);
 
-        FileWriter out = new FileWriter(file);
+        OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
         out.write(output);
         out.close();
     }

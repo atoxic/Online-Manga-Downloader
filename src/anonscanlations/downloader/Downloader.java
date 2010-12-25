@@ -46,12 +46,11 @@ public class Downloader
 
         PreferencesManager.initializePrefs();
 
-        if(args.length >= 1 && args[0].equals("--server"))
+        if(args.length >= 2 && args[0].equals("--server"))
         {
-            server(args.length >= 2 ? args[1] :
-                                DownloadInfoServer.SAVE_LOCATION);
+            server(args[1]);
         }
-        else
+        else if(args.length == 0)
         {
             client();
         }
