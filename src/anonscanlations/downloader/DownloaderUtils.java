@@ -4,8 +4,12 @@
 
 package anonscanlations.downloader;
 
-import java.io.*;
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.*;
+
+import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.lang.reflect.*;
@@ -41,6 +45,48 @@ public class DownloaderUtils
         ERRORS.add(new Exception(msg, e));
         if(fatal)
             System.exit(1);
+    }
+
+    public static void browse(String url)
+    {
+        Desktop desktop = Desktop.getDesktop();
+
+        if(desktop.isSupported(java.awt.Desktop.Action.BROWSE))
+        {
+            try
+            {
+                URI uri = new URI(url);
+                desktop.browse(uri);
+            }
+            catch(Exception e)
+            {
+                DownloaderUtils.errorGUI("couldn't browse to page: " + url, e, false);
+            }
+        }
+    }
+
+    public static JEditorPane makeHyperlinkLabel(String label)
+    {
+        JEditorPane labelPane = new JEditorPane("text/html", label);
+        labelPane.setAlignmentX(Component.LEFT_ALIGNMENT);
+        labelPane.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        labelPane.setEditable(false);
+        labelPane.setOpaque(false);
+        labelPane.setMaximumSize(new Dimension(10000000, labelPane.getPreferredSize().height));
+        if(label.startsWith("<html>"))
+        {
+            labelPane.addHyperlinkListener(new HyperlinkListener()
+            {
+                public void hyperlinkUpdate(HyperlinkEvent hle)
+                {
+                    if(HyperlinkEvent.EventType.ACTIVATED.equals(hle.getEventType()))
+                    {
+                        browse(hle.getURL().toString());
+                    }
+                }
+            });
+        }
+        return(labelPane);
     }
 
     public static String getPage(String url, String encoding) throws IOException

@@ -92,51 +92,85 @@ public class DownloaderWindow extends JFrame
 
         // Menu
 
+        setupMenu();
+    }
+
+    public void setupMenu()
+    {
         JMenuBar menuBar = new JMenuBar();
 
-        JMenu file = new JMenu("File");
-        file.setMnemonic(KeyEvent.VK_F);
-        menuBar.add(file);
-
-        JMenuItem manuallyRefresh = new JMenuItem("Manually Refresh");
-        manuallyRefresh.setMnemonic(KeyEvent.VK_M);
-        manuallyRefresh.setAccelerator(KeyStroke.getKeyStroke(
-                KeyEvent.VK_M, ActionEvent.CTRL_MASK));
-        manuallyRefresh.addActionListener(new ActionListener()
         {
-            public void actionPerformed(ActionEvent ae)
-            {
-                RefreshDialog dialog = new RefreshDialog(DownloaderWindow.this);
-                dialog.setVisible(true);
-            }
-        });
-        file.add(manuallyRefresh);
+            JMenu file = new JMenu("File");
+            file.setMnemonic(KeyEvent.VK_F);
+            menuBar.add(file);
 
-        JMenuItem refresh = new JMenuItem("Refresh from Server");
-        refresh.setMnemonic(KeyEvent.VK_R);
-        refresh.setAccelerator(KeyStroke.getKeyStroke(
-                KeyEvent.VK_R, ActionEvent.CTRL_MASK));
-        refresh.addActionListener(new ActionListener()
+            {
+                JMenuItem manuallyRefresh = new JMenuItem("Manually Refresh");
+                manuallyRefresh.setMnemonic(KeyEvent.VK_M);
+                manuallyRefresh.setAccelerator(KeyStroke.getKeyStroke(
+                        KeyEvent.VK_M, ActionEvent.CTRL_MASK));
+                manuallyRefresh.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        RefreshDialog dialog = new RefreshDialog(DownloaderWindow.this);
+                        dialog.setVisible(true);
+                    }
+                });
+                file.add(manuallyRefresh);
+            }
+
+            {
+                JMenuItem refresh = new JMenuItem("Refresh from Server");
+                refresh.setMnemonic(KeyEvent.VK_R);
+                refresh.setAccelerator(KeyStroke.getKeyStroke(
+                        KeyEvent.VK_R, ActionEvent.CTRL_MASK));
+                refresh.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        DownloaderUtils.refreshFromServer(DownloaderWindow.this);
+                    }
+                });
+                file.add(refresh);
+            }
+
+            file.addSeparator();
+
+            {
+                JMenuItem exit = new JMenuItem("Exit");
+                exit.setMnemonic(KeyEvent.VK_X);
+                exit.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        System.exit(0);
+                    }
+                });
+                file.add(exit);
+            }
+        }
         {
-            public void actionPerformed(ActionEvent ae)
-            {
-                DownloaderUtils.refreshFromServer(DownloaderWindow.this);
-            }
-        });
-        file.add(refresh);
+            JMenu help = new JMenu("Help");
+            help.setMnemonic(KeyEvent.VK_H);
+            menuBar.add(help);
 
-        file.addSeparator();
-
-        JMenuItem exit = new JMenuItem("Exit");
-        exit.setMnemonic(KeyEvent.VK_X);
-        exit.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent ae)
             {
-                System.exit(0);
+                JMenuItem about = new JMenuItem("About");
+                about.setMnemonic(KeyEvent.VK_A);
+                about.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        JOptionPane.showMessageDialog(null, 
+                                DownloaderUtils.makeHyperlinkLabel(Downloader.ABOUT),
+                                "About",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    }
+                });
+                help.add(about);
             }
-        });
-        file.add(exit);
+        }
 
         setJMenuBar(menuBar);
     }

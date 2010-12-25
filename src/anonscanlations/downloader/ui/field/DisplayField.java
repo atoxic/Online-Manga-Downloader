@@ -39,48 +39,11 @@ public abstract class DisplayField
 
     protected abstract JFormattedTextField.AbstractFormatter getFormatter();
 
-    protected static void browse(String url)
-    {
-        Desktop desktop = Desktop.getDesktop();
-
-        if(desktop.isSupported(java.awt.Desktop.Action.BROWSE))
-        {
-            try
-            {
-                URI uri = new URI(url);
-                desktop.browse(uri);
-            }
-            catch(Exception e)
-            {
-                DownloaderUtils.errorGUI("couldn't browse to page: " + url, e, false);
-            }
-        }
-    }
-
     public String getLabel(Object value){ return(label); }
 
     public void addLabel(JPanel fieldPanel, Object value)
     {
-        JEditorPane labelPane = new JEditorPane("text/html", getLabel(value));
-        labelPane.setAlignmentX(Component.LEFT_ALIGNMENT);
-        labelPane.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-        labelPane.setEditable(false);
-        labelPane.setOpaque(false);
-        labelPane.setMaximumSize(new Dimension(10000000, labelPane.getPreferredSize().height));
-        if(getLabel(value).startsWith("<html>"))
-        {
-            labelPane.addHyperlinkListener(new HyperlinkListener()
-            {
-                public void hyperlinkUpdate(HyperlinkEvent hle)
-                {
-                    if(HyperlinkEvent.EventType.ACTIVATED.equals(hle.getEventType()))
-                    {
-                        browse(hle.getURL().toString());
-                    }
-                }
-            });
-        }
-        fieldPanel.add(labelPane);
+        fieldPanel.add(DownloaderUtils.makeHyperlinkLabel(getLabel(value)));
     }
 
     public JTextField addField(JPanel fieldPanel, Object value)
