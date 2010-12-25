@@ -62,15 +62,8 @@ public class GanGanOnlineChapter extends Chapter implements Serializable
         index = page.indexOf("<total>");
         String totalString = page.substring(index + 7, page.indexOf("</total>", index));
 
-        try
-        {
-            start = Integer.parseInt(startString);
-            total = Integer.parseInt(totalString);
-        }
-        catch(NumberFormatException nfe)
-        {
-            // EAT IT
-        }
+        start = Integer.parseInt(startString);
+        total = Integer.parseInt(totalString);
     }
 
     public Series getSeries()

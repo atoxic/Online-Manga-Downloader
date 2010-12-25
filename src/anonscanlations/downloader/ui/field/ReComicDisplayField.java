@@ -10,6 +10,8 @@ import javax.swing.*;
 import javax.swing.text.*;
 import java.text.*;
 
+import anonscanlations.downloader.*;
+
 /**
  *
  * @author /a/non
@@ -31,7 +33,7 @@ public class ReComicDisplayField extends PrefixedDisplayField
         }
         catch(ParseException e)
         {
-
+            DownloaderUtils.error("Couldn't parse MaskFormatter", e, false);
         }
         return(null);
     }

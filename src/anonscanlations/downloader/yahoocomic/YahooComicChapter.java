@@ -41,9 +41,9 @@ public class YahooComicChapter extends Chapter implements Serializable
         {
             xmlurl = URLDecoder.decode(getParam(url, "xmlurl"), "UTF-8");
         }
-        catch(Exception e)
+        catch(UnsupportedEncodingException e)
         {
-            // eat it up
+            DownloaderUtils.error("Couldn't decode xmlurl with UTF-8", e, false);
         }
         shd = getParam(url, "shd");
         rangeStart = rangeEnd = 0;
@@ -75,15 +75,9 @@ public class YahooComicChapter extends Chapter implements Serializable
         String rangeString = page.substring(index + 22, page.indexOf("\">", index));
         String range[] = rangeString.split("-");
 
-        try
-        {
-            rangeStart = Integer.parseInt(range[0]);
-            rangeEnd = Integer.parseInt(range[1]);
-        }
-        catch(NumberFormatException nfe)
-        {
-            // EAT IT
-        }
+       
+        rangeStart = Integer.parseInt(range[0]);
+        rangeEnd = Integer.parseInt(range[1]);
     }
 
     private String getParam(String url, String param)

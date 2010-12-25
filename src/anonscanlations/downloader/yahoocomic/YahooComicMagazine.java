@@ -78,7 +78,7 @@ public class YahooComicMagazine extends Magazine
                     }
                     catch(Exception e)
                     {
-                        // I'll take an exception...and eat it!
+                        DownloaderUtils.error("Couldn't parse Yahoo! Comic page", e, false);
                     }
                 }
             };
@@ -96,7 +96,7 @@ public class YahooComicMagazine extends Magazine
             }
             catch(Exception e)
             {
-                // yum
+                DownloaderUtils.error("Couldn't join thread", e, false);
             }
         }
     }

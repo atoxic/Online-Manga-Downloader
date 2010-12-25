@@ -58,7 +58,7 @@ class MUImageLoadThread extends Thread
         }
         catch(IOException ioe)
         {
-            // Eat it
+            DownloaderUtils.error("Couldn't load image", ioe, false);
         }
     }
 }
