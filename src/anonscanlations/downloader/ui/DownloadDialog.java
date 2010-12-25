@@ -93,9 +93,9 @@ public class DownloadDialog extends JDialog
                 {
                     chapter.download(dl);
                 }
-                catch(Exception ie)
+                catch(Exception e)
                 {
-                    DownloaderUtils.errorGUI("Download error", false);
+                    DownloaderUtils.errorGUI("Download error", e, false);
                 }
                 DownloadDialog.this.dispose();
             }

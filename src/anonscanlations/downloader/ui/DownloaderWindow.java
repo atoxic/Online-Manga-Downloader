@@ -59,7 +59,7 @@ public class DownloaderWindow extends JFrame
                 }
                 catch(IOException ioe)
                 {
-                    DownloaderUtils.error("Couldn't save data to file", false);
+                    DownloaderUtils.error("Couldn't save data to file", ioe, false);
                 }
 
                 System.exit(0);

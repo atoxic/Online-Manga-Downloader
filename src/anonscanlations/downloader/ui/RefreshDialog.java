@@ -121,7 +121,7 @@ class RefreshDialog extends JDialog
                         }
                         catch(IOException ioe)
                         {
-                            DownloaderUtils.errorGUI("Refresh error", false);
+                            DownloaderUtils.errorGUI("Refresh error", ioe, false);
                         }
                     }
                 };

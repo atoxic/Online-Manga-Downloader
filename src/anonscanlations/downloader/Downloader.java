@@ -30,7 +30,7 @@ public class Downloader
         }
         catch(Exception e)
         {
-            DownloaderUtils.errorGUI("Couldn't load info on series or magazines", true);
+            DownloaderUtils.errorGUI("Couldn't load info on series or magazines", e, true);
         }
 
         DownloadInfoServer.SITES.put(SundaySite.SITE.getName(), SundaySite.SITE);
@@ -67,7 +67,7 @@ public class Downloader
             catch(IOException ioe)
             {
                 DownloaderUtils.error("Could not get data on magazine \""
-                                    + entry.getKey() + "\"", false);
+                                    + entry.getKey() + "\"", ioe, false);
             }
             magazines.putAll(siteMagazines);
         }
@@ -81,7 +81,7 @@ public class Downloader
         }
         catch(IOException ioe)
         {
-            DownloaderUtils.error("Could not save data", true);
+            DownloaderUtils.error("Could not save data", ioe, true);
         }
     }
 
@@ -104,7 +104,7 @@ public class Downloader
         }
         catch(Exception e)
         {
-            DownloaderUtils.errorGUI("Could not retreive data from file", true);
+            DownloaderUtils.errorGUI("Could not retreive data from file", e, true);
         }
     }
 }

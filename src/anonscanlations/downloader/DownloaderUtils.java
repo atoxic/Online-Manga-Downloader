@@ -20,22 +20,25 @@ import anonscanlations.downloader.ui.*;
  */
 public class DownloaderUtils
 {
+    public static final ArrayList<Exception> ERRORS = new ArrayList<Exception>();
+
     public static void debug(String message)
     {
         System.out.println("DEBUG: " + message);
     }
-    public static void error(String message, boolean fatal)
+    public static void error(String message, Exception e, boolean fatal)
     {
-        if(!fatal)
-            System.err.print("NON-");
-        System.err.println("FATAL ERROR: " + message);
+        String msg = (fatal ? "" : "NON-") + "FATAL ERROR: " + message;
+        System.err.println(msg);
+        ERRORS.add(new Exception(msg, e));
         if(fatal)
             System.exit(1);
     }
-    public static void errorGUI(String message, boolean fatal)
+    public static void errorGUI(String message, Exception e, boolean fatal)
     {
         String msg = (fatal ? "" : "NON-") + "FATAL ERROR: " + message;
         JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+        ERRORS.add(new Exception(msg, e));
         if(fatal)
             System.exit(1);
     }
@@ -237,7 +240,7 @@ public class DownloaderUtils
         }
         catch(ClassNotFoundException cnfe)
         {
-            DownloaderUtils.error("Class not found", false);
+            DownloaderUtils.error("Class not found", cnfe, false);
         }
         return(c);
     }
@@ -251,7 +254,7 @@ public class DownloaderUtils
         }
         catch(NoSuchMethodException nsme)
         {
-            DownloaderUtils.error("Constructor not found", false);
+            DownloaderUtils.error("Constructor not found", nsme, false);
         }
         return(constructor);
     }
@@ -265,7 +268,7 @@ public class DownloaderUtils
         }
         catch(Exception e)
         {
-            DownloaderUtils.error("couldn't construct new object; non-fatal error", false);
+            DownloaderUtils.error("couldn't construct new object", e, false);
         }
         return(obj);
     }
@@ -290,7 +293,7 @@ public class DownloaderUtils
                 }
                 catch(Exception e)
                 {
-                    DownloaderUtils.errorGUI("couldn't retreive data from server", false);
+                    DownloaderUtils.errorGUI("couldn't retreive data from server", e, false);
                 }
                 finally
                 {
