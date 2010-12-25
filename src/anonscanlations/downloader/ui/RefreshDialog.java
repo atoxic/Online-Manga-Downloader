@@ -8,17 +8,12 @@ import anonscanlations.downloader.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.event.*;
-import javax.swing.tree.*;
-import javax.imageio.*;
 
 import java.io.*;
 import java.util.*;
-import java.net.*;
 
 /**
  *

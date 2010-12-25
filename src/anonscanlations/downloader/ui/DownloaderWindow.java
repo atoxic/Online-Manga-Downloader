@@ -138,6 +138,24 @@ public class DownloaderWindow extends JFrame
             file.addSeparator();
 
             {
+                JMenuItem preferences = new JMenuItem("Preferences");
+                preferences.setMnemonic(KeyEvent.VK_P);
+                preferences.setAccelerator(KeyStroke.getKeyStroke(
+                        KeyEvent.VK_P, ActionEvent.CTRL_MASK));
+                preferences.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        PreferencesDialog dialog = new PreferencesDialog(DownloaderWindow.this);
+                        dialog.setVisible(true);
+                    }
+                });
+                file.add(preferences);
+            }
+
+            file.addSeparator();
+
+            {
                 JMenuItem exit = new JMenuItem("Exit");
                 exit.setMnemonic(KeyEvent.VK_X);
                 exit.addActionListener(new ActionListener()

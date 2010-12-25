@@ -44,7 +44,7 @@ public class Downloader
         DownloadInfoServer.SITES.put(GanGanOnlineSite.SITE.getName(), GanGanOnlineSite.SITE);
         DownloadInfoServer.SITES.put(YahooComicSite.SITE.getName(), YahooComicSite.SITE);
 
-        DownloadInfoServer.initializePrefs();
+        PreferencesManager.initializePrefs();
 
         if(args.length >= 1 && args[0].equals("--server"))
         {
@@ -104,7 +104,7 @@ public class Downloader
 
             final DownloaderWindow window = new DownloaderWindow(data);
 
-            if(DownloadInfoServer.PREFS.getBoolean("serverCheck", true))
+            if(PreferencesManager.PREFS.getBoolean(PreferencesManager.KEY_SERVERCHECK, true))
                 DownloaderUtils.refreshFromServer(window);
 
             window.setVisible(true);

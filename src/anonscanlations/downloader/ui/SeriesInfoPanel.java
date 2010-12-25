@@ -152,7 +152,7 @@ public class SeriesInfoPanel extends JPanel
                 }
                 window.reorderSeriesNode(name);
 
-                if(DownloadInfoServer.PREFS.getBoolean("submit", false))
+                if(PreferencesManager.PREFS.getBoolean(PreferencesManager.KEY_SUBMIT, false))
                 {
                     try
                     {
@@ -194,10 +194,16 @@ public class SeriesInfoPanel extends JPanel
         add(buttonPanel);
     }
 
+    public void refereshButtonState()
+    {
+        submitButton.setText(PreferencesManager.PREFS
+                            .getBoolean(PreferencesManager.KEY_SUBMIT, false)
+                                ? "Save and Submit" : "Save");
+    }
+
     public void setButtonStates(boolean maySave, boolean mayDownload)
     {
-        submitButton.setText(DownloadInfoServer.PREFS.getBoolean("submit", false)
-                                ? "Save and Submit" : "Save");
+        refereshButtonState();
         submitButton.setEnabled(maySave);
         downloadButton.setEnabled(mayDownload);
     }

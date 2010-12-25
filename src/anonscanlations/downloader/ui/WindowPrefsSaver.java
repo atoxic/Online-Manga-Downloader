@@ -32,7 +32,7 @@ public class WindowPrefsSaver extends WindowAdapter
     {
         key = myKey;
         this.size = size;
-        DownloadInfoServer.loadWindowPrefs(key, w, size);
+        PreferencesManager.loadWindowPrefs(key, w, size);
         w.addWindowListener(this);
     }
 
@@ -45,20 +45,20 @@ public class WindowPrefsSaver extends WindowAdapter
     public void windowOpened(WindowEvent e)
     {
         DownloaderUtils.debug("loading prefs for: " + key);
-        DownloadInfoServer.loadWindowPrefs(key, e.getWindow(), size);
+        PreferencesManager.loadWindowPrefs(key, e.getWindow(), size);
     }
 
     @Override
     public void windowClosing(WindowEvent e)
     {
         DownloaderUtils.debug("closing; saving prefs for: " + key);
-        DownloadInfoServer.saveWindowPrefs(key, e.getWindow());
+        PreferencesManager.saveWindowPrefs(key, e.getWindow());
     }
 
     @Override
     public void windowClosed(WindowEvent e)
     {
         DownloaderUtils.debug("closed; saving prefs for: " + key);
-        DownloadInfoServer.saveWindowPrefs(key, e.getWindow());
+        PreferencesManager.saveWindowPrefs(key, e.getWindow());
     }
 }

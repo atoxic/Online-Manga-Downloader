@@ -15,7 +15,7 @@ public abstract class DownloadListener
     protected String dir;
     public DownloadListener()
     {
-        dir = DownloadInfoServer.PREFS.get("downloadDir", "./");
+        dir = PreferencesManager.PREFS.get("downloadDir", "./");
     }
     public DownloadListener(String myDir)
     {
