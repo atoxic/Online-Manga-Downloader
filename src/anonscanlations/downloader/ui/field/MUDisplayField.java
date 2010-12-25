@@ -91,6 +91,17 @@ class MUFormatter extends JFormattedTextField.AbstractFormatter
     {
         if(obj instanceof Number)
             return(obj.toString());
+        if(obj instanceof String)
+        {
+            try
+            {
+                Number num = Integer.parseInt((String)obj);
+                return((String)obj);
+            }
+            catch(NumberFormatException nfe)
+            {
+            }
+        }
         return(null);
     }
 }

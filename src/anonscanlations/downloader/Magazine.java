@@ -25,7 +25,12 @@ public abstract class Magazine implements YAMLable, Serializable
     public final String getTranslatedTitle()
     {
         HashMap info = getMagazineInfo();
-        return(info == null ?  getOriginalTitle() : (String)info.get("translation"));
+        if(info != null)
+        {
+            if(info.containsKey("translation"))
+                return((String)info.get("translation"));
+        }
+        return(getOriginalTitle());
     }
 
     @Override

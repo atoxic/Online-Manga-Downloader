@@ -34,7 +34,12 @@ public abstract class Series implements YAMLable, Serializable
     public final String getTranslatedTitle()
     {
         HashMap info = getSeriesInfo();
-        return(info == null ?  getOriginalTitle() : (String)info.get("translation"));
+        if(info != null)
+        {
+            if(info.containsKey("translation"))
+                return((String)info.get("translation"));
+        }
+        return(getOriginalTitle());
     }
 
     @Override

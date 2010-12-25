@@ -161,7 +161,11 @@ public class SeriesInfoPanel extends JPanel
                 }
                 for(Map.Entry<String, JTextField> fieldEntry : fieldMap.entrySet())
                 {
-                    info.put(fieldEntry.getKey(), FIELDS_MAP.get(fieldEntry.getKey()).getValue(fieldEntry.getValue()));
+                    String value = FIELDS_MAP.get(fieldEntry.getKey()).getValue(fieldEntry.getValue());
+                    if(value == null || value.length() == 0)
+                        info.remove(fieldEntry.getKey());
+                    else
+                        info.put(fieldEntry.getKey(), value);
                 }
 
                 // Refresh node
@@ -172,7 +176,6 @@ public class SeriesInfoPanel extends JPanel
                     parent.remove(node);
                     parent.add(node);
                     model.nodeStructureChanged(parent);
-                    node = null;
                 }
 
                 // Submit info in needed
