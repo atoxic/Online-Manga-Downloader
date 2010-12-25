@@ -42,6 +42,7 @@ public class DownloaderWindow extends JFrame
 
         setupUI();
 
+        setSize(800, 600);
         WindowPrefsSaver.add("mainWindow", this, true);
 
         addWindowListener(new WindowAdapter()

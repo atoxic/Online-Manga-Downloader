@@ -44,15 +44,25 @@ public class PreferencesManager
 
     public static void loadWindowPrefs(String key, Window w, boolean size)
     {
-        Preferences node = PREFS.node(key);
-        Rectangle bounds = w.getBounds();
-        bounds.x = node.getInt("x", bounds.x);
-        bounds.y = node.getInt("y", bounds.y);
-        if(size)
+        try
         {
-            bounds.width = node.getInt("width", bounds.width);
-            bounds.height = node.getInt("height", bounds.height);
+            if(PREFS.nodeExists(key))
+            {
+                Preferences node = PREFS.node(key);
+                Rectangle bounds = w.getBounds();
+                bounds.x = node.getInt("x", bounds.x);
+                bounds.y = node.getInt("y", bounds.y);
+                if(size)
+                {
+                    bounds.width = node.getInt("width", bounds.width);
+                    bounds.height = node.getInt("height", bounds.height);
+                }
+                w.setBounds(bounds);
+            }
         }
-        w.setBounds(bounds);
+        catch(BackingStoreException bse)
+        {
+            DownloaderUtils.error("Couldn't load preferences for window: " + key, bse, false);
+        }
     }
 }
