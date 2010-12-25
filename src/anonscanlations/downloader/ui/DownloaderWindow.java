@@ -26,6 +26,7 @@ import java.net.*;
  */
 public class DownloaderWindow extends JFrame
 {
+    // package scope
     SeriesInfoPanel info;
     JTree tree;
     DownloadDialog downloader;

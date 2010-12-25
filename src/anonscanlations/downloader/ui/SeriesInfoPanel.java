@@ -112,6 +112,14 @@ public class SeriesInfoPanel extends JPanel
             fieldMap.put(field.getKey(),
                     field.addField(fieldPanel, seriesInfo.get(field.getKey())));
         }
+        if(seriesInfo.containsKey("mangaupdates"))
+        {
+            MUImageLoadThread loader = new MUImageLoadThread(image,
+                            "http://www.mangaupdates.com/series.html?id="
+                            + seriesInfo.get("mangaupdates"));
+
+            loader.start();
+        }
         setButtonStates(true, chapter != null);
     }
 
