@@ -25,16 +25,7 @@ public class MUDisplayField extends PrefixedDisplayField
 
     protected JFormattedTextField.AbstractFormatter getFormatter()
     {
-        try
-        {
-            MaskFormatter formatter = new MaskFormatter("#######");
-            return(formatter);
-        }
-        catch(ParseException e)
-        {
-            DownloaderUtils.error("Couldn't parse MaskFormatter", e, false);
-        }
-        return(null);
+        return(new MUFormatter());
     }
     
     @Override
@@ -53,5 +44,53 @@ public class MUDisplayField extends PrefixedDisplayField
         super.setupField(field);
         if(field instanceof JFormattedTextField)
             ((JFormattedTextField)field).setColumns(7);
+    }
+}
+
+class MUFormatter extends JFormattedTextField.AbstractFormatter
+{
+    @Override
+    protected DocumentFilter getDocumentFilter()
+    {
+        return(new DocumentFilter()
+        {
+            @Override
+            public void insertString(DocumentFilter.FilterBypass fb,
+                                int offset, String string, AttributeSet attr)
+                                    throws BadLocationException
+            {
+                String onlyNums = string.replaceAll("[^0-9]", "");
+                fb.insertString(offset, onlyNums, attr);
+            }
+
+            @Override
+            public void replace(DocumentFilter.FilterBypass fb, 
+                                int offset, int length,
+                                String text, AttributeSet attrs)
+                                    throws BadLocationException
+            {
+                String onlyNums = text.replaceAll("[^0-9]", "");
+                fb.replace(offset, length, onlyNums, attrs);
+            }
+        });
+    }
+
+    public Object stringToValue(String text)
+    {
+        try
+        {
+            Number num = Integer.parseInt(text);
+            return(num);
+        }
+        catch(NumberFormatException nfe)
+        {
+            return(null);
+        }
+    }
+    public String valueToString(Object obj)
+    {
+        if(obj instanceof Number)
+            return(obj.toString());
+        return(null);
     }
 }
