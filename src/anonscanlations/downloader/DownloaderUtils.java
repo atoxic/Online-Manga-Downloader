@@ -24,6 +24,8 @@ import anonscanlations.downloader.ui.*;
  */
 public class DownloaderUtils
 {
+    public static final boolean SPILL_GUTS = true;
+
     public static final ArrayList<Exception> ERRORS = new ArrayList<Exception>();
 
     public static void debug(String message)
@@ -34,7 +36,7 @@ public class DownloaderUtils
     {
         String msg = (fatal ? "" : "NON-") + "FATAL ERROR: " + message;
         System.err.println(msg);
-        ERRORS.add(new Exception(msg, e));
+        addException(msg, e);
         if(fatal)
             System.exit(1);
     }
@@ -42,9 +44,19 @@ public class DownloaderUtils
     {
         String msg = (fatal ? "" : "NON-") + "FATAL ERROR: " + message;
         JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
-        ERRORS.add(new Exception(msg, e));
+        addException(msg, e);
         if(fatal)
             System.exit(1);
+    }
+
+    private static void addException(String msg, Exception e)
+    {
+        ERRORS.add(new Exception(msg, e));
+        if(SPILL_GUTS)
+        {
+            System.err.println("LOGGER: Exception added");
+            e.printStackTrace();
+        }
     }
 
     public static void browse(String url)

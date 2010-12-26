@@ -72,10 +72,9 @@ public class YahooComicChapter extends Chapter implements Serializable
         dataFolder = page.substring(index + 22, page.indexOf("\">", index));
 
         index = page.indexOf("<SamplePageList list=\"");
-        String rangeString = page.substring(index + 22, page.indexOf("\">", index));
+        String rangeString = page.substring(index + 22, page.indexOf("\"", index + 22));
         String range[] = rangeString.split("-");
-
-       
+        
         rangeStart = Integer.parseInt(range[0]);
         rangeEnd = Integer.parseInt(range[1]);
     }
