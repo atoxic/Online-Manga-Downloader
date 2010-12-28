@@ -23,6 +23,8 @@ import anonscanlations.downloader.pcviewer.*;
  */
 public class SundayChapter extends Chapter
 {
+    public static final String ERR_OTK = "Couldn't get correct OTK key";
+
     private Series series;
     private String key1, key2, key3, key4, shd;
 
@@ -108,6 +110,14 @@ public class SundayChapter extends Chapter
         if(dl.isDownloadAborted())
             return(true);
 
+        if(xmlString == null)
+        {
+            if((xmlString = backupOTKGet(dl)) == null)
+            {
+                throw new Exception(ERR_OTK);
+            }
+        }
+
         getSWF();
         if(dl.isDownloadAborted())
             return(true);
@@ -188,7 +198,13 @@ public class SundayChapter extends Chapter
         return(true);
     }
 
-    private void getNewSession(String url) throws IOException
+    /**
+     * 
+     * @param url
+     * @return
+     * @throws IOException
+     */
+    private boolean getNewSession(String url) throws IOException
     {
         // 1) get otk and PHPSESSID
 
@@ -219,10 +235,15 @@ public class SundayChapter extends Chapter
                                         urlConn.getInputStream(), "UTF-8"));
 
         String line;
-
+        boolean lastPage = true;
+        int index;
         while((line = stream.readLine()) != null)
         {
-            int index = line.indexOf("&otk=");
+            index = line.indexOf("進む &gt;</a>");
+            if(index != -1)
+                lastPage = false;
+            
+            index = line.indexOf("&otk=");
             if(index != -1)
             {
                 otk = line.substring(index + 5, line.indexOf('\'', index));
@@ -234,6 +255,8 @@ public class SundayChapter extends Chapter
         urlConn.disconnect();
         
         DownloaderUtils.debug("otk: " + otk);
+
+        return(lastPage);
     }
 
     private void getMainFile() throws IOException
@@ -283,6 +306,9 @@ public class SundayChapter extends Chapter
 
         stream.close();
         urlConn.disconnect();
+
+        if(xmlString.equals("NG"))
+            xmlString = null;
         
         return(xmlString);
     }
@@ -299,5 +325,29 @@ public class SundayChapter extends Chapter
         urlConn.setRequestProperty("Cookie", cookies);
         urlConn.connect();
         urlConn.disconnect();
+    }
+
+    private String backupOTKGet(DownloadListener dl) throws IOException
+    {
+        String xmlString = null;
+        boolean lastPage = false;
+        for(int i = 1; !lastPage; i++)
+        {
+            lastPage = getNewSession("http://club.shogakukan.co.jp/magazine/SH_CSNDY/"
+                                    + key3 + "/all/" + i);
+            if(dl.isDownloadAborted())
+                return(null);
+
+            getMainFile();
+            if(dl.isDownloadAborted())
+                return(null);
+
+            xmlString = getXMLFile();
+            if(dl.isDownloadAborted())
+                return(null);
+            if(xmlString != null)
+                return(xmlString);
+        }
+        return(xmlString);
     }
 }
