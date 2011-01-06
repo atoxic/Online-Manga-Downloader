@@ -41,7 +41,7 @@ public class SundaySite extends Site
             int index = page.indexOf("<span class=\"current\">");
             String current = page.substring(index + 22, page.indexOf("</span>", index));
 
-            DownloaderUtils.debug("current: " + current);
+            DownloaderUtils.debug("current page: " + current);
             if(!current.equals(i + ""))
                 break;
 

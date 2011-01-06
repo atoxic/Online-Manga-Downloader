@@ -1,18 +1,26 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Coded by /a/non, for /a/non
  */
 
 package anonscanlations.downloader.comichigh;
 
+import java.io.*;
 import java.util.*;
+
+import anonscanlations.downloader.*;
 
 /**
  *
- * @author Administrator
+ * @author /a/non
  */
-public class ComicHighSite
+public class ComicHighSite extends Site
 {
+    public final static ComicHighSite SITE = new ComicHighSite();
+
+    private ComicHighSite()
+    {
+    }
+
     private static final String kBase = "zBCfA!c#e@-UHTOtLEaDPVbXYjgNrRQlyFWpZ$+no*qIhKSvuxGk~siwm%:dJ/M?";
 
     private static final int[] bbc = new int[]{0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095},
@@ -141,5 +149,31 @@ public class ComicHighSite
 	}
 
         System.out.println("result: " + _ret);
+    }
+
+    public String getName(){ return("Comic High!"); }
+
+    public TreeMap<String, Magazine> getMagazines()
+            throws IOException
+    {
+        TreeMap<String, Magazine> map = new TreeMap<String, Magazine>();
+        ComicHighMagazine mag = new ComicHighMagazine();
+        map.put(mag.getOriginalTitle(), mag);
+
+        String page = DownloaderUtils.getPage("http://www.comichigh.jp/webcomic.html", "UTF-8");
+
+        int index = 0;
+        TreeSet<String> links = new TreeSet<String>();
+        while((index = page.indexOf("http://futabasha.pluginfree.com/weblish/futabawebhigh/", index + 1)) != -1)
+        {
+            String link = page.substring(index, page.indexOf("/transit2.html", index));
+
+            links.add(link);
+        }
+
+        for(String link : links)
+            System.out.println("link: " + link);
+
+        return(map);
     }
 }
