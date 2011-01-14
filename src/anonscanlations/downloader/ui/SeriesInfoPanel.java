@@ -225,7 +225,7 @@ public class SeriesInfoPanel extends JPanel
     {
         submitButton.setText(PreferencesManager.PREFS
                             .getBoolean(PreferencesManager.KEY_SUBMIT, false)
-                                ? "Save and Submit" : "Save");
+                                ? "Save and Submit Info" : "Save Info");
     }
 
     public void setButtonStates(boolean maySave, boolean mayDownload)

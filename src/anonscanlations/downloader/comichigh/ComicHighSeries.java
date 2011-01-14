@@ -15,7 +15,7 @@ import anonscanlations.downloader.*;
  */
 public class ComicHighSeries extends Series
 {
-    private String url, title;
+    private String title;
     private TreeMap<String, Chapter> chapters;
 
     public ComicHighSeries(Magazine myMagazine, Map<String, Object> yamlMap)
@@ -23,17 +23,15 @@ public class ComicHighSeries extends Series
         super(myMagazine);
 
         title = (String)yamlMap.get("title");
-        url = (String)yamlMap.get("url");
 
         chapters = new TreeMap<String, Chapter>();
     }
 
-    public ComicHighSeries(Magazine myMagazine, String myURL)
+    public ComicHighSeries(Magazine myMagazine, String myTitle)
     {
         super(myMagazine);
 
-        title = null;
-        url = myURL;
+        title = myTitle;
 
         chapters = new TreeMap<String, Chapter>();
     }
@@ -52,7 +50,6 @@ public class ComicHighSeries extends Series
         HashMap<String, Object> ret = new HashMap<String, Object>();
 
         ret.put("title", title);
-        ret.put("url", url);
 
         return(ret);
     }
@@ -60,25 +57,5 @@ public class ComicHighSeries extends Series
     public void addChapter(Chapter chapter)
     {
         chapters.put(chapter.getTitle(), chapter);
-    }
-
-    public void parsePage() throws IOException
-    {
-        String page = DownloaderUtils.getPage(url, "Shift_JIS");
-
-        String cKV = title(page, "'cKV'");
-        System.out.println("cKV");
-    }
-
-    private String title(String page, String ID)
-    {
-        int index = page.indexOf("ID=" + ID);
-        if(index != -1)
-        {
-            index = page.indexOf("title='", index);
-            if(index != -1)
-                return(page.substring(index, page.indexOf('\'', index + 7)));
-        }
-        return(null);
     }
 }

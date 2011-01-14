@@ -63,7 +63,7 @@ public class ComicHighSite extends Site
         return(bx + by);
     }
 
-    public static void expand(String _src, int _key)
+    public static String expand(String _src, int _key)
     {
         int i, j, _cs, _cd, _bis, _bit, _cbt, _ss, _pn;
         String _pst, _ks;
@@ -148,7 +148,7 @@ public class ComicHighSite extends Site
             }
 	}
 
-        System.out.println("result: " + _ret);
+        return(_ret.toString());
     }
 
     public String getName(){ return("Comic High!"); }
@@ -161,18 +161,37 @@ public class ComicHighSite extends Site
         map.put(mag.getOriginalTitle(), mag);
 
         String page = DownloaderUtils.getPage("http://www.comichigh.jp/webcomic.html", "UTF-8");
+        String[] sections = page.split("class=\"lineup\"");
 
-        int index = 0;
         TreeSet<String> links = new TreeSet<String>();
-        while((index = page.indexOf("http://futabasha.pluginfree.com/weblish/futabawebhigh/", index + 1)) != -1)
-        {
-            String link = page.substring(index, page.indexOf("/transit2.html", index));
 
-            links.add(link);
+        for(int i = 1; i < 2; i++)
+        {
+            int index = 0;
+            index = sections[i].indexOf("<dt>");
+            String title = sections[i].substring(index + 4, sections[i].indexOf("<", index + 4) - 1);
+             DownloaderUtils.debug("title: " + title);
+            ComicHighSeries series = new ComicHighSeries(mag, title);
+
+            while((index = sections[i].indexOf("http://futabasha.pluginfree.com/weblish/futabawebhigh/", index + 1)) != -1)
+            {
+                String link = sections[i].substring(index, sections[i].indexOf("/transit2.html", index));
+
+                links.add(link);
+            }
+            
+            for(String link : links)
+            {
+                DownloaderUtils.debug("\tlink: " + link);
+                ComicHighChapter chapter = new ComicHighChapter(series,
+                                        link.substring(link.indexOf('_') + 1), link);
+                chapter.parsePages();
+                series.addChapter(chapter);
+            }
+            mag.addSeries(series);
+            links.clear();
         }
 
-        for(String link : links)
-            System.out.println("link: " + link);
 
         return(map);
     }
