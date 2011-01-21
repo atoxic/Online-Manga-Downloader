@@ -6,12 +6,14 @@ package anonscanlations.downloader;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import javax.imageio.*;
 import java.lang.reflect.*;
 
 import org.yaml.snakeyaml.*;
@@ -131,6 +133,19 @@ public class DownloaderUtils
 
         output.close();
         return(true);
+    }
+
+    public static BufferedImage downloadImage(URL url) throws IOException
+    {
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
+            return(null);
+
+        InputStream in = conn.getInputStream();
+
+        BufferedImage image = ImageIO.read(in);
+
+        return(image);
     }
 
     // Source http://www.rgagnon.com/javadetails/java-0307.html

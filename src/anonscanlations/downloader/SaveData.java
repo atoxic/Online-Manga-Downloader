@@ -44,7 +44,7 @@ public class SaveData implements Serializable
 
     public final void dumpYAML(String file) throws IOException
     {
-        Yaml yaml = new Yaml();
+        Yaml yaml = new Yaml(DownloadInfoServer.OPTIONS);
 
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("date", date);

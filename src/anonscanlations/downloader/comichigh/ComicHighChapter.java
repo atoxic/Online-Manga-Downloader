@@ -6,6 +6,7 @@ package anonscanlations.downloader.comichigh;
 
 import java.util.*;
 import java.io.*;
+import java.awt.image.*;
 import java.net.*;
 
 import anonscanlations.downloader.*;
@@ -86,10 +87,14 @@ public class ComicHighChapter extends Chapter implements Serializable
 
         // title
         String sHN = title(initVal, "'sHN'");
-        DownloaderUtils.debug("\t\t\tsIS: " + sHN);
+        DownloaderUtils.debug("\t\t\tsHN: " + sHN);
 
-        DownloaderUtils.debug("\t\t\ttarget: http://futabasha.pluginfree.com/cgi-bin/widget.cgi?a=" + hCN + sHN + "/" + sHN);
-        DownloaderUtils.debug("\t\t\t" + ComicHighSite.getIpntStr(sIS, 1, 0, 0, 0));
+        downloadURL = "http://futabasha.pluginfree.com/cgi-bin/widget.cgi?a=" + hCN + sHN + "/" + sHN;
+        DownloaderUtils.debug("\t\t\ttarget: " + downloadURL);
+        //DownloaderUtils.debug("\t\t\t" + ComicHighSite.getIpntStr(sIS, 1, 15, 0, 0));
+        //DownloaderUtils.debug("\t\t\t" + ComicHighSite.getIpntStr(sIS, 1, 15, 1, 0));
+        //DownloaderUtils.debug("\t\t\t" + ComicHighSite.getIpntStr(sIS, 1, 15, 1, 1));
+        //DownloaderUtils.debug("\t\t\t" + ComicHighSite.getIpntStr(sIS, 1, 15, 0, 1));
 
         return(true);
     }
@@ -115,7 +120,9 @@ public class ComicHighChapter extends Chapter implements Serializable
 
     public boolean download(DownloadListener dl) throws IOException
     {
+        URL url = new URL(downloadURL + "_001_15" + ComicHighSite.getIpntStr(sIS, 1, 15, 0, 0) + ".jpg");
 
+        BufferedImage image = DownloaderUtils.downloadImage(url);
 
         return(true);
     }

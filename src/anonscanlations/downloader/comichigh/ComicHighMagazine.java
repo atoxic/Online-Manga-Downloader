@@ -41,11 +41,11 @@ public class ComicHighMagazine extends Magazine
 
     public Collection<Series> getSeries()
     {
-        return(null);
+        return(series.values());
     }
     
     public void addSeries(Series s)
     {
-        
+        series.put(s.getOriginalTitle(), s);
     }
 }

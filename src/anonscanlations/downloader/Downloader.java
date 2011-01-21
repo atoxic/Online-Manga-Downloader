@@ -42,6 +42,7 @@ public class Downloader
             DownloaderUtils.errorGUI("Couldn't load info on series or magazines", e, true);
         }
 
+        DownloadInfoServer.SITES.put(ComicHighSite.SITE.getName(), ComicHighSite.SITE);
         DownloadInfoServer.SITES.put(SundaySite.SITE.getName(), SundaySite.SITE);
         DownloadInfoServer.SITES.put(GanGanOnlineSite.SITE.getName(), GanGanOnlineSite.SITE);
         DownloadInfoServer.SITES.put(YahooComicSite.SITE.getName(), YahooComicSite.SITE);
@@ -54,15 +55,7 @@ public class Downloader
         }
         else if(args.length == 0)
         {
-            try
-            {
-                ComicHighSite.SITE.getMagazines();
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-            //client();
+            client();
         }
         // */
     }

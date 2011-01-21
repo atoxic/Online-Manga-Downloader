@@ -23,6 +23,14 @@ public class DownloadInfoServer
 
     public static final TreeMap<String, Site> SITES = new TreeMap<String, Site>();
 
+
+    public static final DumperOptions OPTIONS = new DumperOptions();
+    static
+    {
+        OPTIONS.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+        OPTIONS.setDefaultScalarStyle(DumperOptions.ScalarStyle.DOUBLE_QUOTED);
+    }
+
     public static void loadInfo(String file, Map<String, HashMap> infoMap) throws IOException
     {
         Yaml yaml = new Yaml();
@@ -40,7 +48,7 @@ public class DownloadInfoServer
 
     public static void saveInfo(String file, Map<String, HashMap> infoMap) throws IOException
     {
-        Yaml yaml = new Yaml();
+        Yaml yaml = new Yaml(OPTIONS);
 
         String output = yaml.dumpAll(infoMap.values().iterator());
 

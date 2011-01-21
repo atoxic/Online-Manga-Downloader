@@ -158,19 +158,18 @@ public class ComicHighSite extends Site
     {
         TreeMap<String, Magazine> map = new TreeMap<String, Magazine>();
         ComicHighMagazine mag = new ComicHighMagazine();
-        map.put(mag.getOriginalTitle(), mag);
-
+        
         String page = DownloaderUtils.getPage("http://www.comichigh.jp/webcomic.html", "UTF-8");
         String[] sections = page.split("class=\"lineup\"");
 
         TreeSet<String> links = new TreeSet<String>();
 
-        for(int i = 1; i < 2; i++)
+        for(int i = 1; i < sections.length; i++)
         {
             int index = 0;
             index = sections[i].indexOf("<dt>");
             String title = sections[i].substring(index + 4, sections[i].indexOf("<", index + 4) - 1);
-             DownloaderUtils.debug("title: " + title);
+            DownloaderUtils.debug("title: " + title);
             ComicHighSeries series = new ComicHighSeries(mag, title);
 
             while((index = sections[i].indexOf("http://futabasha.pluginfree.com/weblish/futabawebhigh/", index + 1)) != -1)
@@ -183,14 +182,23 @@ public class ComicHighSite extends Site
             for(String link : links)
             {
                 DownloaderUtils.debug("\tlink: " + link);
-                ComicHighChapter chapter = new ComicHighChapter(series,
-                                        link.substring(link.indexOf('_') + 1), link);
-                chapter.parsePages();
-                series.addChapter(chapter);
+                try
+                {
+                    ComicHighChapter chapter = new ComicHighChapter(series,
+                                            link.substring(link.indexOf('_') + 1), link);
+                    chapter.parsePages();
+                    series.addChapter(chapter);
+                }
+                catch(IOException e)
+                {
+                    DownloaderUtils.error("could not get info on page: " + link, e, false);
+                }
             }
             mag.addSeries(series);
             links.clear();
         }
+
+        map.put(mag.getOriginalTitle(), mag);
 
 
         return(map);

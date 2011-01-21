@@ -1,18 +1,69 @@
-{name: EDEN, translation: EDEN, mangaupdates: 'http://www.mangaupdates.com/publishers.html?pubname=EDEN'}
---- {name: FlexComix ネクスト, translation: Flex Comix Next, mangaupdates: 'http://www.mangaupdates.com/publishers.html?pubname=Flex+Comix+Next'}
---- {name: FlexComix フレア, translation: Flex Comix Flare, mangaupdates: 'http://www.mangaupdates.com/publishers.html?pubname=Flex+Comix+Flare'}
---- {name: FlexComix ブラッド, translation: Flex Comix Blood, mangaupdates: 'http://www.mangaupdates.com/publishers.html?pubname=Flex+Comix+Blood'}
---- {name: GENZO EX., translation: GENZO EX., mangaupdates: 'http://www.mangaupdates.com/publishers.html?pubname=GENZO+EX'}
---- {name: JOURすてきな主婦たち, translation: Jour Suteki na Shufutachi, mangaupdates: 'http://www.mangaupdates.com/publishers.html?pubname=Jour+Suteki+na+Shufutachi'}
---- {name: Nextcomic ファースト, translation: Next Comic First, mangaupdates: 'http://www.mangaupdates.com/publishers.html?pubname=Next+Comic+First'}
---- {name: WEBコミックエッセイ劇場 Yahoo! JAPANセレクション, translation: Webcomic Essay Theater}
---- {name: WINGS, translation: WINGS, mangaupdates: 'http://www.mangaupdates.com/publishers.html?pubname=WINGS'}
---- {name: ガンガンONLINE, translation: GanGan Online, mangaupdates: 'http://www.mangaupdates.com/publishers.html?pubname=Gangan+Online'}
---- {name: クラブサンデー, translation: Club Sunday, mangaupdates: 'http://www.mangaupdates.com/publishers.html?pubname=Club+Sunday',
-  recomic: 'http://recomic.jp/a2.php?option=0&keyword=%E3%82%AF%E3%83%A9%E3%83%96%E3%82%B5%E3%83%B3%E3%83%87%E3%83%BC'}
---- {name: コミックヒストリア, translation: Comic Histria, mangaupdates: 'http://www.mangaupdates.com/publishers.html?pubname=Comic+Histria'}
---- {name: コミックマンガ王＋YA！, translation: Comic Manga King + YA!}
---- {name: デジタル漫画アクション, translation: Digital Manga Action}
---- {name: ハーレクイン, translation: Harlequin, mangaupdates: 'http://www.mangaupdates.com/publishers.html?pubname=Harlequin'}
---- {name: ホラー＆ファンタジー倶楽部, translation: Horror and Fantasy Club}
---- {name: ルチルSWEET, translation: Ruchiru Sweet, mangaupdates: 'http://www.mangaupdates.com/publishers.html?pubname=Ruchiru+Sweet'}
+"name": "EDEN"
+"translation": "EDEN"
+"mangaupdates": "http://www.mangaupdates.com/publishers.html?pubname=EDEN"
+---
+"name": "FlexComix ネクスト"
+"translation": "Flex Comix Next"
+"mangaupdates": "http://www.mangaupdates.com/publishers.html?pubname=Flex+Comix+Next"
+---
+"name": "FlexComix フレア"
+"translation": "Flex Comix Flare"
+"mangaupdates": "http://www.mangaupdates.com/publishers.html?pubname=Flex+Comix+Flare"
+---
+"name": "FlexComix ブラッド"
+"translation": "Flex Comix Blood"
+"mangaupdates": "http://www.mangaupdates.com/publishers.html?pubname=Flex+Comix+Blood"
+---
+"name": "GENZO EX."
+"translation": "GENZO EX."
+"mangaupdates": "http://www.mangaupdates.com/publishers.html?pubname=GENZO+EX"
+---
+"name": "JOURすてきな主婦たち"
+"translation": "Jour Suteki na Shufutachi"
+"mangaupdates": "http://www.mangaupdates.com/publishers.html?pubname=Jour+Suteki+na+Shufutachi"
+---
+"name": "Nextcomic ファースト"
+"translation": "Next Comic First"
+"mangaupdates": "http://www.mangaupdates.com/publishers.html?pubname=Next+Comic+First"
+---
+"name": "WEBコミックエッセイ劇場 Yahoo! JAPANセレクション"
+"translation": "Webcomic Essay Theater"
+---
+"name": "WINGS"
+"translation": "WINGS"
+"mangaupdates": "http://www.mangaupdates.com/publishers.html?pubname=WINGS"
+---
+"name": "ガンガンONLINE"
+"translation": "GanGan Online"
+"mangaupdates": "http://www.mangaupdates.com/publishers.html?pubname=Gangan+Online"
+---
+"name": "クラブサンデー"
+"translation": "Club Sunday"
+"mangaupdates": "http://www.mangaupdates.com/publishers.html?pubname=Club+Sunday"
+"recomic": "http://recomic.jp/a2.php?option=0&keyword=%E3%82%AF%E3%83%A9%E3%83%96%E3%82%B5%E3%83%B3%E3%83%87%E3%83%BC"
+---
+"name": "コミックハイ！"
+"translation": "Comic High"
+"mangaupdates": "http://www.mangaupdates.com/publishers.html?pubname=Comic+High!"
+"recomic": "http://recomic.jp/PGN-A18Z52"
+---
+"name": "コミックヒストリア"
+"translation": "Comic Histria"
+"mangaupdates": "http://www.mangaupdates.com/publishers.html?pubname=Comic+Histria"
+---
+"name": "コミックマンガ王＋YA！"
+"translation": "Comic Manga King + YA!"
+---
+"name": "デジタル漫画アクション"
+"translation": "Digital Manga Action"
+---
+"name": "ハーレクイン"
+"translation": "Harlequin"
+"mangaupdates": "http://www.mangaupdates.com/publishers.html?pubname=Harlequin"
+---
+"name": "ホラー＆ファンタジー倶楽部"
+"translation": "Horror and Fantasy Club"
+---
+"name": "ルチルSWEET"
+"translation": "Ruchiru Sweet"
+"mangaupdates": "http://www.mangaupdates.com/publishers.html?pubname=Ruchiru+Sweet"
