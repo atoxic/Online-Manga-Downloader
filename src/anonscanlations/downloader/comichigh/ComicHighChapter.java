@@ -7,6 +7,8 @@ package anonscanlations.downloader.comichigh;
 import java.util.*;
 import java.io.*;
 import java.awt.image.*;
+import javax.imageio.*;
+import java.awt.*;
 import java.net.*;
 
 import anonscanlations.downloader.*;
@@ -77,7 +79,7 @@ public class ComicHighChapter extends Chapter implements Serializable
 
         // page number
         String tPN = title(initVal, "'tPN'");
-        total = Integer.parseInt(tPN) - 1;
+        total = Integer.parseInt(tPN);
         DownloaderUtils.debug("\t\t\ttotal: " + total);
 
         // for decoding page individual files
@@ -120,9 +122,34 @@ public class ComicHighChapter extends Chapter implements Serializable
 
     public boolean download(DownloadListener dl) throws IOException
     {
-        URL url = new URL(downloadURL + "_001_15" + ComicHighSite.getIpntStr(sIS, 1, 15, 0, 0) + ".jpg");
+        for(int i = 1; i <= total; i++)
+        {
+            if(dl.isDownloadAborted())
+                return(true);
 
-        BufferedImage image = DownloaderUtils.downloadImage(url);
+            String prefix = downloadURL + "_" + String.format("%03d", i) + "_15";
+            BufferedImage topLeft   =   DownloaderUtils.downloadImage(new URL(prefix + ComicHighSite.getIpntStr(sIS, i, 15, 0, 0) + ".jpg"));
+            BufferedImage topRight  =   DownloaderUtils.downloadImage(new URL(prefix + ComicHighSite.getIpntStr(sIS, i, 15, 1, 0) + ".jpg"));
+            BufferedImage botLeft   =   DownloaderUtils.downloadImage(new URL(prefix + ComicHighSite.getIpntStr(sIS, i, 15, 0, 1) + ".jpg"));
+            BufferedImage botRight  =   DownloaderUtils.downloadImage(new URL(prefix + ComicHighSite.getIpntStr(sIS, i, 15, 1, 1) + ".jpg"));
+
+            BufferedImage complete = new BufferedImage(topLeft.getWidth() + topRight.getWidth(),
+                                                        topLeft.getHeight() + botLeft.getHeight(),
+                                                        BufferedImage.TYPE_INT_RGB);
+
+            Graphics2D g = complete.createGraphics();
+            g.drawImage(topLeft,    0,                      0, null);
+            g.drawImage(topRight,   topLeft.getWidth(),     0, null);
+            g.drawImage(botLeft,    0,                      topLeft.getHeight(), null);
+            g.drawImage(botRight,   topLeft.getWidth(),     topLeft.getHeight(), null);
+
+            String path = dl.downloadPath(this, i);
+            ImageIO.write(complete, "JPEG", new File(path));
+
+            dl.downloadProgressed(this, i);
+        }
+
+        dl.downloadFinished(this);
 
         return(true);
     }

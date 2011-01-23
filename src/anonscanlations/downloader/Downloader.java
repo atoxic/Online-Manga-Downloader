@@ -32,7 +32,6 @@ public class Downloader
      */
     public static void main(String[] args)
     {
-        //*
         try
         {
             DownloadInfoServer.loadAllInfo();
@@ -57,7 +56,10 @@ public class Downloader
         {
             client();
         }
-        // */
+        else
+        {
+            DownloaderUtils.error("Either start with no parameters or start with --server <file to save to>", null, true);
+        }
     }
 
     private static void server(String file)
