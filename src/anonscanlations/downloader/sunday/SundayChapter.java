@@ -271,7 +271,7 @@ public class SundayChapter extends Chapter
         URL mainFile = new URL("http://club.shogakukan.co.jp/dor/pcviewer_main.php?key1=" + key1 +
                             "&key2=" + key2 + "&key3=" + key3 +
                             "&key4=" + key4 + "&sp=-1&re=0&shd=" + shd +
-                            "&otk=" + otk);
+                            "&otk=" + otk + "&vo=1");
 
         HttpURLConnection urlConn = (HttpURLConnection)mainFile.openConnection();
         urlConn.setRequestProperty("Cookie", cookies);
