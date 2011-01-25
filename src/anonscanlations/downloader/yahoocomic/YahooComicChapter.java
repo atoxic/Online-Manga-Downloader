@@ -127,6 +127,7 @@ public class YahooComicChapter extends Chapter implements Serializable
 
             dl.downloadProgressed(this, i);
         }
+        temp.delete();
 
         dl.downloadFinished(this);
 

@@ -110,7 +110,7 @@ public class SundayChapter extends Chapter
         if(dl.isDownloadAborted())
             return(true);
 
-        if(xmlString == null)
+        if(xmlString == null || xmlString.contains("pagecount=\"0\""))
         {
             if((xmlString = backupOTKGet(dl)) == null)
             {
@@ -125,6 +125,8 @@ public class SundayChapter extends Chapter
         // 5) parse XML
 
         DownloaderUtils.debug("===PART 5===");
+
+        DownloaderUtils.debug("xmlString: " + xmlString);
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -192,7 +194,8 @@ public class SundayChapter extends Chapter
 
             dl.downloadProgressed(this, i);
         }
-
+        temp.delete();
+        
         dl.downloadFinished(this);
 
         return(true);
@@ -345,7 +348,7 @@ public class SundayChapter extends Chapter
             xmlString = getXMLFile();
             if(dl.isDownloadAborted())
                 return(null);
-            if(xmlString != null)
+            if(xmlString != null && !xmlString.contains("pagecount=\"0\""))
                 return(xmlString);
         }
         return(xmlString);
