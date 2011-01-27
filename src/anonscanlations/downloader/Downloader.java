@@ -13,6 +13,7 @@ import anonscanlations.downloader.yahoocomic.*;
 import anonscanlations.downloader.ganganonline.*;
 import anonscanlations.downloader.comichigh.*;
 import anonscanlations.downloader.sunday.*;
+import anonscanlations.downloader.gekkin.*;
 
 /**
  *
@@ -43,6 +44,7 @@ public class Downloader
             DownloaderUtils.errorGUI("Couldn't load info on series or magazines", e, true);
         }
 
+        DownloadInfoServer.SITES.put(GekkinSite.SITE.getName(), GekkinSite.SITE);
         DownloadInfoServer.SITES.put(ComicHighSite.SITE.getName(), ComicHighSite.SITE);
         DownloadInfoServer.SITES.put(SundaySite.SITE.getName(), SundaySite.SITE);
         DownloadInfoServer.SITES.put(GanGanOnlineSite.SITE.getName(), GanGanOnlineSite.SITE);

@@ -2,7 +2,7 @@
  * Coded by /a/non, for /a/non
  */
 
-package anonscanlations.downloader.comichigh;
+package anonscanlations.downloader.pluginfree;
 
 import java.util.*;
 import java.io.*;
@@ -12,18 +12,19 @@ import java.awt.*;
 import java.net.*;
 
 import anonscanlations.downloader.*;
+import anonscanlations.downloader.comichigh.ComicHighSite;
 
 /**
  *
  * @author /a/non
  */
-public class ComicHighChapter extends Chapter implements Serializable
+public class PluginFreeChapter extends Chapter implements Serializable
 {
     private Series series;
     private String title, url, downloadURL;
-    private int total, sIS;
+    private int total, sIS, nsn;
 
-    public ComicHighChapter(Series mySeries, Map<String, Object> yamlMap)
+    public PluginFreeChapter(Series mySeries, Map<String, Object> yamlMap)
     {
         series = mySeries;
         title = (String)yamlMap.get("title");
@@ -31,9 +32,10 @@ public class ComicHighChapter extends Chapter implements Serializable
         downloadURL = (String)yamlMap.get("dlURL");
         total = (Integer)yamlMap.get("total");
         sIS = (Integer)yamlMap.get("sIS");
+        nsn = (Integer)yamlMap.get("nsn");
     }
 
-    public ComicHighChapter(Series mySeries, String myTitle, String myURL)
+    public PluginFreeChapter(Series mySeries, String myTitle, String myURL, int myNSN)
     {
         series = mySeries;
         title = myTitle;
@@ -42,6 +44,7 @@ public class ComicHighChapter extends Chapter implements Serializable
         downloadURL = null;
         total = 0;
         sIS = 0;
+        nsn = myNSN;
     }
 
     public Map<String, Object> dump()
@@ -53,11 +56,12 @@ public class ComicHighChapter extends Chapter implements Serializable
         ret.put("dlURL", downloadURL);
         ret.put("total", total);
         ret.put("sIS", sIS);
+        ret.put("nsn", nsn);
 
         return(ret);
     }
 
-    public boolean parsePages() throws IOException
+    public boolean parsePages(String cgi) throws IOException
     {
         String indexPage = DownloaderUtils.getPage(url + "/index.shtml", "Shift_JIS");
         
@@ -75,7 +79,7 @@ public class ComicHighChapter extends Chapter implements Serializable
         int index = initValEncoded.indexOf("<DIV ID='DATA'>");
         if(index == -1)
             return(false);
-        String initVal = ComicHighSite.expand(initValEncoded.substring(index + 15, initValEncoded.indexOf("</DIV>", index)), cKVInt);
+        String initVal = PluginFreeDecrypt.expand(initValEncoded.substring(index + 15, initValEncoded.indexOf("</DIV>", index)), cKVInt);
 
         // page number
         String tPN = title(initVal, "'tPN'");
@@ -91,7 +95,7 @@ public class ComicHighChapter extends Chapter implements Serializable
         String sHN = title(initVal, "'sHN'");
         DownloaderUtils.debug("\t\t\tsHN: " + sHN);
 
-        downloadURL = "http://futabasha.pluginfree.com/cgi-bin/widget.cgi?a=" + hCN + sHN + "/" + sHN;
+        downloadURL = cgi + hCN + sHN + "/" + sHN;
         DownloaderUtils.debug("\t\t\ttarget: " + downloadURL);
         //DownloaderUtils.debug("\t\t\t" + ComicHighSite.getIpntStr(sIS, 1, 15, 0, 0));
         //DownloaderUtils.debug("\t\t\t" + ComicHighSite.getIpntStr(sIS, 1, 15, 1, 0));
@@ -127,11 +131,12 @@ public class ComicHighChapter extends Chapter implements Serializable
             if(dl.isDownloadAborted())
                 return(true);
 
-            String prefix = downloadURL + "_" + String.format("%03d", i) + "_15";
-            BufferedImage topLeft   =   DownloaderUtils.downloadImage(new URL(prefix + ComicHighSite.getIpntStr(sIS, i, 15, 0, 0) + ".jpg"));
-            BufferedImage topRight  =   DownloaderUtils.downloadImage(new URL(prefix + ComicHighSite.getIpntStr(sIS, i, 15, 1, 0) + ".jpg"));
-            BufferedImage botLeft   =   DownloaderUtils.downloadImage(new URL(prefix + ComicHighSite.getIpntStr(sIS, i, 15, 0, 1) + ".jpg"));
-            BufferedImage botRight  =   DownloaderUtils.downloadImage(new URL(prefix + ComicHighSite.getIpntStr(sIS, i, 15, 1, 1) + ".jpg"));
+            String prefix = downloadURL + "_" + String.format("%03d", i) + "_" + nsn;
+            
+            BufferedImage topLeft   =   DownloaderUtils.downloadImage(new URL(prefix + PluginFreeDecrypt.getIpntStr(sIS, i, nsn, 0, 0) + ".jpg"));
+            BufferedImage topRight  =   DownloaderUtils.downloadImage(new URL(prefix + PluginFreeDecrypt.getIpntStr(sIS, i, nsn, 1, 0) + ".jpg"));
+            BufferedImage botLeft   =   DownloaderUtils.downloadImage(new URL(prefix + PluginFreeDecrypt.getIpntStr(sIS, i, nsn, 0, 1) + ".jpg"));
+            BufferedImage botRight  =   DownloaderUtils.downloadImage(new URL(prefix + PluginFreeDecrypt.getIpntStr(sIS, i, nsn, 1, 1) + ".jpg"));
 
             BufferedImage complete = new BufferedImage(topLeft.getWidth() + topRight.getWidth(),
                                                         topLeft.getHeight() + botLeft.getHeight(),

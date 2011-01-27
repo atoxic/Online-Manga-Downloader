@@ -137,6 +137,8 @@ public class DownloaderUtils
 
     public static BufferedImage downloadImage(URL url) throws IOException
     {
+        DownloaderUtils.debug("downloading image: " + url);
+
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
             return(null);
@@ -309,7 +311,10 @@ public class DownloaderUtils
         Class c = null;
         try
         {
-            c = Class.forName((String)map.get("class"));
+            Object name = map.get("class");
+            if(name == null)
+                return(null);
+            c = Class.forName((String)name);
         }
         catch(ClassNotFoundException cnfe)
         {
