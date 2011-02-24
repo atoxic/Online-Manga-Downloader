@@ -2,6 +2,7 @@
 ##What is it?
 
 It's a downloader for manga that are viewable but not downloadable from the official source.  Current, this downloader supports downloading from:
+
 + [GanGan Online](http://www.square-enix.com/jp/magazine/ganganonline/) (ActiBook)
 + [Yahoo! Comic](http://comics.yahoo.co.jp/magazine/) (PCViewer)
 + [Club Sunday](http://club.shogakukan.co.jp/) (PCViewer + special encryption)
