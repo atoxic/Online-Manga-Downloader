@@ -235,6 +235,7 @@ public class DownloaderWindow extends JFrame
         }
 
         older.getMagazines().putAll(newer.getMagazines());
+        older.setDate(newer.getDate());
 
         this.data = older;
 

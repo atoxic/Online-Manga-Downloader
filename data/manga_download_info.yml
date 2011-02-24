@@ -691,13 +691,13 @@
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/datenin/viewer/001_3/books/"
   "ばらかもん":
     "title": "ばらかもん"
-    "031":
-      "total": !!int "28"
-      "title": "031"
+    "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
+    "032":
+      "total": !!int "14"
+      "title": "032"
       "start": !!int "1"
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/barakamon/viewer/031/books/"
-    "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/barakamon/viewer/032/books/"
     "001":
       "total": !!int "58"
       "title": "001"
@@ -722,14 +722,14 @@
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/strays/viewer/001_2/books/"
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/strays/index.html"
   "フラクタル":
-    "title": "フラクタル"
-    "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
-    "004_1":
-      "total": !!int "24"
-      "title": "004_1"
+    "005_1":
+      "total": !!int "44"
+      "title": "005_1"
       "start": !!int "1"
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/fractale/viewer/004_1/books/"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/fractale/viewer/005_1/books/"
+    "title": "フラクタル"
+    "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
     "001":
       "total": !!int "68"
       "title": "001"
@@ -739,19 +739,13 @@
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/fractale/index.html"
   "独眼龍改":
     "title": "独眼龍改"
-    "009":
-      "total": !!int "24"
-      "title": "009"
-      "start": !!int "1"
-      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/neodora/viewer/009/books/"
-    "bangai011223":
-      "total": !!int "12"
-      "title": "bangai011223"
-      "start": !!int "1"
-      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/neodora/viewer/bangai011223/books/"
     "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
+    "011":
+      "total": !!int "44"
+      "title": "011"
+      "start": !!int "1"
+      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/neodora/viewer/011/books/"
     "001_2":
       "total": !!int "44"
       "title": "001_2"
@@ -852,6 +846,12 @@
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/zero_k/viewer/028/books/"
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/zero_k/index.html"
   "みんなの呉":
+    "bangai110127":
+      "total": !!int "8"
+      "title": "bangai110127"
+      "start": !!int "1"
+      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/minna_g/viewer/bangai110127/books/"
     "title": "みんなの呉"
     "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
     "005":
@@ -912,6 +912,12 @@
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/ujyu_n/viewer/001/books/"
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/ujyu_n/index.html"
   "藤村くんメイツ":
+    "039":
+      "total": !!int "18"
+      "title": "039"
+      "start": !!int "1"
+      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/fujimurakun/viewer/039/books/"
     "038":
       "total": !!int "18"
       "title": "038"
@@ -919,12 +925,6 @@
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/fujimurakun/viewer/038/books/"
     "title": "藤村くんメイツ"
-    "037":
-      "total": !!int "20"
-      "title": "037"
-      "start": !!int "1"
-      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/fujimurakun/viewer/037/books/"
     "002_1":
       "total": !!int "12"
       "title": "002_1"
@@ -947,13 +947,13 @@
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/fujimurakun/index.html"
   "ばのてん! SUMMER DAYS":
     "title": "ばのてん! SUMMER DAYS"
-    "013":
-      "total": !!int "18"
-      "title": "013"
+    "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
+    "014":
+      "total": !!int "16"
+      "title": "014"
       "start": !!int "1"
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/banoten/viewer/013/books/"
-    "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/banoten/viewer/014/books/"
     "001":
       "total": !!int "12"
       "title": "001"
@@ -1036,15 +1036,21 @@
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/015/books/"
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/index.html"
+    "016":
+      "total": !!int "20"
+      "title": "016"
+      "start": !!int "1"
+      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/016/books/"
   "学校のせんせい":
     "title": "学校のせんせい"
     "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
-    "023":
-      "total": !!int "30"
-      "title": "023"
+    "024":
+      "total": !!int "28"
+      "title": "024"
       "start": !!int "1"
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/gakkouno/viewer/023/books/"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/gakkouno/viewer/024/books/"
     "001":
       "total": !!int "32"
       "title": "001"
@@ -1128,6 +1134,12 @@
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/blade/index.html"
   "重金属彼女":
     "title": "重金属彼女"
+    "010":
+      "total": !!int "18"
+      "title": "010"
+      "start": !!int "1"
+      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/jyukin/viewer/010/books/"
     "009":
       "total": !!int "20"
       "title": "009"
@@ -1148,12 +1160,6 @@
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/jyukin/viewer/002/books/"
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/jyukin/index.html"
-    "008_1":
-      "total": !!int "20"
-      "title": "008_1"
-      "start": !!int "1"
-      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/jyukin/viewer/008_1/books/"
   "伊達柱":
     "title": "伊達柱"
     "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
@@ -1210,12 +1216,12 @@
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/hell/index.html"
   "花みちおとめ":
     "title": "花みちおとめ"
-    "002_1":
+    "003_1":
       "total": !!int "46"
-      "title": "002_1"
+      "title": "003_1"
       "start": !!int "1"
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/hanamichi/viewer/002_1/books/"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/hanamichi/viewer/003_1/books/"
     "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
     "001":
       "total": !!int "80"
@@ -1257,14 +1263,14 @@
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/dullahan/viewer/001/books/"
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/dullahan/index.html"
   "げきぶの。":
-    "title": "げきぶの。"
-    "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
-    "017":
-      "total": !!int "10"
-      "title": "017"
+    "019":
+      "total": !!int "8"
+      "title": "019"
       "start": !!int "1"
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/gekibuno/viewer/017/books/"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/gekibuno/viewer/019/books/"
+    "title": "げきぶの。"
+    "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
     "018":
       "total": !!int "10"
       "title": "018"
@@ -1279,6 +1285,12 @@
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/gekibuno/viewer/001/books/"
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/gekibuno/"
   "男子高校生の日常":
+    "066":
+      "total": !!int "12"
+      "title": "066"
+      "start": !!int "1"
+      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/danshinichijyo/viewer/066/books/"
     "title": "男子高校生の日常"
     "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
     "001":
@@ -1287,12 +1299,6 @@
       "start": !!int "1"
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/danshinichijyo/viewer/001/books/"
-    "064":
-      "total": !!int "14"
-      "title": "064"
-      "start": !!int "1"
-      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/danshinichijyo/viewer/064/books/"
     "002":
       "total": !!int "10"
       "title": "002"
@@ -1363,19 +1369,13 @@
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/special/ixa/yomikiri/viewer/yomikiri_hizikata/books/"
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/special/ixa/yomikiri/"
   "マンガ家さんとアシスタントさんと":
-    "yorinuki006_1":
-      "total": !!int "22"
-      "title": "yorinuki006_1"
-      "start": !!int "1"
-      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/manga/viewer/yorinuki006_1/books/"
     "title": "マンガ家さんとアシスタントさんと"
-    "007_2":
-      "total": !!int "14"
-      "title": "007_2"
+    "yorinuki006_2":
+      "total": !!int "20"
+      "title": "yorinuki006_2"
       "start": !!int "1"
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/manga/viewer/007_2/books/"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/manga/viewer/yorinuki006_2/books/"
     "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
     "001":
       "total": !!int "10"
@@ -1384,15 +1384,21 @@
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/manga/viewer/001/books/"
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/manga/index.html"
+    "008_1":
+      "total": !!int "12"
+      "title": "008_1"
+      "start": !!int "1"
+      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/manga/viewer/008_1/books/"
   "真伝勇伝・革命編 堕ちた黒い勇者の伝説":
     "title": "真伝勇伝・革命編 堕ちた黒い勇者の伝説"
     "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
-    "006":
-      "total": !!int "44"
-      "title": "006"
+    "007":
+      "total": !!int "46"
+      "title": "007"
       "start": !!int "1"
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/legend/viewer/006/books/"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/legend/viewer/007/books/"
     "001_2":
       "total": !!int "44"
       "title": "001_2"
@@ -1418,25 +1424,19 @@
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/kitakita/index.html"
   "アホリズム":
     "title": "アホリズム"
-    "bangai101230":
-      "total": !!int "10"
-      "title": "bangai101230"
-      "start": !!int "1"
-      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/aphorism/viewer/bangai101230/books/"
     "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
-    "027_1":
-      "total": !!int "26"
-      "title": "027_1"
-      "start": !!int "1"
-      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/aphorism/viewer/027_1/books/"
     "001":
       "total": !!int "50"
       "title": "001"
       "start": !!int "1"
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/aphorism/viewer/001/books/"
+    "028":
+      "total": !!int "32"
+      "title": "028"
+      "start": !!int "1"
+      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/aphorism/viewer/028/books/"
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/aphorism/index.html"
   "生徒会のヲタのしみ。":
     "title": "生徒会のヲタのしみ。"
@@ -1469,18 +1469,18 @@
   "狂想のシミュラクラ":
     "title": "狂想のシミュラクラ"
     "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
-    "014":
-      "total": !!int "38"
-      "title": "014"
-      "start": !!int "1"
-      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/simulacra/viewer/014/books/"
     "001":
       "total": !!int "72"
       "title": "001"
       "start": !!int "1"
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/simulacra/viewer/001/books/"
+    "015":
+      "total": !!int "42"
+      "title": "015"
+      "start": !!int "1"
+      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/simulacra/viewer/015/books/"
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/simulacra/index.html"
   "かへたんていぶ":
     "title": "かへたんていぶ"
@@ -1497,15 +1497,21 @@
       "start": !!int "1"
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/cafe/viewer/001_1/books/"
+    "015":
+      "total": !!int "20"
+      "title": "015"
+      "start": !!int "1"
+      "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/cafe/viewer/015/books/"
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/cafe/index.html"
   "戦国毒饅頭ハンベエ":
     "title": "戦国毒饅頭ハンベエ"
-    "009":
-      "total": !!int "20"
-      "title": "009"
+    "010":
+      "total": !!int "22"
+      "title": "010"
       "start": !!int "1"
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
-      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/hanbe/viewer/009/books/"
+      "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/hanbe/viewer/010/books/"
     "class": "anonscanlations.downloader.ganganonline.GanGanOnlineSeries"
     "001":
       "total": !!int "22"
@@ -1540,7 +1546,7 @@
       "class": "anonscanlations.downloader.ganganonline.GanGanOnlineChapter"
       "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/innocent/viewer/042/books/"
     "url": "http://www.square-enix.com/jp/magazine/ganganonline/comic/innocent/index.html"
-"date": !!timestamp "2011-01-27T01:12:35.310Z"
+"date": !!timestamp "2011-02-24T08:12:17.742Z"
 "GENZO EX.":
   "走れ! T校バスケット部":
     "0005":
@@ -8087,6 +8093,18 @@
       "rangeEnd": !!int "40"
     "class": "anonscanlations.downloader.yahoocomic.YahooComicSeries"
 "クラブサンデー":
+  "CRIMSONS 紅き航海者たち":
+    "title": "CRIMSONS 紅き航海者たち"
+    "0001":
+      "key4": "0001-0"
+      "key3": "kurimuzonz_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "shd": "7553d494de1c61f663e7c2c73d002aaaafecb5a7"
+      "key2": "kannotakan_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/kurimuzonz_001/"
+    "class": "anonscanlations.downloader.sunday.SundaySeries"
   "キメルとMELT":
     "title": "キメルとMELT"
     "0001":
@@ -8104,7 +8122,7 @@
     "0001":
       "key4": "0001-0"
       "key3": "anrakkihsu_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
       "shd": "c3f2b4b6cd87f118efba9688f7d7d00d92220e10"
       "key2": "maizimahir_001"
       "key1": "SHWM"
@@ -8132,11 +8150,19 @@
       "key2": "kurazonono_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "0022":
+      "key4": "0022-0"
+      "key3": "mahougyous_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "shd": "05cdfd295ffb41615987949f483dd71aad39bcd1"
+      "key2": "kurazonono_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "title": "魔法行商人ロマ"
     "0001":
       "key4": "0001-0"
       "key3": "mahougyous_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/24"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/23"
       "shd": "d26f7480ef2b1f9989d2a5171bcfad5a36d3f9bd"
       "key2": "kurazonono_001"
       "key1": "SHWM"
@@ -8144,7 +8170,7 @@
     "0020":
       "key4": "0020-0"
       "key3": "mahougyous_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
       "shd": "e4ed5dec93950db45629c10e9234ebc2aa6e09bc"
       "key2": "kurazonono_001"
       "key1": "SHWM"
@@ -8154,7 +8180,7 @@
     "0021":
       "key4": "0021-0"
       "key3": "mahougyous_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
       "shd": "80e25783fbb3383a34697fac1d1194e11d483503"
       "key2": "kurazonono_001"
       "key1": "SHWM"
@@ -8195,18 +8221,6 @@
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/momisi_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "満天の星よりも":
-    "title": "満天の星よりも"
-    "0001":
-      "key4": "0001-0"
-      "key3": "mantennoho_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
-      "shd": "0033be33b6cea823b85899b5f8d9031c3113b01b"
-      "key2": "abehanazir_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/mantennoho_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
   "アーティストアクロ":
     "title": "アーティストアクロ"
     "0001":
@@ -8232,7 +8246,7 @@
     "0003":
       "key4": "0003-0"
       "key3": "tiisaihito_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
       "shd": "02ac7038e83e40fdbcec814119f8de0a1d99868f"
       "key2": "kyoutikuto_001"
       "key1": "SHWM"
@@ -8240,7 +8254,7 @@
     "0002":
       "key4": "0002-0"
       "key3": "tiisaihito_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/9"
       "shd": "27c27828d21b98d4a541db32a10d5c88bb79f822"
       "key2": "kyoutikuto_001"
       "key1": "SHWM"
@@ -8272,6 +8286,14 @@
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/rafumeikah_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "超弩級少女4946":
+    "0022":
+      "key4": "0022-0"
+      "key3": "choudokyuu_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "shd": "a98aed5c9190f32236eb9a063d38bb485a0f870b"
+      "key2": "azumatakes_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "title": "超弩級少女4946"
     "0001":
       "key4": "0001-0"
@@ -8283,14 +8305,6 @@
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
-    "0021":
-      "key4": "0021-0"
-      "key3": "choudokyuu_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
-      "shd": "9b29b5523c39108091543a8185e995f839d2c7ef"
-      "key2": "azumatakes_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
   "きみのカケラ":
     "0005":
       "key4": "0005-0"
@@ -8319,24 +8333,12 @@
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/kiminokake_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "ラクロス部ハジケロッツ":
-    "title": "ラクロス部ハジケロッツ"
-    "0001":
-      "key4": "0001-0"
-      "key3": "rakurosubu_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
-      "shd": "11c65755f67873596263eb37447ab33daaf77c46"
-      "key2": "kurobaseiz_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/rakurosubu_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
   "本日のギャグのおすすめ":
     "title": "本日のギャグのおすすめ"
     "0001":
       "key4": "0001-0"
       "key3": "honzitunog_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/25"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/24"
       "shd": "d32fc11a1685f94c596dd3a27a7bb120e43ec634"
       "key2": "yuumin_001"
       "key1": "SHWM"
@@ -8346,44 +8348,36 @@
     "0044":
       "key4": "0044-0"
       "key3": "honzitunog_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
       "shd": "e707a3207238a45bde64b8188f7ad0f24083bd90"
       "key2": "yuumin_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0042":
-      "key4": "0042-0"
+    "0045":
+      "key4": "0045-0"
       "key3": "honzitunog_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
-      "shd": "b11f04ac18b224c62cb90218b55569b086b29c48"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "shd": "7cdc32670c2f4d1c1827e0e71767a845f4ab2767"
       "key2": "yuumin_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0043":
       "key4": "0043-0"
       "key3": "honzitunog_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
       "shd": "5f39272bb5d54d4d53f03cd31c6d3ef744258cb6"
       "key2": "yuumin_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0041":
-      "key4": "0041-0"
+    "0046":
+      "key4": "0046-0"
       "key3": "honzitunog_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
-      "shd": "d3bf5de8cd75bf5999de471f2ed206a33aeb7b9b"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "shd": "d2d71389d546893ae162ffcbf1134201d58db427"
       "key2": "yuumin_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
   "今週のサンデー":
-    "0151":
-      "key4": "0151-0"
-      "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/9"
-      "shd": "f1186a048fe1b87e43a04734ca762099559fc847"
-      "key2": "kurisutaru_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0150":
       "key4": "0150-0"
       "key3": "konshuunos_001"
@@ -8443,7 +8437,7 @@
     "0021":
       "key4": "0021-0"
       "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/23"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/22"
       "shd": "9e4b6bed73670cb84c51b42e84c3816d03380426"
       "key2": "iizimakous_001"
       "key1": "SHWM"
@@ -8475,7 +8469,7 @@
     "0148":
       "key4": "0148-0"
       "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/10"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/9"
       "shd": "5e22e0e97c05dacec5a37a8d044d2d4475371da1"
       "key2": "matuenashu_001"
       "key1": "SHWM"
@@ -8507,17 +8501,9 @@
     "0164":
       "key4": "0164-0"
       "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
       "shd": "0c22a4bdca5b1bd61159a46d421e8a513c484ccd"
       "key2": "aoyamagous_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0163":
-      "key4": "0163-0"
-      "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
-      "shd": "ddf1e502754663c310021ab0183c6e21dcb165d9"
-      "key2": "ogasawaras_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0162":
@@ -8561,22 +8547,6 @@
       "key2": "degutimasa_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0157":
-      "key4": "0157-0"
-      "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/9"
-      "shd": "b6cdad923f099ab16fe68865fc3a0e9974767734"
-      "key2": "yamatoyaek_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0155":
-      "key4": "0155-0"
-      "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/9"
-      "shd": "104e82a5e4444fb857b01a670bf44291bb3002bf"
-      "key2": "kenmotutiy_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0158":
       "key4": "0158-0"
       "key3": "konshuunos_001"
@@ -8588,7 +8558,7 @@
     "0159":
       "key4": "0159-0"
       "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/9"
       "shd": "1ac8fcccd66e42d02c91c16fdb72d571541feb8d"
       "key2": "kobayasihi_002"
       "key1": "SHWM"
@@ -8604,7 +8574,7 @@
     "0172":
       "key4": "0172-0"
       "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
       "shd": "e753026d60e4218624c896575d6e3db1ea2e5171"
       "key2": "wataseyuu_001"
       "key1": "SHWM"
@@ -8612,7 +8582,7 @@
     "0173":
       "key4": "0173-0"
       "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
       "shd": "3ff8c42477b6e5509c8ab20452404c2003b4e52d"
       "key2": "wakakitami_001"
       "key1": "SHWM"
@@ -8620,25 +8590,25 @@
     "0174":
       "key4": "0174-0"
       "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
       "shd": "4dd1ddafea46f80665b7bb60b53e691ee73fdb48"
       "key2": "samukawaka_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "0175":
+      "key4": "0175-0"
+      "key3": "konshuunos_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "shd": "a8296c8775f6ed9680bed26addf74f3b3ba07562"
+      "key2": "nisimorihi_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0170":
       "key4": "0170-0"
       "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
       "shd": "fe14072727532b2d6f581f89ed5b28ebdca27df2"
       "key2": "hasigutita_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0171":
-      "key4": "0171-0"
-      "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
-      "shd": "53c0cabaa2e75a8657627e5caeea8cce02e871c1"
-      "key2": "anzainobuy_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0083":
@@ -8652,7 +8622,7 @@
     "0169":
       "key4": "0169-0"
       "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
       "shd": "90d507edf50ba91795ece0c3705b2599092a9b73"
       "key2": "fukudahiro_001"
       "key1": "SHWM"
@@ -8661,7 +8631,7 @@
     "0166":
       "key4": "0166-0"
       "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
       "shd": "e6f70cbdd7da0c0b0fdd6e4d48bf53b4217815a1"
       "key2": "ootakasino_001"
       "key1": "SHWM"
@@ -8669,7 +8639,7 @@
     "0165":
       "key4": "0165-0"
       "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
       "shd": "8800774a97cd5e625e48452d067302d71cfdb341"
       "key2": "siinatakas_001"
       "key1": "SHWM"
@@ -8677,7 +8647,7 @@
     "0168":
       "key4": "0168-0"
       "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
       "shd": "8923734f8e05ab0918849f68d8a5343d1f8b0ac1"
       "key2": "hirakawaay_001"
       "key1": "SHWM"
@@ -8685,7 +8655,7 @@
     "0167":
       "key4": "0167-0"
       "key3": "konshuunos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
       "shd": "fce5aae19d4fe7eb9345377fb2d3cea1160e750d"
       "key2": "sasakiken_001"
       "key1": "SHWM"
@@ -8715,12 +8685,52 @@
       "key2": "sakuraiato_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "0181":
+      "key4": "0181-0"
+      "key3": "konshuunos_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "shd": "765fb7c6d3126f81675426422fd1714448a8cb30"
+      "key2": "kurisutaru_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "0182":
+      "key4": "0182-0"
+      "key3": "konshuunos_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "shd": "b3a1b2e90fb9a7c5e7c4c84de35a29522723f509"
+      "key2": "yangyoniru_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "0180":
+      "key4": "0180-0"
+      "key3": "konshuunos_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "shd": "e7e6699b7615856efd7cbe2beff36a6d07176ab9"
+      "key2": "kenmotutiy_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0071":
       "key4": "0071-0"
       "key3": "konshuunos_001"
       "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/18"
       "shd": "fe9cdd13a0141c66ef9a77d14f31d5f9c0f4f329"
       "key2": "tanakamoto_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "0179":
+      "key4": "0179-0"
+      "key3": "konshuunos_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "shd": "fa8321a04c647249728ef273e24de6955f82fdb9"
+      "key2": "tanakamoto_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "0178":
+      "key4": "0178-0"
+      "key3": "konshuunos_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "shd": "0457901447ea01f96485f83b414ed2fb97e6d8b0"
+      "key2": "yamatoyaek_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0073":
@@ -8731,12 +8741,28 @@
       "key2": "araitakahi_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "0177":
+      "key4": "0177-0"
+      "key3": "konshuunos_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "shd": "9d6124687aa84df28d6b78f4f170be6f573c4d4f"
+      "key2": "anzainobuy_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0076":
       "key4": "0076-0"
       "key3": "konshuunos_001"
       "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/16"
       "shd": "e1106f34d3330f1d6feb79beb39bcc5af1fba317"
       "key2": "hirakawaay_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "0176":
+      "key4": "0176-0"
+      "key3": "konshuunos_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "shd": "5255608e528870e6b905f83b4b5e4f5611ec798c"
+      "key2": "ogasawaras_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0114":
@@ -8808,7 +8834,7 @@
     "0001":
       "key4": "0001-0"
       "key3": "torimayone_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
       "shd": "80e17e3ebef588e0c9bde3d2436afc6a3fb7aedc"
       "key2": "kotetu_001"
       "key1": "SHWM"
@@ -8880,7 +8906,7 @@
     "0001":
       "key4": "0001-0"
       "key3": "haniwasens_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
       "shd": "8b4d372a89f632fa3266c0b34a86a029f69bbc41"
       "key2": "akuimakoto_001"
       "key1": "SHWM"
@@ -8898,6 +8924,18 @@
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/rafuaniki_001/"
+    "class": "anonscanlations.downloader.sunday.SundaySeries"
+  "La ブランチ":
+    "title": "La ブランチ"
+    "0001":
+      "key4": "0001-0"
+      "key3": "raburanti_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "shd": "23bcb4f595cd9fe52d5e7a44bf59d828713b6fae"
+      "key2": "sakuraiyuu_002"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/raburanti_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "神のみぞ知るセカイ":
     "title": "神のみぞ知るセカイ"
@@ -8935,6 +8973,18 @@
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/keigakumir_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
+  "破界蟲":
+    "title": "破界蟲"
+    "0001":
+      "key4": "0001-0"
+      "key3": "hakaichuu_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "shd": "2baff4c7a32d761bbff23ba70ce63a10c787ae96"
+      "key2": "taka_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/hakaichuu_001/"
+    "class": "anonscanlations.downloader.sunday.SundaySeries"
   "お姉さんの好きなもの":
     "title": "お姉さんの好きなもの"
     "0001":
@@ -8952,7 +9002,7 @@
     "0001":
       "key4": "0001-0"
       "key3": "eigobanmao_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/21"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/20"
       "shd": "384800a198ac8e274e5c35cf762c3e3966c325e1"
       "key2": "isakakouta_001"
       "key1": "SHWM"
@@ -8995,29 +9045,17 @@
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/kouzakyuus_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "仮面ライダーBlack":
-    "title": "仮面ライダーBlack"
+  "HERO":
+    "title": "HERO"
     "0001":
       "key4": "0001-0"
-      "key3": "kamenraida_002"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
-      "shd": "e0887fe5c2a179d9712891bf417e1b9f86d4244e"
-      "key2": "isinomoris_001"
+      "key3": "hihroh_002"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/15"
+      "shd": "108001354024b01f99038d564b1730ba95ed7d85"
+      "key2": "kanton_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/kamenraida_002/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "レオナルド・ダ・ヴィンチによろしく":
-    "title": "レオナルド・ダ・ヴィンチによろしく"
-    "0001":
-      "key4": "0001-0"
-      "key3": "reonarudod_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
-      "shd": "98d2eb2daa4c345368b20dab2d2c8982b6ba2976"
-      "key2": "suzukisin_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/reonarudod_001/"
+    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/hihroh_002/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "ことらぶ！":
     "title": "ことらぶ！"
@@ -9042,18 +9080,6 @@
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/toxuruhemo_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "微笑みの奇術師":
-    "title": "微笑みの奇術師"
-    "0001":
-      "key4": "0001-0"
-      "key3": "hohoeminok_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
-      "shd": "8a6faf76724faaf2062304973a300a91ea5e0d68"
-      "key2": "yamazihide_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/hohoeminok_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "燃えろ!! 蓮葉くん":
     "title": "燃えろ!! 蓮葉くん"
@@ -9101,10 +9127,18 @@
       "key2": "yamadahito_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "0003":
+      "key4": "0003-0"
+      "key3": "zih_004"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "shd": "664e20e2ee87baaa2ac362ea1acaf1cf4f4d574b"
+      "key2": "yamadahito_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0002":
       "key4": "0002-0"
       "key3": "zih_004"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
       "shd": "fee4cbc82f15eb3aba1c5df4804e031bfab8623e"
       "key2": "yamadahito_001"
       "key1": "SHWM"
@@ -9128,7 +9162,7 @@
     "0001":
       "key4": "0001-0"
       "key3": "araragitan_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
       "shd": "9c08087e54f1f210215c510fa985aa5a5c47f784"
       "key2": "kumomineha_001"
       "key1": "SHWM"
@@ -9152,7 +9186,7 @@
     "0001":
       "key4": "0001-0"
       "key3": "zerogohiti_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
       "shd": "b8ff38a41896298b31209cc1f4600ce1c5fd670d"
       "key2": "yamadakane_001"
       "key1": "SHWM"
@@ -9180,10 +9214,10 @@
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/geneishoun_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
     "0019":
-      "key4": "0019-0"
+      "key4": "0019-2"
       "key3": "geneishoun_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
-      "shd": "f30ddd2b41130a11ea604c567ff72209bc27efc7"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
+      "shd": "6a94e152ab0f9417ea0b0971d925206b7bb22aaa"
       "key2": "banjoudait_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
@@ -9204,8 +9238,16 @@
     "0001":
       "key4": "0001-0"
       "key3": "nanikoreja_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
       "shd": "c068b25b7cbcdd5429caea662656236485003dda"
+      "key2": "nakatamino_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "0002":
+      "key4": "0002-0"
+      "key3": "nanikoreja_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "shd": "9fc6ba95d76acb243c9e0bad8893e4b1143fe346"
       "key2": "nakatamino_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
@@ -9236,15 +9278,15 @@
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/natukusaho_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "ソワチネ":
-    "title": "ソワチネ"
-    "0006":
-      "key4": "0006-0"
+    "0007":
+      "key4": "0007-0"
       "key3": "sowatine_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
-      "shd": "cf2c3f2f138e4fa8920bb5be8b6bf898a7a0f594"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "shd": "3b284ee0dab9c8ce4c471c3fdb49bf6906d5797a"
       "key2": "kitijouter_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "title": "ソワチネ"
     "0001":
       "key4": "0001-0"
       "key3": "sowatine_001"
@@ -9266,18 +9308,6 @@
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/reon_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "プロレスラー！ともひろ":
-    "title": "プロレスラー！ともひろ"
-    "0001":
-      "key4": "0001-0"
-      "key3": "puroresura_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
-      "shd": "18e2e92018d4dbb92770f411a2043e73ed964235"
-      "key2": "otami_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/puroresura_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "エレクトロニックハーツ":
     "title": "エレクトロニックハーツ"
@@ -9332,7 +9362,7 @@
     "0001":
       "key4": "0001-0"
       "key3": "orehadande_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
       "shd": "25595a435ceda8e4fa0cdbe6e2613d55c04288bc"
       "key2": "ogatakazuy_001"
       "key1": "SHWM"
@@ -9363,6 +9393,18 @@
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/oedosakimo_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
+  "ぎゃんぐすパニック！":
+    "title": "ぎゃんぐすパニック！"
+    "0001":
+      "key4": "0001-0"
+      "key3": "gyangusupa_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "shd": "60b493ca24fd6800d96f2bb60af59b6297670f1e"
+      "key2": "muraiti_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/gyangusupa_001/"
+    "class": "anonscanlations.downloader.sunday.SundaySeries"
   "ヒミツキチ":
     "title": "ヒミツキチ"
     "0001":
@@ -9380,8 +9422,16 @@
     "0001":
       "key4": "0001-0"
       "key3": "momibarais_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
       "shd": "421e465897750524d6caf4850d51032ba31d15ee"
+      "key2": "sorayomida_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "0002":
+      "key4": "0002-0"
+      "key3": "momibarais_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "shd": "7ac45971e76a722312f73e735a3acac4ca428baa"
       "key2": "sorayomida_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
@@ -9416,7 +9466,7 @@
     "0001":
       "key4": "0001-0"
       "key3": "kosumosumy_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/22"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/21"
       "shd": "202eeac9edb111464667c660142a5494597d0533"
       "key2": "hirobaging_001"
       "key1": "SHWM"
@@ -9424,10 +9474,18 @@
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/kosumosumy_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "阿鬼羅":
+    "0023":
+      "key4": "0023-0"
+      "key3": "akira_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "shd": "0de76f172a9c74d1645fd7fa877fd7704b4f80a0"
+      "key2": "ootukasiro_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0022":
       "key4": "0022-0"
       "key3": "akira_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
       "shd": "180868fa40b95b36885ea7935c3b8adbb9f87e2d"
       "key2": "ootukasiro_001"
       "key1": "SHWM"
@@ -9443,14 +9501,6 @@
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/akira_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
-    "0021":
-      "key4": "0021-0"
-      "key3": "akira_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
-      "shd": "5ebc6c7523726887e745b277178000747790d985"
-      "key2": "ootukasiro_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
   "晴れときどき黒ネコ":
     "title": "晴れときどき黒ネコ"
     "0001":
@@ -9468,7 +9518,7 @@
     "0001":
       "key4": "0001-0"
       "key3": "gurihnkahs_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
       "shd": "f3a0222c23e63de8112c2b141b4eeb69d39a2a7e"
       "key2": "nakayamaju_001"
       "key1": "SHWM"
@@ -9486,26 +9536,6 @@
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/korijonkoh_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "RAIDEN-18":
-    "title": "RAIDEN-18"
-    "0001":
-      "key4": "0001-0"
-      "key3": "raidenjuuh_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
-      "shd": "ea4b5b45689b955e8457581117c1885205598962"
-      "key2": "arakawahir_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0002":
-      "key4": "0002-0"
-      "key3": "raidenjuuh_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
-      "shd": "c550527a9c23971de95e2000d99d0795c3fd70f9"
-      "key2": "arakawahir_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/raidenjuuh_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "ドンパイア!!":
     "title": "ドンパイア!!"
@@ -9608,7 +9638,7 @@
     "0001":
       "key4": "0001-0"
       "key3": "kouteipeng_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
       "shd": "7f5ad5d5d42ae8a47e5f5834453e1193e58e7547"
       "key2": "akutushour_001"
       "key1": "SHWM"
@@ -9632,24 +9662,24 @@
     "0001":
       "key4": "0001-0"
       "key3": "osamurai_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/11"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/10"
       "shd": "77c9c6602136604ab40c4d2015a27e43d80223fa"
       "key2": "otami_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/osamurai_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "&スマイリー":
-    "title": "&スマイリー"
+  "ガラスの楽艶":
+    "title": "ガラスの楽艶"
     "0001":
       "key4": "0001-0"
-      "key3": "andosumair_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
-      "shd": "b89fb5183c3f9b90c17a61f78a7b3c4d8a29fb8b"
-      "key2": "sakurajun_001"
+      "key3": "garasunora_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "shd": "7de12b8adc7b61df51126f1b4d0a3f109ef2e548"
+      "key2": "makiyamahi_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/andosumair_001/"
+    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/garasunora_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "未来のフットボール":
     "title": "未来のフットボール"
@@ -9680,7 +9710,7 @@
     "0002":
       "key4": "0002-0"
       "key3": "mahtisutoh_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/18"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/17"
       "shd": "90b9311e7f19dac2812b8dc2df3b1ff8fd7042db"
       "key2": "yangyoniru_001"
       "key1": "SHWM"
@@ -9712,6 +9742,14 @@
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/mefisuto_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "サムライハイスクール":
+    "0022":
+      "key4": "0022-0"
+      "key3": "samuraihai_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "shd": "95f66d21995c79c3b6314ab6300a09eedac9c885"
+      "key2": "kasiwabahi_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "title": "サムライハイスクール"
     "0001":
       "key4": "0001-0"
@@ -9726,35 +9764,11 @@
     "0021":
       "key4": "0021-0"
       "key3": "samuraihai_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
       "shd": "f8f12efc6784e0db583113f15e3843983ee2757d"
       "key2": "kasiwabahi_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
-  "ロボ彼女":
-    "title": "ロボ彼女"
-    "0001":
-      "key4": "0001-0"
-      "key3": "robokanojo_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
-      "shd": "ba2989db76304dcd92ec9d40ddc3b3e781dc0872"
-      "key2": "itukaitisi_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/robokanojo_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "仮面ライダー":
-    "title": "仮面ライダー"
-    "0001":
-      "key4": "0001-0"
-      "key3": "kamenraida_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
-      "shd": "69975800cd3dbd2fb9c90d2f94a7b0419bb2df83"
-      "key2": "isinomoris_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/kamenraida_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
   "独り唄":
     "title": "独り唄"
     "0001":
@@ -9796,7 +9810,7 @@
     "0001":
       "key4": "0001-0"
       "key3": "rasutomiss_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
       "shd": "57de399d5df4de1b0bc630fcd23d7943ccbbcd9c"
       "key2": "takahasish_001"
       "key1": "SHWM"
@@ -9817,20 +9831,36 @@
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "いつわりびと◆空◆":
     "title": "いつわりびと◆空◆"
+    "0099":
+      "key4": "0099-0"
+      "key3": "ituwaribit_002"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "shd": "e55ec250f00c20711b87b34b08f33404405928de"
+      "key2": "iinumayuuk_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0097":
       "key4": "0097-0"
       "key3": "ituwaribit_002"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
       "shd": "af6b1d36b33435c487b3825e32ebaed9d2146aca"
       "key2": "iinumayuuk_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/ituwaribit_002/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
+    "0098":
+      "key4": "0098-0"
+      "key3": "ituwaribit_002"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "shd": "d22221c1e7f23acace76fcbe64e55af1d1aefa50"
+      "key2": "iinumayuuk_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0095":
       "key4": "0095-0"
       "key3": "ituwaribit_002"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
       "shd": "524963867db0593e3e0763505afe415fe07c27f3"
       "key2": "iinumayuuk_001"
       "key1": "SHWM"
@@ -9838,44 +9868,36 @@
     "0096":
       "key4": "0096-0"
       "key3": "ituwaribit_002"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
       "shd": "db6ed2d11a8b1ee552acc502979831bd4c78dc0e"
       "key2": "iinumayuuk_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0093":
-      "key4": "0093-0"
+    "0101":
+      "key4": "0101-0"
       "key3": "ituwaribit_002"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
-      "shd": "d1921bbbff7c89f4fd96241c1e63769337378615"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "shd": "1897551d1c686c450150dea180d9e6955fca2f43"
       "key2": "iinumayuuk_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0094":
-      "key4": "0094-0"
+    "0100":
+      "key4": "0100-0"
       "key3": "ituwaribit_002"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
-      "shd": "e5fb2a0a74ff7b79b1bda5e9dd56cd490a5e1be4"
-      "key2": "iinumayuuk_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0091":
-      "key4": "0091-0"
-      "key3": "ituwaribit_002"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
-      "shd": "ab422c65fef2ec2fd957a4c3d5d668716aa6b216"
-      "key2": "iinumayuuk_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0092":
-      "key4": "0092-0"
-      "key3": "ituwaribit_002"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
-      "shd": "d1dd09418df5e761548d7009e42a3c68b77a5f46"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "shd": "408344948788451d71e62833750b9513dc38d926"
       "key2": "iinumayuuk_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
   "小学ににゃんせい":
+    "0022":
+      "key4": "0022-0"
+      "key3": "shougakuni_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "shd": "e0cb34cc00898bd1ee28a06e9d98de60c48bf981"
+      "key2": "yorozuyafu_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "title": "小学ににゃんせい"
     "0001":
       "key4": "0001-0"
@@ -9890,7 +9912,7 @@
     "0021":
       "key4": "0021-0"
       "key3": "shougakuni_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
       "shd": "6ad5549a702b16c0c50268db064ddb55dc06a4b5"
       "key2": "yorozuyafu_001"
       "key1": "SHWM"
@@ -9906,18 +9928,6 @@
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/youkaijank_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "Unevenness":
-    "title": "Unevenness"
-    "0001":
-      "key4": "0001-0"
-      "key3": "anihbunnes_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
-      "shd": "9ee23656a76b866bc3c9401e11a17fed56cb46f7"
-      "key2": "matumineda_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/anihbunnes_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "旅行解禁!!ハイド＆クローサー":
     "title": "旅行解禁!!ハイド＆クローサー"
@@ -9972,12 +9982,24 @@
     "0001":
       "key4": "0001-0"
       "key3": "bokunowada_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/12"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/11"
       "shd": "f7fd01066a43bb11935790d5d0bcde594f68f00a"
       "key2": "uenotooru_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/bokunowada_001/"
+    "class": "anonscanlations.downloader.sunday.SundaySeries"
+  "ディエゴを知っているか?":
+    "title": "ディエゴを知っているか?"
+    "0001":
+      "key4": "0001-0"
+      "key3": "dhiegowosi_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "shd": "62fb4d40684fef6c74f979200c50c6165ffedda3"
+      "key2": "akaikeiori_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/dhiegowosi_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "おわりノブナガ編":
     "title": "おわりノブナガ編"
@@ -10025,28 +10047,28 @@
       "key2": "fukutituba_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0039":
-      "key4": "0039-0"
+    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/takkoku_001/"
+    "class": "anonscanlations.downloader.sunday.SundaySeries"
+    "0042":
+      "key4": "0042-0"
       "key3": "takkoku_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
-      "shd": "33768a51032a1cd6d3bd9ec79ffde6e91388e0ac"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "shd": "8db393d5106b0bfab5c2f923912a7cc7d7dbbfde"
       "key2": "fukutituba_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/takkoku_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
-    "0040":
-      "key4": "0040-0"
+    "0043":
+      "key4": "0043-0"
       "key3": "takkoku_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
-      "shd": "9b6e204d08ef8f3f0be36e4e6fa14248e2248ddd"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "shd": "27fca696d5b8c330e1f952edc1a3e48161386e46"
       "key2": "fukutituba_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0041":
       "key4": "0041-0"
       "key3": "takkoku_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
       "shd": "7c8619d2f311cff7c16a0c688d22f60a3691ca8c"
       "key2": "fukutituba_001"
       "key1": "SHWM"
@@ -10068,7 +10090,7 @@
     "0001":
       "key4": "0001-0"
       "key3": "soruthihan_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/13"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/12"
       "shd": "5e200db8740f83bf8d660a841fcf5b0f689e414f"
       "key2": "kakuterujo_001"
       "key1": "SHWM"
@@ -10076,36 +10098,12 @@
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/soruthihan_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "class": "anonscanlations.downloader.sunday.SundayMagazine"
-  "けせらせら":
-    "title": "けせらせら"
-    "0001":
-      "key4": "0001-0"
-      "key3": "keserasera_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
-      "shd": "8d2cbd5baae2420f3df8ff2fd324578e04b9b7f3"
-      "key2": "urayamasin_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/keserasera_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "鉄壁女子":
-    "title": "鉄壁女子"
-    "0001":
-      "key4": "0001-0"
-      "key3": "teppekijos_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
-      "shd": "815c268d09ca414af1e591e47a64b148894aa767"
-      "key2": "sanagihisa_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/teppekijos_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
   "アップセット15":
     "title": "アップセット15"
     "0014":
       "key4": "0014-0"
       "key3": "appusettof_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
       "shd": "c39ab0a88345051f5e1037311b59693e91cdaa90"
       "key2": "okuhideki_001"
       "key1": "SHWM"
@@ -10115,14 +10113,6 @@
       "key3": "appusettof_001"
       "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/18"
       "shd": "56b03b41580e9a07e2280cc6ee657246ee2bf033"
-      "key2": "okuhideki_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0013":
-      "key4": "0013-0"
-      "key3": "appusettof_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
-      "shd": "197ec1fca78b42a90dcbfdc387c273c32d9c899f"
       "key2": "okuhideki_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
@@ -10237,15 +10227,23 @@
     "0001":
       "key4": "0001-0"
       "key3": "imawanokun_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
       "shd": "a0a492a0f015620321d6d7aadabb9fd9dc369b8e"
+      "key2": "asouharo_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "0003":
+      "key4": "0003-0"
+      "key3": "imawanokun_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "shd": "e260f20ff58608fcac91407e6b0eb798bdef29d9"
       "key2": "asouharo_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0002":
       "key4": "0002-0"
       "key3": "imawanokun_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
       "shd": "4fe99ac1c15fcde2c7dab5215eb664eb29cbb8c6"
       "key2": "asouharo_001"
       "key1": "SHWM"
@@ -10289,10 +10287,18 @@
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/pasutodori_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "ポップコーンアバター":
+    "0023":
+      "key4": "0023-0"
+      "key3": "poppukohna_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "shd": "b76a993b43d38d472dafddba568f7eec980c8666"
+      "key2": "hosinokoui_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0022":
       "key4": "0022-0"
       "key3": "poppukohna_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
       "shd": "c261d607efe9efbbf7fd143663ea17610562694f"
       "key2": "hosinokoui_001"
       "key1": "SHWM"
@@ -10308,25 +10314,29 @@
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/poppukohna_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
-    "0021":
-      "key4": "0021-0"
-      "key3": "poppukohna_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
-      "shd": "25108973a97fb392ce3e6e1c143c5f38c797d608"
-      "key2": "hosinokoui_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-  "ウイークエンド・フレンド":
-    "title": "ウイークエンド・フレンド"
+  "今津の風":
+    "title": "今津の風"
     "0001":
       "key4": "0001-0"
-      "key3": "uihkuendof_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
-      "shd": "ea30d3b2854180050207d20fcc61a02cd2f2390b"
-      "key2": "taokariki_001"
+      "key3": "imadunokaz_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "shd": "08c554a52c38ca09df2637f73b7b53fabb09e03a"
+      "key2": "araijunya_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/uihkuendof_001/"
+    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/imadunokaz_001/"
+    "class": "anonscanlations.downloader.sunday.SundaySeries"
+  "覚の駒":
+    "title": "覚の駒"
+    "0001":
+      "key4": "0001-0"
+      "key3": "satorinoko_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "shd": "4502e5891baff68b626eb048315bfd1b24879482"
+      "key2": "utitomitak_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/satorinoko_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "モテすぎ!!":
     "title": "モテすぎ!!"
@@ -10345,16 +10355,16 @@
     "0015":
       "key4": "0015-0"
       "key3": "daiyamondo_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
       "shd": "f10e3a01dc14fed45c14db9ccc7a0719db3e576d"
       "key2": "tagutikenz_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0014":
-      "key4": "0014-0"
+      "key4": "0014-5"
       "key3": "daiyamondo_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
-      "shd": "3e95317f1023b65effbfaf8139fc673360aebeb3"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
+      "shd": "5151b5b39048737dfdc3e9a9d4431abd0cae3df8"
       "key2": "tagutikenz_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
@@ -10378,20 +10388,12 @@
       "key2": "sugawarake_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0020":
-      "key4": "0020-0"
-      "key3": "mohsohdohr_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
-      "shd": "3b30e4bc3ed96cb53182881a56fe9478ef413a22"
-      "key2": "sugawarake_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/mohsohdohr_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
     "0021":
       "key4": "0021-0"
       "key3": "mohsohdohr_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
       "shd": "347fc7c08213e163d6908fc55edbc3f8841754b4"
       "key2": "sugawarake_001"
       "key1": "SHWM"
@@ -10464,7 +10466,7 @@
     "0012":
       "key4": "0012-0"
       "key3": "saibohguze_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/16"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/15"
       "shd": "4fc34254ccf66f39699c1d1dc4378c76ef904a43"
       "key2": "isinomoris_001"
       "key1": "SHWM"
@@ -10505,7 +10507,7 @@
     "0008":
       "key4": "0008-0"
       "key3": "saibohguze_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/17"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/16"
       "shd": "59b9f74cdd8e785731f2f1842238c8c8af581ba9"
       "key2": "isinomoris_001"
       "key1": "SHWM"
@@ -10531,18 +10533,6 @@
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/momonyarou_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "HI-RO":
-    "title": "HI-RO"
-    "0001":
-      "key4": "0001-0"
-      "key3": "hihroh_002"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/15"
-      "shd": "108001354024b01f99038d564b1730ba95ed7d85"
-      "key2": "kanton_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/hihroh_002/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "デモーニッシュザイン":
     "title": "デモーニッシュザイン"
@@ -10604,24 +10594,12 @@
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/kurasusifu_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "コウテツ少年":
-    "title": "コウテツ少年"
-    "0001":
-      "key4": "0001-0"
-      "key3": "koutetusho_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
-      "shd": "7a5bc6bba8b05a72175ae04cf782f5884e56999a"
-      "key2": "wasiokazuy_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/koutetusho_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
   "009 トランプ・タワー編":
     "title": "009 トランプ・タワー編"
     "0001":
       "key4": "0001-0"
       "key3": "zerozerona_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
       "shd": "21d49344d6e06973e1b76f04a280fc145afea025"
       "key2": "isinomoris_001"
       "key1": "SHWM"
@@ -10712,18 +10690,6 @@
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/dorokeidor_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "ゆめかんとく":
-    "title": "ゆめかんとく"
-    "0001":
-      "key4": "0001-0"
-      "key3": "yumekantok_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
-      "shd": "3839a428f621c8fdf6879dd50a9c371f0e0400cf"
-      "key2": "okakeisuke_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/yumekantok_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
   "金魚屋跡取りラン":
     "title": "金魚屋跡取りラン"
     "0001":
@@ -10748,40 +10714,36 @@
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/dukekoatak_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
-  "サイコロマキビ～遣唐記～":
-    "title": "サイコロマキビ～遣唐記～"
-    "0001":
-      "key4": "0001-0"
-      "key3": "saikoromak_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
-      "shd": "de81190e410483ddb3e51a03ff4a074404e0da99"
-      "key2": "kawaiakifu_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/saikoromak_001/"
-    "class": "anonscanlations.downloader.sunday.SundaySeries"
   "青血のハグルマ":
     "title": "青血のハグルマ"
     "0001":
       "key4": "0001-0"
       "key3": "seiketunoh_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/15"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/14"
       "shd": "64d17c4a3e8476c44bf7d4e42ab92863f9c889c9"
       "key2": "hanaokouhe_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/seiketunoh_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
-    "0009":
-      "key4": "0009-0"
+    "0010":
+      "key4": "0010-0"
       "key3": "seiketunoh_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
-      "shd": "379aee937fd045049afdb1bd92f7bebe9fb4a743"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "shd": "016556a687d80b83981af1136fc29979d4d1a841"
       "key2": "hanaokouhe_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
   "やおよろっ！":
     "title": "やおよろっ！"
+    "0099":
+      "key4": "0099-0"
+      "key3": "yaoyoro_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "shd": "f0a6ed6745e15fbdd30af27cd68a463a3d4bf9e0"
+      "key2": "natumin_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0038":
       "key4": "0038-0"
       "key3": "yaoyoro_001"
@@ -10790,29 +10752,29 @@
       "key2": "natumin_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "0097":
+      "key4": "0097-0"
+      "key3": "yaoyoro_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "shd": "62ce08c263cc4a22ed1e26dda6da7e503e59d497"
+      "key2": "natumin_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/yaoyoro_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
     "0095":
-      "key4": "0095-0"
+      "key4": "0095-5"
       "key3": "yaoyoro_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
-      "shd": "0fc9e5acb93136af0ef7c7fbd80d41c1a825a158"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
+      "shd": "76d514b9c8b3e77d865f4843a8f932b9d7a575a4"
       "key2": "natumin_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "0096":
       "key4": "0096-0"
       "key3": "yaoyoro_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
       "shd": "371841a98c725661eca523c7432d49564f3b3dce"
-      "key2": "natumin_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0094":
-      "key4": "0094-0"
-      "key3": "yaoyoro_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/8"
-      "shd": "0d826c4650a614ed374c6dee1362f1527b61a63d"
       "key2": "natumin_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
@@ -10832,7 +10794,7 @@
     "0005":
       "key4": "0005-0"
       "key3": "kyoukaraor_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/19"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/18"
       "shd": "50e3c168d7ffc4cd6f9d125187eac0782003a6a0"
       "key2": "nisimorihi_001"
       "key1": "SHWM"
@@ -10913,7 +10875,7 @@
     "0001":
       "key4": "0001-0"
       "key3": "shokora_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/14"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/13"
       "shd": "7d4889d7f203395b2a7f44084e7f4d1b280c9cb9"
       "key2": "tuburayasi_001"
       "key1": "SHWM"
@@ -10944,6 +10906,18 @@
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/youkososin_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
+  "ノゾミとキミオ":
+    "title": "ノゾミとキミオ"
+    "0001":
+      "key4": "0001-0"
+      "key3": "nozomitoki_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "shd": "8ee06c67a0150b758a8a49112caa7efcca210e1c"
+      "key2": "honnawakou_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/nozomitoki_001/"
+    "class": "anonscanlations.downloader.sunday.SundaySeries"
   "悪魔のオーキッド":
     "title": "悪魔のオーキッド"
     "0001":
@@ -10960,7 +10934,7 @@
     "0052":
       "key4": "0052-0"
       "key3": "tuhru_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
       "shd": "cb476412ee601b3df2fdf8281801977b9c77a795"
       "key2": "ootaniakir_001"
       "key1": "SHWM"
@@ -10968,30 +10942,30 @@
     "0051":
       "key4": "0051-0"
       "key3": "tuhru_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
       "shd": "18daab2108b9c7084f841e62e6e9119d475410b0"
       "key2": "ootaniakir_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "title": "ツール！"
-    "0050":
-      "key4": "0050-0"
+    "0054":
+      "key4": "0054-0"
       "key3": "tuhru_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/5"
-      "shd": "8e7944835437bb89d591d1e9751478986cca945e"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/1"
+      "shd": "64cdfa9971cad7d661367a69bbb4b2dec5a7320c"
+      "key2": "ootaniakir_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "title": "ツール！"
+    "0053":
+      "key4": "0053-0"
+      "key3": "tuhru_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "shd": "02a546788b08c0324e1a96c69ad534041ed51570"
       "key2": "ootaniakir_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/tuhru_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
-    "0049":
-      "key4": "0049-0"
-      "key3": "tuhru_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/7"
-      "shd": "e323c4b966360cf9f034a110f313fa01cbd69148"
-      "key2": "ootaniakir_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
   "仏ロック":
     "title": "仏ロック"
     "0001":
@@ -11016,6 +10990,18 @@
       "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/ierohdorag_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
+  "バンカイザー・ザ・サンドウィッチマン":
+    "title": "バンカイザー・ザ・サンドウィッチマン"
+    "0001":
+      "key4": "0001-0"
+      "key3": "bankaizahz_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/4"
+      "shd": "12000c0db4fe36499f001f8fd4baa10e9e5c7e82"
+      "key2": "koyamamiti_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
+    "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/bankaizahz_001/"
+    "class": "anonscanlations.downloader.sunday.SundaySeries"
   "銀塩少年":
     "title": "銀塩少年"
     "0001":
@@ -11026,22 +11012,22 @@
       "key2": "gotoujunpe_001"
       "key1": "SHWM"
       "class": "anonscanlations.downloader.sunday.SundayChapter"
-    "0020":
-      "key4": "0020-0"
-      "key3": "zeratinboh_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
-      "shd": "1a1c7e00c1d5531d4b22d61fd3ca30d64a4c17a5"
-      "key2": "gotoujunpe_001"
-      "key1": "SHWM"
-      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "path": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/zeratinboh_001/"
     "class": "anonscanlations.downloader.sunday.SundaySeries"
   "魔法のいろは！":
+    "0016":
+      "key4": "0016-0"
+      "key3": "mahounoiro_001"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/2"
+      "shd": "fc45b838aacdedce2b74a6f55b7204888bb8ccd6"
+      "key2": "inouekazur_001"
+      "key1": "SHWM"
+      "class": "anonscanlations.downloader.sunday.SundayChapter"
     "title": "魔法のいろは！"
     "0015":
       "key4": "0015-0"
       "key3": "mahounoiro_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/3"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/6"
       "shd": "55f0fed35e5e907505bb06cac59757eed9dc7f69"
       "key2": "inouekazur_001"
       "key1": "SHWM"
@@ -11049,7 +11035,7 @@
     "0001":
       "key4": "0001-0"
       "key3": "mahounoiro_001"
-      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/20"
+      "keyURL": "http://club.shogakukan.co.jp/magazine/SH_CSNDY/list/ALL/19"
       "shd": "26144d4869ce087e070b14d69523ff54a1efbb25"
       "key2": "inouekazur_001"
       "key1": "SHWM"
