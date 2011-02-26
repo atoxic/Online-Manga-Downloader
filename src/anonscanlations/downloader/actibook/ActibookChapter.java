@@ -2,7 +2,7 @@
  * Coded by /a/non, for /a/non
  */
 
-package anonscanlations.downloader.ganganonline;
+package anonscanlations.downloader.actibook;
 
 import java.util.*;
 import java.io.*;
@@ -14,13 +14,13 @@ import anonscanlations.downloader.*;
  *
  * @author /a/non
  */
-public class GanGanOnlineChapter extends Chapter implements Serializable
+public class ActibookChapter extends Chapter implements Serializable
 {
     private Series series;
     private String title, url;
     private int start, total;
 
-    public GanGanOnlineChapter(Series mySeries, Map<String, Object> yamlMap)
+    public ActibookChapter(Series mySeries, Map<String, Object> yamlMap)
     {
         series = mySeries;
         title = (String)yamlMap.get("title");
@@ -29,7 +29,7 @@ public class GanGanOnlineChapter extends Chapter implements Serializable
         total = (Integer)yamlMap.get("total");
     }
 
-    public GanGanOnlineChapter(Series mySeries, String myTitle, String myURL)
+    public ActibookChapter(Series mySeries, String myTitle, String myURL)
     {
         series = mySeries;
         title = myTitle;

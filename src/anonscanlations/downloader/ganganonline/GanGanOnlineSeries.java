@@ -4,6 +4,7 @@
 
 package anonscanlations.downloader.ganganonline;
 
+import anonscanlations.downloader.actibook.ActibookChapter;
 import anonscanlations.downloader.*;
 
 import java.io.*;
@@ -71,7 +72,7 @@ public class GanGanOnlineSeries extends Series implements Serializable
             
             String urlString = (new URL(new URL(url), "viewer/" + string + "/books/")).toString();
 
-            GanGanOnlineChapter chapter = new GanGanOnlineChapter(this, string, urlString);
+            ActibookChapter chapter = new ActibookChapter(this, string, urlString);
 
             try
             {

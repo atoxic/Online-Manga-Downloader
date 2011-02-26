@@ -67,11 +67,15 @@ public class PluginFreeChapter extends Chapter implements Serializable
         
         // content Key Value
         String cKV = title(indexPage, "'cKV'");
+        if(cKV == null)
+            return(false);
         DownloaderUtils.debug("\t\t\tcKV: " + cKV);
         int cKVInt = Integer.parseInt(cKV);
 
         // root directory
         String hCN = title(indexPage, "'hCN'");
+        if(hCN == null)
+            return(false);
         DownloaderUtils.debug("\t\t\thCN: " + hCN);
 
         String initValEncoded = DownloaderUtils.getPage(url + "/InitVal.html", "Shift_JIS");
@@ -83,16 +87,22 @@ public class PluginFreeChapter extends Chapter implements Serializable
 
         // page number
         String tPN = title(initVal, "'tPN'");
+        if(tPN == null)
+            return(false);
         total = Integer.parseInt(tPN);
         DownloaderUtils.debug("\t\t\ttotal: " + total);
 
         // for decoding page individual files
         String sISString = title(initVal, "'sIS'");
+        if(tPN == null)
+            return(false);
         sIS = Integer.parseInt(sISString);
         DownloaderUtils.debug("\t\t\tsIS: " + sIS);
 
         // title
         String sHN = title(initVal, "'sHN'");
+        if(sHN == null)
+            return(false);
         DownloaderUtils.debug("\t\t\tsHN: " + sHN);
 
         downloadURL = cgi + hCN + sHN + "/" + sHN;

@@ -111,7 +111,7 @@ public class Downloader
 
         try
         {
-            data = DownloaderUtils.readYAML("data/manga_download_info.yml");
+            data = DownloaderUtils.readYAML("data/manga_download_info_2.yml");
 
             final DownloaderWindow window = new DownloaderWindow(data);
 
