@@ -55,5 +55,4 @@ public class YAMLable
             }
         }
     }
-    public final void dump(){}
 }

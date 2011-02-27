@@ -50,14 +50,14 @@ public class GanGanOnlineSeries extends Series implements Serializable
 
             try
             {
-                chapter.parseXML();
-                // add only if it doesn't get an error
-                addChapter(chapter);
+                if(chapter.parseXML())
+                    // add only if it doesn't get an error
+                    addChapter(chapter);
             }
-            catch(IOException ioe)
+            catch(Exception e)
             {
                 // non-fatal; don't freak out
-                DownloaderUtils.error("Couldn't get chapter: " + urlString, ioe, false);
+                DownloaderUtils.error("Couldn't get chapter: " + urlString, e, false);
             }
         }
     }
