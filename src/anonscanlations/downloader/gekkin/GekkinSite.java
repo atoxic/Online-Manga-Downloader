@@ -70,8 +70,9 @@ public class GekkinSite extends Site
                     String title = chapterLink.substring(chapterLink.lastIndexOf('/', chapterLink.lastIndexOf('/') - 1) + 1, chapterLink.lastIndexOf('/'));
                     if(title.indexOf('_') != -1)
                         title = title.substring(title.indexOf('_') + 1);
-                    PluginFreeChapter chapter = new PluginFreeChapter(series, title,
+                    PluginFreeChapter chapter = new PluginFreeChapter(title,
                             chapterLink.substring(0, chapterLink.lastIndexOf('/')), 18);
+                    chapter.setSeries(series);
                     chapter.parsePages("http://ebook.comic-gekkin.com/cgi-bin/widget.cgi?a=");
                     series.addChapter(chapter);
                 }

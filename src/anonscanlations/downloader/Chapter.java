@@ -13,7 +13,16 @@ import java.util.*;
  */
 public abstract class Chapter implements YAMLable, Serializable
 {
-    public abstract Series getSeries();
+    private Series series;
+
+    public final void setSeries(Series mySeries)
+    {
+        series = mySeries;
+    }
+    public final Series getSeries()
+    {
+        return(series);
+    }
     public abstract String getTitle();
     public abstract int getMin();
     public abstract int getMax();

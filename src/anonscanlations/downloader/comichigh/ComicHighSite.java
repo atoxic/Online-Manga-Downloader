@@ -55,8 +55,8 @@ public class ComicHighSite extends Site
                 DownloaderUtils.debug("\tlink: " + link);
                 try
                 {
-                    PluginFreeChapter chapter = new PluginFreeChapter(series,
-                                            link.substring(link.indexOf('_') + 1), link, 15);
+                    PluginFreeChapter chapter = new PluginFreeChapter(link.substring(link.indexOf('_') + 1), link, 15);
+                    chapter.setSeries(series);
                     chapter.parsePages("http://futabasha.pluginfree.com/cgi-bin/widget.cgi?a=");
                     series.addChapter(chapter);
                 }

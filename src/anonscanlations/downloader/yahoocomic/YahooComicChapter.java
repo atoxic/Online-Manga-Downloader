@@ -17,13 +17,11 @@ import anonscanlations.downloader.pcviewer.*;
  */
 public class YahooComicChapter extends Chapter implements Serializable
 {
-    private Series series;
     private String key1, xmlurl, shd, dataFolder;
     private int rangeStart, rangeEnd;
 
-    public YahooComicChapter(Series mySeries, Map<String, Object> yamlMap)
+    public YahooComicChapter(Map<String, Object> yamlMap)
     {
-        series = mySeries;
         key1 = (String)yamlMap.get("key1");
         xmlurl = (String)yamlMap.get("xmlurl");
         dataFolder = (String)yamlMap.get("dataFolder");
@@ -32,10 +30,8 @@ public class YahooComicChapter extends Chapter implements Serializable
         rangeEnd = (Integer)yamlMap.get("rangeEnd");
     }
 
-    public YahooComicChapter(Series mySeries, String url)
+    public YahooComicChapter(String url)
     {
-        series = mySeries;
-
         key1 = getParam(url, "key1");
         try
         {
@@ -85,11 +81,6 @@ public class YahooComicChapter extends Chapter implements Serializable
         if(endIndex == -1)
             endIndex = url.length();
         return(url.substring(index + param.length() + 1, endIndex));
-    }
-
-    public Series getSeries()
-    {
-        return(series);
     }
 
     public String getTitle()

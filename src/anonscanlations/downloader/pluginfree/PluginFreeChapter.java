@@ -12,7 +12,6 @@ import java.awt.*;
 import java.net.*;
 
 import anonscanlations.downloader.*;
-import anonscanlations.downloader.comichigh.ComicHighSite;
 
 /**
  *
@@ -20,13 +19,11 @@ import anonscanlations.downloader.comichigh.ComicHighSite;
  */
 public class PluginFreeChapter extends Chapter implements Serializable
 {
-    private Series series;
     private String title, url, downloadURL;
     private int total, sIS, nsn;
 
-    public PluginFreeChapter(Series mySeries, Map<String, Object> yamlMap)
+    public PluginFreeChapter(Map<String, Object> yamlMap)
     {
-        series = mySeries;
         title = (String)yamlMap.get("title");
         url = (String)yamlMap.get("url");
         downloadURL = (String)yamlMap.get("dlURL");
@@ -35,9 +32,8 @@ public class PluginFreeChapter extends Chapter implements Serializable
         nsn = (Integer)yamlMap.get("nsn");
     }
 
-    public PluginFreeChapter(Series mySeries, String myTitle, String myURL, int myNSN)
+    public PluginFreeChapter(String myTitle, String myURL, int myNSN)
     {
-        series = mySeries;
         title = myTitle;
         url = myURL;
         
@@ -113,11 +109,6 @@ public class PluginFreeChapter extends Chapter implements Serializable
         //DownloaderUtils.debug("\t\t\t" + ComicHighSite.getIpntStr(sIS, 1, 15, 0, 1));
 
         return(true);
-    }
-
-    public Series getSeries()
-    {
-        return(series);
     }
 
     public String getTitle()

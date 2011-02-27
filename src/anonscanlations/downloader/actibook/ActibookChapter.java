@@ -16,22 +16,19 @@ import anonscanlations.downloader.*;
  */
 public class ActibookChapter extends Chapter implements Serializable
 {
-    private Series series;
     private String title, url;
     private int start, total;
 
-    public ActibookChapter(Series mySeries, Map<String, Object> yamlMap)
+    public ActibookChapter(Map<String, Object> yamlMap)
     {
-        series = mySeries;
         title = (String)yamlMap.get("title");
         url = (String)yamlMap.get("url");
         start = (Integer)yamlMap.get("start");
         total = (Integer)yamlMap.get("total");
     }
 
-    public ActibookChapter(Series mySeries, String myTitle, String myURL)
+    public ActibookChapter(String myTitle, String myURL)
     {
-        series = mySeries;
         title = myTitle;
         url = myURL;
         start = 0;
@@ -64,11 +61,6 @@ public class ActibookChapter extends Chapter implements Serializable
 
         start = Integer.parseInt(startString);
         total = Integer.parseInt(totalString);
-    }
-
-    public Series getSeries()
-    {
-        return(series);
     }
 
     public String getTitle()

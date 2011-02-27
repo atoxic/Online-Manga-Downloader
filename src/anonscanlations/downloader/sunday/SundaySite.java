@@ -72,7 +72,8 @@ public class SundaySite extends Site
                     mag.addSeries(s);
                 }
 
-                SundayChapter chapter = new SundayChapter(s, chapterURL, siteURL);
+                SundayChapter chapter = new SundayChapter(chapterURL, siteURL);
+                chapter.setSeries(s);
                 s.addChapter(chapter);
             }
         }

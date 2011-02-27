@@ -25,16 +25,14 @@ public class SundayChapter extends Chapter
 {
     public static final String ERR_OTK = "Couldn't get correct OTK key";
 
-    private Series series;
     private String key1, key2, key3, key4, shd;
 
     private String cookies, otk;
 
     private String keyURL;
 
-    public SundayChapter(Series mySeries, Map<String, Object> yamlMap)
+    public SundayChapter(Map<String, Object> yamlMap)
     {
-        series = mySeries;
         key1 = (String)yamlMap.get("key1");
         key2 = (String)yamlMap.get("key2");
         key3 = (String)yamlMap.get("key3");
@@ -43,9 +41,8 @@ public class SundayChapter extends Chapter
         keyURL = (String)yamlMap.get("keyURL");
     }
 
-    public SundayChapter(Series mySeries, String url, String myKeyURL)
+    public SundayChapter(String url, String myKeyURL)
     {
-        series = mySeries;
         keyURL = myKeyURL;
 
         key1 = getParam(url, "key1");
@@ -62,11 +59,7 @@ public class SundayChapter extends Chapter
             endIndex = url.length();
         return(url.substring(index + param.length() + 1, endIndex));
     }
-
-    public Series getSeries()
-    {
-        return(series);
-    }
+    
     public String getTitle()
     {
         return(key4.substring(0, key4.indexOf('-')));

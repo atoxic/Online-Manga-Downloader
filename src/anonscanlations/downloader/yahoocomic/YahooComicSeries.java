@@ -67,7 +67,8 @@ public class YahooComicSeries extends Series
             if(chapters.containsKey(string))
                 continue;
 
-            YahooComicChapter chapter = new YahooComicChapter(this, string);
+            YahooComicChapter chapter = new YahooComicChapter(string);
+            chapter.setSeries(this);
             chapter.parseXML();
             chapters.put(string, chapter);
         }

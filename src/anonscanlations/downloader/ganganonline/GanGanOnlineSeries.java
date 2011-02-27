@@ -72,7 +72,8 @@ public class GanGanOnlineSeries extends Series implements Serializable
             
             String urlString = (new URL(new URL(url), "viewer/" + string + "/books/")).toString();
 
-            ActibookChapter chapter = new ActibookChapter(this, string, urlString);
+            ActibookChapter chapter = new ActibookChapter(string, urlString);
+            chapter.setSeries(this);
 
             try
             {

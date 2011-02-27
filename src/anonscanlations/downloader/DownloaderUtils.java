@@ -294,10 +294,11 @@ public class DownloaderUtils
                 Class c = findClass(chapterMap);
                 if(c == null)
                     continue;
-                Constructor cons = findConstructor(c, Series.class, Map.class);
+                Constructor cons = findConstructor(c, Map.class);
                 if(cons == null)
                     continue;
-                Chapter chapter = (Chapter)newInstance(cons, series, chapterMap);
+                Chapter chapter = (Chapter)newInstance(cons, chapterMap);
+                chapter.setSeries(series);
                 if(chapter == null)
                     continue;
 
