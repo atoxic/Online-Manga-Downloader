@@ -67,13 +67,12 @@ public class SundaySite extends Site
                     s = (SundaySeries)series.get(name);
                 else
                 {
-                    s = new SundaySeries(mag, name, path);
+                    s = new SundaySeries(name, path);
                     series.put(name, s);
                     mag.addSeries(s);
                 }
 
                 SundayChapter chapter = new SundayChapter(chapterURL, siteURL);
-                chapter.setSeries(s);
                 s.addChapter(chapter);
             }
         }

@@ -54,7 +54,7 @@ public class DownloaderWindow extends JFrame
 
                 try
                 {
-                    data.dumpYAML("data/manga_download_info.yml");
+                    data.dumpYAML("data/" + Downloader.FILE);
                     DownloadInfoServer.saveAllInfo();
 
                     DownloaderUtils.debug("data saved");

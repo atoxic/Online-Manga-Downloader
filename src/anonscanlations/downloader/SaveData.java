@@ -51,13 +51,13 @@ public class SaveData implements Serializable
 
         for(Map.Entry<String, Magazine> magEntry : magazines.entrySet())
         {
-            Map<String, Object> magazineDump = magEntry.getValue().dump();
+            Map<String, Object> magazineDump = magEntry.getValue().exportVars();
             for(Series series : magEntry.getValue().getSeries())
             {
-                Map<String, Object> seriesDump = series.dump();
+                Map<String, Object> seriesDump = series.exportVars();
                 for(Chapter chapter : series.getChapters())
                 {
-                    Map<String, Object> chapterDump = chapter.dump();
+                    Map<String, Object> chapterDump = chapter.exportVars();
                     chapterDump.put("class", chapter.getClass().getName());
                     seriesDump.put(chapter.getTitle(), chapterDump);
                 }

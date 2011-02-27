@@ -28,6 +28,8 @@ public class Downloader
                 + "http://anonscanlations.blogspot.com/</a><br/>"
             + "Licensed (lol) under new BSD<br/>";
 
+    public static final String FILE = "manga_download_info_2.yml";
+
     /**
      * @param args the command line arguments
      */
@@ -111,7 +113,7 @@ public class Downloader
 
         try
         {
-            data = DownloaderUtils.readYAML("data/manga_download_info_2.yml");
+            data = DownloaderUtils.readYAML("data/" + FILE);
 
             final DownloaderWindow window = new DownloaderWindow(data);
 

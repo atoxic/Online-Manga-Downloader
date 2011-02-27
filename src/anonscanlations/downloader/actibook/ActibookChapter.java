@@ -19,12 +19,8 @@ public class ActibookChapter extends Chapter implements Serializable
     private String title, url;
     private int start, total;
 
-    public ActibookChapter(Map<String, Object> yamlMap)
+    public ActibookChapter()
     {
-        title = (String)yamlMap.get("title");
-        url = (String)yamlMap.get("url");
-        start = (Integer)yamlMap.get("start");
-        total = (Integer)yamlMap.get("total");
     }
 
     public ActibookChapter(String myTitle, String myURL)
@@ -33,18 +29,6 @@ public class ActibookChapter extends Chapter implements Serializable
         url = myURL;
         start = 0;
         total = 0;
-    }
-
-    public Map<String, Object> dump()
-    {
-        HashMap<String, Object> ret = new HashMap<String, Object>();
-
-        ret.put("title", title);
-        ret.put("url", url);
-        ret.put("start", start);
-        ret.put("total", total);
-
-        return(ret);
     }
 
     public void parseXML() throws IOException

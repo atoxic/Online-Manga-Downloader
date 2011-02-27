@@ -244,10 +244,11 @@ public class DownloaderUtils
                 Class c = findClass(magMap);
                 if(c == null)
                     continue;
-                Constructor cons = findConstructor(c, Map.class);
+                Constructor cons = findConstructor(c);
                 if(cons == null)
                     continue;
-                Magazine mag = (Magazine)newInstance(cons, magMap);
+                Magazine mag = (Magazine)newInstance(cons);
+                mag.importVars(magMap);
                 if(mag == null)
                     continue;
 
@@ -271,10 +272,12 @@ public class DownloaderUtils
                 Class c = findClass(seriesMap);
                 if(c == null)
                     continue;
-                Constructor cons = findConstructor(c, Magazine.class, Map.class);
+                Constructor cons = findConstructor(c);
                 if(cons == null)
                     continue;
-                Series series = (Series)newInstance(cons, mag, seriesMap);
+                Series series = (Series)newInstance(cons);
+                series.setMagazine(mag);
+                series.importVars(seriesMap);
                 if(series == null)
                     continue;
 
@@ -294,10 +297,11 @@ public class DownloaderUtils
                 Class c = findClass(chapterMap);
                 if(c == null)
                     continue;
-                Constructor cons = findConstructor(c, Map.class);
+                Constructor cons = findConstructor(c);
                 if(cons == null)
                     continue;
-                Chapter chapter = (Chapter)newInstance(cons, chapterMap);
+                Chapter chapter = (Chapter)newInstance(cons);
+                chapter.importVars(chapterMap);
                 chapter.setSeries(series);
                 if(chapter == null)
                     continue;
@@ -364,7 +368,7 @@ public class DownloaderUtils
             {
                 try
                 {
-                    URL object = new URL("https://dl.dropbox.com/u/6792608/manga_download_info.yml");
+                    URL object = new URL("https://dl.dropbox.com/u/6792608/" + Downloader.FILE);
 
                     SaveData data = DownloaderUtils.readYAML(object.openStream());
 

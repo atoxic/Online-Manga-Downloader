@@ -11,11 +11,25 @@ import java.util.*;
  *
  * @author /a/non
  */
-public abstract class Magazine implements YAMLable, Serializable
+public abstract class Magazine extends YAMLable implements Serializable
 {
+    private ArrayList<Series> series;
+    public Magazine()
+    {
+        series = new ArrayList<Series>();
+    }
+
     public abstract String getOriginalTitle();
-    public abstract Collection<Series> getSeries();
-    public abstract void addSeries(Series s);
+
+    public final Collection<Series> getSeries()
+    {
+        return(series);
+    }
+    public final void addSeries(Series s)
+    {
+        s.setMagazine(this);
+        series.add(s);
+    }
 
     public final HashMap getMagazineInfo()
     {

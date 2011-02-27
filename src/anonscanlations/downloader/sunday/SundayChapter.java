@@ -31,16 +31,8 @@ public class SundayChapter extends Chapter
 
     private String keyURL;
 
-    public SundayChapter(Map<String, Object> yamlMap)
-    {
-        key1 = (String)yamlMap.get("key1");
-        key2 = (String)yamlMap.get("key2");
-        key3 = (String)yamlMap.get("key3");
-        key4 = (String)yamlMap.get("key4");
-        shd = (String)yamlMap.get("shd");
-        keyURL = (String)yamlMap.get("keyURL");
-    }
-
+    public SundayChapter(){}
+    
     public SundayChapter(String url, String myKeyURL)
     {
         keyURL = myKeyURL;
@@ -73,20 +65,6 @@ public class SundayChapter extends Chapter
     public int getMax()
     {
         return(-1);
-    }
-
-    public Map<String, Object> dump()
-    {
-        HashMap<String, Object> ret = new HashMap<String, Object>();
-
-        ret.put("key1", key1);
-        ret.put("key2", key2);
-        ret.put("key3", key3);
-        ret.put("key4", key4);
-        ret.put("shd", shd);
-        ret.put("keyURL", keyURL);
-
-        return(ret);
     }
 
     public boolean download(DownloadListener dl) throws Exception

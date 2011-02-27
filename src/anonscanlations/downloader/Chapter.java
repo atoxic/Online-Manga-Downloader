@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author /a/non
  */
-public abstract class Chapter implements YAMLable, Serializable
+public abstract class Chapter extends YAMLable implements Serializable
 {
     private Series series;
 

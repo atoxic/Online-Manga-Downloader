@@ -18,68 +18,41 @@ import java.util.*;
 public class GanGanOnlineSeries extends Series implements Serializable
 {
     private String url, title;
-    private TreeMap<String, Chapter> chapters;
 
-    public GanGanOnlineSeries(Magazine myMagazine, Map<String, Object> yamlMap)
+    public GanGanOnlineSeries(){}
+
+    public GanGanOnlineSeries(String titlePanel) throws MalformedURLException
     {
-        super(myMagazine);
-
-        title = (String)yamlMap.get("title");
-        url = (String)yamlMap.get("url");
-
-        chapters = new TreeMap<String, Chapter>();
-    }
-
-    public GanGanOnlineSeries(Magazine myMagazine, String titlePanel) throws MalformedURLException
-    {
-        super(myMagazine);
-
         int urlIndex = titlePanel.indexOf("href=\"");
         url = new URL(new URL(GanGanOnlineSite.ROOT),
                 titlePanel.substring(urlIndex + 6, titlePanel.indexOf("\">", urlIndex))).toString();
 
         int titleIndex = titlePanel.indexOf("alt=\"");
         title = DownloaderUtils.unescapeHTML(titlePanel.substring(titleIndex + 5, titlePanel.indexOf("\" />", titleIndex)));
-
-        chapters = new TreeMap<String, Chapter>();
-    }
-
-    public Map<String, Object> dump()
-    {
-        HashMap<String, Object> ret = new HashMap<String, Object>();
-
-        ret.put("title", title);
-        ret.put("url", url);
-
-        return(ret);
-    }
-
-    public void addChapter(Chapter chapter)
-    {
-        chapters.put(chapter.getTitle(), chapter);
     }
 
     public void parsePage() throws IOException
     {
         String page = DownloaderUtils.getPage(url, "Shift_JIS");
+        TreeSet<String> strings = new TreeSet<String>();
 
         int index = 0;
         while((index = page.indexOf("javascript:Fullscreen('viewer/", index + 1)) != -1)
         {
             String string = page.substring(index + 30, page.indexOf("/_SWF_Window.html');", index));
-            if(chapters.containsKey(string))
+            if(strings.contains(string))
                 continue;
+            strings.add(string);
             
             String urlString = (new URL(new URL(url), "viewer/" + string + "/books/")).toString();
 
             ActibookChapter chapter = new ActibookChapter(string, urlString);
-            chapter.setSeries(this);
 
             try
             {
                 chapter.parseXML();
                 // add only if it doesn't get an error
-                chapters.put(string, chapter);
+                addChapter(chapter);
             }
             catch(IOException ioe)
             {
@@ -91,5 +64,4 @@ public class GanGanOnlineSeries extends Series implements Serializable
 
     public String getURL() { return(url); }
     public String getOriginalTitle(){ return(title); }
-    public Collection<Chapter> getChapters() { return(chapters.values()); }
 }

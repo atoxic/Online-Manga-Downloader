@@ -41,7 +41,7 @@ public class ComicHighSite extends Site
             index = sections[i].indexOf("<dt>");
             String title = sections[i].substring(index + 4, sections[i].indexOf("<", index + 4) - 1);
             DownloaderUtils.debug("title: " + title);
-            ComicHighSeries series = new ComicHighSeries(mag, title);
+            ComicHighSeries series = new ComicHighSeries(title);
 
             while((index = sections[i].indexOf("http://futabasha.pluginfree.com/weblish/futabawebhigh/", index + 1)) != -1)
             {
@@ -56,7 +56,6 @@ public class ComicHighSite extends Site
                 try
                 {
                     PluginFreeChapter chapter = new PluginFreeChapter(link.substring(link.indexOf('_') + 1), link, 15);
-                    chapter.setSeries(series);
                     chapter.parsePages("http://futabasha.pluginfree.com/cgi-bin/widget.cgi?a=");
                     series.addChapter(chapter);
                 }

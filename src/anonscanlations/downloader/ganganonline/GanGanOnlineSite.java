@@ -40,7 +40,7 @@ public class GanGanOnlineSite extends Site
         
         for(String titlePanels : list)
         {
-            GanGanOnlineSeries s = new GanGanOnlineSeries(ggOnline, titlePanels);
+            GanGanOnlineSeries s = new GanGanOnlineSeries(titlePanels);
             s.parsePage();
             ggOnline.addSeries(s);
         }

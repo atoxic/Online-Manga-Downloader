@@ -5,12 +5,55 @@
 package anonscanlations.downloader;
 
 import java.util.*;
+import java.lang.reflect.*;
 
 /**
  *
  * @author /a/non
  */
-public interface YAMLable
+public class YAMLable
 {
-    public Map<String, Object> dump();
+    public final HashMap<String, Object> exportVars()
+    {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        Field[] fields = getClass().getDeclaredFields();
+        for(Field f : fields)
+        {
+            int mods = f.getModifiers();
+            if(Modifier.isFinal(mods) || Modifier.isStatic(mods) || Modifier.isTransient(mods))
+                continue;
+            try
+            {
+                f.setAccessible(true);
+                map.put(f.getName(), f.get(this));
+            }
+            catch(IllegalAccessException iae)
+            {
+                DownloaderUtils.error("couldn't get field: " + f, iae, false);
+            }
+        }
+
+        return(map);
+    }
+    public final void importVars(Map<String, Object> map)
+    {
+        Field[] fields = getClass().getDeclaredFields();
+        for(Field f : fields)
+        {
+            f.setAccessible(true);
+            Object value = map.get(f.getName());
+            if(value == null)
+                continue;
+
+            try
+            {
+                f.set(this, value);
+            }
+            catch(IllegalAccessException iae)
+            {
+                DownloaderUtils.error("couldn't set field: " + f, iae, false);
+            }
+        }
+    }
+    public final void dump(){}
 }

@@ -50,7 +50,7 @@ public class GekkinSite extends Site
         TreeSet<String> chapters = new TreeSet<String>();
         for(Map.Entry<String, String> entry : links.entrySet())
         {
-            GekkinSeries series = new GekkinSeries(mag, entry.getKey());
+            GekkinSeries series = new GekkinSeries(entry.getKey());
 
             page = DownloaderUtils.getPage("http://www.comic-gekkin.com/" + entry.getValue(), "UTF-8");
             DownloaderUtils.debug("title: " + entry.getKey());
@@ -72,7 +72,6 @@ public class GekkinSite extends Site
                         title = title.substring(title.indexOf('_') + 1);
                     PluginFreeChapter chapter = new PluginFreeChapter(title,
                             chapterLink.substring(0, chapterLink.lastIndexOf('/')), 18);
-                    chapter.setSeries(series);
                     chapter.parsePages("http://ebook.comic-gekkin.com/cgi-bin/widget.cgi?a=");
                     series.addChapter(chapter);
                 }

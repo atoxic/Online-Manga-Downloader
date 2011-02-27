@@ -16,41 +16,16 @@ import anonscanlations.downloader.*;
  */
 public class YahooComicMagazine extends Magazine
 {
-    private TreeMap<String, Series> series;
-
     private String title;
 
     public YahooComicMagazine()
     {
-        series = new TreeMap<String, Series>();
-    }
-
-    public YahooComicMagazine(Map<String, Object> yamlMap)
-    {
-        this();
-
-        title = (String)yamlMap.get("title");
-    }
-
-    public Map<String, Object> dump()
-    {
-        HashMap<String, Object> ret = new HashMap<String, Object>();
-
-        ret.put("title", title);
-
-        return(ret);
-    }
-
-    public void addSeries(Series s)
-    {
-        series.put(s.getOriginalTitle(), s);
     }
 
     public String getOriginalTitle()
     {
         return(title);
     }
-    public Collection<Series> getSeries() { return(series.values()); }
 
     public void parsePage(String url) throws IOException
     {
@@ -65,7 +40,7 @@ public class YahooComicMagazine extends Magazine
         {
             final String string = (new URL(new URL(url), page.substring(index + 26, page.indexOf("\">", index)))).toString();
 
-            final YahooComicSeries comicSeries = new YahooComicSeries(this);
+            final YahooComicSeries comicSeries = new YahooComicSeries();
             // multithread it to increase speed
             Thread t = new Thread()
             {
@@ -92,7 +67,7 @@ public class YahooComicMagazine extends Magazine
             try
             {
                 t.getKey().join();
-                series.put(t.getValue().getOriginalTitle(), t.getValue());
+                addSeries(t.getValue());
             }
             catch(Exception e)
             {

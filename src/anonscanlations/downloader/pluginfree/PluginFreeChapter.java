@@ -22,15 +22,7 @@ public class PluginFreeChapter extends Chapter implements Serializable
     private String title, url, downloadURL;
     private int total, sIS, nsn;
 
-    public PluginFreeChapter(Map<String, Object> yamlMap)
-    {
-        title = (String)yamlMap.get("title");
-        url = (String)yamlMap.get("url");
-        downloadURL = (String)yamlMap.get("dlURL");
-        total = (Integer)yamlMap.get("total");
-        sIS = (Integer)yamlMap.get("sIS");
-        nsn = (Integer)yamlMap.get("nsn");
-    }
+    public PluginFreeChapter(){}
 
     public PluginFreeChapter(String myTitle, String myURL, int myNSN)
     {
@@ -41,20 +33,6 @@ public class PluginFreeChapter extends Chapter implements Serializable
         total = 0;
         sIS = 0;
         nsn = myNSN;
-    }
-
-    public Map<String, Object> dump()
-    {
-        HashMap<String, Object> ret = new HashMap<String, Object>();
-
-        ret.put("title", title);
-        ret.put("url", url);
-        ret.put("dlURL", downloadURL);
-        ret.put("total", total);
-        ret.put("sIS", sIS);
-        ret.put("nsn", nsn);
-
-        return(ret);
     }
 
     public boolean parsePages(String cgi) throws IOException

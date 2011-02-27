@@ -15,37 +15,12 @@ import anonscanlations.downloader.*;
  */
 public class ComicHighMagazine extends Magazine
 {
-    private TreeMap<String, Series> series;
-
     public ComicHighMagazine()
     {
-        series = new TreeMap<String, Series>();
-    }
-
-    public ComicHighMagazine(Map<String, Object> yamlMap)
-    {
-        this();
-    }
-
-    public Map<String, Object> dump()
-    {
-        HashMap<String, Object> ret = new HashMap<String, Object>();
-
-        return(ret);
     }
 
     public String getOriginalTitle()
     {
         return("コミックハイ！");
-    }
-
-    public Collection<Series> getSeries()
-    {
-        return(series.values());
-    }
-    
-    public void addSeries(Series s)
-    {
-        series.put(s.getOriginalTitle(), s);
     }
 }

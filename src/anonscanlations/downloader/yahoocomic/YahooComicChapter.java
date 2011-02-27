@@ -20,16 +20,7 @@ public class YahooComicChapter extends Chapter implements Serializable
     private String key1, xmlurl, shd, dataFolder;
     private int rangeStart, rangeEnd;
 
-    public YahooComicChapter(Map<String, Object> yamlMap)
-    {
-        key1 = (String)yamlMap.get("key1");
-        xmlurl = (String)yamlMap.get("xmlurl");
-        dataFolder = (String)yamlMap.get("dataFolder");
-        shd = (String)yamlMap.get("shd");
-        rangeStart = (Integer)yamlMap.get("rangeStart");
-        rangeEnd = (Integer)yamlMap.get("rangeEnd");
-    }
-
+    public YahooComicChapter(){}
     public YahooComicChapter(String url)
     {
         key1 = getParam(url, "key1");
@@ -43,20 +34,6 @@ public class YahooComicChapter extends Chapter implements Serializable
         }
         shd = getParam(url, "shd");
         rangeStart = rangeEnd = 0;
-    }
-    
-    public Map<String, Object> dump()
-    {
-        HashMap<String, Object> ret = new HashMap<String, Object>();
-
-        ret.put("key1", key1);
-        ret.put("xmlurl", xmlurl);
-        ret.put("shd", shd);
-        ret.put("dataFolder", dataFolder);
-        ret.put("rangeStart", rangeStart);
-        ret.put("rangeEnd", rangeEnd);
-
-        return(ret);
     }
 
     public void parseXML() throws IOException
