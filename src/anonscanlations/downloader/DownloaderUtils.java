@@ -223,7 +223,7 @@ public class DownloaderUtils
     {
         SaveData data = new SaveData();
 
-        TreeMap<String, Magazine> magazines = new TreeMap<String, Magazine>();
+        ArrayList<Magazine> magazines = new ArrayList<Magazine>();
 
         Yaml yaml = new Yaml();
         Object obj = yaml.load(stream);
@@ -253,7 +253,7 @@ public class DownloaderUtils
                     continue;
 
                 buildMagazine(mag, magMap);
-                magazines.put(mag.getOriginalTitle(), mag);
+                magazines.add(mag);
             }
         }
 

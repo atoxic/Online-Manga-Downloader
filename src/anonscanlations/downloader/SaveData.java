@@ -17,7 +17,7 @@ public class SaveData implements Serializable
 {
     private Date date;
 
-    private TreeMap<String, Magazine> magazines;
+    private ArrayList<Magazine> magazines;
     
     public SaveData()
     {
@@ -33,11 +33,11 @@ public class SaveData implements Serializable
         date = new Date();
     }
 
-    public void setMagazines(TreeMap<String, Magazine> myMagazines)
+    public void setMagazines(ArrayList<Magazine> myMagazines)
     {
         magazines = myMagazines;
     }
-    public TreeMap<String, Magazine> getMagazines()
+    public ArrayList<Magazine> getMagazines()
     {
         return(magazines);
     }
@@ -49,10 +49,10 @@ public class SaveData implements Serializable
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("date", date);
 
-        for(Map.Entry<String, Magazine> magEntry : magazines.entrySet())
+        for(Magazine mag : magazines)
         {
-            Map<String, Object> magazineDump = magEntry.getValue().exportVars();
-            for(Series series : magEntry.getValue().getSeries())
+            Map<String, Object> magazineDump = mag.exportVars();
+            for(Series series : mag.getSeries())
             {
                 Map<String, Object> seriesDump = series.exportVars();
                 for(Chapter chapter : series.getChapters())
@@ -64,8 +64,8 @@ public class SaveData implements Serializable
                 seriesDump.put("class", series.getClass().getName());
                 magazineDump.put(series.getOriginalTitle(), seriesDump);
             }
-            magazineDump.put("class", magEntry.getValue().getClass().getName());
-            data.put(magEntry.getValue().getOriginalTitle(), magazineDump);
+            magazineDump.put("class", mag.getClass().getName());
+            data.put(mag.getOriginalTitle(), magazineDump);
         }
 
         String output = yaml.dump(data);

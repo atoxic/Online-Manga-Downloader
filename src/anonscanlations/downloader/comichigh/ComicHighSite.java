@@ -24,10 +24,10 @@ public class ComicHighSite extends Site
 
     public String getName(){ return("Comic High!"); }
 
-    public TreeMap<String, Magazine> getMagazines()
+    public ArrayList<Magazine> getMagazines()
             throws IOException
     {
-        TreeMap<String, Magazine> map = new TreeMap<String, Magazine>();
+        ArrayList<Magazine> map = new ArrayList<Magazine>();
         ComicHighMagazine mag = new ComicHighMagazine();
         
         String page = DownloaderUtils.getPage("http://www.comichigh.jp/webcomic.html", "UTF-8");
@@ -68,7 +68,7 @@ public class ComicHighSite extends Site
             links.clear();
         }
 
-        map.put(mag.getOriginalTitle(), mag);
+        map.add(mag);
 
 
         return(map);

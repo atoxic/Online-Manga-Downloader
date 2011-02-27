@@ -199,10 +199,10 @@ public class DownloaderWindow extends JFrame
     {
         SortedTreeNode top = new SortedTreeNode("Magazines");
 
-        for(Map.Entry<String, Magazine> mag : data.getMagazines().entrySet())
+        for(Magazine mag : data.getMagazines())
         {
-            SortedTreeNode magazineNode = new SortedTreeNode(mag.getValue().getTranslatedTitle());
-            for(Series series : mag.getValue().getSeries())
+            SortedTreeNode magazineNode = new SortedTreeNode(mag.getTranslatedTitle());
+            for(Series series : mag.getSeries())
             {
                 SortedTreeNode seriesNode = new SortedTreeNode(series);
                 for(Chapter chapter : series.getChapters())
@@ -234,10 +234,26 @@ public class DownloaderWindow extends JFrame
             older = data;
         }
 
-        older.getMagazines().putAll(newer.getMagazines());
-        older.setDate(newer.getDate());
-
-        this.data = older;
+        boolean add;
+        // add old to new if the new doesn't have it
+        for(Magazine oldMag : older.getMagazines())
+        {
+            add = true;
+            for(Magazine newMag : newer.getMagazines())
+            {
+                if(oldMag.getOriginalTitle().equals(newMag.getOriginalTitle()))
+                {
+                    add = false;
+                    break;
+                }
+            }
+            if(add)
+            {
+                newer.getMagazines().add(oldMag);
+            }
+        }
+        
+        this.data = newer;
 
         rebuildTree();
     }

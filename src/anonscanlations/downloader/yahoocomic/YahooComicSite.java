@@ -26,9 +26,9 @@ public class YahooComicSite extends Site
 
     public String getName(){ return("Yahoo Comic"); }
 
-    public TreeMap<String, Magazine> getMagazines() throws IOException
+    public ArrayList<Magazine> getMagazines() throws IOException
     {
-        TreeMap<String, Magazine> magazines = new TreeMap<String, Magazine>();
+        ArrayList<Magazine> magazines = new ArrayList<Magazine>();
 
         String page = DownloaderUtils.getPage(ROOT, "EUC-JP");
 
@@ -39,7 +39,7 @@ public class YahooComicSite extends Site
             YahooComicMagazine mag = new YahooComicMagazine();
             mag.parsePage(url);
 
-            magazines.put(mag.getOriginalTitle(), mag);
+            magazines.add(mag);
         }
 
         return(magazines);

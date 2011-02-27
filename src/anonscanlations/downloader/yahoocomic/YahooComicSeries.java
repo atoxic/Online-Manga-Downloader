@@ -4,6 +4,7 @@
 
 package anonscanlations.downloader.yahoocomic;
 
+import anonscanlations.downloader.pcviewer.PCViewerChapter;
 import java.util.*;
 import java.io.*;
 import java.net.*;
@@ -16,6 +17,8 @@ import anonscanlations.downloader.*;
  */
 public class YahooComicSeries extends Series
 {
+    private static final String[] PARAMS = {"key1", "shd"};
+
     private String title;
 
     public YahooComicSeries()
@@ -42,7 +45,7 @@ public class YahooComicSeries extends Series
                 continue;
             strings.add(string);
 
-            YahooComicChapter chapter = new YahooComicChapter(string);
+            PCViewerChapter chapter = new PCViewerChapter(string, PARAMS);
             chapter.parseXML();
             addChapter(chapter);
         }

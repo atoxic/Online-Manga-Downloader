@@ -14,6 +14,6 @@ import java.util.*;
 public abstract class Site
 {
     public abstract String getName();
-    public abstract TreeMap<String, Magazine> getMagazines()
+    public abstract Collection<Magazine> getMagazines()
             throws IOException;
 }

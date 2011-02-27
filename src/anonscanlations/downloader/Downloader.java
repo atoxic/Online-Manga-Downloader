@@ -14,6 +14,7 @@ import anonscanlations.downloader.ganganonline.*;
 import anonscanlations.downloader.comichigh.*;
 import anonscanlations.downloader.sunday.*;
 import anonscanlations.downloader.gekkin.*;
+import anonscanlations.downloader.famitsu.*;
 
 /**
  *
@@ -51,6 +52,7 @@ public class Downloader
         DownloadInfoServer.SITES.put(SundaySite.SITE.getName(), SundaySite.SITE);
         DownloadInfoServer.SITES.put(GanGanOnlineSite.SITE.getName(), GanGanOnlineSite.SITE);
         DownloadInfoServer.SITES.put(YahooComicSite.SITE.getName(), YahooComicSite.SITE);
+        DownloadInfoServer.SITES.put(FamitsuSite.SITE.getName(), FamitsuSite.SITE);
 
         PreferencesManager.initializePrefs();
 
@@ -72,14 +74,14 @@ public class Downloader
     {
         DownloaderUtils.debug("running server");
 
-        TreeMap<String, Magazine> magazines =
-                new TreeMap<String, Magazine>();
+        ArrayList<Magazine> magazines =
+                new ArrayList<Magazine>();
 
         for(Map.Entry<String, Site> entry : DownloadInfoServer.SITES.entrySet())
         {
             DownloaderUtils.debug("getting magazine: " + entry.getKey());
 
-            TreeMap<String, Magazine> siteMagazines = null;
+            Collection<Magazine> siteMagazines = null;
             try
             {
                 siteMagazines = entry.getValue().getMagazines();
@@ -89,7 +91,7 @@ public class Downloader
                 DownloaderUtils.error("Could not get data on magazine \""
                                     + entry.getKey() + "\"", ioe, false);
             }
-            magazines.putAll(siteMagazines);
+            magazines.addAll(siteMagazines);
         }
 
         SaveData data = new SaveData();

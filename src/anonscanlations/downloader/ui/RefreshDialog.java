@@ -143,12 +143,12 @@ class RefreshDialog extends JDialog
     }
     private void refresh() throws IOException
     {
-        TreeMap<String, Magazine> magazines =
-                new TreeMap<String, Magazine>();
+        ArrayList<Magazine> magazines =
+                new ArrayList<Magazine>();
 
         for(String name : selected)
         {
-            magazines.putAll(DownloadInfoServer.SITES.get(name).getMagazines());
+            magazines.addAll(DownloadInfoServer.SITES.get(name).getMagazines());
         }
 
         SaveData data = new SaveData();

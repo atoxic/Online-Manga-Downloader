@@ -2,28 +2,32 @@
  * Coded by /a/non, for /a/non
  */
 
-package anonscanlations.downloader.yahoocomic;
+package anonscanlations.downloader.pcviewer;
 
 import java.util.*;
 import java.io.*;
 import java.net.*;
 
 import anonscanlations.downloader.*;
-import anonscanlations.downloader.pcviewer.*;
 
 /**
  *
  * @author /a/non
  */
-public class YahooComicChapter extends Chapter implements Serializable
+public class PCViewerChapter extends Chapter implements Serializable
 {
-    private String key1, xmlurl, shd, dataFolder;
+    protected HashMap<String, String> params;
+    private String xmlurl, dataFolder;
     private int rangeStart, rangeEnd;
 
-    public YahooComicChapter(){}
-    public YahooComicChapter(String url)
+    public PCViewerChapter(){}
+    public PCViewerChapter(String url, String[] myParams)
     {
-        key1 = getParam(url, "key1");
+        params = new HashMap<String, String>();
+        for(String p : myParams)
+        {
+            params.put(p, getParam(url, p));
+        }
         try
         {
             xmlurl = URLDecoder.decode(getParam(url, "xmlurl"), "UTF-8");
@@ -32,13 +36,21 @@ public class YahooComicChapter extends Chapter implements Serializable
         {
             DownloaderUtils.error("Couldn't decode xmlurl with UTF-8", e, false);
         }
-        shd = getParam(url, "shd");
         rangeStart = rangeEnd = 0;
+    }
+
+    protected String getParams()
+    {
+        StringBuffer sb = new StringBuffer();
+        for(Map.Entry<String, String> p : params.entrySet())
+            sb.append(p.getKey() + "=" + p.getValue() + "&");
+        sb.deleteCharAt(sb.length() - 1);
+        return(sb.toString());
     }
 
     public void parseXML() throws IOException
     {
-        URL xml = new URL(new URL(xmlurl), "/content_dl.php?dtype=0&key1=" + key1 + "&z=&x=0&shd=" + shd + "&re=0&ad=0&pre=&p=");
+        URL xml = new URL(new URL(xmlurl), "content_dl.php?dtype=0&" + getParams() + "&z=&x=0&re=0&ad=0&pre=&p=");
         String page = DownloaderUtils.getPage(xml.toString(), "EUC-JP");
 
         int index = page.indexOf("<DataFileFolder path=\"");
@@ -62,6 +74,7 @@ public class YahooComicChapter extends Chapter implements Serializable
 
     public String getTitle()
     {
+        String key1 = params.get("key1");
         return(key1.substring(key1.lastIndexOf('-') + 1));
     }
 
@@ -87,8 +100,7 @@ public class YahooComicChapter extends Chapter implements Serializable
                 return(true);
 
             URL url = new URL(baseURL,
-                        "content_dl.php?dtype=1&key1=" + key1 + "&z=&x=0&shd=" +
-                            shd + "&re=0&ad=0&pre=&pno=" + i + "&p=" + dataFolder);
+                        "content_dl.php?dtype=1&" + getParams() + "&z=&x=0&re=0&ad=0&pre=&pno=" + i + "&p=" + dataFolder);
             DownloaderUtils.downloadFile(url, temp.getAbsolutePath());
             PCViewerDecrypt.decryptFile(temp.getAbsolutePath(),
                     dl.downloadPath(this, i));

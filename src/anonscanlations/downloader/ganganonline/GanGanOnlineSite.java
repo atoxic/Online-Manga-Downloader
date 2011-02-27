@@ -26,17 +26,17 @@ public class GanGanOnlineSite extends Site
 
     public String getName(){ return("GanGan Online"); }
 
-    public TreeMap<String, Magazine> getMagazines() throws IOException
+    public ArrayList<Magazine> getMagazines() throws IOException
     {
-        TreeMap<String, Magazine> magazines =
-                new TreeMap<String, Magazine>();
+        ArrayList<Magazine> magazines =
+                new ArrayList<Magazine>();
         
         String page = DownloaderUtils.getPage(ROOT, "Shift_JIS");
 
         TreeSet<String> list = titleInstances(page);
         
         GanGanOnlineMagazine ggOnline = new GanGanOnlineMagazine();
-        magazines.put(ggOnline.getOriginalTitle(), ggOnline);
+        magazines.add(ggOnline);
         
         for(String titlePanels : list)
         {

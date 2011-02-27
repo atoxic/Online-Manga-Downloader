@@ -23,15 +23,15 @@ public class SundaySite extends Site
     }
 
     public String getName() { return("Club Sunday"); }
-    public TreeMap<String, Magazine> getMagazines()
+    public ArrayList<Magazine> getMagazines()
             throws IOException
     {
-        TreeMap<String, Magazine> ret = new TreeMap<String, Magazine>();
+        ArrayList<Magazine> ret = new ArrayList<Magazine>();
 
         TreeMap<String, Series> series = new TreeMap<String, Series>();
 
         SundayMagazine mag = new SundayMagazine();
-        ret.put(mag.getOriginalTitle(), mag);
+        ret.add(mag);
         
         for(int i = 1; ; i++)
         {

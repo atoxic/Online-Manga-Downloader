@@ -24,12 +24,12 @@ public class GekkinSite extends Site
 
     public String getName(){ return("Comic Gekkin"); }
 
-    public TreeMap<String, Magazine> getMagazines()
+    public ArrayList<Magazine> getMagazines()
             throws IOException
     {
         DownloaderUtils.debug("gekkin");
 
-        TreeMap<String, Magazine> map = new TreeMap<String, Magazine>();
+        ArrayList<Magazine> map = new ArrayList<Magazine>();
         GekkinMagazine mag = new GekkinMagazine();
         
         String page = DownloaderUtils.getPage("http://www.comic-gekkin.com/works/archive.html", "UTF-8") +
@@ -83,7 +83,7 @@ public class GekkinSite extends Site
             mag.addSeries(series);
         }
 
-        map.put(mag.getOriginalTitle(), mag);
+        map.add(mag);
         
         return(map);
     }

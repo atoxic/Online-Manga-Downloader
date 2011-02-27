@@ -15,8 +15,13 @@ public class YAMLable
 {
     public final HashMap<String, Object> exportVars()
     {
+        return(exportVars(getClass()));
+    }
+
+    public final HashMap<String, Object> exportVars(Class c)
+    {
         HashMap<String, Object> map = new HashMap<String, Object>();
-        Field[] fields = getClass().getDeclaredFields();
+        Field[] fields = c.getDeclaredFields();
         for(Field f : fields)
         {
             int mods = f.getModifiers();
@@ -33,11 +38,22 @@ public class YAMLable
             }
         }
 
+        Class superclass = c.getSuperclass();
+        if(!superclass.equals(YAMLable.class) && !superclass.getPackage().getName().equals("anonscanlations.downloader"))
+        {
+            map.putAll(exportVars(superclass));
+        }
+
         return(map);
     }
+
     public final void importVars(Map<String, Object> map)
     {
-        Field[] fields = getClass().getDeclaredFields();
+        importVars(map, getClass());
+    }
+    public final void importVars(Map<String, Object> map, Class c)
+    {
+        Field[] fields = c.getDeclaredFields();
         for(Field f : fields)
         {
             f.setAccessible(true);
@@ -53,6 +69,11 @@ public class YAMLable
             {
                 DownloaderUtils.error("couldn't set field: " + f, iae, false);
             }
+        }
+        Class superclass = c.getSuperclass();
+        if(!superclass.equals(YAMLable.class))
+        {
+            importVars(map, superclass);
         }
     }
 }
