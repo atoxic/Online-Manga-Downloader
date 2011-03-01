@@ -11,10 +11,6 @@ import java.net.*;
 import org.w3c.dom.*;
 import org.xml.sax.*;
 import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
-import javax.xml.transform.stream.*;
-
 
 import anonscanlations.downloader.*;
 
@@ -60,20 +56,6 @@ public class ActibookChapter extends Chapter implements Serializable
         return(ret);
     }
 
-    private static double parseDouble(String s)
-    {
-        double d = -1;
-        try
-        {
-            d = Double.parseDouble(s);
-        }
-        catch(NumberFormatException nfe)
-        {
-            return(-1);
-        }
-        return(d);
-    }
-
     public boolean parseXML() throws IOException, ParserConfigurationException, SAXException
     {
         URL xmlURL = new URL(new URL(url), "db/book.xml");
@@ -107,28 +89,6 @@ public class ActibookChapter extends Chapter implements Serializable
         if(zooms.length == 0)
             return(false);
         zoom = zooms[zooms.length - 1];
-
-        /* old way with book.xml
-        NodeList sizes = doc.getElementsByTagName("PageSize");
-        double area, maxArea = 0, w, h;
-        for(int i = 0; i < sizes.getLength(); i++)
-        {
-            Node n = sizes.item(i);
-            Element e = (Element)n;
-            w = parseDouble(e.getAttribute("w"));
-            h = parseDouble(e.getAttribute("h"));
-            if(w == -1 || h == -1)
-                continue;
-
-            area = w * h;
-            if(area > maxArea)
-            {
-                area = maxArea;
-                zoom = e.getAttribute("zoom");
-            }
-        }
-        System.out.println("zoom: " + zoom);
-        // */
 
         return(true);
     }
