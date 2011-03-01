@@ -149,7 +149,7 @@ public class ActibookChapter extends Chapter implements Serializable
 
     public boolean download(DownloadListener dl) throws IOException
     {
-        URL baseURL = new URL(new URL(url), "images/2/");
+        URL baseURL = new URL(new URL(url), "images/" + zoom + "/");
 
         for(int i = start;
             DownloaderUtils.downloadFile(new URL(baseURL, i + ".jpg"),

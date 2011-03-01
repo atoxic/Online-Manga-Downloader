@@ -27,7 +27,7 @@ public class SundayChapter extends Chapter
 
     private String key1, key2, key3, key4, shd;
 
-    private String cookies, otk;
+    private transient String cookies, otk;
 
     private String keyURL;
 
