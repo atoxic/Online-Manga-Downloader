@@ -6,7 +6,7 @@ It's a downloader for manga that are viewable but not downloadable from the offi
 + [GanGan Online](http://www.square-enix.com/jp/magazine/ganganonline/) (ActiBook)
 + [Yahoo! Comic](http://comics.yahoo.co.jp/magazine/) (PCViewer)
 + [Club Sunday](http://club.shogakukan.co.jp/) (PCViewer + special encryption)
-+ [Famitsu Comic Clear (only se\_* right now)](http://www.famitsu.com/comic_clear/cl_list/) (se\_* = PCViewer, co\_* = HTML, yo\_* = ???)
++ [Famitsu Comic Clear (only se\_\* right now)](http://www.famitsu.com/comic_clear/cl_list/) (se\_\* = PCViewer, co\_\* = HTML, yo\_\* = ???)
 + [Comic High](http://comichigh.jp/webcomic.html) (PluginFree)
 + [Comic Gekkin](http://www.comic-gekkin.com/) (PluginFree)
 
