@@ -3,6 +3,10 @@ package anonscanlations.downloader.mangaonweb;
 import java.io.*;
 import java.net.*;
 
+import org.w3c.dom.*;
+import org.xml.sax.*;
+import javax.xml.parsers.*;
+
 import anonscanlations.downloader.*;
 
 /**
@@ -11,7 +15,16 @@ import anonscanlations.downloader.*;
  */
 public class MangaOnWebChapter extends Chapter
 {
-    private transient String ctsn = "31073", cookies;
+    private String ctsn;
+    private int min, max;
+
+    private transient String cookies, cdn, crcod;
+
+    public MangaOnWebChapter(){}
+    public MangaOnWebChapter(String ctsn)
+    {
+        this.ctsn = ctsn;
+    }
 
     public String getTitle()
     {
@@ -27,27 +40,26 @@ public class MangaOnWebChapter extends Chapter
         return(137);
     }
 
-    public boolean download(DownloadListener dl) throws Exception
+    private boolean handshake() throws Exception
     {
-        /* 1) get crcod and cdn (session code)
-         * 2) get xml (unneeded)
-         * 3) get pages and decode them
-         */
         URL homePage = new URL("http://mangaonweb.com/viewer.do?ctsn=" + ctsn);
 
         HttpURLConnection urlConn = (HttpURLConnection)homePage.openConnection();
         urlConn.connect();
+        if(urlConn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
+            return(false);
 
+        // save the cookie
         String headerName = null;
         for(int i = 1; (headerName = urlConn.getHeaderFieldKey(i)) != null; i++)
         {
             if(headerName.equals("Set-Cookie"))
             {
                 cookies = urlConn.getHeaderField(i);
-                System.out.println("cookies: " + cookies);
             }
         }
 
+        // save cdn and crcod
         String page = "", line;
         BufferedReader stream = new BufferedReader(
                                     new InputStreamReader(
@@ -55,23 +67,67 @@ public class MangaOnWebChapter extends Chapter
         while((line = stream.readLine()) != null)
 	    page += line;
 
-        String cdn = param(page, "cdn");
-        String crcod = param(page, "crcod");
+        cdn = param(page, "cdn");
+        crcod = param(page, "crcod");
 
-        System.out.println("cdn: " + cdn);
-        System.out.println("crcod: " + crcod);
+        return(true);
+    }
 
-        DownloaderUtils.downloadByteArray(new URL("http://mangaonweb.com/pages/viewer/BKViewer.swf?v114"));
+    public boolean parseXML() throws Exception
+    {
+        handshake();
+
+        URL url = new URL("http://mangaonweb.com/page.do?cdn=" + cdn + "&cpn=book.xml&crcod=" + crcod + "&rid=" + (int)(Math.random() * 10000));
+        String page = DownloaderUtils.getPage(url.toString(), "UTF-8");
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        InputSource is = new InputSource(new StringReader(page));
+        Document d = builder.parse(is);
+        Element doc = d.getDocumentElement();
+
+        min = Integer.MAX_VALUE;
+        max = Integer.MIN_VALUE;
+        NodeList pages = doc.getElementsByTagName("page");
+        for(int i = 0; i < pages.getLength(); i++)
+        {
+            Element e = (Element)pages.item(i);
+            String numString = e.getAttribute("no");
+            try
+            {
+                int num = Integer.parseInt(numString);
+                if(num < min)
+                    min = num;
+                else if(num > max)
+                    max = num;
+            }
+            catch(NumberFormatException nfe)
+            {
+                DownloaderUtils.error("Couldn't parse page number in mangaonweb xml file", nfe, false);
+            }
+        }
+
+        return(true);
+    }
+
+    public boolean download(DownloadListener dl) throws Exception
+    {
+        /* 1) get crcod and cdn (session code)
+         * 2) get xml (unneeded?)
+         * 3) get pages and decode them
+         */
+        // 1)
+        handshake();
 
         byte[] key = {99, 49, 51, 53, 100, 54, 56, 56, 57, 57, 99, 56, 50, 54, 99, 101, 100, 55, 99, 52, 57, 98, 99, 55, 54, 97, 97, 57, 52, 56, 57, 48};
         BlowFishKey bfkey = new BlowFishKey(key);
-        for(int i = 1; i < 137; i++)
+        for(int i = getMin(); i <= getMax(); i++)
         {
             if(dl.isDownloadAborted())
                 return(true);
 
+            // rid is just a random number from 0-9999
             URL url = new URL("http://mangaonweb.com/page.do?cdn=" + cdn + "&cpn=page_" + i + ".jpg&crcod=" + crcod + "&rid=" + (int)(Math.random() * 10000));
-            //System.out.println("url: " + url);
 
             byte[] encrypted = downloadByteArray(url);
             bfkey.decrypt(encrypted, 0);
@@ -102,11 +158,10 @@ public class MangaOnWebChapter extends Chapter
         {
             offset += read;
         }
-
-        System.out.println("length: " + buf.length);
         return(buf);
     }
 
+    // get something like "param=return&"
     private static String param(String page, String param)
     {
         int index = 0, endIndex;

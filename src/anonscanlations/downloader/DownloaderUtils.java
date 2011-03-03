@@ -117,19 +117,6 @@ public class DownloaderUtils
         return(string);
     }
 
-    public static byte[] downloadByteArray(URL url) throws IOException
-    {
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
-            return(null);
-
-        InputStream in = conn.getInputStream();
-        byte[] buf = new byte[conn.getContentLength()];
-        if(in.read(buf) == -1)
-            return(null);
-        return(buf);
-    }
-
     public static boolean downloadFile(URL url, String localFile) throws IOException
     {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
