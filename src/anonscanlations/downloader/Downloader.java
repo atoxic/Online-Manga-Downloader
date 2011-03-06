@@ -23,7 +23,7 @@ import anonscanlations.downloader.famitsu.*;
 public class Downloader
 {
     public static final String ABOUT = "<html>About Online Manga Downloader<br/>"
-            + "PCViewer decrypter and Club Sunday scraper made by Nagato<br/>"
+            + "CrochetTime decrypter, PCViewer decrypter and Club Sunday scraper made by Nagato<br/>"
             + "GUI made by /a/nonymous scanlations<br/>"
             + "<a href=\"http://anonscanlations.blogspot.com/\">"
                 + "http://anonscanlations.blogspot.com/</a><br/>"

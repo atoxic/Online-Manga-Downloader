@@ -246,7 +246,7 @@ public class CrochetTimeChapter extends Chapter
 
     public CrochetTimeChapter()
     {
-        path = "kdsv9784060625410_pc_image_crochet";
+        path = "kdsv9784060625311";
     }
 
     public String getTitle()
@@ -269,15 +269,14 @@ public class CrochetTimeChapter extends Chapter
                 tempOut = File.createTempFile("crochettime_tempout_", ".bin");
         temp.deleteOnExit();
         tempOut.deleteOnExit();
-        String pathHead = path.substring(0, path.indexOf('_'));
 
         // 1) get file list
         DownloaderUtils.debug("===PART 1===");
 
         ((StringBuilder)FORMATTER.out()).setLength(0);
         FORMATTER.format("%08x", (int)(32767 * Math.random()));
-        String filepath = "/home/dotbook/rs2_contents/voyager-store_contents/" + pathHead + "/";
-        String filelistURL = scrambleURL(filepath + path + ".book.bmit&B" + FORMATTER.out().toString());
+        String filepath = "/home/dotbook/rs2_contents/voyager-store_contents/" + path + "/";
+        String filelistURL = scrambleURL(filepath + path + "_pc_image_crochet.book.bmit&B" + FORMATTER.out().toString());
         boolean listExists = DownloaderUtils.downloadFile(new URL("http://shangrila.voyager-store.com/dBmd?" + filelistURL),
                                     temp.getAbsolutePath());
         if(!listExists)
@@ -298,8 +297,6 @@ public class CrochetTimeChapter extends Chapter
         {
             if(dl.isDownloadAborted())
                 return(true);
-
-            System.out.println("url: " + filepath + filelist.get(i));
             String fileURL = scrambleURL(filepath + filelist.get(i));
 
             boolean fileExists = DownloaderUtils.downloadFile(new URL("http://shangrila.voyager-store.com/dBmd?" + fileURL),
