@@ -30,7 +30,7 @@ public class SundaySite extends Site
 
         TreeMap<String, Series> series = new TreeMap<String, Series>();
 
-        SundayMagazine mag = new SundayMagazine();
+        SimpleMagazine mag = new SimpleMagazine("クラブサンデー");
         ret.add(mag);
         
         for(int i = 1; ; i++)
@@ -62,12 +62,12 @@ public class SundaySite extends Site
                 index = page.indexOf("openViewer('", index);
                 String chapterURL = page.substring(index + 12, page.indexOf("')", index));
 
-                SundaySeries s;
+                SimpleSeries s;
                 if(series.containsKey(name))
-                    s = (SundaySeries)series.get(name);
+                    s = (SimpleSeries)series.get(name);
                 else
                 {
-                    s = new SundaySeries(name, path);
+                    s = new SimpleSeries(name);
                     series.put(name, s);
                     mag.addSeries(s);
                 }

@@ -242,16 +242,35 @@ public class CrochetTimeChapter extends Chapter
         output.close();
     }
 
-    private transient String path;
+    private String path, title;
+    private int total;
 
     public CrochetTimeChapter()
     {
-        path = "kdsv9784060625311";
+    }
+
+    public CrochetTimeChapter(String path, String title)
+    {
+        this.path = path;
+        this.title = title;
+    }
+
+    public boolean checkFileList() throws Exception
+    {
+        File temp = File.createTempFile("crochettime_temp_", ".bin");
+        temp.deleteOnExit();
+        ArrayList<String> list = getList(temp);
+        if(list == null)
+            return(false);
+        total = list.size();
+        temp.delete();
+
+        return(true);
     }
 
     public String getTitle()
     {
-        return("crochet time test");
+        return(title);
     }
     public int getMin()
     {
@@ -259,8 +278,26 @@ public class CrochetTimeChapter extends Chapter
     }
     public int getMax()
     {
-        return(597);
+        return(total);
     }
+
+    public ArrayList<String> getList(File temp) throws Exception
+    {
+        ((StringBuilder)FORMATTER.out()).setLength(0);
+        FORMATTER.format("%08x", (int)(32767 * Math.random()));
+        String filepath = "/home/dotbook/rs2_contents/voyager-store_contents/" + path + "/";
+        String filelistURL = scrambleURL(filepath + path + "_pc_image_crochet.book.bmit&B" + FORMATTER.out().toString());
+        boolean listExists = DownloaderUtils.downloadFile(new URL("http://shangrila.voyager-store.com/dBmd?" + filelistURL),
+                                    temp.getAbsolutePath());
+        if(!listExists)
+            return(null);
+
+        ArrayList<String> filelist = fileList(temp);
+        if(filelist.isEmpty())
+            return(null);
+        return(filelist);
+    }
+
     public boolean download(DownloadListener dl) throws Exception
     {
         // for the file list and downloaded files
@@ -272,27 +309,13 @@ public class CrochetTimeChapter extends Chapter
 
         // 1) get file list
         DownloaderUtils.debug("===PART 1===");
-
-        ((StringBuilder)FORMATTER.out()).setLength(0);
-        FORMATTER.format("%08x", (int)(32767 * Math.random()));
+        ArrayList<String> filelist = getList(temp);
+        if(filelist == null)
+            return(false);
         String filepath = "/home/dotbook/rs2_contents/voyager-store_contents/" + path + "/";
-        String filelistURL = scrambleURL(filepath + path + "_pc_image_crochet.book.bmit&B" + FORMATTER.out().toString());
-        boolean listExists = DownloaderUtils.downloadFile(new URL("http://shangrila.voyager-store.com/dBmd?" + filelistURL),
-                                    temp.getAbsolutePath());
-        if(!listExists)
-            return(false);
-
-        // 2) decrypt file list
-        DownloaderUtils.debug("===PART 2===");
-        if(dl.isDownloadAborted())
-            return(true);
-        ArrayList<String> filelist = fileList(temp);
-        if(filelist.isEmpty())
-            return(false);
-        DownloaderUtils.debug("listsize: " + filelist.size());
 
         // 3) get files
-        DownloaderUtils.debug("===PART 3===");
+        DownloaderUtils.debug("===PART 2===");
         for(int i = 0; i < filelist.size(); i++)
         {
             if(dl.isDownloadAborted())

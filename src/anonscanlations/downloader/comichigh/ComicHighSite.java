@@ -28,7 +28,7 @@ public class ComicHighSite extends Site
             throws IOException
     {
         ArrayList<Magazine> map = new ArrayList<Magazine>();
-        ComicHighMagazine mag = new ComicHighMagazine();
+        SimpleMagazine mag = new SimpleMagazine("コミックハイ！");
         
         String page = DownloaderUtils.getPage("http://www.comichigh.jp/webcomic.html", "UTF-8");
         String[] sections = page.split("class=\"lineup\"");
@@ -41,7 +41,7 @@ public class ComicHighSite extends Site
             index = sections[i].indexOf("<dt>");
             String title = sections[i].substring(index + 4, sections[i].indexOf("<", index + 4) - 1);
             DownloaderUtils.debug("title: " + title);
-            ComicHighSeries series = new ComicHighSeries(title);
+            SimpleSeries series = new SimpleSeries(title);
 
             while((index = sections[i].indexOf("http://futabasha.pluginfree.com/weblish/futabawebhigh/", index + 1)) != -1)
             {

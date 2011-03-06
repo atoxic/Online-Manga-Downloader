@@ -39,7 +39,7 @@ public class YAMLable
         }
 
         Class superclass = c.getSuperclass();
-        if(!superclass.equals(YAMLable.class) && !superclass.getPackage().getName().equals("anonscanlations.downloader"))
+        if(!superclass.equals(YAMLable.class))
         {
             map.putAll(exportVars(superclass));
         }

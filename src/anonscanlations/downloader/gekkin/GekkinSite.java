@@ -30,7 +30,7 @@ public class GekkinSite extends Site
         DownloaderUtils.debug("gekkin");
 
         ArrayList<Magazine> map = new ArrayList<Magazine>();
-        GekkinMagazine mag = new GekkinMagazine();
+        SimpleMagazine mag = new SimpleMagazine("Webコミック ゲッキン");
         
         String page = DownloaderUtils.getPage("http://www.comic-gekkin.com/works/archive.html", "UTF-8") +
                 DownloaderUtils.getPage("http://www.comic-gekkin.com/works/serialization.html", "UTF-8");
@@ -50,7 +50,7 @@ public class GekkinSite extends Site
         TreeSet<String> chapters = new TreeSet<String>();
         for(Map.Entry<String, String> entry : links.entrySet())
         {
-            GekkinSeries series = new GekkinSeries(entry.getKey());
+            SimpleSeries series = new SimpleSeries(entry.getKey());
 
             page = DownloaderUtils.getPage("http://www.comic-gekkin.com/" + entry.getValue(), "UTF-8");
             DownloaderUtils.debug("title: " + entry.getKey());

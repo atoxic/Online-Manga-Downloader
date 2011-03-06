@@ -35,7 +35,7 @@ public class GanGanOnlineSite extends Site
 
         TreeSet<String> list = titleInstances(page);
         
-        GanGanOnlineMagazine ggOnline = new GanGanOnlineMagazine();
+        SimpleMagazine ggOnline = new SimpleMagazine("ガンガンONLINE");
         magazines.add(ggOnline);
         
         for(String titlePanels : list)

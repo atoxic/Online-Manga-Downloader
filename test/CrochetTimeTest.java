@@ -64,7 +64,7 @@ public class CrochetTimeTest
     @Test
     public void downloadTest() throws Exception
     {
-        CrochetTimeChapter c = new CrochetTimeChapter();
+        CrochetTimeChapter c = new CrochetTimeChapter("ldg13_096", "test");
         DummyDownloadListener dl = new DummyDownloadListener();
 
         assertTrue(c.download(dl));

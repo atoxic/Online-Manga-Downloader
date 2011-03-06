@@ -23,7 +23,7 @@ public class FamitsuSite extends Site
 
     public String getName(){ return("Famitsu Comic Clear"); }
 
-    private static void pcviewerPage(FamitsuSeries series, String link)
+    private static void pcviewerPage(SimpleSeries series, String link)
             throws IOException
     {
         String page = DownloaderUtils.getPage(link, "Shift_JIS");
@@ -44,7 +44,7 @@ public class FamitsuSite extends Site
             throws IOException
     {
         ArrayList<Magazine> mags = new ArrayList<Magazine>();
-        FamitsuMagazine mag = new FamitsuMagazine();
+        SimpleMagazine mag = new SimpleMagazine("ファミ通コミッククリア");
 
         String page = DownloaderUtils.getPage("http://www.famitsu.com/comic_clear/cl_list/", "Shift_JIS");
         int index = 0;
@@ -56,7 +56,7 @@ public class FamitsuSite extends Site
             index = page.indexOf('>', index) + 1;
             String name = page.substring(index, page.indexOf('<', index));
 
-            FamitsuSeries series = new FamitsuSeries(name);
+            SimpleSeries series = new SimpleSeries(name);
 
             // Famitsu has three different viewers, depending on the URL
             // todo: make yo_ and co_ work
