@@ -7,8 +7,12 @@ package anonscanlations.downloader.crochettime;
 
 import java.io.*;
 import java.util.*;
+import java.net.*;
 
 import anonscanlations.downloader.*;
+
+// the images are zlib-comrpessed then encrypted
+import com.jcraft.jzlib.*;
 
 /**
  *
@@ -95,11 +99,11 @@ public class CrochetTimeChapter extends Chapter
         return(new String(c));
     }
 
-    public static ArrayList<String> fileList(String fileName) throws IOException
+    public static ArrayList<String> fileList(File f) throws IOException
     {
         ArrayList<String> ret = new ArrayList<String>();
 
-        RandomAccessFile file = new RandomAccessFile(fileName, "r");
+        RandomAccessFile file = new RandomAccessFile(f, "r");
 
         file.seek(8);
         int offset = bigEndianInt(file);
@@ -127,9 +131,9 @@ public class CrochetTimeChapter extends Chapter
                 file.skipBytes(0x5b);
                 String fname = getString(file, filenameSize);
 
+                ((StringBuilder)FORMATTER.out()).setLength(0);
                 FORMATTER.format("%s&D&%d&%d%08x", fname, urlPart1, urlPart2, (int)(32767 * Math.random()) + 0x4000);
                 String result = FORMATTER.out().toString();
-                ((StringBuilder)FORMATTER.out()).setLength(0);
                 //System.out.println("res: " + result);
                 ret.add(result);
 
@@ -221,10 +225,10 @@ public class CrochetTimeChapter extends Chapter
         return(ret);
     }
 
-    public static void decryptFile(String inputFilename, String outputFilename) throws IOException
+    public static void decryptFile(File inputFile, File outputFile) throws IOException
     {
-        RandomAccessFile input = new RandomAccessFile(inputFilename, "r"),
-                    output = new RandomAccessFile(outputFilename, "rw");
+        RandomAccessFile input = new RandomAccessFile(inputFile, "r"),
+                    output = new RandomAccessFile(outputFile, "rw");
 
         // the index begins at the filesize
         int in;
@@ -238,11 +242,12 @@ public class CrochetTimeChapter extends Chapter
         output.close();
     }
 
+    private transient String path;
+
     public CrochetTimeChapter()
     {
+        path = "amwdc0003_pc_image_crochet";
     }
-
-    private transient String path = "amwdc0002";
 
     public String getTitle()
     {
@@ -254,12 +259,71 @@ public class CrochetTimeChapter extends Chapter
     }
     public int getMax()
     {
-        return(598);
+        return(597);
     }
     public boolean download(DownloadListener dl) throws Exception
     {
-        // TODO
+        // for the file list and downloaded files
+        File temp = File.createTempFile("crochettime_temp_", ".bin"),
+        // for the decrypt files
+                tempOut = File.createTempFile("crochettime_tempout_", ".bin");
+        temp.deleteOnExit();
+        tempOut.deleteOnExit();
+        String pathHead = path.substring(0, path.indexOf('_'));
+
+        // 1) get file list
+        DownloaderUtils.debug("===PART 1===");
+
+        ((StringBuilder)FORMATTER.out()).setLength(0);
+        FORMATTER.format("%08x", (int)(32767 * Math.random()));
+        String filepath = "/home/dotbook/rs2_contents/voyager-store_contents/" + pathHead + "/";
+        String filelistURL = scrambleURL(filepath + path + ".book.bmit&B" + FORMATTER.out().toString());
+        boolean listExists = DownloaderUtils.downloadFile(new URL("http://shangrila.voyager-store.com/dBmd?" + filelistURL),
+                                    temp.getAbsolutePath());
+        if(!listExists)
+            return(false);
+
+        // 2) decrypt file list
+        DownloaderUtils.debug("===PART 2===");
+        if(dl.isDownloadAborted())
+            return(true);
+        ArrayList<String> filelist = fileList(temp);
+        if(filelist.isEmpty())
+            return(false);
+        DownloaderUtils.debug("listsize: " + filelist.size());
+
+        // 3) get files
+        DownloaderUtils.debug("===PART 3===");
+        for(int i = 0; i < filelist.size(); i++)
+        {
+            if(dl.isDownloadAborted())
+                return(true);
+
+            String fileURL = scrambleURL(filepath + filelist.get(i));
+
+            boolean fileExists = DownloaderUtils.downloadFile(new URL("http://shangrila.voyager-store.com/dBmd?" + fileURL),
+                                    temp.getAbsolutePath());
+            if(!fileExists)
+                return(false);
+
+            decryptFile(temp, tempOut);
+
+            BufferedInputStream input = new BufferedInputStream(new ZInputStream(new FileInputStream(tempOut)));
+            FileOutputStream output = new FileOutputStream(dl.downloadPath(this, i));
+            byte[] buf = new byte[1024];
+            while(input.read(buf) != -1)
+            {
+                output.write(buf);
+            }
+
+            input.close();
+            output.close();
+
+            dl.downloadProgressed(this, i);
+        }
+
+        dl.downloadFinished(this);
+
         return(true);
     }
-
 }
