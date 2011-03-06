@@ -2,6 +2,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 import java.io.*;
+import java.util.*;
 
 import anonscanlations.downloader.crochettime.*;
 
@@ -28,6 +29,14 @@ public class CrochetTimeTest
     public void fileListTest() throws IOException
     {
         // TODO: check results
-        CrochetTimeChapter.fileList("testfiles/dBmd_amwdc0002");
+        ArrayList<String> test = CrochetTimeChapter.fileList("testfiles/dBmd_amwdc0002");
+
+        RandomAccessFile results = new RandomAccessFile("testfiles/dBmd_amwdc0002_res", "r");
+
+        for(String t : test)
+        {
+            String line = results.readLine();
+            assertTrue(t.startsWith(line));
+        }
     }
 }

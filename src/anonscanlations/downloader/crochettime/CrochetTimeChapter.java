@@ -69,7 +69,6 @@ public class CrochetTimeChapter
 
         file.seek(8);
         int offset = bigEndianInt(file);
-        System.out.println("offset: " + offset);
 
         file.seek(offset);
 
@@ -97,12 +96,16 @@ public class CrochetTimeChapter
                 FORMATTER.format("%s&D&%d&%d%08x", fname, urlPart1, urlPart2, (int)(32767 * Math.random()) + 0x4000);
                 String result = FORMATTER.out().toString();
                 ((StringBuilder)FORMATTER.out()).setLength(0);
-                System.out.println("res: " + result);
+                //System.out.println("res: " + result);
                 ret.add(result);
+
+                // eat up a NUL
+                file.skipBytes(1);
             }
             else
             {
                 // other types, like thumbnails
+                file.skipBytes(blockSize);
             }
         }
 
