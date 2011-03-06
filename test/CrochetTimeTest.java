@@ -23,6 +23,12 @@ public class CrochetTimeTest
 
         assertEquals(scrambled,
                 "7tczwnjvwwmxj%2Fj7p_es%26_lxf%2Ftidtkuyzafpe8e-xc_.xczpxgha7b3%2F73%2Faireecj_wktkjj%2FG%2F.zyzrsf7qu239f_2t0fj1zd48uuy4");
+
+        // long string (>128 chars) to test for out of bounds error
+        scrambled = CrochetTimeChapter.scrambleURL("/home/dotbook/rs2_contents/voyager-store_contents/kdsv9784060625410/kdsv9784060625410_pc_image_crochet.book&D&11812&294404000052ff");
+
+        assertEquals(scrambled,
+               "4ddttgkjmhy1y0jsr0qcp0w0st3hs4.77lb_sk38929beaed86m%2F0q2ka15u%26d88%2Feuxw024_17oijnc64e6x6spryf6e69_h8%2662e%2Fd467nN%26x_3%2Fd1jij_-bs%2Ffjs7%2Fw");
     }
 
     @Test

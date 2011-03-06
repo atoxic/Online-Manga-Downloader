@@ -191,21 +191,21 @@ public class CrochetTimeChapter extends Chapter
 	{
             if((str[i]-0x61) <= 0x19 && (str[i]-0x61) >= 0) // lower case
             {
-                int t = SCRAMBLE_KEY_TABLE[strLen+i];
+                int t = SCRAMBLE_KEY_TABLE[(strLen + i) & 0xff];
                 t += str[i]-0x61;
 
                 str[i] = (char)((t % 0x1a) + 0x61);
             }
             else if((str[i]-0x41) <= 0x19 && (str[i]-0x41) >= 0) // upper case
             {
-                int t = SCRAMBLE_KEY_TABLE[strLen+i];
+                int t = SCRAMBLE_KEY_TABLE[(strLen + i) & 0xff];
                 t += str[i]-0x41;
 
                 str[i] = (char)((t % 0x1a) + 0x41);
             }
             else if((str[i]-0x30) <= 0x9 && (str[i]-0x30) >= 0) // number
             {
-                int t = SCRAMBLE_KEY_TABLE[strLen+i];
+                int t = SCRAMBLE_KEY_TABLE[(strLen + i) & 0xff];
                 t += str[i]-0x30;
 
                 str[i] = (char)((t % 0x0a) + 0x30);
@@ -246,7 +246,7 @@ public class CrochetTimeChapter extends Chapter
 
     public CrochetTimeChapter()
     {
-        path = "amwdc0003_pc_image_crochet";
+        path = "kdsv9784060625410_pc_image_crochet";
     }
 
     public String getTitle()
@@ -299,6 +299,7 @@ public class CrochetTimeChapter extends Chapter
             if(dl.isDownloadAborted())
                 return(true);
 
+            System.out.println("url: " + filepath + filelist.get(i));
             String fileURL = scrambleURL(filepath + filelist.get(i));
 
             boolean fileExists = DownloaderUtils.downloadFile(new URL("http://shangrila.voyager-store.com/dBmd?" + fileURL),
