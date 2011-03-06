@@ -28,7 +28,6 @@ public class CrochetTimeTest
     @Test
     public void fileListTest() throws IOException
     {
-        // TODO: check results
         ArrayList<String> test = CrochetTimeChapter.fileList("testfiles/dBmd_amwdc0002");
 
         RandomAccessFile results = new RandomAccessFile("testfiles/dBmd_amwdc0002_res", "r");
@@ -37,6 +36,22 @@ public class CrochetTimeTest
         {
             String line = results.readLine();
             assertTrue(t.startsWith(line));
+        }
+    }
+
+    @Test
+    public void decryptFileTest() throws IOException
+    {
+        CrochetTimeChapter.decryptFile("testfiles_gitignore/dengeki2_first",
+                                    "testfiles_gitignore/out");
+
+        RandomAccessFile test = new RandomAccessFile("testfiles_gitignore/out", "r"),
+                        res = new RandomAccessFile("testfiles_gitignore/dengeki2_first_res", "r");
+        assertEquals(test.length(), res.length());
+        int in, out;
+        while((in = test.read()) != -1 && (out = res.read()) != -1)
+        {
+            assertEquals(in, out);
         }
     }
 }
