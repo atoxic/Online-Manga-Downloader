@@ -1,0 +1,773 @@
+"Voyager Store":
+  "影狩り":
+    "3":
+      "total": !!int "385"
+      "title": "3"
+      "path": "ldkgg_003"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2":
+      "total": !!int "401"
+      "title": "2"
+      "path": "ldkgg_002"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "1":
+      "total": !!int "399"
+      "title": "1"
+      "path": "ldkgg_001"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "10":
+      "total": !!int "415"
+      "title": "10"
+      "path": "ldkgg_010"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "title": "影狩り"
+    "7":
+      "total": !!int "385"
+      "title": "7"
+      "path": "ldkgg_007"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "6":
+      "total": !!int "387"
+      "title": "6"
+      "path": "ldkgg_006"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "5":
+      "total": !!int "385"
+      "title": "5"
+      "path": "ldkgg_005"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "4":
+      "total": !!int "385"
+      "title": "4"
+      "path": "ldkgg_004"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "class": "anonscanlations.downloader.SimpleSeries"
+    "9":
+      "total": !!int "401"
+      "title": "9"
+      "path": "ldkgg_009"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "8":
+      "total": !!int "385"
+      "title": "8"
+      "path": "ldkgg_008"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+  "モーニングスーパー増刊　モーニング・ツー　":
+    "title": "モーニングスーパー増刊　モーニング・ツー　"
+    "vol.41":
+      "total": !!int "497"
+      "title": "vol.41"
+      "path": "kdsv9784060625212"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "class": "anonscanlations.downloader.SimpleSeries"
+    "vol.42":
+      "total": !!int "481"
+      "title": "vol.42"
+      "path": "kdsv9784060625311"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "vol.43":
+      "total": !!int "449"
+      "title": "vol.43"
+      "path": "kdsv9784060625410"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+  "ＬＵＮＡＲ":
+    "title": "ＬＵＮＡＲ"
+    "ヴェーン飛空船物語":
+      "total": !!int "197"
+      "title": "ヴェーン飛空船物語"
+      "path": "GCLNR_001F"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "class": "anonscanlations.downloader.SimpleSeries"
+  "class": "anonscanlations.downloader.SimpleMagazine"
+  "Honey Rose":
+    "第７話〜最終話":
+      "total": !!int "112"
+      "title": "第７話〜最終話"
+      "path": "GCHR_003"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "title": "Honey Rose"
+    "第４話〜第６話":
+      "total": !!int "88"
+      "title": "第４話〜第６話"
+      "path": "GCHR_002"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "class": "anonscanlations.downloader.SimpleSeries"
+    "第１話〜第３話":
+      "total": !!int "104"
+      "title": "第１話〜第３話"
+      "path": "GCHR_001"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+  "title": "Voyager Store"
+  "サクラダリセット２　WITCH, PICTURE and RED EYE":
+    "title": "サクラダリセット２　WITCH, PICTURE and RED EYE"
+    "class": "anonscanlations.downloader.SimpleSeries"
+  "ふるこんたくと！　４":
+    "title": "ふるこんたくと！　４"
+    "class": "anonscanlations.downloader.SimpleSeries"
+  "ゴルゴ１３":
+    "35":
+      "total": !!int "259"
+      "title": "35"
+      "path": "ldg13_035"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "36":
+      "total": !!int "259"
+      "title": "36"
+      "path": "ldg13_036"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "33":
+      "total": !!int "259"
+      "title": "33"
+      "path": "ldg13_033"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "34":
+      "total": !!int "259"
+      "title": "34"
+      "path": "ldg13_034"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "39":
+      "total": !!int "259"
+      "title": "39"
+      "path": "ldg13_039"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "37":
+      "total": !!int "259"
+      "title": "37"
+      "path": "ldg13_037"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "38":
+      "total": !!int "251"
+      "title": "38"
+      "path": "ldg13_038"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "43":
+      "total": !!int "261"
+      "title": "43"
+      "path": "ldg13_043"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "42":
+      "total": !!int "253"
+      "title": "42"
+      "path": "ldg13_042"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "41":
+      "total": !!int "259"
+      "title": "41"
+      "path": "ldg13_041"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "40":
+      "total": !!int "259"
+      "title": "40"
+      "path": "ldg13_040"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "22":
+      "total": !!int "259"
+      "title": "22"
+      "path": "ldg13_022"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "23":
+      "total": !!int "267"
+      "title": "23"
+      "path": "ldg13_023"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "24":
+      "total": !!int "259"
+      "title": "24"
+      "path": "ldg13_024"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "25":
+      "total": !!int "259"
+      "title": "25"
+      "path": "ldg13_025"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "26":
+      "total": !!int "259"
+      "title": "26"
+      "path": "ldg13_026"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "27":
+      "total": !!int "251"
+      "title": "27"
+      "path": "ldg13_027"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "28":
+      "total": !!int "259"
+      "title": "28"
+      "path": "ldg13_028"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "29":
+      "total": !!int "259"
+      "title": "29"
+      "path": "ldg13_029"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "3":
+      "total": !!int "311"
+      "title": "3"
+      "path": "ldg13_003"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2":
+      "total": !!int "309"
+      "title": "2"
+      "path": "ldg13_002"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "1":
+      "total": !!int "307"
+      "title": "1"
+      "path": "ldg13_001"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "30":
+      "total": !!int "259"
+      "title": "30"
+      "path": "ldg13_030"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "7":
+      "total": !!int "277"
+      "title": "7"
+      "path": "ldg13_007"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "6":
+      "total": !!int "275"
+      "title": "6"
+      "path": "ldg13_006"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "32":
+      "total": !!int "259"
+      "title": "32"
+      "path": "ldg13_032"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "5":
+      "total": !!int "309"
+      "title": "5"
+      "path": "ldg13_005"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "31":
+      "total": !!int "259"
+      "title": "31"
+      "path": "ldg13_031"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "4":
+      "total": !!int "307"
+      "title": "4"
+      "path": "ldg13_004"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "9":
+      "total": !!int "269"
+      "title": "9"
+      "path": "ldg13_009"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "8":
+      "total": !!int "269"
+      "title": "8"
+      "path": "ldg13_008"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "19":
+      "total": !!int "261"
+      "title": "19"
+      "path": "ldg13_019"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "17":
+      "total": !!int "259"
+      "title": "17"
+      "path": "ldg13_017"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "18":
+      "total": !!int "259"
+      "title": "18"
+      "path": "ldg13_018"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "15":
+      "total": !!int "259"
+      "title": "15"
+      "path": "ldg13_015"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "16":
+      "total": !!int "261"
+      "title": "16"
+      "path": "ldg13_016"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "13":
+      "total": !!int "261"
+      "title": "13"
+      "path": "ldg13_013"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "14":
+      "total": !!int "259"
+      "title": "14"
+      "path": "ldg13_014"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "11":
+      "total": !!int "261"
+      "title": "11"
+      "path": "ldg13_011"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "12":
+      "total": !!int "267"
+      "title": "12"
+      "path": "ldg13_012"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "21":
+      "total": !!int "259"
+      "title": "21"
+      "path": "ldg13_021"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "20":
+      "total": !!int "259"
+      "title": "20"
+      "path": "ldg13_020"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "title": "ゴルゴ１３"
+    "99":
+      "total": !!int "265"
+      "title": "99"
+      "path": "ldg13_099"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "100":
+      "total": !!int "265"
+      "title": "100"
+      "path": "ldg13_100"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "98":
+      "total": !!int "263"
+      "title": "98"
+      "path": "ldg13_098"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "97":
+      "total": !!int "265"
+      "title": "97"
+      "path": "ldg13_097"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "96":
+      "total": !!int "263"
+      "title": "96"
+      "path": "ldg13_096"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "95":
+      "total": !!int "247"
+      "title": "95"
+      "path": "ldg13_095"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "94":
+      "total": !!int "259"
+      "title": "94"
+      "path": "ldg13_094"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "93":
+      "total": !!int "259"
+      "title": "93"
+      "path": "ldg13_093"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "92":
+      "total": !!int "265"
+      "title": "92"
+      "path": "ldg13_092"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "91":
+      "total": !!int "263"
+      "title": "91"
+      "path": "ldg13_091"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "90":
+      "total": !!int "257"
+      "title": "90"
+      "path": "ldg13_090"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "10":
+      "total": !!int "263"
+      "title": "10"
+      "path": "ldg13_010"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "88":
+      "total": !!int "265"
+      "title": "88"
+      "path": "ldg13_088"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "89":
+      "total": !!int "265"
+      "title": "89"
+      "path": "ldg13_089"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "79":
+      "total": !!int "267"
+      "title": "79"
+      "path": "ldg13_079"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "78":
+      "total": !!int "251"
+      "title": "78"
+      "path": "ldg13_078"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "77":
+      "total": !!int "261"
+      "title": "77"
+      "path": "ldg13_077"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "82":
+      "total": !!int "265"
+      "title": "82"
+      "path": "ldg13_082"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "83":
+      "total": !!int "221"
+      "title": "83"
+      "path": "ldg13_083"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "80":
+      "total": !!int "267"
+      "title": "80"
+      "path": "ldg13_080"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "81":
+      "total": !!int "265"
+      "title": "81"
+      "path": "ldg13_081"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "86":
+      "total": !!int "251"
+      "title": "86"
+      "path": "ldg13_086"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "87":
+      "total": !!int "265"
+      "title": "87"
+      "path": "ldg13_087"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "84":
+      "total": !!int "265"
+      "title": "84"
+      "path": "ldg13_084"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "85":
+      "total": !!int "263"
+      "title": "85"
+      "path": "ldg13_085"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "67":
+      "total": !!int "259"
+      "title": "67"
+      "path": "ldg13_067"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "66":
+      "total": !!int "263"
+      "title": "66"
+      "path": "ldg13_066"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "69":
+      "total": !!int "251"
+      "title": "69"
+      "path": "ldg13_069"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "68":
+      "total": !!int "275"
+      "title": "68"
+      "path": "ldg13_068"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "class": "anonscanlations.downloader.SimpleSeries"
+    "70":
+      "total": !!int "263"
+      "title": "70"
+      "path": "ldg13_070"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "71":
+      "total": !!int "255"
+      "title": "71"
+      "path": "ldg13_071"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "72":
+      "total": !!int "261"
+      "title": "72"
+      "path": "ldg13_072"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "73":
+      "total": !!int "259"
+      "title": "73"
+      "path": "ldg13_073"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "74":
+      "total": !!int "267"
+      "title": "74"
+      "path": "ldg13_074"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "75":
+      "total": !!int "267"
+      "title": "75"
+      "path": "ldg13_075"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "76":
+      "total": !!int "259"
+      "title": "76"
+      "path": "ldg13_076"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "59":
+      "total": !!int "255"
+      "title": "59"
+      "path": "ldg13_059"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "58":
+      "total": !!int "253"
+      "title": "58"
+      "path": "ldg13_058"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "57":
+      "total": !!int "245"
+      "title": "57"
+      "path": "ldg13_057"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "56":
+      "total": !!int "249"
+      "title": "56"
+      "path": "ldg13_056"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "55":
+      "total": !!int "249"
+      "title": "55"
+      "path": "ldg13_055"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "64":
+      "total": !!int "259"
+      "title": "64"
+      "path": "ldg13_064"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "65":
+      "total": !!int "259"
+      "title": "65"
+      "path": "ldg13_065"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "62":
+      "total": !!int "259"
+      "title": "62"
+      "path": "ldg13_062"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "63":
+      "total": !!int "263"
+      "title": "63"
+      "path": "ldg13_063"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "60":
+      "total": !!int "261"
+      "title": "60"
+      "path": "ldg13_060"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "61":
+      "total": !!int "257"
+      "title": "61"
+      "path": "ldg13_061"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "49":
+      "total": !!int "251"
+      "title": "49"
+      "path": "ldg13_049"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "48":
+      "total": !!int "253"
+      "title": "48"
+      "path": "ldg13_048"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "45":
+      "total": !!int "253"
+      "title": "45"
+      "path": "ldg13_045"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "44":
+      "total": !!int "259"
+      "title": "44"
+      "path": "ldg13_044"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "47":
+      "total": !!int "249"
+      "title": "47"
+      "path": "ldg13_047"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "46":
+      "total": !!int "253"
+      "title": "46"
+      "path": "ldg13_046"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "51":
+      "total": !!int "255"
+      "title": "51"
+      "path": "ldg13_051"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "52":
+      "total": !!int "253"
+      "title": "52"
+      "path": "ldg13_052"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "53":
+      "total": !!int "251"
+      "title": "53"
+      "path": "ldg13_053"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "54":
+      "total": !!int "257"
+      "title": "54"
+      "path": "ldg13_054"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "50":
+      "total": !!int "253"
+      "title": "50"
+      "path": "ldg13_050"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+  "電撃コミック ジャパン":
+    "title": "電撃コミック ジャパン"
+    "創刊2号":
+      "total": !!int "614"
+      "title": "創刊2号"
+      "path": "amwdc0003"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "class": "anonscanlations.downloader.SimpleSeries"
+    "創刊号":
+      "total": !!int "597"
+      "title": "創刊号"
+      "path": "amwdc0002"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "プレ創刊号":
+      "total": !!int "253"
+      "title": "プレ創刊号"
+      "path": "amwdc0001"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2011年4月号":
+      "total": !!int "619"
+      "title": "2011年4月号"
+      "path": "amwdc0004"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+  "妄想少女４":
+    "title": "妄想少女４"
+    "class": "anonscanlations.downloader.SimpleSeries"
+  "Webスピカ":
+    "2009年11月号":
+      "total": !!int "324"
+      "title": "2009年11月号"
+      "path": "GCWS_200911"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2011年3月号":
+      "total": !!int "240"
+      "title": "2011年3月号"
+      "path": "GCWS_201103"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2009年5月号":
+      "total": !!int "298"
+      "title": "2009年5月号"
+      "path": "GCWS_200905"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2010年6月号":
+      "total": !!int "426"
+      "title": "2010年6月号"
+      "path": "GCWS_201006"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2010年5月号":
+      "total": !!int "250"
+      "title": "2010年5月号"
+      "path": "GCWS_201005"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2010年10月号":
+      "total": !!int "276"
+      "title": "2010年10月号"
+      "path": "GCWS_201010"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "title": "Webスピカ"
+    "2009年4月号":
+      "total": !!int "300"
+      "title": "2009年4月号"
+      "path": "GCWS_200904"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2009年3月号":
+      "total": !!int "232"
+      "title": "2009年3月号"
+      "path": "GCWS_200903"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2010年12月号":
+      "total": !!int "300"
+      "title": "2010年12月号"
+      "path": "GCWS_201012"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2009年6月号":
+      "total": !!int "348"
+      "title": "2009年6月号"
+      "path": "GCWS_200906"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2010年11月号":
+      "total": !!int "228"
+      "title": "2010年11月号"
+      "path": "GCWS_201011"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2009年7月号":
+      "total": !!int "316"
+      "title": "2009年7月号"
+      "path": "GCWS_200907"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2011年1月号":
+      "total": !!int "182"
+      "title": "2011年1月号"
+      "path": "GCWS_201101"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2009年2月号":
+      "total": !!int "326"
+      "title": "2009年2月号"
+      "path": "GCWS_200902"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2009年8月号":
+      "total": !!int "304"
+      "title": "2009年8月号"
+      "path": "GCWS_200908"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "class": "anonscanlations.downloader.SimpleSeries"
+    "2011年2月号":
+      "total": !!int "230"
+      "title": "2011年2月号"
+      "path": "GCWS_201102"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2010年2月号":
+      "total": !!int "362"
+      "title": "2010年2月号"
+      "path": "GCWS_201002"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2010年3月号":
+      "total": !!int "254"
+      "title": "2010年3月号"
+      "path": "GCWS_201003"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2009年9月号":
+      "total": !!int "302"
+      "title": "2009年9月号"
+      "path": "GCWS_200909"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2010年9月号":
+      "total": !!int "224"
+      "title": "2010年9月号"
+      "path": "GCWS_201009"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2009年12月号":
+      "total": !!int "316"
+      "title": "2009年12月号"
+      "path": "GCWS_200912"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2010年4月号":
+      "total": !!int "286"
+      "title": "2010年4月号"
+      "path": "GCWS_201004"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2010年7月号":
+      "total": !!int "276"
+      "title": "2010年7月号"
+      "path": "GCWS_201007"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2009年10月号":
+      "total": !!int "358"
+      "title": "2009年10月号"
+      "path": "GCWS_200910"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+    "2010年8月号":
+      "total": !!int "232"
+      "title": "2010年8月号"
+      "path": "GCWS_201008"
+      "class": "anonscanlations.downloader.crochettime.CrochetTimeChapter"
+  "妄想少女５":
+    "title": "妄想少女５"
+    "class": "anonscanlations.downloader.SimpleSeries"
+  "シュガーダーク":
+    "title": "シュガーダーク"
+    "class": "anonscanlations.downloader.SimpleSeries"
+  "Miscellaneous":
+    "title": "Miscellaneous"
+    "class": "anonscanlations.downloader.SimpleSeries"
+"date": !!timestamp "2011-03-07T00:22:44.460Z"

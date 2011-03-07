@@ -70,7 +70,15 @@ public class DownloadDialog extends JDialog
         content = new JPanel();
         setContentPane(content);
 
-        progressBar = new JProgressBar();
+        progressBar = new JProgressBar()
+        {
+            @Override
+            public String getString()
+            {
+                return("Page " + getValue() + " out of " + (getMaximum() - getMinimum()));
+            }
+        };
+        progressBar.setStringPainted(true);
         progressBar.setStringPainted(true);
         
         content.add(progressBar);

@@ -27,6 +27,7 @@ public class YAMLable
             int mods = f.getModifiers();
             if(Modifier.isFinal(mods) || Modifier.isStatic(mods) || Modifier.isTransient(mods))
                 continue;
+            
             try
             {
                 f.setAccessible(true);
@@ -39,7 +40,7 @@ public class YAMLable
         }
 
         Class superclass = c.getSuperclass();
-        if(!superclass.equals(YAMLable.class))
+        if(!superclass.equals(YAMLable.class) && !superclass.equals(Series.class) && !superclass.equals(Magazine.class) && !superclass.equals(Chapter.class))
         {
             map.putAll(exportVars(superclass));
         }

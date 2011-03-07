@@ -15,6 +15,7 @@ import anonscanlations.downloader.comichigh.*;
 import anonscanlations.downloader.sunday.*;
 import anonscanlations.downloader.gekkin.*;
 import anonscanlations.downloader.famitsu.*;
+import anonscanlations.downloader.voyagerstore.*;
 
 /**
  *
@@ -29,7 +30,7 @@ public class Downloader
                 + "http://anonscanlations.blogspot.com/</a><br/>"
             + "Licensed (lol) under new BSD<br/>";
 
-    public static final String FILE = "manga_download_info_2.yml";
+    public static final String FILE = "manga_download_info_3.yml";
 
     /**
      * @param args the command line arguments
@@ -47,12 +48,14 @@ public class Downloader
             DownloaderUtils.errorGUI("Couldn't load info on series or magazines", e, true);
         }
 
+        DownloadInfoServer.SITES.put(VoyagerStoreSite.SITE.getName(), VoyagerStoreSite.SITE);
         DownloadInfoServer.SITES.put(GekkinSite.SITE.getName(), GekkinSite.SITE);
         DownloadInfoServer.SITES.put(ComicHighSite.SITE.getName(), ComicHighSite.SITE);
         DownloadInfoServer.SITES.put(SundaySite.SITE.getName(), SundaySite.SITE);
         DownloadInfoServer.SITES.put(GanGanOnlineSite.SITE.getName(), GanGanOnlineSite.SITE);
         DownloadInfoServer.SITES.put(YahooComicSite.SITE.getName(), YahooComicSite.SITE);
         DownloadInfoServer.SITES.put(FamitsuSite.SITE.getName(), FamitsuSite.SITE);
+        // */
 
         PreferencesManager.initializePrefs();
 
