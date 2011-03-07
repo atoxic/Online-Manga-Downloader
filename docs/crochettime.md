@@ -11,10 +11,11 @@
 
 1. Get the book path, such as
 
-        "amwdc0001_pc_image_crochet".
+        "amwdc0001".
 2. Compute
 
-        "/home/dotbook/rs2_contents/voyager-store_contents/" + [first part of path] + "/" + [path] + "_pc_image_crochet.book.bmit&B" + [8 digit random number].  Ex: "/home/dotbook/rs2_contents/voyager-store_contents/amwdc0002/amwdc0002_pc_image_crochet.book.bmit&B00006032"
+        "/home/dotbook/rs2_contents/voyager-store_contents/" + [path] + "/" + [path] + "_pc_image_crochet.book.bmit&B" + [8 digit random number]
+		Ex: "/home/dotbook/rs2_contents/voyager-store_contents/amwdc0002/amwdc0002_pc_image_crochet.book.bmit&B00006032"
 3. Scramble the URL with [this code](https://github.com/atoxic/Online-Manga-Downloader/blob/master/src/anonscanlations/downloader/crochettime/CrochetTimeChapter.java#L155).
 4. GET the book binary file list from "http://shangrila.voyager-store.com/dBmd" with the scrambled URL.
 5. Parse through the file list with [this code](https://github.com/atoxic/Online-Manga-Downloader/blob/master/src/anonscanlations/downloader/crochettime/CrochetTimeChapter.java#L102).
