@@ -60,6 +60,8 @@ public class ActibookChapter extends Chapter implements Serializable
     {
         URL xmlURL = new URL(new URL(url), "db/book.xml");
         String page = DownloaderUtils.getPage(xmlURL.toString(), "UTF-8");
+        if(page == null)
+            return(false);
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();

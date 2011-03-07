@@ -111,7 +111,8 @@ public class DownloaderUtils
     {
         URL u = new URL(url);
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-        conn.setRequestProperty("Cookie", cookies);
+        if(cookies != null)
+            conn.setRequestProperty("Cookie", cookies);
         if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
             return(null);
         BufferedReader stream = new BufferedReader(new InputStreamReader(conn.getInputStream(), encoding));

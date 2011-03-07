@@ -33,12 +33,17 @@ public abstract class DownloadListener
     {
         return(aborted);
     }
+
+    final String BAD_CHARS ="[\\\\/:*?\"<>\\|]";
     
     public synchronized String downloadPath(Chapter c, int i) throws IOException
     {
         String saveTitle = c.getSeries().getTranslatedTitle() + "_c" + c.getTitle()
                             + "_" + String.format("%03d", i) + ".jpg";
         saveTitle = saveTitle.replace(' ', '_');
+
+        saveTitle = saveTitle.replaceAll(BAD_CHARS, "");
+
         return((new File(directory.getFile(), saveTitle)).getAbsolutePath());
     }
 }

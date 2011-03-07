@@ -38,6 +38,8 @@ public class PluginFreeChapter extends Chapter implements Serializable
     public boolean parsePages(String cgi) throws IOException
     {
         String indexPage = DownloaderUtils.getPage(url + "/index.shtml", "Shift_JIS");
+        if(indexPage == null)
+            return(false);
         
         // content Key Value
         String cKV = title(indexPage, "'cKV'");

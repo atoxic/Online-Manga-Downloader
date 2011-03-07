@@ -16,6 +16,7 @@ import anonscanlations.downloader.sunday.*;
 import anonscanlations.downloader.gekkin.*;
 import anonscanlations.downloader.famitsu.*;
 import anonscanlations.downloader.voyagerstore.*;
+import anonscanlations.downloader.mangaonweb.*;
 
 /**
  *
@@ -48,6 +49,7 @@ public class Downloader
             DownloaderUtils.errorGUI("Couldn't load info on series or magazines", e, true);
         }
 
+        DownloadInfoServer.SITES.put(MangaOnWebSite.SITE.getName(), MangaOnWebSite.SITE);
         DownloadInfoServer.SITES.put(VoyagerStoreSite.SITE.getName(), VoyagerStoreSite.SITE);
         DownloadInfoServer.SITES.put(GekkinSite.SITE.getName(), GekkinSite.SITE);
         DownloadInfoServer.SITES.put(ComicHighSite.SITE.getName(), ComicHighSite.SITE);

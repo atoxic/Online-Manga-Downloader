@@ -2,6 +2,7 @@ package anonscanlations.downloader.mangaonweb;
 
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 import org.w3c.dom.*;
 import org.xml.sax.*;
@@ -21,9 +22,12 @@ public class MangaOnWebChapter extends Chapter
     private transient String cookies, cdn, crcod;
 
     public MangaOnWebChapter(){}
-    public MangaOnWebChapter(String ctsn)
+    public MangaOnWebChapter(String ctsn, String title)
     {
         this.ctsn = ctsn;
+        this.title = title;
+        this.min = 1;
+        this.max = -1;
     }
 
     public String getTitle()
@@ -73,14 +77,14 @@ public class MangaOnWebChapter extends Chapter
         return(true);
     }
 
-    public boolean parseXML() throws Exception
+    public ArrayList<String> parseXML() throws Exception
     {
+        ArrayList<String> ret = new ArrayList<String>();
+
         handshake();
 
         URL url = new URL("http://mangaonweb.com/page.do?cdn=" + cdn + "&cpn=book.xml&crcod=" + crcod + "&rid=" + (int)(Math.random() * 10000));
-        DownloaderUtils.debug("url: " + url);
         String page = DownloaderUtils.getPage(url.toString(), "UTF-8", cookies);
-        DownloaderUtils.debug("page: " + page);
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -88,50 +92,37 @@ public class MangaOnWebChapter extends Chapter
         Document d = builder.parse(is);
         Element doc = d.getDocumentElement();
 
-        title = doc.getAttribute("title");
-
-        min = Integer.MAX_VALUE;
-        max = Integer.MIN_VALUE;
         NodeList pages = doc.getElementsByTagName("page");
+        min = 1;
+        max = pages.getLength();
         for(int i = 0; i < pages.getLength(); i++)
         {
             Element e = (Element)pages.item(i);
-            String numString = e.getAttribute("no");
-            try
-            {
-                int num = Integer.parseInt(numString);
-                if(num < min)
-                    min = num;
-                else if(num > max)
-                    max = num;
-            }
-            catch(NumberFormatException nfe)
-            {
-                DownloaderUtils.error("Couldn't parse page number in mangaonweb xml file", nfe, false);
-            }
+            ret.add(e.getAttribute("path"));
         }
 
-        return(true);
+        return(ret);
     }
 
     public boolean download(DownloadListener dl) throws Exception
     {
-        /* 1) get crcod and cdn (session code)
-         * 2) get xml (unneeded?)
-         * 3) get pages and decode them
-         */
-        // 1)
+        // 1) get crcod, cdn, and cookies
         handshake();
 
+        // 2) get XML
+        ArrayList<String> paths = parseXML();
+        dl.setDownloadRange(getMin(), getMax());
+
+        // 3) get pages
         byte[] key = {99, 49, 51, 53, 100, 54, 56, 56, 57, 57, 99, 56, 50, 54, 99, 101, 100, 55, 99, 52, 57, 98, 99, 55, 54, 97, 97, 57, 52, 56, 57, 48};
         BlowFishKey bfkey = new BlowFishKey(key);
-        for(int i = getMin(); i <= getMax(); i++)
+        for(int i = 0; i < paths.size(); i++)
         {
             if(dl.isDownloadAborted())
                 return(true);
 
             // rid is just a random number from 0-9999
-            URL url = new URL("http://mangaonweb.com/page.do?cdn=" + cdn + "&cpn=page_" + i + ".jpg&crcod=" + crcod + "&rid=" + (int)(Math.random() * 10000));
+            URL url = new URL("http://mangaonweb.com/page.do?cdn=" + cdn + "&cpn=" + paths.get(i) + "&crcod=" + crcod + "&rid=" + (int)(Math.random() * 10000));
 
             byte[] encrypted = downloadByteArray(url);
             bfkey.decrypt(encrypted, 0);
@@ -140,7 +131,7 @@ public class MangaOnWebChapter extends Chapter
             output.write(encrypted);
             output.close();
 
-            dl.downloadProgressed(this, i);
+            dl.downloadProgressed(this, i + 1);
         }
 
         dl.downloadFinished(this);
