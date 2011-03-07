@@ -9,6 +9,8 @@ It's a downloader for manga that are viewable but not downloadable from the offi
 + [Famitsu Comic Clear (only se\_\* right now)](http://www.famitsu.com/comic_clear/cl_list/) (se\_\* = PCViewer, co\_\* = HTML, yo\_\* = ???)
 + [Comic High](http://comichigh.jp/webcomic.html) (PluginFree)
 + [Comic Gekkin](http://www.comic-gekkin.com/) (PluginFree)
++ [Manga On Web](http://mangaonweb.com/) (Hub)
++ [Voyager Store (only CrochetTime right now)](http://voyager-store.com/) ([CrochetTime](https://github.com/atoxic/Online-Manga-Downloader/blob/master/docs/crochettime.md), T-Time)
 
 ##How do I use it?
 
