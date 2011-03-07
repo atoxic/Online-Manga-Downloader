@@ -26,6 +26,32 @@ import anonscanlations.downloader.ui.*;
  */
 public class DownloaderUtils
 {
+    private static final Class[] CLASSES = new Class[]
+    {
+        SimpleMagazine.class,
+        SimpleSeries.class,
+        anonscanlations.downloader.actibook.ActibookChapter.class,
+        anonscanlations.downloader.crochettime.CrochetTimeChapter.class,
+        anonscanlations.downloader.famitsu.FamitsuChapter.class,
+        anonscanlations.downloader.ganganonline.GanGanOnlineSeries.class,
+        anonscanlations.downloader.mangaonweb.MangaOnWebChapter.class,
+        anonscanlations.downloader.pcviewer.PCViewerChapter.class,
+        anonscanlations.downloader.pluginfree.PluginFreeChapter.class,
+        anonscanlations.downloader.sunday.SundayChapter.class,
+        anonscanlations.downloader.yahoocomic.YahooComicMagazine.class,
+        anonscanlations.downloader.yahoocomic.YahooComicSeries.class,
+    };
+    public static final HashMap<Class, Integer> CLASS_TO_INT = new HashMap<Class, Integer>();
+    public static final HashMap<Integer, Class> INT_TO_CLASS = new HashMap<Integer, Class>();
+    static
+    {
+        for(int i = 0; i < CLASSES.length; i++)
+        {
+            CLASS_TO_INT.put(CLASSES[i], i);
+            INT_TO_CLASS.put(i, CLASSES[i]);
+        }
+    }
+
     public static final boolean SPILL_GUTS = true;
 
     public static final ArrayList<Exception> ERRORS = new ArrayList<Exception>();
@@ -329,7 +355,10 @@ public class DownloaderUtils
             Object name = map.get("class");
             if(name == null)
                 return(null);
-            c = Class.forName((String)name);
+            if(name instanceof Integer)
+                c = INT_TO_CLASS.get((Integer)name);
+            else if(name instanceof String)
+                c = Class.forName((String)name);
         }
         catch(ClassNotFoundException cnfe)
         {

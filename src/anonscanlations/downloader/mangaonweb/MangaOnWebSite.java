@@ -34,7 +34,7 @@ public class MangaOnWebSite extends Site
         mags.add(mag);
         TreeMap<String, Series> series = new TreeMap<String, Series>();
 
-        final String SEARCH = "class=\"mow_word_break\">";
+        final String SEARCH = "alt=\"";
 
         for(int i = 0; ; i++)
         {
@@ -48,11 +48,11 @@ public class MangaOnWebSite extends Site
                 index = page.indexOf("no=", index) + 3;
                 String ctsn = page.substring(index, page.indexOf('&', index));
 
-                index = page.indexOf('"', page.indexOf(SEARCH, index));
-                String chapterTitle = DownloaderUtils.unescapeHTML(page.substring(page.lastIndexOf('"', index - 1), index));
+                index = page.indexOf(SEARCH, index) + SEARCH.length();
+                String chapterTitle = DownloaderUtils.unescapeHTML(page.substring(index, page.indexOf('"', index)));
 
-                index = page.indexOf('"', page.indexOf(SEARCH, index));
-                String seriesTitle = DownloaderUtils.unescapeHTML(page.substring(page.lastIndexOf('"', index - 1), index));
+                index = page.indexOf(SEARCH, index) + SEARCH.length();
+                String seriesTitle = DownloaderUtils.unescapeHTML(page.substring(index, page.indexOf('"', index)));
 
                 MangaOnWebChapter chapter = new MangaOnWebChapter(ctsn, chapterTitle);
                 SimpleSeries s;

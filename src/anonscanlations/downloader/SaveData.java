@@ -42,6 +42,18 @@ public class SaveData implements Serializable
         return(magazines);
     }
 
+    private static final void dumpClass(Map<String, Object> map, Object obj)
+    {
+        if(DownloaderUtils.CLASS_TO_INT.containsKey(obj.getClass()))
+        {
+            map.put("class", DownloaderUtils.CLASS_TO_INT.get(obj.getClass()));
+        }
+        else
+        {
+            map.put("class", obj.getClass().getName());
+        }
+    }
+
     public final void dumpYAML(String file) throws IOException
     {
         Yaml yaml = new Yaml(DownloadInfoServer.OPTIONS);
@@ -58,13 +70,13 @@ public class SaveData implements Serializable
                 for(Chapter chapter : series.getChapters())
                 {
                     Map<String, Object> chapterDump = chapter.exportVars();
-                    chapterDump.put("class", chapter.getClass().getName());
+                    dumpClass(chapterDump, chapter);
                     seriesDump.put(chapter.getTitle(), chapterDump);
                 }
-                seriesDump.put("class", series.getClass().getName());
+                dumpClass(seriesDump, series);
                 magazineDump.put(series.getOriginalTitle(), seriesDump);
             }
-            magazineDump.put("class", mag.getClass().getName());
+            dumpClass(magazineDump, mag);
             data.put(mag.getOriginalTitle(), magazineDump);
         }
 
