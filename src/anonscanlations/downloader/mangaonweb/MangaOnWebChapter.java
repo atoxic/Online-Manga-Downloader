@@ -15,7 +15,7 @@ import anonscanlations.downloader.*;
  */
 public class MangaOnWebChapter extends Chapter
 {
-    private String ctsn;
+    private String ctsn, title;
     private int min, max;
 
     private transient String cookies, cdn, crcod;
@@ -28,16 +28,16 @@ public class MangaOnWebChapter extends Chapter
 
     public String getTitle()
     {
-        return("001");
+        return(title);
     }
 
     public int getMin()
     {
-        return(1);
+        return(min);
     }
     public int getMax()
     {
-        return(137);
+        return(max);
     }
 
     private boolean handshake() throws Exception
@@ -78,13 +78,17 @@ public class MangaOnWebChapter extends Chapter
         handshake();
 
         URL url = new URL("http://mangaonweb.com/page.do?cdn=" + cdn + "&cpn=book.xml&crcod=" + crcod + "&rid=" + (int)(Math.random() * 10000));
-        String page = DownloaderUtils.getPage(url.toString(), "UTF-8");
+        DownloaderUtils.debug("url: " + url);
+        String page = DownloaderUtils.getPage(url.toString(), "UTF-8", cookies);
+        DownloaderUtils.debug("page: " + page);
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         InputSource is = new InputSource(new StringReader(page));
         Document d = builder.parse(is);
         Element doc = d.getDocumentElement();
+
+        title = doc.getAttribute("title");
 
         min = Integer.MAX_VALUE;
         max = Integer.MIN_VALUE;

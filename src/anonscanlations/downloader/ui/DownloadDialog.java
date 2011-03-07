@@ -46,6 +46,7 @@ public class DownloadDialog extends JDialog
         public void downloadProgressed(Chapter c, int page)
         {
             DownloaderUtils.debug("download progess: " + page);
+            progressBar.setString("Page " + progressBar.getValue() + " out of " + (progressBar.getMaximum() - progressBar.getMinimum()));
             if(!progressBar.isIndeterminate())
                 progressBar.setValue(page);
         }
@@ -70,14 +71,7 @@ public class DownloadDialog extends JDialog
         content = new JPanel();
         setContentPane(content);
 
-        progressBar = new JProgressBar()
-        {
-            @Override
-            public String getString()
-            {
-                return("Page " + getValue() + " out of " + (getMaximum() - getMinimum()));
-            }
-        };
+        progressBar = new JProgressBar();
         progressBar.setStringPainted(true);
         progressBar.setStringPainted(true);
         

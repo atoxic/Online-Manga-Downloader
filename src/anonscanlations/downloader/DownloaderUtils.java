@@ -105,15 +105,23 @@ public class DownloaderUtils
 
     public static String getPage(String url, String encoding) throws IOException
     {
+        return(getPage(url, encoding, null));
+    }
+    public static String getPage(String url, String encoding, String cookies) throws IOException
+    {
         URL u = new URL(url);
-
-        BufferedReader stream = new BufferedReader(new InputStreamReader(u.openStream(), encoding));
+        HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+        conn.setRequestProperty("Cookie", cookies);
+        if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
+            return(null);
+        BufferedReader stream = new BufferedReader(new InputStreamReader(conn.getInputStream(), encoding));
 
 	String string = "", line;
 
 	while((line = stream.readLine()) != null)
 	    string += line;
 
+        stream.close();
         return(string);
     }
 
@@ -131,6 +139,7 @@ public class DownloaderUtils
         while((read = in.read(buf)) != -1)
             output.write(buf, 0, read);
 
+        in.close();
         output.close();
         return(true);
     }

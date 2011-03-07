@@ -320,6 +320,7 @@ public class CrochetTimeChapter extends Chapter
         {
             if(dl.isDownloadAborted())
                 return(true);
+            DownloaderUtils.debug("page " + i + ": " + filepath + filelist.get(i));
             String fileURL = scrambleURL(filepath + filelist.get(i));
 
             boolean fileExists = DownloaderUtils.downloadFile(new URL("http://shangrila.voyager-store.com/dBmd?" + fileURL),
