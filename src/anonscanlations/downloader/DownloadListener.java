@@ -21,9 +21,9 @@ public abstract class DownloadListener
         directory = myDir;
     }
 
-    public abstract void downloadProgressed(Chapter c, int page);
+    public abstract void downloadIncrement(Chapter c);
     public abstract void downloadFinished(Chapter c);
-    public abstract void setDownloadRange(int min, int max);
+    public abstract void setTotal(int total);
     
     public synchronized void abortDownload()
     {

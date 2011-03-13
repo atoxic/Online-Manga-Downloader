@@ -58,11 +58,7 @@ public class SundayChapter extends Chapter
     }
 
     // Dunno right now
-    public int getMin()
-    {
-        return(-1);
-    }
-    public int getMax()
+    public int getTotal()
     {
         return(-1);
     }
@@ -118,7 +114,7 @@ public class SundayChapter extends Chapter
         int min = Integer.parseInt(list[0]),
             max = Integer.parseInt(list[1]);
 
-        dl.setDownloadRange(min, max);
+        dl.setTotal(max - min + 1);
 
         DownloaderUtils.debug("serverTimestamp: " + serverTimestamp);
         DownloaderUtils.debug("availTimestamp: " + availTimestamp);
@@ -163,7 +159,7 @@ public class SundayChapter extends Chapter
             PCViewerDecrypt.decryptFile(temp.getAbsolutePath(),
                 dl.downloadPath(this, i));
 
-            dl.downloadProgressed(this, i);
+            dl.downloadIncrement(this);
         }
         temp.delete();
         

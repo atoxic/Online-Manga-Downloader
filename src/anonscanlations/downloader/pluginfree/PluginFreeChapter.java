@@ -96,11 +96,7 @@ public class PluginFreeChapter extends Chapter implements Serializable
         return(title);
     }
 
-    public int getMin()
-    {
-        return(1);
-    }
-    public int getMax()
+    public int getTotal()
     {
         return(total);
     }
@@ -132,7 +128,7 @@ public class PluginFreeChapter extends Chapter implements Serializable
             String path = dl.downloadPath(this, i);
             ImageIO.write(complete, "JPEG", new File(path));
 
-            dl.downloadProgressed(this, i);
+            dl.downloadIncrement(this);
         }
 
         dl.downloadFinished(this);

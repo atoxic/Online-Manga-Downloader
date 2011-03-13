@@ -38,13 +38,16 @@ public class DownloadDialog extends JDialog
 
     private class DownloadDialogListener extends DownloadListener
     {
+        int page;
         public DownloadDialogListener(DownloadDirectory myDir)
         {
             super(myDir);
+            page = 0;
         }
 
-        public void downloadProgressed(Chapter c, int page)
+        public void downloadIncrement(Chapter c)
         {
+            page++;
             DownloaderUtils.debug("download progess: " + page);
             progressBar.setString("Page " + progressBar.getValue() + " out of " + (progressBar.getMaximum() - progressBar.getMinimum()));
             if(!progressBar.isIndeterminate())
@@ -55,11 +58,11 @@ public class DownloadDialog extends JDialog
             DownloaderUtils.debug("download finished!");
             dispose();
         }
-        public void setDownloadRange(int min, int max)
+        public void setTotal(int total)
         {
-            DownloaderUtils.debug("setting download range: " + min + " to " + max);
-            progressBar.setMaximum(max);
-            progressBar.setMinimum(min - 1);
+            DownloaderUtils.debug("setting total: " + total);
+            progressBar.setMaximum(total);
+            progressBar.setMinimum(0);
             progressBar.setIndeterminate(false);
         }
     }
@@ -97,11 +100,9 @@ public class DownloadDialog extends JDialog
         final DownloadListener dl = new DownloadDialogListener(dir);
 
         progressBar.setValue(0);
-        if(chapter.getMin() != -1)
-        {
-            progressBar.setMinimum(chapter.getMin() - 1);
-            progressBar.setMaximum(chapter.getMax());
-        }
+        progressBar.setMinimum(1);
+        if(chapter.getTotal() != -1)
+            progressBar.setMaximum(chapter.getTotal());
         else
             progressBar.setIndeterminate(true);
 

@@ -77,15 +77,9 @@ public class PCViewerChapter extends Chapter implements Serializable
         String key1 = params.get("key1");
         return(key1.substring(key1.lastIndexOf('-') + 1));
     }
-
-    public int getMin()
+    public int getTotal()
     {
-        return(rangeStart);
-    }
-
-    public int getMax()
-    {
-        return(rangeEnd);
+        return(rangeEnd - rangeStart + 1);
     }
 
     public boolean download(DownloadListener dl) throws IOException
@@ -105,7 +99,7 @@ public class PCViewerChapter extends Chapter implements Serializable
             PCViewerDecrypt.decryptFile(temp.getAbsolutePath(),
                     dl.downloadPath(this, i));
 
-            dl.downloadProgressed(this, i);
+            dl.downloadIncrement(this);
         }
         temp.delete();
 

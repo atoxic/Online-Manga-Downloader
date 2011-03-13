@@ -17,7 +17,7 @@ import anonscanlations.downloader.*;
 public class MangaOnWebChapter extends Chapter
 {
     private String ctsn, title;
-    private int min, max;
+    private int total;
 
     private transient String cookies, cdn, crcod;
 
@@ -26,8 +26,7 @@ public class MangaOnWebChapter extends Chapter
     {
         this.ctsn = ctsn;
         this.title = title;
-        this.min = 1;
-        this.max = -1;
+        this.total = -1;
     }
 
     public String getTitle()
@@ -35,13 +34,9 @@ public class MangaOnWebChapter extends Chapter
         return(title);
     }
 
-    public int getMin()
+    public int getTotal()
     {
-        return(min);
-    }
-    public int getMax()
-    {
-        return(max);
+        return(total);
     }
 
     private boolean handshake() throws Exception
@@ -93,8 +88,7 @@ public class MangaOnWebChapter extends Chapter
         Element doc = d.getDocumentElement();
 
         NodeList pages = doc.getElementsByTagName("page");
-        min = 1;
-        max = pages.getLength();
+        total = pages.getLength();
         for(int i = 0; i < pages.getLength(); i++)
         {
             Element e = (Element)pages.item(i);
@@ -111,7 +105,7 @@ public class MangaOnWebChapter extends Chapter
 
         // 2) get XML
         ArrayList<String> paths = parseXML();
-        dl.setDownloadRange(getMin(), getMax());
+        dl.setTotal(getTotal());
 
         // 3) get pages
         byte[] key = {99, 49, 51, 53, 100, 54, 56, 56, 57, 57, 99, 56, 50, 54, 99, 101, 100, 55, 99, 52, 57, 98, 99, 55, 54, 97, 97, 57, 52, 56, 57, 48};
@@ -131,7 +125,7 @@ public class MangaOnWebChapter extends Chapter
             output.write(encrypted);
             output.close();
 
-            dl.downloadProgressed(this, i + 1);
+            dl.downloadIncrement(this);
         }
 
         dl.downloadFinished(this);

@@ -31,8 +31,8 @@ public class ActibookChapter extends Chapter implements Serializable
     {
         title = myTitle;
         url = myURL;
-        start = 0;
         total = 0;
+        start = 0;
         zoom = "1";
     }
 
@@ -100,13 +100,9 @@ public class ActibookChapter extends Chapter implements Serializable
         return(title);
     }
 
-    public int getMin()
+    public int getTotal()
     {
-        return(start);
-    }
-    public int getMax()
-    {
-        return(total - start);
+        return(total);
     }
 
     public boolean download(DownloadListener dl) throws IOException
@@ -120,7 +116,7 @@ public class ActibookChapter extends Chapter implements Serializable
         {
             if(dl.isDownloadAborted())
                 return(true);
-            dl.downloadProgressed(this, i);
+            dl.downloadIncrement(this);
         }
 
         dl.downloadFinished(this);

@@ -21,17 +21,17 @@ public class DummyDownloadListener extends DownloadListener
                         "./downloads/")));
     }
 
-    public void downloadProgressed(Chapter c, int page)
+    public void downloadIncrement(Chapter c)
     {
-        DownloaderUtils.debug("downloadProgressed: chapter " + c + ", page " + page);
+        DownloaderUtils.debug("downloadProgressed: chapter " + c);
     }
     public void downloadFinished(Chapter c)
     {
         DownloaderUtils.debug("downloadFinished: chapter " + c);
     }
-    public void setDownloadRange(int min, int max)
+    public void setTotal(int total)
     {
-        DownloaderUtils.debug("setDownloadRange: min " + min + ", max " + max);
+        DownloaderUtils.debug("setTotal:"  + total);
     }
 
     @Override

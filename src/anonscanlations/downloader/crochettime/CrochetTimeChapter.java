@@ -272,11 +272,7 @@ public class CrochetTimeChapter extends Chapter
     {
         return(title);
     }
-    public int getMin()
-    {
-        return(1);
-    }
-    public int getMax()
+    public int getTotal()
     {
         return(total);
     }
@@ -341,7 +337,7 @@ public class CrochetTimeChapter extends Chapter
             input.close();
             output.close();
 
-            dl.downloadProgressed(this, i);
+            dl.downloadIncrement(this);
         }
 
         dl.downloadFinished(this);

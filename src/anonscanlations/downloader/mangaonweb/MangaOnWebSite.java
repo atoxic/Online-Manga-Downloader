@@ -38,7 +38,7 @@ public class MangaOnWebSite extends Site
 
         for(int i = 0; ; i++)
         {
-            String page = DownloaderUtils.getPage("http://mangaonweb.com/comicContentsPage.do?comic=true&freeContents=on&offset=" + (i * 25), "UTF-8");
+            String page = DownloaderUtils.getPage("http://mangaonweb.com/comicContentsPage.do?sortType=0&comicSelect=false&freeContents=true&genre_no=0&searchText=&offset=" + (i * 25), "UTF-8");
 
             DownloaderUtils.debug("page: " + i);
 
