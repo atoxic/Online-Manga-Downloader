@@ -40,6 +40,7 @@ public class DownloaderUtils
         anonscanlations.downloader.sunday.SundayChapter.class,
         anonscanlations.downloader.yahoocomic.YahooComicMagazine.class,
         anonscanlations.downloader.yahoocomic.YahooComicSeries.class,
+        anonscanlations.downloader.crochettime.BitwayCrochetTimeChapter.class,
     };
     public static final HashMap<Class, Integer> CLASS_TO_INT = new HashMap<Class, Integer>();
     public static final HashMap<Integer, Class> INT_TO_CLASS = new HashMap<Integer, Class>();

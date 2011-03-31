@@ -6,8 +6,9 @@
 ##Sites:
 
 + [Voyager Store](http://voyager-store.com/)
++ [Kodansha's Special Event (from April 1, 2011 to April 30, 2011)](http://kc.kodansha.co.jp/event/event_detail.php/3644)
 
-##Download Algorithm:
+##Download Algorithm (Voyager Store):
 
 1. Get the book path, such as
 
@@ -25,6 +26,21 @@
 7. Scramble it and download it through "http://shangrila.voyager-store.com/dBmd".
 8. Decrypt the files with [this code](https://github.com/atoxic/Online-Manga-Downloader/blob/master/src/anonscanlations/downloader/crochettime/CrochetTimeChapter.java#L228).
 9. Use zlib to decompress the file to JPEG pages.
+
+##Differences with Kodansha's Special Event:
+
+Due to the [2011 Touhoku Earthquake and Tsunami](http://en.wikipedia.org/wiki/2011_T%C5%8Dhoku_earthquake_and_tsunami)
+and Shueisha uploading WSJ 2011-14 online for free, Kodansha released 9 issues from 6 magazines for free usign CrochetTime. 
+Here are the differences in their structure.
+
+1. Examples of their unscrambled path (found through reversing the scrambling algorithm):
+
+		"/opt/pccs/share2/cplus/t_files//978406KA01065.book.bmit&B" + [8 digit random number]
+		"/opt/pccs/share2/cplus/t_files//978406KA01065.book&D&94047295&19100700009344"
+2. Their dBmd script is located at:
+
+		"http://comic.bitway.ne.jp/kc/cgi-bin/dBmd.cgi?"
+3. Other than that, the path scrambling and file encryption algorithms, and the file list structures are exactly the same as the one use in Voyager Store.
 
 ##Notes:
 
