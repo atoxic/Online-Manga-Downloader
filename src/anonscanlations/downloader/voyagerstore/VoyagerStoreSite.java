@@ -47,7 +47,7 @@ public class VoyagerStoreSite extends Site
             DownloaderUtils.debug("page: " + i);
 
             index = 0;
-            page = DownloaderUtils.getPage("http://voyager-store.com/index.php?main_page=addon&module=voyager_store_asp%2Fgenre_product_list&cPath=1727&columnlist=list&sort=created_desc&page=" + i, "UTF-8");
+            page = DownloaderUtils.getPage("http://voyager-store.com/index.php?main_page=addon&module=voyager_store_asp%2Fgenre_product_list&genre=1727&columnlist=list&sort=created_desc&page=" + i, "UTF-8");
             endIndex = page.indexOf("<!-- /.horizon_box -->");
             while((index = page.indexOf(IMAGE_PREFIX, index)) < endIndex && index != -1)
             {

@@ -281,7 +281,7 @@ public class BitwayCrochetTimeChapter extends Chapter
     {
         ((StringBuilder)FORMATTER.out()).setLength(0);
         FORMATTER.format("%08x", (int)(32767 * Math.random()));
-        String filelistURL = scrambleURL("/opt/pccs/share2/cplus/t_files//978406KA01062.book.bmit&B" + FORMATTER.out().toString());
+        String filelistURL = scrambleURL("/opt/pccs/share2/cplus/t_files//978406KA01067.book.bmit&B" + FORMATTER.out().toString());
         boolean listExists = DownloaderUtils.downloadFile(new URL("http://comic.bitway.ne.jp/kc/cgi-bin/dBmd.cgi?" + filelistURL),
                                     temp.getAbsolutePath());
         if(!listExists)
