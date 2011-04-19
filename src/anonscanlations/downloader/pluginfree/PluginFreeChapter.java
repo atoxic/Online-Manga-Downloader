@@ -19,23 +19,24 @@ import anonscanlations.downloader.*;
  */
 public class PluginFreeChapter extends Chapter implements Serializable
 {
-    private String title, url, downloadURL;
+    private String title, url, downloadURL, cgi;
     private int total, sIS, nsn;
 
     public PluginFreeChapter(){}
 
-    public PluginFreeChapter(String myTitle, String myURL, int myNSN)
+    public PluginFreeChapter(String myTitle, String myURL, int myNSN, String myCGI)
     {
         title = myTitle;
         url = myURL;
         
         downloadURL = null;
+        cgi = myCGI;
         total = 0;
         sIS = 0;
         nsn = myNSN;
     }
 
-    public boolean parsePages(String cgi) throws IOException
+    public boolean init() throws IOException
     {
         String indexPage = DownloaderUtils.getPage(url + "/index.shtml", "Shift_JIS");
         if(indexPage == null)

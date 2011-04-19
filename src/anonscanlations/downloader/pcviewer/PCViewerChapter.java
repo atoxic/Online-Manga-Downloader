@@ -48,7 +48,7 @@ public class PCViewerChapter extends Chapter implements Serializable
         return(sb.toString());
     }
 
-    public void parseXML() throws IOException
+    public boolean init() throws IOException
     {
         URL xml = new URL(new URL(xmlurl), "content_dl.php?dtype=0&" + getParams() + "&z=&x=0&re=0&ad=0&pre=&p=");
         String page = DownloaderUtils.getPage(xml.toString(), "EUC-JP");
@@ -62,6 +62,8 @@ public class PCViewerChapter extends Chapter implements Serializable
         
         rangeStart = Integer.parseInt(range[0]);
         rangeEnd = Integer.parseInt(range[1]);
+
+        return(true);
     }
 
     private String getParam(String url, String param)

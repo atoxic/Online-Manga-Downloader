@@ -13,6 +13,8 @@ import java.util.*;
  */
 public abstract class Chapter implements Serializable
 {
+    public abstract boolean init() throws Exception;
+
     public abstract String getTitle();
     public abstract int getTotal();
 

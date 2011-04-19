@@ -63,6 +63,9 @@ public class SundayChapter extends Chapter
         return(-1);
     }
 
+    // TODO: implement this
+    public boolean init() { return(true); }
+
     public boolean download(DownloadListener dl) throws Exception
     {
         getNewSession(keyURL);

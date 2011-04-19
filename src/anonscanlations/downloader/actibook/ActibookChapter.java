@@ -56,7 +56,7 @@ public class ActibookChapter extends Chapter implements Serializable
         return(ret);
     }
 
-    public boolean parseXML() throws IOException, ParserConfigurationException, SAXException
+    public boolean init() throws IOException, ParserConfigurationException, SAXException
     {
         URL xmlURL = new URL(new URL(url), "db/book.xml");
         String page = DownloaderUtils.getPage(xmlURL.toString(), "UTF-8");

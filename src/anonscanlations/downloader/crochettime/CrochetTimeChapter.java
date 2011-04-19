@@ -255,7 +255,7 @@ public class CrochetTimeChapter extends Chapter
         this.title = title;
     }
 
-    public boolean checkFileList() throws Exception
+    public boolean init() throws Exception
     {
         File temp = File.createTempFile("crochettime_temp_", ".bin");
         temp.deleteOnExit();

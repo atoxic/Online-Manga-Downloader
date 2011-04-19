@@ -39,6 +39,8 @@ public class MangaOnWebChapter extends Chapter
         return(total);
     }
 
+    public boolean init(){ return(true); }
+
     private boolean handshake() throws Exception
     {
         URL homePage = new URL("http://mangaonweb.com/viewer.do?ctsn=" + ctsn);
