@@ -5,6 +5,7 @@
 package anonscanlations.downloader;
 
 import java.awt.*;
+import java.awt.event.*;
 import java.util.*;
 import java.util.prefs.*;
 
@@ -20,6 +21,20 @@ public class PreferencesManager
                                 KEY_SUBMIT = "submit",
                                 KEY_DOWNLOADDIR = "downloadDir";
 
+    private static final HashMap<Window, String> KEYS = new HashMap<Window, String>();
+
+    private static final WindowListener LISTENER = new WindowAdapter()
+    {
+        @Override
+        public void windowClosing(WindowEvent e)
+        {
+            if(KEYS.containsKey(e.getWindow()))
+            {
+                saveWindowPrefs(KEYS.get(e.getWindow()), e.getWindow());
+            }
+        }
+    };
+
     // set preferences to default values if they haven't been touched at all
     public static void initializePrefs()
     {
@@ -30,6 +45,13 @@ public class PreferencesManager
             PREFS.putBoolean(KEY_SUBMIT, false);
             PREFS.put(KEY_DOWNLOADDIR, "./downloads/");
         }
+    }
+
+    public static void registerWindow(String key, Window w, boolean size)
+    {
+        loadWindowPrefs(key, w, size);
+        KEYS.put(w, key);
+        w.addWindowListener(LISTENER);
     }
 
     public static void saveWindowPrefs(String key, Window w)

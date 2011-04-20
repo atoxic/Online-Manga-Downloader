@@ -58,7 +58,7 @@ public class ActibookChapter extends Chapter implements Serializable
 
     public boolean init() throws IOException, ParserConfigurationException, SAXException
     {
-        URL xmlURL = new URL(new URL(url), "db/book.xml");
+        URL xmlURL = new URL(new URL(url), "books/db/book.xml");
         String page = DownloaderUtils.getPage(xmlURL.toString(), "UTF-8");
         if(page == null)
             return(false);
@@ -76,7 +76,7 @@ public class ActibookChapter extends Chapter implements Serializable
             return(false);
 
         // page sizes
-        xmlURL = new URL(new URL(url), "db/viewer.xml");
+        xmlURL = new URL(new URL(url), "books/db/viewer.xml");
         page = DownloaderUtils.getPage(xmlURL.toString(), "UTF-8");
         is = new InputSource(new StringReader(page));
         d = builder.parse(is);
@@ -107,7 +107,8 @@ public class ActibookChapter extends Chapter implements Serializable
 
     public boolean download(DownloadListener dl) throws IOException
     {
-        URL baseURL = new URL(new URL(url), "images/" + zoom + "/");
+        URL baseURL = new URL(new URL(url), "books/images/" + zoom + "/");
+        DownloaderUtils.debug("baseURL: " + baseURL);
 
         for(int i = start;
             DownloaderUtils.downloadFile(new URL(baseURL, i + ".jpg"),

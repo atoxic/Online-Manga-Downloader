@@ -121,7 +121,10 @@ public class DownloaderUtils
         stream.close();
         return(string);
     }
-
+    public static boolean downloadFile(String url, String localFile) throws IOException
+    {
+        return(downloadFile(new URL(url), localFile));
+    }
     public static boolean downloadFile(URL url, String localFile) throws IOException
     {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
