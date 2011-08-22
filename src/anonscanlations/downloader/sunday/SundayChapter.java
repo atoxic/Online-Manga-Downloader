@@ -55,12 +55,10 @@ public class SundayChapter extends Chapter
     {
         SessionDownloadJob session = new SessionDownloadJob(keyURL);
         MainFileDownloadJob mainFile = new MainFileDownloadJob();
-        PageDownloadJob swf = new PageDownloadJob("Download the SWF", new URL(url, "tn.swf"), "UTF-8");
         XMLDownloadJob xml = new XMLDownloadJob();
         
         Downloader.getDownloader().addJob(session);
         Downloader.getDownloader().addJob(mainFile);
-        Downloader.getDownloader().addJob(swf);
         Downloader.getDownloader().addJob(xml);
     }
     
