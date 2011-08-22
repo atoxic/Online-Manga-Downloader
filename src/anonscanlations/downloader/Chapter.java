@@ -13,16 +13,6 @@ import java.util.*;
  */
 public abstract class Chapter implements Serializable
 {
-    public abstract boolean init() throws Exception;
-
-    public abstract String getTitle();
-    public abstract int getTotal();
-
-    @Override
-    public String toString()
-    {
-        return(getTitle());
-    }
-
-    public abstract boolean download(DownloadListener dl) throws Exception;
+    public abstract void init() throws Exception;
+    public abstract void download(File directory) throws Exception;
 }

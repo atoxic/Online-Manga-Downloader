@@ -4,13 +4,9 @@
 
 package anonscanlations.downloader;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.io.*;
 import java.util.*;
-import javax.swing.*;
-
-import org.jdesktop.swingx.*;
-import org.jdesktop.swingx.treetable.*;
+import java.net.*;
 
 import anonscanlations.downloader.actibook.*;
 
@@ -18,90 +14,117 @@ import anonscanlations.downloader.actibook.*;
  *
  * @author Administrator
  */
-public class Downloader
+public class Downloader extends Thread
 {
-    public static void main(String[] args)
+    private static Downloader currentThread;
+    private static List<DownloadJob> jobs;
+    
+    private boolean die, suspended;
+    private final Object finished, waitForJobs;
+    private Downloader()
     {
-        final JFrame frame = new JFrame("Online Manga Downloader");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-        PreferencesManager.registerWindow("omd0.1.x_mainWindow", frame, true);
-        frame.setContentPane(makeContentPane());
-        frame.setVisible(true);
+        jobs = Collections.synchronizedList(new ArrayList<DownloadJob>());
+        die = false;
+        suspended = false;
+        finished = new Object();
+        waitForJobs = new Object();
     }
-    private static JPanel makeContentPane()
+    public void addJob(DownloadJob job)
     {
-        final JPanel content = new JPanel(new BorderLayout());
-
-        // ========================
-        // TREE
-        // ========================
-        final DefaultTreeTableModel treeTableModel = new DefaultTreeTableModel();
-        final DefaultMutableTreeTableNode root = new DefaultMutableTreeTableNode();
-        treeTableModel.setRoot(root);
-        final JXTreeTable treeTable = new JXTreeTable(treeTableModel);
-        final JScrollPane scrollpane = new JScrollPane(treeTable);
-        content.add(scrollpane, "Center");
-
-        // ========================
-        // TREEMODEL
-        // ========================
-
-        final ArrayList<String> columns = new ArrayList<String>();
-        columns.add("Name");
-        columns.add("Progress");
-        columns.add("Status");
-        columns.add("Size");
-        treeTableModel.setColumnIdentifiers(columns);
-
-        // ========================
-        // BUTTON
-        // ========================
-
-        final JPanel buttons = new JPanel();
-        final JButton add = new JButton("Add");
-        buttons.add(add);
-
-        add.addActionListener(new ActionListener()
+        System.out.println("Add Job");
+        jobs.add(job);
+        synchronized(waitForJobs)
         {
-            public void actionPerformed(ActionEvent ae)
+            waitForJobs.notify();
+        }
+    }
+    private void kill()
+    {
+        die = true;
+        synchronized(waitForJobs)
+        {
+            waitForJobs.notify();
+        }
+    }
+    public void pause()
+    {
+        suspended = !suspended;
+        synchronized(waitForJobs)
+        {
+            waitForJobs.notify();
+        }
+    }
+    public void waitUntilFinished() throws InterruptedException
+    {
+        synchronized(finished)
+        {
+            finished.wait();
+        }
+    }
+    @Override
+    public void run()
+    {
+        while(!die)
+        {
+            try
             {
-                final DefaultMutableTreeTableNode node = new DefaultMutableTreeTableNode();
-                final DownloadListener listener = new DownloadListener(DownloadDirectory.makeDirectory(
-                                PreferencesManager.PREFS.get(PreferencesManager.KEY_DOWNLOADDIR, "./downloads/")))
+                if(jobs.isEmpty())
+                    synchronized(finished)
+                    {
+                        finished.notifyAll();
+                    }
+                synchronized(waitForJobs)
                 {
-                    public void downloadIncrement(Chapter c)
+                    while(!die && (jobs.isEmpty() || suspended))
                     {
-                        DownloaderUtils.debug("downloadProgressed: chapter " + c);
+                        System.out.println("Wait");
+                        waitForJobs.wait();
                     }
-                    public void downloadFinished(Chapter c)
-                    {
-                        treeTableModel.removeNodeFromParent(node);
-                        DownloaderUtils.debug("downloadFinished: chapter " + c);
-                    }
-                    public void setTotal(int total)
-                    {
-                        DownloaderUtils.debug("setTotal:"  + total);
-                    }
-                };
-
-                treeTableModel.insertNodeInto(node, root, 0);
-
-                ActibookChapter chapter = new ActibookChapter("Ryuushika Ryuushika c01",
-                        "http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/");
-                try
-                {
-                    chapter.init();
-                    chapter.download(listener);
                 }
-                catch(Exception e)
-                {
-                    DownloaderUtils.errorGUI("Error in download", e, false);
-                }
+                
+                if(die)
+                    break;
+                
+                DownloadJob job = jobs.remove(0);
+                System.out.println("Running job: " + job);
+                job.run();
             }
-        });
-        content.add(buttons, "South");
+            catch(InterruptedException ie)
+            {
+            }
+            catch(Exception ex)
+            {
+                DownloaderUtils.error("Error in Downloader", ex, false);
+            }
+        }
+    }
 
-        return(content);
+    public static Downloader getDownloader()
+    {
+        return(currentThread);
+    }
+    public static void main(String[] args) throws Exception
+    {
+        currentThread = new Downloader();
+        currentThread.start();
+
+        ActibookChapter chapter = new ActibookChapter(new URL("http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html"));
+
+        System.out.println("Init");
+        currentThread.pause();
+        chapter.init();
+        currentThread.pause();
+        
+        // wait until init is finished
+        currentThread.waitUntilFinished();
+        
+        System.out.println("Download");
+        currentThread.pause();
+        chapter.download(new File("D:\\test\\"));
+        currentThread.pause();
+
+        // wait until download is finished
+        currentThread.waitUntilFinished();
+        currentThread.kill();
     }
 }
