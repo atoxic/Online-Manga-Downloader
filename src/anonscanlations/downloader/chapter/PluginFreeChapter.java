@@ -20,7 +20,6 @@ import anonscanlations.downloader.*;
 public class PluginFreeChapter extends Chapter implements Serializable
 {
     public static final int nsn = 15;
-    public static final String cgi = "http://futabasha.pluginfree.com/cgi-bin/widget.cgi?a=";
 
     private URL url;
 
@@ -94,7 +93,7 @@ public class PluginFreeChapter extends Chapter implements Serializable
                     throw new Exception("No sHN");
                 DownloaderUtils.debug("\t\t\tsHN: " + sHN);
 
-                downloadURL = cgi + hCN + sHN + "/" + sHN;
+                downloadURL = new URL(new URL("http://" + url.getHost()), "cgi-bin/widget.cgi?a=" + hCN + sHN + "/" + sHN).toString();
             }
         };
         Downloader.getDownloader().addJob(initVal);
