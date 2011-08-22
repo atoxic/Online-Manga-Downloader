@@ -24,7 +24,12 @@ public class ImageDownloadJob extends DownloadJob
     {
         super(_description);
         url = _url;
+        image = null;
         cookies = _cookies;
+    }
+    public BufferedImage getImage()
+    {
+        return(image);
     }
     public void run() throws Exception
     {
