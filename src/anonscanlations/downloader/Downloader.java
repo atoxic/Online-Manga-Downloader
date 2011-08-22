@@ -9,6 +9,7 @@ import java.util.*;
 import java.net.*;
 
 import anonscanlations.downloader.actibook.*;
+import anonscanlations.downloader.sunday.*;
 
 /**
  *
@@ -31,7 +32,6 @@ public class Downloader extends Thread
     }
     public void addJob(DownloadJob job)
     {
-        System.out.println("Add Job");
         jobs.add(job);
         synchronized(waitForJobs)
         {
@@ -56,6 +56,8 @@ public class Downloader extends Thread
     }
     public void waitUntilFinished() throws InterruptedException
     {
+        if(jobs.isEmpty())
+            return;
         synchronized(finished)
         {
             finished.wait();
@@ -77,7 +79,6 @@ public class Downloader extends Thread
                 {
                     while(!die && (jobs.isEmpty() || suspended))
                     {
-                        System.out.println("Wait");
                         waitForJobs.wait();
                     }
                 }
@@ -94,7 +95,7 @@ public class Downloader extends Thread
             }
             catch(Exception ex)
             {
-                DownloaderUtils.error("Error in Downloader", ex, false);
+                DownloaderUtils.error("Error in Downloader", ex, true);
             }
         }
     }
@@ -108,13 +109,22 @@ public class Downloader extends Thread
         currentThread = new Downloader();
         currentThread.start();
 
-        ActibookChapter chapter = new ActibookChapter(new URL("http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html"));
+        //ActibookChapter chapter = new ActibookChapter(new URL("http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html"));
+        //*
+        SundayChapter chapter = new SundayChapter(new URL("http://club.shogakukan.co.jp/dor/pcviewer_main.php?key1=SHWM&key2=mitudataku_001&key3=konshuunos_001&key4=0229-0&sp=-1&re=0&shd=b3787698976e44ec3369a75f37e8ca972fa27a9a&otk=8a44629df43cbd6c3549bbc9a98e0cc091846285"),
+                                                new URL("http://club.shogakukan.co.jp/"));
+        // */
+        /*
+        SundayChapter chapter = new SundayChapter(new URL("http://sokuyomi.jp/dor_sokuyomi/pcviewer_main.php?key1=SHCO&key2=tanakamoto_001&key3=saikyoutor_001&key4=0001-0&sp=-1&re=0&shd=22bc58e0ca503ce2da5120cb06167eed9192fb6e&otk=4162cf06de4a108726b7b6ac5e1912d718d898bd&ls=1"),
+                                                new URL("http://sokuyomi.jp/external/viewer/?isbn=4091263747"));
+        // */
 
         System.out.println("Init");
         currentThread.pause();
         chapter.init();
         currentThread.pause();
-        
+
+        //*
         // wait until init is finished
         currentThread.waitUntilFinished();
         
@@ -122,9 +132,11 @@ public class Downloader extends Thread
         currentThread.pause();
         chapter.download(new File("D:\\test\\"));
         currentThread.pause();
+        // */
 
         // wait until download is finished
         currentThread.waitUntilFinished();
         currentThread.kill();
+        // */
     }
 }
