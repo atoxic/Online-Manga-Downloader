@@ -4,17 +4,10 @@
 
 package anonscanlations.downloader;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 import java.io.*;
-import java.net.*;
 import java.util.*;
-import javax.imageio.*;
-import java.lang.reflect.*;
 
 /**
  *
@@ -119,5 +112,15 @@ public class DownloaderUtils
         }
         while(continueLoop);
         return(source);
+    }
+
+    private static final StringBuilder SB = new StringBuilder();
+    private static final Formatter FORMATTER = new Formatter(SB, Locale.US);
+
+    public static File fileName(File directory, String title, int page, String ext)
+    {
+        SB.setLength(0);
+        FORMATTER.format("%s_%03d.%s", title, page, ext);
+        return(new File(directory, SB.toString()));
     }
 }

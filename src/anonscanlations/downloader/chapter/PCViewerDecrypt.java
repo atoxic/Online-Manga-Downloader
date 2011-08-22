@@ -2,7 +2,7 @@
  * Coded by /a/non, for /a/non
  */
 
-package anonscanlations.downloader.pcviewer;
+package anonscanlations.downloader.chapter;
 
 import java.io.*;
 

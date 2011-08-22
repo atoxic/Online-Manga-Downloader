@@ -2,7 +2,7 @@
  * Coded by /a/non, for /a/non
  */
 
-package anonscanlations.downloader.sunday;
+package anonscanlations.downloader.chapter;
 
 import java.io.*;
 import java.net.*;
@@ -15,7 +15,6 @@ import org.w3c.dom.*;
 import org.xml.sax.*;
 
 import anonscanlations.downloader.*;
-import anonscanlations.downloader.pcviewer.*;
 
 /**
  *
@@ -87,7 +86,7 @@ public class SundayChapter extends Chapter
 
             url += "&h=" + hashedURL;
 
-            PCViewerDownloadJob file = new PCViewerDownloadJob("Page " + i, new URL(url), new File(directory, key3 + "_" + i + ".jpg"));
+            PCViewerDownloadJob file = new PCViewerDownloadJob("Page " + i, new URL(url), DownloaderUtils.fileName(directory, key3 + "_c" + key4, i, "jpg"));
             Downloader.getDownloader().addJob(file);
         }
     }

@@ -1,4 +1,4 @@
-package anonscanlations.downloader.pcviewer;
+package anonscanlations.downloader.chapter;
 
 import java.io.*;
 import java.net.*;

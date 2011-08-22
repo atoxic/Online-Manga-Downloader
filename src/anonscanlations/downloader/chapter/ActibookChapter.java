@@ -2,7 +2,7 @@
  * Coded by /a/non, for /a/non
  */
 
-package anonscanlations.downloader.actibook;
+package anonscanlations.downloader.chapter;
 
 import java.util.*;
 import java.io.*;
@@ -122,7 +122,7 @@ public class ActibookChapter extends Chapter implements Serializable
         for(int i = start; i < start + total; i++)
         {
             FileDownloadJob page = new FileDownloadJob("Page " + i, new URL(url, "books/images/" + zoom + "/" + i + ".jpg"),
-                                                                    new File(directory, title + "_" + i + ".jpg"));
+                                                                    DownloaderUtils.fileName(directory, title, i, "jpg"));
             Downloader.getDownloader().addJob(page);
         }
     }

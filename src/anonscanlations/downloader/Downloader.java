@@ -4,12 +4,12 @@
 
 package anonscanlations.downloader;
 
+import anonscanlations.downloader.chapter.SundayChapter;
 import java.io.*;
 import java.util.*;
 import java.net.*;
 
-import anonscanlations.downloader.actibook.*;
-import anonscanlations.downloader.sunday.*;
+import anonscanlations.downloader.chapter.*;
 
 /**
  *
@@ -114,10 +114,12 @@ public class Downloader extends Thread
         SundayChapter chapter = new SundayChapter(new URL("http://club.shogakukan.co.jp/dor/pcviewer_main.php?key1=SHWM&key2=mitudataku_001&key3=konshuunos_001&key4=0229-0&sp=-1&re=0&shd=b3787698976e44ec3369a75f37e8ca972fa27a9a&otk=8a44629df43cbd6c3549bbc9a98e0cc091846285"),
                                                 new URL("http://club.shogakukan.co.jp/"));
         // */
-        //*
+        /*
         SundayChapter chapter = new SundayChapter(new URL("http://sokuyomi.jp/dor_sokuyomi/pcviewer_main.php?key1=SHCO&key2=tanakamoto_001&key3=saikyoutor_001&key4=0001-0&sp=-1&re=0&shd=22bc58e0ca503ce2da5120cb06167eed9192fb6e&otk=4162cf06de4a108726b7b6ac5e1912d718d898bd&ls=1"),
                                                 new URL("http://sokuyomi.jp/external/viewer/?isbn=4091263747"));
         // */
+        //PCViewerChapter chapter = new PCViewerChapter(new URL("http://view.books.yahoo.co.jp/dor/drm/dor_main.php?key1=comicya-iwakutuk01-0010&sp=-1&ad=1&re=0&xmlurl=http://stream01.books.yahoo.co.jp:8001/&shd=a0386be07c30450fcd53081786de81f3ba2da1c5"));
+        PCViewerChapter chapter = new PCViewerChapter(new URL("http://ct.eb-webcomic.com/dor/pcviewer_main.php?key1=EB&key2=tanabekyou_001&key3=senrankagu_001&key4=0001-0&sp=-1&ad=1&re=1&otp=1&xmlurl=http://ct.eb-webcomic.com/stream/&shd=a7e64b0682d07314cbbb5fead053f24c05a73ec8"));
 
         System.out.println("Init");
         currentThread.pause();
