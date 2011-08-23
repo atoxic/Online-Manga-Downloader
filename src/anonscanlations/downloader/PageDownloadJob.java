@@ -12,6 +12,7 @@ public class PageDownloadJob extends DownloadJob
 {
     protected URL url;
     protected String encoding, page, cookies;
+    protected HttpURLConnection conn;
     public PageDownloadJob(String _description, URL _url, String _encoding)
     {
         this(_description, _url, _encoding, null);
@@ -22,10 +23,11 @@ public class PageDownloadJob extends DownloadJob
         url = _url;
         encoding = _encoding;
         cookies = _cookies;
+        conn = null;
     }
     public void run() throws Exception
     {
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn = (HttpURLConnection) url.openConnection();
         if(cookies != null)
             conn.setRequestProperty("Cookie", cookies);
         if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)

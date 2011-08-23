@@ -106,6 +106,8 @@ public class Downloader extends Thread
     }
     public static void main(String[] args) throws Exception
     {
+        System.setProperty("http.agent", "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.20) Gecko/20110803 Firefox/3.6.20");
+
         currentThread = new Downloader();
         currentThread.start();
 
@@ -123,8 +125,9 @@ public class Downloader extends Thread
         //PluginFreeChapter chapter = new PluginFreeChapter(new URL("http://futabasha.pluginfree.com/weblish/futabawebhigh/Oniichan_033/index.shtml?Mdn=1&rep=1"));
         //PluginFreeChapter chapter = new PluginFreeChapter(new URL("http://futabasha.pluginfree.com/weblish/futabawebhigh/Oniichan_033/index.shtml?Mdn=1&rep=1"));
         //CrochetTimeChapter chapter = new CrochetTimeChapter(new URL("http://voyager-store.com/index.php?main_page=addon&module=ebooks/open_image_crochet&ebooks_id=16470&products_id=11572"));
-        CrochetTimeChapter chapter = new CrochetTimeChapter(new URL("http://voyager-store.com/index.php?main_page=addon&module=ebooks/open_image_crochet&ebooks_id=15275&products_id=11387"));
+        //CrochetTimeChapter chapter = new CrochetTimeChapter(new URL("http://voyager-store.com/index.php?main_page=addon&module=ebooks/open_image_crochet&ebooks_id=15275&products_id=11387"));
         //CrochetTimeChapter chapter = new CrochetTimeChapter(new URL("http://comic.bitway.ne.jp/kc/comic_tameshiyomi.html?isbn=9784063725933&t=parchase"));
+        MangaOnWebChapter chapter = new MangaOnWebChapter(new URL("http://mangaonweb.com/viewer.do?ctsn=31029"));
 
         System.out.println("Init");
         currentThread.pause();
