@@ -34,8 +34,8 @@ public class DownloaderUtils
     public static void errorGUI(String message, Exception e, boolean fatal)
     {
         String msg = (fatal ? "" : "NON-") + "FATAL ERROR: " + message;
-        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
         addException(msg, e);
+        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
         if(fatal)
             System.exit(1);
     }

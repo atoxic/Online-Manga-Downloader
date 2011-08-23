@@ -21,9 +21,10 @@ public class NicoNicoChapter extends Chapter
 
     private URL url;
 
-    private transient String username, password, cookies, title, id;
+    private transient String username, cookies, title, id;
+    private transient char[] password;
     private transient ArrayList<String> ids;
-    public NicoNicoChapter(URL _url, String _username, String _password)
+    public NicoNicoChapter(URL _url, String _username, char[] _password)
     {
         url = _url;
         username = _username;
@@ -46,7 +47,8 @@ public class NicoNicoChapter extends Chapter
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setDoOutput(true);
                 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                wr.write("next_url=%2Fmanga%2F&mail=" + username + "&password=" + password);
+                wr.write("next_url=%2Fmanga%2F&mail=" + username + "&password=");
+                wr.write(password);
                 wr.flush();
 
                 if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
