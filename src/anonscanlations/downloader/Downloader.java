@@ -128,6 +128,7 @@ public class Downloader extends Thread
         //CrochetTimeChapter chapter = new CrochetTimeChapter(new URL("http://voyager-store.com/index.php?main_page=addon&module=ebooks/open_image_crochet&ebooks_id=15275&products_id=11387"));
         //CrochetTimeChapter chapter = new CrochetTimeChapter(new URL("http://comic.bitway.ne.jp/kc/comic_tameshiyomi.html?isbn=9784063725933&t=parchase"));
         MangaOnWebChapter chapter = new MangaOnWebChapter(new URL("http://mangaonweb.com/viewer.do?ctsn=31029"));
+        //NicoNicoChapter chapter = new NicoNicoChapter(new URL("http://seiga.nicovideo.jp/watch/mg22888"), "someusername", "somepassword");
 
         System.out.println("Init");
         currentThread.pause();

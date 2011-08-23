@@ -116,11 +116,13 @@ public class DownloaderUtils
 
     private static final StringBuilder SB = new StringBuilder();
     private static final Formatter FORMATTER = new Formatter(SB, Locale.US);
+    private static final String BAD_CHARS ="[\\\\/:*?\"<>\\|]";
 
     public static File fileName(File directory, String title, int page, String ext)
     {
         SB.setLength(0);
         FORMATTER.format("%s_%03d.%s", title, page, ext);
-        return(new File(directory, SB.toString()));
+        String saveTitle = SB.toString().replace(' ', '_').replaceAll(BAD_CHARS, "");
+        return(new File(directory, saveTitle));
     }
 }
