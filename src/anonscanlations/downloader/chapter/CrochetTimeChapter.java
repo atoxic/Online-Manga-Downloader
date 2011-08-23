@@ -242,6 +242,8 @@ public class CrochetTimeChapter extends Chapter
         output.close();
     }
 
+    private String dbmd, basePath, suffix;
+
     private URL url;
     private String path, filepath;
     private ArrayList<String> list;
@@ -260,13 +262,35 @@ public class CrochetTimeChapter extends Chapter
             {
                 super.run();
                 
-                int index = page.indexOf("var book");
-                if(index == -1)
-                    throw new Exception("Book path not found");
-                int start = page.indexOf('\'', index) + 1;
-                int end = page.indexOf('_', start);
-                path = page.substring(start, end);
-                filepath = "/home/dotbook/rs2_contents/voyager-store_contents/" + path + "/";
+                int index = page.indexOf("var book"), start = -1, end = -1;
+                // Voyager
+                if(index != -1)
+                {
+                    start = page.indexOf('\'', index) + 1;
+                    end = page.indexOf('_', start);
+                    path = page.substring(start, end);
+                    
+                    dbmd = "http://shangrila.voyager-store.com/dBmd?";
+                    basePath = "/home/dotbook/rs2_contents/voyager-store_contents/";
+                    suffix = "_pc_image_crochet";
+                    filepath = basePath + path + "/";
+                }
+                // Kondansha Bitway
+                else
+                {
+                    index = page.indexOf("BOOK=");
+                    if(index == -1)
+                        throw new Exception("Book path not found");
+
+                    start = page.indexOf('=', index) + 1;
+                    end = page.indexOf('.', start);
+                    path = page.substring(start, end);
+
+                    dbmd = "http://comic.bitway.ne.jp/kc/cgi-bin/dBmd.cgi?";
+                    basePath = "/opt/pccs/share2/cplus/t_files//";
+                    suffix = "";
+                    filepath = basePath;
+                }
 
                 DownloaderUtils.debug("path: " + path);
             }
@@ -281,8 +305,8 @@ public class CrochetTimeChapter extends Chapter
 
                 ((StringBuilder)FORMATTER.out()).setLength(0);
                 FORMATTER.format("%08x", (int)(32767 * Math.random()));
-                String filelistURL = scrambleURL(filepath + path + "_pc_image_crochet.book.bmit&B" + FORMATTER.out().toString());
-                url = new URL("http://shangrila.voyager-store.com/dBmd?" + filelistURL);
+                String filelistURL = scrambleURL(filepath + path + suffix + ".book.bmit&B" + FORMATTER.out().toString());
+                url = new URL(dbmd + filelistURL);
                 
                 super.run();
 
@@ -303,13 +327,14 @@ public class CrochetTimeChapter extends Chapter
         // for the decrypt files
                 tempOut = File.createTempFile("crochettime_tempout_", ".bin"),
                 finalDirectory = directory;
-
+        temp.deleteOnExit();
+        tempOut.deleteOnExit();
 
         for(int i = 0; i < list.size(); i++)
         {
             final int finalIndex = i;
 
-            FileDownloadJob page = new FileDownloadJob("Page " + i, new URL("http://shangrila.voyager-store.com/dBmd?" + scrambleURL(filepath + list.get(i))), temp)
+            FileDownloadJob page = new FileDownloadJob("Page " + i, new URL(dbmd + scrambleURL(filepath + list.get(i))), temp)
             {
                 @Override
                 public void run() throws Exception
@@ -330,6 +355,7 @@ public class CrochetTimeChapter extends Chapter
                     }
                     catch(Exception e)
                     {
+                        input.close();
                         input = new BufferedInputStream(new FileInputStream(tempOut));
                         while(input.read(buf) != -1)
                         {
@@ -344,8 +370,5 @@ public class CrochetTimeChapter extends Chapter
 
             Downloader.getDownloader().addJob(page);
         }
-
-        temp.deleteOnExit();
-        tempOut.deleteOnExit();
     }
 }

@@ -124,6 +124,7 @@ public class Downloader extends Thread
         //PluginFreeChapter chapter = new PluginFreeChapter(new URL("http://futabasha.pluginfree.com/weblish/futabawebhigh/Oniichan_033/index.shtml?Mdn=1&rep=1"));
         //CrochetTimeChapter chapter = new CrochetTimeChapter(new URL("http://voyager-store.com/index.php?main_page=addon&module=ebooks/open_image_crochet&ebooks_id=16470&products_id=11572"));
         CrochetTimeChapter chapter = new CrochetTimeChapter(new URL("http://voyager-store.com/index.php?main_page=addon&module=ebooks/open_image_crochet&ebooks_id=15275&products_id=11387"));
+        //CrochetTimeChapter chapter = new CrochetTimeChapter(new URL("http://comic.bitway.ne.jp/kc/comic_tameshiyomi.html?isbn=9784063725933&t=parchase"));
 
         System.out.println("Init");
         currentThread.pause();
