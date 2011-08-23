@@ -1,16 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * TempDownloaderFrame.java
- *
- * Created on Aug 22, 2011, 8:29:03 PM
- */
-
 package anonscanlations.downloader;
 
+import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import java.net.*;
@@ -27,6 +17,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     /** Creates new form TempDownloaderFrame */
     public TempDownloaderFrame() {
         initComponents();
+
+        PreferencesManager.registerWindow("OMD0.1.0_tempdlframe", this, false);
     }
 
     /** This method is called from within the constructor to
@@ -326,8 +318,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_downloadButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        dispose();
-        System.exit(0);
+        WindowEvent windowClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+	this.dispatchEvent(windowClosing);
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
