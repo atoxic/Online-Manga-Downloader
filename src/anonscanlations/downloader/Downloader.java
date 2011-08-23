@@ -120,8 +120,10 @@ public class Downloader extends Thread
         // */
         //PCViewerChapter chapter = new PCViewerChapter(new URL("http://view.books.yahoo.co.jp/dor/drm/dor_main.php?key1=comicya-iwakutuk01-0010&sp=-1&ad=1&re=0&xmlurl=http://stream01.books.yahoo.co.jp:8001/&shd=a0386be07c30450fcd53081786de81f3ba2da1c5"));
         //PCViewerChapter chapter = new PCViewerChapter(new URL("http://ct.eb-webcomic.com/dor/pcviewer_main.php?key1=EB&key2=tanabekyou_001&key3=senrankagu_001&key4=0001-0&sp=-1&ad=1&re=1&otp=1&xmlurl=http://ct.eb-webcomic.com/stream/&shd=a7e64b0682d07314cbbb5fead053f24c05a73ec8"));
-        PluginFreeChapter chapter = new PluginFreeChapter(new URL("http://futabasha.pluginfree.com/weblish/futabawebhigh/Oniichan_033/index.shtml?Mdn=1&rep=1"));
-        //PluginFreeChapter chapter = new PluginFreeChapter(new URL("http://ebook.comic-gekkin.com/weblish/gekkin/hanasakuiroha_002/transit2.html"));
+        //PluginFreeChapter chapter = new PluginFreeChapter(new URL("http://futabasha.pluginfree.com/weblish/futabawebhigh/Oniichan_033/index.shtml?Mdn=1&rep=1"));
+        //PluginFreeChapter chapter = new PluginFreeChapter(new URL("http://futabasha.pluginfree.com/weblish/futabawebhigh/Oniichan_033/index.shtml?Mdn=1&rep=1"));
+        //CrochetTimeChapter chapter = new CrochetTimeChapter(new URL("http://voyager-store.com/index.php?main_page=addon&module=ebooks/open_image_crochet&ebooks_id=16470&products_id=11572"));
+        CrochetTimeChapter chapter = new CrochetTimeChapter(new URL("http://voyager-store.com/index.php?main_page=addon&module=ebooks/open_image_crochet&ebooks_id=15275&products_id=11387"));
 
         System.out.println("Init");
         currentThread.pause();
