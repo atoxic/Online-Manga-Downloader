@@ -5,6 +5,9 @@
 package anonscanlations.downloader.chapter;
 
 import java.util.*;
+import java.awt.*;
+import java.awt.image.*;
+import javax.imageio.*;
 import java.io.*;
 import java.net.*;
 
@@ -20,9 +23,11 @@ import anonscanlations.downloader.*;
  */
 public class ActibookChapter extends Chapter implements Serializable
 {
+    private static final int DOKI_GRID_W = 400, DOKI_GRID_H = 400;
+
     private URL url;
     private String zoom, title;
-    private int start, total;
+    private int start, total, w, h;
 
     public ActibookChapter()
     {
@@ -34,6 +39,8 @@ public class ActibookChapter extends Chapter implements Serializable
         total = 0;
         start = 0;
         zoom = "1";
+        w = 0;
+        h = 0;
     }
 
     private static Node getNode(Element doc, String tagName)
@@ -89,6 +96,10 @@ public class ActibookChapter extends Chapter implements Serializable
                 if(nameContents == null)
                     throw new Exception("No name");
                 title = nameContents.getNodeValue();
+
+                w = getIntContents(doc, "w");
+                h = getIntContents(doc, "h");
+                // no error checking here
             }
         };
         PageDownloadJob viewerXML = new PageDownloadJob("viewer.xml for zoom level", new URL(url, "books/db/viewer.xml"), "UTF-8")
@@ -119,11 +130,57 @@ public class ActibookChapter extends Chapter implements Serializable
 
     public void download(File directory) throws Exception
     {
-        for(int i = start; i < start + total; i++)
+        final File finalDirectory = directory;
+        if(url.toString().contains("dokidokivisual"))
         {
-            FileDownloadJob page = new FileDownloadJob("Page " + i, new URL(url, "books/images/" + zoom + "/" + i + ".jpg"),
-                                                                    DownloaderUtils.fileName(directory, title, i, "jpg"));
-            Downloader.getDownloader().addJob(page);
+            if(w == -1 || h == -1)
+                throw new Exception("No dimensions");
+            final float zoomVal = Float.parseFloat(zoom);
+            final int gridW = (int)Math.ceil(w * zoomVal / DOKI_GRID_W);
+            final int gridH = (int)Math.ceil(h * zoomVal / DOKI_GRID_H);
+            for(int i = start; i < start + total; i++)
+            {
+                final int finalIndex = i;
+                final ImageDownloadJob grid[][] = new ImageDownloadJob[gridW][gridH];
+                for(int y = 0; y < gridH; y++)
+                {
+                    for(int x = 0; x < gridW; x++)
+                    {
+                        grid[x][y] = new ImageDownloadJob("Page " + i + " (" + x + ", " + y + ")",
+                                        new URL(url, "books/images/" + zoom + "/g_" + i + "/x" + (x + 1) + "y" + (y + 1) + ".jpg"));
+                        Downloader.getDownloader().addJob(grid[x][y]);
+                    }
+                }
+                DownloadJob combine = new DownloadJob("Combine page " + i)
+                {
+                    public void run() throws Exception
+                    {
+                        BufferedImage complete = new BufferedImage((int)(w * zoomVal),
+                                                                    (int)(h * zoomVal),
+                                                                    BufferedImage.TYPE_INT_RGB);
+
+                        Graphics2D g = complete.createGraphics();
+                        for(int y = 0; y < gridH; y++)
+                        {
+                            for(int x = 0; x < gridW; x++)
+                            {
+                                g.drawImage(grid[x][y].getImage(), x * DOKI_GRID_W, y * DOKI_GRID_H, null);
+                            }
+                        }
+                        ImageIO.write(complete, "JPEG", DownloaderUtils.fileName(finalDirectory, title, finalIndex, "jpg"));
+                    }
+                };
+                Downloader.getDownloader().addJob(combine);
+            }
+        }
+        else
+        {
+            for(int i = start; i < start + total; i++)
+            {
+                FileDownloadJob page = new FileDownloadJob("Page " + i, new URL(url, "books/images/" + zoom + "/" + i + ".jpg"),
+                                                                        DownloaderUtils.fileName(directory, title, i, "jpg"));
+                Downloader.getDownloader().addJob(page);
+            }
         }
     }
 }

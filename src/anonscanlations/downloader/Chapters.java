@@ -16,7 +16,7 @@ public enum Chapters
     CROCHETTIME("CrochetTime"),
     MANGAONWEB("Manga On Web"),
     NICONICO("NicoNico"),
-    PCVIEWER("PCViewer"),
+    PCVIEWER("PCViewer/DOR"),
     PLUGINFREE("PluginFree");
 
     private final String name;

@@ -225,6 +225,78 @@ public class CrochetTimeChapter extends Chapter
         return(ret);
     }
 
+    public static String unscrambleURL(String src)
+    {
+        String decoded = null;
+        try
+        {
+            decoded = java.net.URLDecoder.decode(src, "UTF-8");
+        }
+        catch(java.io.UnsupportedEncodingException uee)
+        {
+            DownloaderUtils.error("UTF-8 not found", uee, true);
+        }
+
+        char[] str = decoded.toCharArray();
+
+        int strLen, p1, p2;
+        strLen = str.length;
+
+        for(int i = 0; i < strLen; i++)
+	{
+	    int k = SCRAMBLE_KEY_TABLE[(strLen + i) & 0xff], m, a;
+            if((str[i]-0x61) <= 0x19 && (str[i]-0x61) >= 0) // lower case
+            {
+                m = str[i] - 0x61;
+                a = (k - m) / 0x1a;
+
+                str[i] = (char)((m - k + 0x1a * (a + 1)) % 0x1a + 0x61);
+            }
+            else if((str[i]-0x41) <= 0x19 && (str[i]-0x41) >= 0) // upper case
+            {
+                m = str[i] - 0x41;
+                a = (k - m) / 0x1a;
+
+                str[i] = (char)((m - k + 0x1a * (a + 1)) % 0x1a + 0x41);
+            }
+            else if((str[i]-0x30) <= 0x9 && (str[i]-0x30) >= 0) // number
+            {
+                m = str[i] - 0x30;
+                a = (k - m) / 0x0a;
+
+                str[i] = (char)((m - k + 0x0a * (a + 1)) % 0x0a + 0x30);
+            }
+	}
+
+	int strHash = 0;
+	for(int i=0; i<strLen; i++)
+            strHash += str[i];
+        int idx = strHash;
+
+	for(int i = strLen - 1; i >= 0; i--)
+	{
+            int t = SCRAMBLE_KEY_TABLE[(idx+i)&0xff];
+            t += i;
+
+            p1 = t % strLen;
+            t /= strLen;
+            t = ((t|0xffffffff)-i)&0xff;
+
+            t = SCRAMBLE_KEY_TABLE[t];
+            t += i;
+            p2 = t % strLen;
+
+            if(p1 != p2) // same positions, don't swap bytes
+            {
+                char c = str[p1];
+                str[p1] = str[p2];
+                str[p2] = c;
+            }
+	}
+
+        return(new String(str));
+    }
+
     public static void decryptFile(File inputFile, File outputFile) throws IOException
     {
         RandomAccessFile input = new RandomAccessFile(inputFile, "r"),

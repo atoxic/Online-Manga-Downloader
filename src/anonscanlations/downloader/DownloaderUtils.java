@@ -17,7 +17,7 @@ public class DownloaderUtils
 {
     public static final boolean SPILL_GUTS = true;
 
-    public static final ArrayList<Exception> ERRORS = new ArrayList<Exception>();
+    public static final HashMap<String, Exception> ERRORS = new HashMap<String, Exception>();
 
     public static void debug(String message)
     {
@@ -34,20 +34,26 @@ public class DownloaderUtils
     public static void errorGUI(String message, Exception e, boolean fatal)
     {
         String msg = (fatal ? "" : "NON-") + "FATAL ERROR: " + message;
-        addException(msg, e);
-        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+        // don't report it again if it's been reported
+        if(addException(msg, e))
+        {
+            JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
         if(fatal)
             System.exit(1);
     }
 
-    private static void addException(String msg, Exception e)
+    private static boolean addException(String msg, Exception e)
     {
-        ERRORS.add(new Exception(msg, e));
+        if(ERRORS.containsValue(e))
+            return(false);
+        ERRORS.put(msg, e);
         if(SPILL_GUTS)
         {
             System.err.println("LOGGER: Exception added");
             e.printStackTrace();
         }
+        return(true);
     }
 
     // Source http://www.rgagnon.com/javadetails/java-0307.html

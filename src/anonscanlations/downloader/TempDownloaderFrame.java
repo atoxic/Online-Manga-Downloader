@@ -21,6 +21,11 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         PreferencesManager.registerWindow("OMD0.1.0_tempdlframe", this, false);
     }
 
+    public void setStatus(String status)
+    {
+        statusBar.setText("Status: " + status);
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -53,6 +58,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         downloadButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         viewerURLField = new javax.swing.JTextField();
+        statusBar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Online Manga Downloader 0.1.0");
@@ -196,6 +202,14 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             }
         });
 
+        statusBar.setEditable(false);
+        statusBar.setText("Status:");
+        statusBar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statusBarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -203,6 +217,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(statusBar, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -239,6 +254,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(downloadButton)
                     .addComponent(exitButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(statusBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -335,6 +352,10 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_browseButtonActionPerformed
 
+    private void statusBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusBarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statusBarActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -368,6 +389,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton nicoRadioButton;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.ButtonGroup radioButtonGroup;
+    private javax.swing.JTextField statusBar;
     private javax.swing.JTextField viewerURLField;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables

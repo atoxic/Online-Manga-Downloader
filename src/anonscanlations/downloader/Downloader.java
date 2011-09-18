@@ -17,16 +17,19 @@ import anonscanlations.downloader.chapter.*;
  */
 public class Downloader extends Thread
 {
+    private static TempDownloaderFrame frame;
     private static Downloader currentThread;
     private static List<DownloadJob> jobs;
     
     private boolean die, suspended;
+    private Exception error;
     private final Object finished, waitForJobs;
     private Downloader()
     {
         jobs = Collections.synchronizedList(new ArrayList<DownloadJob>());
         die = false;
         suspended = false;
+        error = null;
         finished = new Object();
         waitForJobs = new Object();
     }
@@ -54,14 +57,23 @@ public class Downloader extends Thread
             waitForJobs.notify();
         }
     }
-    public void waitUntilFinished() throws InterruptedException
+    public void waitUntilFinished() throws Exception
     {
         if(jobs.isEmpty())
             return;
+        Exception errorCopy = null;
         synchronized(finished)
         {
             finished.wait();
+            if(error != null)
+            {
+                errorCopy = error;
+                error = null;
+            }
         }
+        if(errorCopy != null)
+            throw errorCopy;
+        return;
     }
     @Override
     public void run()
@@ -88,6 +100,7 @@ public class Downloader extends Thread
                 
                 DownloadJob job = jobs.remove(0);
                 System.out.println("Running job: " + job);
+                frame.setStatus(job.toString());
                 job.run();
             }
             catch(InterruptedException ie)
@@ -97,6 +110,7 @@ public class Downloader extends Thread
             {
                 DownloaderUtils.errorGUI("Error in executing download jobs", e, false);
                 jobs.clear();
+                error = e;
             }
         }
     }
@@ -117,21 +131,27 @@ public class Downloader extends Thread
             {
                 try
                 {
+                    frame.setStatus("Initializing");
                     currentThread.pause();
                     chapter.init();
                     currentThread.pause();
 
                     currentThread.waitUntilFinished();
 
+                    frame.setStatus("Downloading");
                     currentThread.pause();
                     chapter.download(directory);
                     currentThread.pause();
 
                     currentThread.waitUntilFinished();
+
+                    frame.setStatus("Finished");
                 }
                 catch(Exception e)
                 {
                     DownloaderUtils.errorGUI("Error in spawning download jobs", e, false);
+
+                    frame.setStatus("Error");
                 }
             }
         };
@@ -144,7 +164,7 @@ public class Downloader extends Thread
         currentThread = new Downloader();
         currentThread.start();
 
-        TempDownloaderFrame frame = new TempDownloaderFrame();
+        frame = new TempDownloaderFrame();
         frame.setVisible(true);
 
         //ActibookChapter chapter = new ActibookChapter(new URL("http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html"));
