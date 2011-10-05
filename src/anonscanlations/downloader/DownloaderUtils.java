@@ -131,4 +131,21 @@ public class DownloaderUtils
         String saveTitle = SB.toString().replace(' ', '_').replaceAll(BAD_CHARS, "");
         return(new File(directory, saveTitle));
     }
+
+    public static void browse(java.net.URL url)
+    {
+        java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+
+        if(desktop.isSupported(java.awt.Desktop.Action.BROWSE))
+        {
+            try
+            {
+                desktop.browse(url.toURI());
+            }
+            catch(Exception e)
+            {
+                DownloaderUtils.errorGUI("couldn't browse to page: " + url, e, false);
+            }
+        }
+    }
 }

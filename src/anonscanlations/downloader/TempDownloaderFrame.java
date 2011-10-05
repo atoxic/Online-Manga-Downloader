@@ -14,9 +14,14 @@ import anonscanlations.downloader.chapter.*;
  */
 public class TempDownloaderFrame extends javax.swing.JFrame {
 
+    private ExamplesFrame examples;
+
     /** Creates new form TempDownloaderFrame */
     public TempDownloaderFrame() {
         initComponents();
+
+        // lazy init
+        examples = null;
 
         PreferencesManager.registerWindow("OMD0.1.0_tempdlframe", this, false);
     }
@@ -59,6 +64,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         exitButton = new javax.swing.JButton();
         viewerURLField = new javax.swing.JTextField();
         statusBar = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Online Manga Downloader 0.1.0");
@@ -210,6 +216,13 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Examples");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -232,7 +245,9 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                             .addComponent(viewerURLField, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(downloadButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 364, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(exitButton)))
                 .addContainerGap())
         );
@@ -253,7 +268,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(downloadButton)
-                    .addComponent(exitButton))
+                    .addComponent(exitButton)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -356,6 +372,14 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_statusBarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(examples == null)
+        {
+            examples = new ExamplesFrame();
+        }
+        examples.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -375,6 +399,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JTextField downloadDirectoryField;
     private javax.swing.JTextField emailField;
     private javax.swing.JButton exitButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
