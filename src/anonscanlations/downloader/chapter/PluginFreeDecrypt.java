@@ -52,9 +52,6 @@ public class PluginFreeDecrypt
 
     public static String expand(String _src, int _key)
     {
-        DownloaderUtils.debug("expand src: " + _src);
-        DownloaderUtils.debug("expand key: " + _key);
-
         int i, j, _cs, _cd, _bis, _bit, _cbt, _ss, _pn;
         String _pst, _ks;
         String[] _tbl = new String[4096];
