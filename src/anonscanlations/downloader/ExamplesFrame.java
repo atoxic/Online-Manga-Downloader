@@ -112,12 +112,15 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTextField1.setEditable(false);
         jTextField1.setText("http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html");
+        jTextField1.setCaretPosition(0);
 
         jTextField2.setEditable(false);
         jTextField2.setText("http://comic.mag-garden.co.jp/assets/files/blade_sengokuyoko01/_SWF_Window.html");
+        jTextField2.setCaretPosition(0);
 
         jTextField3.setEditable(false);
         jTextField3.setText("http://www.kadokawa.co.jp/tachiyomi/comic/201003000250/_SWF_Window.html?mode=1062");
+        jTextField3.setCaretPosition(0);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -160,7 +163,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(Chapters.ACTIBOOK.getName(), Actibook);
@@ -185,6 +188,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTextField4.setEditable(false);
         jTextField4.setText("http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/");
+        jTextField4.setCaretPosition(0);
 
         jTextField5.setEditable(false);
         jTextField5.setText("http://club.shogakukan.co.jp/dor/pcviewer_main.php?key1=SHWM&key2=azumatakes_001&key3=choudokyuu_001&key4=0001-0&sp=-1&re=0&shd=e255451bc193d8388067ad31e2923665c88efc5d&otk=4a8acbcf319841d0d23bdcd9f25dfcc937172cd4");
@@ -192,6 +196,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTextField6.setEditable(false);
         jTextField6.setText("http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/");
+        jTextField6.setCaretPosition(0);
 
         jLabel1.setText("If I want to download the first chapter (\"scene #1\") of this manga:");
 
@@ -261,7 +266,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(Chapters.CLUBSUNDAY.getName(), ClubSunday);
@@ -270,9 +275,11 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTextField7.setEditable(false);
         jTextField7.setText("http://voyager-store.com/index.php?main_page=addon&module=ebooks/open_image_crochet&ebooks_id=17657&products_id=11956");
+        jTextField7.setCaretPosition(0);
 
         jTextField8.setEditable(false);
         jTextField8.setText("http://comic.bitway.ne.jp/kc/comic_tameshiyomi.html?isbn=9784063723953");
+        jTextField8.setCaretPosition(0);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -328,7 +335,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(Chapters.CROCHETTIME.getName(), Crochet);
@@ -337,6 +344,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTextField9.setEditable(false);
         jTextField9.setText("http://mangaonweb.com/viewer.do?ctsn=31811");
+        jTextField9.setCaretPosition(0);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -374,7 +382,6 @@ public class ExamplesFrame extends javax.swing.JFrame {
         MangaOnWeb.setLayout(MangaOnWebLayout);
         MangaOnWebLayout.setHorizontalGroup(
             MangaOnWebLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 733, Short.MAX_VALUE)
             .addGroup(MangaOnWebLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(MangaOnWebLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,7 +396,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(Chapters.MANGAONWEB.getName(), MangaOnWeb);
@@ -398,11 +405,13 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTextField10.setEditable(false);
         jTextField10.setText("http://seiga.nicovideo.jp/watch/mg10942");
+        jTextField10.setCaretPosition(0);
 
         jLabel5.setText("E-Mail");
 
         jTextField11.setEditable(false);
         jTextField11.setText("yournicoemail@lol.com");
+        jTextField11.setCaretPosition(0);
         jTextField11.setPreferredSize(new java.awt.Dimension(120, 20));
 
         jLabel6.setText("Password");
@@ -462,8 +471,6 @@ public class ExamplesFrame extends javax.swing.JFrame {
         Nico.setLayout(NicoLayout);
         NicoLayout.setHorizontalGroup(
             NicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 733, Short.MAX_VALUE)
-            .addGap(0, 733, Short.MAX_VALUE)
             .addGroup(NicoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(NicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -478,12 +485,12 @@ public class ExamplesFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(Chapters.NICONICO.getName(), Nico);
 
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Examples"));
 
         jTextField12.setEditable(false);
         jTextField12.setText("http://view.books.yahoo.co.jp/dor/drm/dor_main.php?key1=blood-mikotoka01-0001&sp=-1&ad=1&re=0&xmlurl=http://stream01.books.yahoo.co.jp:8001/&shd=62862185b216b95c956c6c06b2af2e9b2a2aeb88");
@@ -491,6 +498,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTextField13.setEditable(false);
         jTextField13.setText("http://ct.eb-webcomic.com/dor/pcviewer_main.php?key1=EB&key2=umetanitig_001&key3=evahsebunt_001&key4=0001-0&sp=-1&ad=1&re=1&otp=1&xmlurl=http://ct.eb-webcomic.com/stream/&shd=1ccefd53ebe69ff204c60dba9ade4b6334282e61");
+        jTextField13.setCaretPosition(0);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -532,8 +540,6 @@ public class ExamplesFrame extends javax.swing.JFrame {
         PCViewer.setLayout(PCViewerLayout);
         PCViewerLayout.setHorizontalGroup(
             PCViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 733, Short.MAX_VALUE)
-            .addGap(0, 733, Short.MAX_VALUE)
             .addGroup(PCViewerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PCViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -548,18 +554,20 @@ public class ExamplesFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(Chapters.PCVIEWER.getName(), PCViewer);
 
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Examples"));
 
         jTextField14.setEditable(false);
         jTextField14.setText("http://futabasha.pluginfree.com/weblish/futabawebhigh/fsp/Oniichan_001/index.shtml?Mdn=1&rep=1");
+        jTextField14.setCaretPosition(0);
 
         jTextField15.setEditable(false);
         jTextField15.setText("http://ebook.comic-gekkin.com/weblish/gekkin/hanasakuiroha_001/index.shtml?rep=1");
+        jTextField15.setCaretPosition(0);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -602,8 +610,6 @@ public class ExamplesFrame extends javax.swing.JFrame {
         PluginFreeLayout.setHorizontalGroup(
             PluginFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 733, Short.MAX_VALUE)
-            .addGap(0, 733, Short.MAX_VALUE)
-            .addGap(0, 733, Short.MAX_VALUE)
             .addGroup(PluginFreeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PluginFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -613,13 +619,12 @@ public class ExamplesFrame extends javax.swing.JFrame {
         );
         PluginFreeLayout.setVerticalGroup(
             PluginFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 209, Short.MAX_VALUE)
             .addGroup(PluginFreeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(Chapters.PLUGINFREE.getName(), PluginFree);
@@ -633,7 +638,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
