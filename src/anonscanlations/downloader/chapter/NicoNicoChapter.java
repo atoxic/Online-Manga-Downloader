@@ -78,7 +78,6 @@ public class NicoNicoChapter extends Chapter
                     if(headerName.equals("Set-Cookie") && !conn.getHeaderField(i).contains("deleted"))
                     {
                         NicoNicoChapter.this.cookies = conn.getHeaderField(i);
-                        //DownloaderUtils.debug("cookies: " + NicoNicoChapter.this.cookies);
                     }
                 }
             }
@@ -145,7 +144,6 @@ public class NicoNicoChapter extends Chapter
 
     public void download(File directory) throws Exception
     {
-        //*
         int i = 1;
         for(NicoImage image : images.values())
         {
@@ -163,6 +161,5 @@ public class NicoNicoChapter extends Chapter
             
             i++;
         }
-        // */
     }
 }
