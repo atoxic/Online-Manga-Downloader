@@ -23,7 +23,7 @@ public class NicoNicoChapter extends Chapter
 
     private transient String username, cookies, title, id;
     private transient char[] password;
-    private transient ArrayList<String> ids;
+    private transient HashMap<String, NicoImage> images;
     public NicoNicoChapter(URL _url, String _username, char[] _password)
     {
         url = _url;
@@ -31,6 +31,25 @@ public class NicoNicoChapter extends Chapter
         password = _password;
         cookies = null;
         title = null;
+    }
+
+    private class NicoImage
+    {
+        private String id, se_path;
+        private ArrayList<String> comments, user_hashes;
+        NicoImage(String _id)
+        {
+            id = _id;
+            se_path = null;
+            comments = new ArrayList<String>();
+            user_hashes = new ArrayList<String>();
+        }
+        public void setSEPath(String _se_path){ se_path = _se_path; }
+        public void addComment(String comment, String hash)
+        {
+            comments.add(comment);
+            user_hashes.add(hash);
+        }
     }
 
     public void init() throws Exception
@@ -86,24 +105,7 @@ public class NicoNicoChapter extends Chapter
             {
                 this.cookies = NicoNicoChapter.this.cookies;
                 super.run();
-
-                ids = new ArrayList<String>();
-                
-                // Should use SAX for this
-                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder builder = factory.newDocumentBuilder();
-                InputSource is = new InputSource(new StringReader(page));
-                Document d = builder.parse(is);
-                Element doc = d.getDocumentElement();
-                NodeList idElements = doc.getElementsByTagName("id");
-                for(int i = 0; i < idElements.getLength(); i++)
-                {
-                    Element idElement = (Element)idElements.item(i);
-                    if(((Element)idElement.getParentNode()).getNodeName().equals("image"))
-                    {
-                        ids.add(idElement.getTextContent());
-                    }
-                }
+                parseData(page);
             }
         };
         Downloader.getDownloader().addJob(login);
@@ -111,16 +113,56 @@ public class NicoNicoChapter extends Chapter
         Downloader.getDownloader().addJob(data);
     }
 
+    private void parseData(String page) throws Exception
+    {
+        images = new HashMap<String, NicoImage>();
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        InputSource is = new InputSource(new StringReader(page));
+        Document d = builder.parse(is);
+        Element doc = d.getDocumentElement();
+
+        Element imageList = (Element)doc.getElementsByTagName("image_list").item(0);
+        NodeList imageElements = imageList.getChildNodes();
+        for(int i = 0; i < imageElements.getLength(); i++)
+        {
+            Node n = imageElements.item(i);
+            if(!(n instanceof Element))
+                continue;
+            Element image = (Element)n;
+            Element image_id = (Element)image.getElementsByTagName("id").item(0);
+            NicoImage nicoImage = new NicoImage(image_id.getTextContent());
+            images.put(nicoImage.id, nicoImage);
+
+            NodeList se_path = image.getElementsByTagName("se_path");
+            if(se_path.getLength() > 0)
+            {
+                nicoImage.setSEPath(((Element)se_path.item(0)).getTextContent());
+            }
+        }
+    }
+
     public void download(File directory) throws Exception
     {
+        //*
         int i = 1;
-        for(String id : ids)
+        for(NicoImage image : images.values())
         {
             FileDownloadJob page = new FileDownloadJob("Page " + i,
-                            new URL("http://lohas.nicoseiga.jp/thumb/" + id + "l?"),
+                            new URL("http://lohas.nicoseiga.jp/thumb/" + image.id + "l?"),
                             DownloaderUtils.fileName(directory, title, i, "jpg"));
             Downloader.getDownloader().addJob(page);
+            if(image.se_path != null)
+            {
+                FileDownloadJob sfx = new FileDownloadJob("Page " + i + " SFX",
+                            new URL("http://lohas.nicoseiga.jp/" + image.se_path),
+                            DownloaderUtils.fileName(directory, title, i, "mp3"));
+                Downloader.getDownloader().addJob(sfx);
+            }
+            
             i++;
         }
+        // */
     }
 }

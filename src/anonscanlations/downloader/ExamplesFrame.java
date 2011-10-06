@@ -39,14 +39,14 @@ public class ExamplesFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        Actibook = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
         jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
+        ClubSunday = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jEditorPane2 = new javax.swing.JEditorPane();
         jPanel4 = new javax.swing.JPanel();
@@ -57,12 +57,44 @@ public class ExamplesFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        Crochet = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jTextField7 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jEditorPane3 = new javax.swing.JEditorPane();
+        MangaOnWeb = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jTextField9 = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jEditorPane4 = new javax.swing.JEditorPane();
+        Nico = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jTextField10 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField11 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jEditorPane5 = new javax.swing.JEditorPane();
+        PCViewer = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jTextField12 = new javax.swing.JTextField();
+        jTextField13 = new javax.swing.JTextField();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jEditorPane6 = new javax.swing.JEditorPane();
+        PluginFree = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jTextField14 = new javax.swing.JTextField();
+        jTextField15 = new javax.swing.JTextField();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jEditorPane7 = new javax.swing.JEditorPane();
 
         setTitle("Examples and Usage");
 
         jScrollPane1.setBorder(null);
 
-        jEditorPane1.setBackground(jPanel1.getBackground());
+        jEditorPane1.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
         jEditorPane1.setBorder(null);
         jEditorPane1.setContentType("text/html");
         jEditorPane1.setEditable(false);
@@ -79,13 +111,13 @@ public class ExamplesFrame extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Examples"));
 
         jTextField1.setEditable(false);
-        jTextField1.setText("www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html");
+        jTextField1.setText("http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html");
 
         jTextField2.setEditable(false);
-        jTextField2.setText("comic.mag-garden.co.jp/assets/files/blade_sengokuyoko01/_SWF_Window.html");
+        jTextField2.setText("http://comic.mag-garden.co.jp/assets/files/blade_sengokuyoko01/_SWF_Window.html");
 
         jTextField3.setEditable(false);
-        jTextField3.setText("www.kadokawa.co.jp/tachiyomi/comic/201003000250/_SWF_Window.html?mode=1062");
+        jTextField3.setText("http://www.kadokawa.co.jp/tachiyomi/comic/201003000250/_SWF_Window.html?mode=1062");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -110,32 +142,32 @@ public class ExamplesFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout ActibookLayout = new javax.swing.GroupLayout(Actibook);
+        Actibook.setLayout(ActibookLayout);
+        ActibookLayout.setHorizontalGroup(
+            ActibookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ActibookLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(ActibookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        ActibookLayout.setVerticalGroup(
+            ActibookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ActibookLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab(Chapters.ACTIBOOK.getName(), jPanel1);
+        jTabbedPane1.addTab(Chapters.ACTIBOOK.getName(), Actibook);
 
         jScrollPane2.setBorder(null);
 
-        jEditorPane2.setBackground(jPanel1.getBackground());
+        jEditorPane2.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
         jEditorPane2.setBorder(null);
         jEditorPane2.setContentType("text/html");
         jEditorPane2.setEditable(false);
@@ -152,13 +184,14 @@ public class ExamplesFrame extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
 
         jTextField4.setEditable(false);
-        jTextField4.setText("club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/");
+        jTextField4.setText("http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/");
 
         jTextField5.setEditable(false);
-        jTextField5.setText("club.shogakukan.co.jp/dor/pcviewer_main.php?key1=SHWM&key2=azumatakes_001&key3=choudokyuu_001&key4=0001-0&sp=-1&re=0&shd=e255451bc193d8388067ad31e2923665c88efc5d&otk=4a8acbcf319841d0d23bdcd9f25dfcc937172cd4");
+        jTextField5.setText("http://club.shogakukan.co.jp/dor/pcviewer_main.php?key1=SHWM&key2=azumatakes_001&key3=choudokyuu_001&key4=0001-0&sp=-1&re=0&shd=e255451bc193d8388067ad31e2923665c88efc5d&otk=4a8acbcf319841d0d23bdcd9f25dfcc937172cd4");
+        jTextField5.setCaretPosition(0);
 
         jTextField6.setEditable(false);
-        jTextField6.setText("club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/");
+        jTextField6.setText("http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/");
 
         jLabel1.setText("If I want to download the first chapter (\"scene #1\") of this manga:");
 
@@ -210,28 +243,386 @@ public class ExamplesFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout ClubSundayLayout = new javax.swing.GroupLayout(ClubSunday);
+        ClubSunday.setLayout(ClubSundayLayout);
+        ClubSundayLayout.setHorizontalGroup(
+            ClubSundayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ClubSundayLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(ClubSundayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        ClubSundayLayout.setVerticalGroup(
+            ClubSundayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ClubSundayLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab(Chapters.CLUBSUNDAY.getName(), ClubSunday);
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Examples"));
+
+        jTextField7.setEditable(false);
+        jTextField7.setText("http://voyager-store.com/index.php?main_page=addon&module=ebooks/open_image_crochet&ebooks_id=17657&products_id=11956");
+
+        jTextField8.setEditable(false);
+        jTextField8.setText("http://comic.bitway.ne.jp/kc/comic_tameshiyomi.html?isbn=9784063723953");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+                    .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab(Chapters.CLUBSUNDAY.getName(), jPanel3);
+        jScrollPane3.setBorder(null);
+
+        jEditorPane3.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane3.setBorder(null);
+        jEditorPane3.setContentType("text/html");
+        jEditorPane3.setEditable(false);
+        jEditorPane3.setFont(jEditorPane3.getFont());
+        jEditorPane3.setText("<html>Viewer used on sites such the <a href=\"http://voyager-store.com/\">Voyager Store</a> and <a href=\"http://kc.kodansha.co.jp/\">Kodansha's comic site</a> that uses a separate browser plugin.  Currently, it's not programmatically possible to decode some information necessary to download the files, so only the Voyager Store and Kodansha are supported.  Due to the Voyager Store's lack of authentication, this downloader can and will download every page in the product as if you bought it if you give it the \"try\" link.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane3.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane3.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                hyperlink(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jEditorPane3);
+
+        javax.swing.GroupLayout CrochetLayout = new javax.swing.GroupLayout(Crochet);
+        Crochet.setLayout(CrochetLayout);
+        CrochetLayout.setHorizontalGroup(
+            CrochetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrochetLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CrochetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        CrochetLayout.setVerticalGroup(
+            CrochetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrochetLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(67, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab(Chapters.CROCHETTIME.getName(), Crochet);
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+
+        jTextField9.setEditable(false);
+        jTextField9.setText("http://mangaonweb.com/viewer.do?ctsn=31811");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jScrollPane4.setBorder(null);
+
+        jEditorPane4.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane4.setBorder(null);
+        jEditorPane4.setContentType("text/html");
+        jEditorPane4.setEditable(false);
+        jEditorPane4.setFont(jEditorPane4.getFont());
+        jEditorPane4.setText("<html>Flash-based viewer used on <a href=\"http://mangaonweb.com/welcome.do\">MangaOnWeb</a>.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane4.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane4.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                hyperlink(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jEditorPane4);
+
+        javax.swing.GroupLayout MangaOnWebLayout = new javax.swing.GroupLayout(MangaOnWeb);
+        MangaOnWeb.setLayout(MangaOnWebLayout);
+        MangaOnWebLayout.setHorizontalGroup(
+            MangaOnWebLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 733, Short.MAX_VALUE)
+            .addGroup(MangaOnWebLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(MangaOnWebLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        MangaOnWebLayout.setVerticalGroup(
+            MangaOnWebLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MangaOnWebLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(118, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab(Chapters.MANGAONWEB.getName(), MangaOnWeb);
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+
+        jTextField10.setEditable(false);
+        jTextField10.setText("http://seiga.nicovideo.jp/watch/mg10942");
+
+        jLabel5.setText("E-Mail");
+
+        jTextField11.setEditable(false);
+        jTextField11.setText("yournicoemail@lol.com");
+        jTextField11.setPreferredSize(new java.awt.Dimension(120, 20));
+
+        jLabel6.setText("Password");
+
+        jPasswordField1.setEditable(false);
+        jPasswordField1.setText("hunter12");
+        jPasswordField1.setPreferredSize(new java.awt.Dimension(120, 20));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jScrollPane5.setBorder(null);
+
+        jEditorPane5.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane5.setBorder(null);
+        jEditorPane5.setContentType("text/html");
+        jEditorPane5.setEditable(false);
+        jEditorPane5.setFont(jEditorPane5.getFont());
+        jEditorPane5.setText("<html>Viewer on <a href=\"http://seiga.nicovideo.jp/manga/\">NicoNico's manga site</a>.  This viewer supports sounds and scrolling comments; however, the downloader will only download the images and sound effects.  Furthermore, downloading requires authentication, so a valid NicoNico login is necessary.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane5.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane5.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                hyperlink(evt);
+            }
+        });
+        jScrollPane5.setViewportView(jEditorPane5);
+
+        javax.swing.GroupLayout NicoLayout = new javax.swing.GroupLayout(Nico);
+        Nico.setLayout(NicoLayout);
+        NicoLayout.setHorizontalGroup(
+            NicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 733, Short.MAX_VALUE)
+            .addGap(0, 733, Short.MAX_VALUE)
+            .addGroup(NicoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(NicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        NicoLayout.setVerticalGroup(
+            NicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NicoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab(Chapters.NICONICO.getName(), Nico);
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+
+        jTextField12.setEditable(false);
+        jTextField12.setText("http://view.books.yahoo.co.jp/dor/drm/dor_main.php?key1=blood-mikotoka01-0001&sp=-1&ad=1&re=0&xmlurl=http://stream01.books.yahoo.co.jp:8001/&shd=62862185b216b95c956c6c06b2af2e9b2a2aeb88");
+        jTextField12.setCaretPosition(0);
+
+        jTextField13.setEditable(false);
+        jTextField13.setText("http://ct.eb-webcomic.com/dor/pcviewer_main.php?key1=EB&key2=umetanitig_001&key3=evahsebunt_001&key4=0001-0&sp=-1&ad=1&re=1&otp=1&xmlurl=http://ct.eb-webcomic.com/stream/&shd=1ccefd53ebe69ff204c60dba9ade4b6334282e61");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+                    .addComponent(jTextField13, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane6.setBorder(null);
+
+        jEditorPane6.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane6.setBorder(null);
+        jEditorPane6.setContentType("text/html");
+        jEditorPane6.setEditable(false);
+        jEditorPane6.setFont(jEditorPane6.getFont());
+        jEditorPane6.setText("<html>Flash-based viewer used on sites suched as <a href=\"http://comics.yahoo.co.jp\">Yahoo Comics</a> and <a href=\"http://www.famitsu.com/comic_clear/\">Famitsu Comic Clear (series that start with \"se_\")</a>.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane6.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane6.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                hyperlink(evt);
+            }
+        });
+        jScrollPane6.setViewportView(jEditorPane6);
+
+        javax.swing.GroupLayout PCViewerLayout = new javax.swing.GroupLayout(PCViewer);
+        PCViewer.setLayout(PCViewerLayout);
+        PCViewerLayout.setHorizontalGroup(
+            PCViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 733, Short.MAX_VALUE)
+            .addGap(0, 733, Short.MAX_VALUE)
+            .addGroup(PCViewerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PCViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        PCViewerLayout.setVerticalGroup(
+            PCViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PCViewerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab(Chapters.PCVIEWER.getName(), PCViewer);
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+
+        jTextField14.setEditable(false);
+        jTextField14.setText("http://futabasha.pluginfree.com/weblish/futabawebhigh/fsp/Oniichan_001/index.shtml?Mdn=1&rep=1");
+
+        jTextField15.setEditable(false);
+        jTextField15.setText("http://ebook.comic-gekkin.com/weblish/gekkin/hanasakuiroha_001/index.shtml?rep=1");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+                    .addComponent(jTextField15, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane7.setBorder(null);
+
+        jEditorPane7.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane7.setBorder(null);
+        jEditorPane7.setContentType("text/html");
+        jEditorPane7.setEditable(false);
+        jEditorPane7.setFont(jEditorPane7.getFont());
+        jEditorPane7.setText("<html>Javascript-based viewer used on sites suched as <a href=\"http://comichigh.jp/webcomic.html\">Comic High</a> and <a href=\"http://www.comic-gekkin.com\">Comic Gekkin</a>.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane7.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane7.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                hyperlink(evt);
+            }
+        });
+        jScrollPane7.setViewportView(jEditorPane7);
+
+        javax.swing.GroupLayout PluginFreeLayout = new javax.swing.GroupLayout(PluginFree);
+        PluginFree.setLayout(PluginFreeLayout);
+        PluginFreeLayout.setHorizontalGroup(
+            PluginFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 733, Short.MAX_VALUE)
+            .addGap(0, 733, Short.MAX_VALUE)
+            .addGap(0, 733, Short.MAX_VALUE)
+            .addGroup(PluginFreeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PluginFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        PluginFreeLayout.setVerticalGroup(
+            PluginFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 209, Short.MAX_VALUE)
+            .addGroup(PluginFreeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab(Chapters.PLUGINFREE.getName(), PluginFree);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -241,7 +632,9 @@ public class ExamplesFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -266,24 +659,56 @@ public class ExamplesFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Actibook;
+    private javax.swing.JPanel ClubSunday;
+    private javax.swing.JPanel Crochet;
+    private javax.swing.JPanel MangaOnWeb;
+    private javax.swing.JPanel Nico;
+    private javax.swing.JPanel PCViewer;
+    private javax.swing.JPanel PluginFree;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JEditorPane jEditorPane2;
+    private javax.swing.JEditorPane jEditorPane3;
+    private javax.swing.JEditorPane jEditorPane4;
+    private javax.swing.JEditorPane jEditorPane5;
+    private javax.swing.JEditorPane jEditorPane6;
+    private javax.swing.JEditorPane jEditorPane7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
+    private javax.swing.JTextField jTextField14;
+    private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }
