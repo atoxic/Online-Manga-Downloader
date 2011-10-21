@@ -34,20 +34,12 @@ public class SundayChapter extends Chapter
         keyURL = _keyURL;
         url = _url;
 
-        String urlString = url.toString();
-        key1 = getParam(urlString, "key1");
-        key2 = getParam(urlString, "key2");
-        key3 = getParam(urlString, "key3");
-        key4 = getParam(urlString, "key4");
-        shd = getParam(urlString, "shd");
-    }
-
-    private String getParam(String url, String param)
-    {
-        int index = url.indexOf(param + "="), endIndex = url.indexOf('&', index);
-        if(endIndex == -1)
-            endIndex = url.length();
-        return(url.substring(index + param.length() + 1, endIndex));
+        HashMap<String, String> params = DownloaderUtils.getQueryMap(url);
+        key1 = params.get("key1");
+        key2 = params.get("key2");
+        key3 = params.get("key3");
+        key4 = params.get("key4");
+        shd = params.get("shd");
     }
 
     public void init() throws Exception
@@ -56,9 +48,9 @@ public class SundayChapter extends Chapter
         MainFileDownloadJob mainFile = new MainFileDownloadJob();
         XMLDownloadJob xml = new XMLDownloadJob();
         
-        Downloader.getDownloader().addJob(session);
-        Downloader.getDownloader().addJob(mainFile);
-        Downloader.getDownloader().addJob(xml);
+        downloader().addJob(session);
+        downloader().addJob(mainFile);
+        downloader().addJob(xml);
     }
     
     public void download(File directory) throws Exception
@@ -87,7 +79,7 @@ public class SundayChapter extends Chapter
             url += "&h=" + hashedURL;
 
             PCViewerDownloadJob file = new PCViewerDownloadJob("Page " + i, new URL(url), DownloaderUtils.fileName(directory, key3 + "_c" + key4, i, "jpg"));
-            Downloader.getDownloader().addJob(file);
+            downloader().addJob(file);
         }
     }
 
@@ -224,10 +216,7 @@ public class SundayChapter extends Chapter
             if(page.equals("NG") || page.contains("pagecount=\"0\""))
                 throw new Exception("XML file NG");
             
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            InputSource is = new InputSource(new StringReader(page));
-            Document d = builder.parse(is);
+            Document d = DownloaderUtils.makeDocument(page);
             Element root = d.getDocumentElement();
 
             String serverTimestamp = ((Element)root.getElementsByTagName("ServerTimestamp").item(0))

@@ -24,21 +24,10 @@ public class PCViewerChapter extends Chapter implements Serializable
     public PCViewerChapter(URL _url)
     {
         url = _url;
-        params = new HashMap<String, String>();
+        params = DownloaderUtils.getQueryMap(url);
         rangeStart = rangeEnd = 0;
         title = "";
 
-        int index = url.toString().indexOf('?');
-        if(index != -1)
-        {
-            String paramString = url.toString().substring(index + 1);
-            StringTokenizer st1 = new StringTokenizer(paramString, "&");
-            while(st1.hasMoreTokens())
-            {
-                StringTokenizer st2 = new StringTokenizer(st1.nextToken(), "=");
-                params.put(st2.nextToken(), st2.nextToken());
-            }
-        }
         for(Map.Entry<String, String> entry : params.entrySet())
         {
             if(entry.getKey().startsWith("key"))
@@ -90,7 +79,7 @@ public class PCViewerChapter extends Chapter implements Serializable
                 DownloaderUtils.debug("rangeEnd: " + rangeEnd);
             }
         };
-        Downloader.getDownloader().addJob(xml);
+        downloader().addJob(xml);
     }
 
     public void download(File directory) throws Exception
@@ -103,7 +92,7 @@ public class PCViewerChapter extends Chapter implements Serializable
                         new URL(baseURL,
                             "content_dl.php?dtype=1&p=" + dataFolder + "&z=&x=0&re=0&ad=0&pre=&pno=" + i + "&" + getParams()),
                         DownloaderUtils.fileName(directory, title, i, "jpg"));
-            Downloader.getDownloader().addJob(job);
+            downloader().addJob(job);
         }
     }
 }

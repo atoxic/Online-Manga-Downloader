@@ -9,6 +9,10 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
+import org.w3c.dom.*;
+import org.xml.sax.*;
+import javax.xml.parsers.*;
+
 /**
  *
  * @author /a/non
@@ -147,5 +151,28 @@ public class DownloaderUtils
                 DownloaderUtils.errorGUI("couldn't browse to page: " + url, e, false);
             }
         }
+    }
+
+    public static HashMap<String, String> getQueryMap(java.net.URL url)
+    {
+        String[] params = url.getQuery().split("&");
+        HashMap<String, String> map = new HashMap<String, String>();
+        for(String param : params)
+        {
+            String name = param.split("=")[0];
+            String value = param.split("=")[1];
+            map.put(name, value);
+        }
+        return(map);
+    }
+
+    public static Document makeDocument(String page) throws Exception
+    {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        InputSource is = new InputSource(new StringReader(page));
+        Document d = builder.parse(is);
+
+        return(d);
     }
 }

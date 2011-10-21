@@ -5,8 +5,6 @@ import java.net.*;
 import java.util.*;
 
 import org.w3c.dom.*;
-import org.xml.sax.*;
-import javax.xml.parsers.*;
 
 import anonscanlations.downloader.*;
 
@@ -59,7 +57,7 @@ public class MangaOnWebChapter extends Chapter
                 crcod = param(page, "crcod");
             }
         };
-        Downloader.getDownloader().addJob(mainPage);
+        downloader().addJob(mainPage);
 
         PageDownloadJob xml = new PageDownloadJob("Get XML file", null, "UTF-8")
         {
@@ -73,10 +71,7 @@ public class MangaOnWebChapter extends Chapter
 
                 paths = new ArrayList<String>();
 
-                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder builder = factory.newDocumentBuilder();
-                InputSource is = new InputSource(new StringReader(page));
-                Document d = builder.parse(is);
+                Document d = DownloaderUtils.makeDocument(page);
                 Element doc = d.getDocumentElement();
 
                 NodeList pages = doc.getElementsByTagName("page");
@@ -87,7 +82,7 @@ public class MangaOnWebChapter extends Chapter
                 }
             }
         };
-        Downloader.getDownloader().addJob(xml);
+        downloader().addJob(xml);
     }
 
     public void download(File directory) throws Exception
@@ -114,7 +109,7 @@ public class MangaOnWebChapter extends Chapter
                     output.close();
                 }
             };
-            Downloader.getDownloader().addJob(page);
+            downloader().addJob(page);
         }
     }
 

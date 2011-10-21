@@ -57,7 +57,7 @@ public class PluginFreeChapter extends Chapter implements Serializable
                 DownloaderUtils.debug("hCN: " + hCN);
             }
         };
-        Downloader.getDownloader().addJob(index);
+        downloader().addJob(index);
 
         PageDownloadJob initVal = new PageDownloadJob("Get initVal page", new URL(url, "InitVal.html"), "Shift_JIS")
         {
@@ -106,7 +106,7 @@ public class PluginFreeChapter extends Chapter implements Serializable
                 downloadURL = new URL(new URL("http://" + url.getHost()), "cgi-bin/widget.cgi?a=" + hCN + title + "/" + title).toString();
             }
         };
-        Downloader.getDownloader().addJob(initVal);
+        downloader().addJob(initVal);
     }
 
     public void download(File directory) throws IOException
@@ -128,7 +128,7 @@ public class PluginFreeChapter extends Chapter implements Serializable
                 {
                     grid[x][y] = new ImageDownloadJob("Page " + i + " (" + x + ", " + y + ")",
                                     new URL(prefix + PluginFreeDecrypt.getIpntStr(sIS, i, zoomVal, x, y) + ".jpg"));
-                    Downloader.getDownloader().addJob(grid[x][y]);
+                    downloader().addJob(grid[x][y]);
                 }
             }
             DownloadJob combine = new DownloadJob("Combine page " + i)
@@ -149,7 +149,7 @@ public class PluginFreeChapter extends Chapter implements Serializable
                     ImageIO.write(complete, "JPEG", DownloaderUtils.fileName(finalDirectory, title, finalIndex, "jpg"));
                 }
             };
-            Downloader.getDownloader().addJob(combine);
+            downloader().addJob(combine);
         }
     }
 

@@ -157,17 +157,21 @@ public class Downloader extends Thread
         };
         t.start();
     }
+
+    public static void init() throws Exception
+    {
+        currentThread = new Downloader();
+        currentThread.start();
+        frame = new TempDownloaderFrame();
+    }
+
     public static void main(String[] args) throws Exception
     {
         System.setProperty("http.agent", "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.20) Gecko/20110803 Firefox/3.6.20");
 
-        currentThread = new Downloader();
-        currentThread.start();
+        init();
 
-        frame = new TempDownloaderFrame();
-        frame.setVisible(true);
-
-        //ActibookChapter chapter = new ActibookChapter(new URL("http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html"));
+        ActibookChapter chapter = new ActibookChapter(new URL("http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html"));
         /*
         SundayChapter chapter = new SundayChapter(new URL("http://club.shogakukan.co.jp/dor/pcviewer_main.php?key1=SHWM&key2=takahasiru_001&key3=konshuunos_001&key4=0230-0&sp=-1&re=0&shd=d1b53e031df96f4b93037c3f8c1513415ef9b09d&otk=0f694497ed762f6e7970fff9e2c69529906dc223&vo=1"),
                                                 new URL("http://club.shogakukan.co.jp/"));
@@ -185,6 +189,46 @@ public class Downloader extends Thread
         //MangaOnWebChapter chapter = new MangaOnWebChapter(new URL("http://mangaonweb.com/viewer.do?ctsn=31029"));
         //NicoNicoChapter chapter = new NicoNicoChapter(new URL("http://seiga.nicovideo.jp/watch/mg22888"), "someusername", "somepassword");
 
-        //runChapter(chapter, new File("D:\\test"));
+        //PocoChapter chapter = new PocoChapter(new URL("http://www.poco2.jp/viewer/play.php?partid=735b90b4568125ed6c3f678819b6e058"));
+
+        runChapter(chapter, new File("D:\\test"));
+        //System.exit(0);
+        //frame.setVisible(true);
     }
 }
+
+/*
+File f = new File("0000a11ce");
+FileInputStream fis = new FileInputStream(f);
+byte[] param1 = new byte[(int)f.length()];
+fis.read(param1);
+fis.close();
+java.security.MessageDigest md5 = java.security.MessageDigest.getInstance("MD5");
+
+long _loc_4 = 0;
+md5.reset();
+md5.update(("" + param1.length).getBytes());
+String _loc_2 = "";
+for(byte b : md5.digest())
+{
+    _loc_2 += String.format("%02x", b);
+}
+System.out.println("_loc_2: " + _loc_2);
+ArrayList<Integer> _loc_3 = new ArrayList<Integer>();
+while(_loc_4 < 8)
+{
+    _loc_3.add(Integer.parseInt(_loc_2.substring((int)(_loc_4 * 2), (int)(_loc_4 * 2) + 2), 16));
+    _loc_4 = _loc_4 + 1;
+}
+int _loc_5 = _loc_3.size();
+_loc_4 = 0;
+while(_loc_4 < param1.length)
+{
+    param1[(int)_loc_4] = (byte)(param1[(int)_loc_4] ^ _loc_3.get((int)(_loc_4 % _loc_5)));
+    _loc_4 = _loc_4 + 1;
+}
+
+FileOutputStream fos = new FileOutputStream("output2.jpg");
+fos.write(param1);
+fos.close();
+// */

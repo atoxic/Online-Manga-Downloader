@@ -388,8 +388,8 @@ public class CrochetTimeChapter extends Chapter
                 temp.delete();
             }
         };
-        Downloader.getDownloader().addJob(mainPage);
-        Downloader.getDownloader().addJob(getList);
+        downloader().addJob(mainPage);
+        downloader().addJob(getList);
     }
 
     public void download(File directory) throws Exception
@@ -440,7 +440,7 @@ public class CrochetTimeChapter extends Chapter
                 }
             };
 
-            Downloader.getDownloader().addJob(page);
+            downloader().addJob(page);
         }
     }
 }

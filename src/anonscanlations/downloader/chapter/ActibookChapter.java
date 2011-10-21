@@ -26,12 +26,8 @@ public class ActibookChapter extends Chapter implements Serializable
     private static final int DOKI_GRID_W = 400, DOKI_GRID_H = 400;
 
     private URL url;
-    private String zoom, title;
+    private String zoom, title, type;
     private int start, total, w, h;
-
-    public ActibookChapter()
-    {
-    }
 
     public ActibookChapter(URL myURL)
     {
@@ -80,10 +76,7 @@ public class ActibookChapter extends Chapter implements Serializable
             {
                 super.run();
 
-                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder builder = factory.newDocumentBuilder();
-                InputSource is = new InputSource(new StringReader(page));
-                Document d = builder.parse(is);
+                Document d = DownloaderUtils.makeDocument(page);
                 Element doc = d.getDocumentElement();
 
                 // get start and total
@@ -97,6 +90,11 @@ public class ActibookChapter extends Chapter implements Serializable
                     throw new Exception("No name");
                 title = nameContents.getNodeValue();
 
+                Node typeContents = getNode(doc, "to_type");
+                if(nameContents == null)
+                    throw new Exception("No type");
+                type = typeContents.getNodeValue();
+
                 w = getIntContents(doc, "w");
                 h = getIntContents(doc, "h");
                 // no error checking here
@@ -109,10 +107,7 @@ public class ActibookChapter extends Chapter implements Serializable
             {
                 super.run();
 
-                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder builder = factory.newDocumentBuilder();
-                InputSource is = new InputSource(new StringReader(page));
-                Document d = builder.parse(is);
+                Document d = DownloaderUtils.makeDocument(page);
                 Element doc = d.getDocumentElement();
 
                 Node zoomsContents = getNode(doc, "zoom_s");
@@ -124,14 +119,14 @@ public class ActibookChapter extends Chapter implements Serializable
                 zoom = zooms[zooms.length - 1];
             }
         };
-        Downloader.getDownloader().addJob(bookXML);
-        Downloader.getDownloader().addJob(viewerXML);
+        downloader().addJob(bookXML);
+        downloader().addJob(viewerXML);
     }
 
     public void download(File directory) throws Exception
     {
         final File finalDirectory = directory;
-        if(url.toString().contains("dokidokivisual"))
+        if(type.equals("normal"))
         {
             if(w == -1 || h == -1)
                 throw new Exception("No dimensions");
@@ -148,7 +143,7 @@ public class ActibookChapter extends Chapter implements Serializable
                     {
                         grid[x][y] = new ImageDownloadJob("Page " + i + " (" + x + ", " + y + ")",
                                         new URL(url, "books/images/" + zoom + "/g_" + i + "/x" + (x + 1) + "y" + (y + 1) + ".jpg"));
-                        Downloader.getDownloader().addJob(grid[x][y]);
+                        downloader().addJob(grid[x][y]);
                     }
                 }
                 DownloadJob combine = new DownloadJob("Combine page " + i)
@@ -170,17 +165,21 @@ public class ActibookChapter extends Chapter implements Serializable
                         ImageIO.write(complete, "JPEG", DownloaderUtils.fileName(finalDirectory, title, finalIndex, "jpg"));
                     }
                 };
-                Downloader.getDownloader().addJob(combine);
+                downloader().addJob(combine);
             }
         }
-        else
+        else if(type.equals("rich"))
         {
             for(int i = start; i < start + total; i++)
             {
                 FileDownloadJob page = new FileDownloadJob("Page " + i, new URL(url, "books/images/" + zoom + "/" + i + ".jpg"),
                                                                         DownloaderUtils.fileName(directory, title, i, "jpg"));
-                Downloader.getDownloader().addJob(page);
+                downloader().addJob(page);
             }
+        }
+        else
+        {
+            throw new Exception("This type of Actibook is unknown: \"" + type + ".\"  Please report this bug.");
         }
     }
 }

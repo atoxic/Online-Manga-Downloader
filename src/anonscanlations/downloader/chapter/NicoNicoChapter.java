@@ -6,8 +6,6 @@ import java.util.regex.*;
 import java.net.*;
 
 import org.w3c.dom.*;
-import org.xml.sax.*;
-import javax.xml.parsers.*;
 
 import anonscanlations.downloader.*;
 
@@ -107,19 +105,16 @@ public class NicoNicoChapter extends Chapter
                 parseData(page);
             }
         };
-        Downloader.getDownloader().addJob(login);
-        Downloader.getDownloader().addJob(info);
-        Downloader.getDownloader().addJob(data);
+        downloader().addJob(login);
+        downloader().addJob(info);
+        downloader().addJob(data);
     }
 
     private void parseData(String page) throws Exception
     {
         images = new HashMap<String, NicoImage>();
 
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        InputSource is = new InputSource(new StringReader(page));
-        Document d = builder.parse(is);
+        Document d = DownloaderUtils.makeDocument(page);
         Element doc = d.getDocumentElement();
 
         Element imageList = (Element)doc.getElementsByTagName("image_list").item(0);
@@ -150,13 +145,13 @@ public class NicoNicoChapter extends Chapter
             FileDownloadJob page = new FileDownloadJob("Page " + i,
                             new URL("http://lohas.nicoseiga.jp/thumb/" + image.id + "l?"),
                             DownloaderUtils.fileName(directory, title, i, "jpg"));
-            Downloader.getDownloader().addJob(page);
+            downloader().addJob(page);
             if(image.se_path != null)
             {
                 FileDownloadJob sfx = new FileDownloadJob("Page " + i + " SFX",
                             new URL("http://lohas.nicoseiga.jp/" + image.se_path),
                             DownloaderUtils.fileName(directory, title, i, "mp3"));
-                Downloader.getDownloader().addJob(sfx);
+                downloader().addJob(sfx);
             }
             
             i++;
