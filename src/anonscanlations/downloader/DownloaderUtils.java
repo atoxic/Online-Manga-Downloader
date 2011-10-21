@@ -175,4 +175,14 @@ public class DownloaderUtils
 
         return(d);
     }
+
+    public static Node getNodeText(Element doc, String tagName)
+    {
+        NodeList list = doc.getElementsByTagName(tagName);
+        if(list.getLength() < 1)
+            return(null);
+        Node element = list.item(0);
+        Node contents = element.getFirstChild();
+        return(contents);
+    }
 }

@@ -61,6 +61,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
         jRadioButton7 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
         downloadButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         viewerURLField = new javax.swing.JTextField();
@@ -140,6 +141,10 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jRadioButton7.setText(Chapters.POCO.getName());
         jRadioButton7.setActionCommand("POCO");
 
+        radioButtonGroup.add(jRadioButton4);
+        jRadioButton4.setText(Chapters.NICONICO2.getName());
+        jRadioButton4.setActionCommand("NICONICO2");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -148,14 +153,15 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(clubSundayRadioButton)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(clubSundayKeyURL, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE))
+                    .addComponent(jRadioButton2)
                     .addComponent(jRadioButton3)
+                    .addComponent(jRadioButton4)
                     .addComponent(jRadioButton5)
                     .addComponent(jRadioButton6)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -185,6 +191,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nicoRadioButton)
                     .addComponent(jLabel4)
@@ -196,7 +204,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton7))
+                .addComponent(jRadioButton7)
+                .addContainerGap())
         );
 
         downloadButton.setText("Download");
@@ -269,8 +278,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                     .addComponent(viewerURLField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(downloadButton)
                     .addComponent(jButton1)
@@ -331,6 +340,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             case PCVIEWER:      chapter = new PCViewerChapter(viewerURL);       break;
             case PLUGINFREE:    chapter = new PluginFreeChapter(viewerURL);     break;
             case POCO:          chapter = new PocoChapter(viewerURL);           break;
+            case NICONICO2:     chapter = new NicoNicoChapter2(viewerURL);      break;
             case CLUBSUNDAY:
             {
                 URL keyURL;
@@ -415,6 +425,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;

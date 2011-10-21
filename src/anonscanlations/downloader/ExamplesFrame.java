@@ -68,6 +68,12 @@ public class ExamplesFrame extends javax.swing.JFrame {
         jTextField9 = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         jEditorPane4 = new javax.swing.JEditorPane();
+        Nico2 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        jTextField18 = new javax.swing.JTextField();
+        jTextField19 = new javax.swing.JTextField();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jEditorPane9 = new javax.swing.JEditorPane();
         Nico = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jTextField10 = new javax.swing.JTextField();
@@ -398,6 +404,73 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab(Chapters.MANGAONWEB.getName(), MangaOnWeb);
 
+        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+
+        jTextField18.setEditable(false);
+        jTextField18.setText("http://seiga.nicovideo.jp/nanoace/watch/5001");
+
+        jTextField19.setEditable(false);
+        jTextField19.setText("http://seiga.nicovideo.jp/sdandgo/watch/7001");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField18, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+                    .addComponent(jTextField19, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane9.setBorder(null);
+
+        jEditorPane9.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane9.setBorder(null);
+        jEditorPane9.setContentType("text/html");
+        jEditorPane9.setEditable(false);
+        jEditorPane9.setFont(jEditorPane9.getFont());
+        jEditorPane9.setText("<html>Viewer used for tie-ins with official magazines such as <a href=\"http://info.nicovideo.jp/seiga/nanoace/\">Nano Ace (from Oct 3, 2011 to Nov 7)</a> and the now-defunct <a href=\"http://info.nicovideo.jp/seiga/sdandgo/\">SDMP (from Oct 21, 2011 to Nov 18)</a>.  The examples below may have expired.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane9.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane9.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                hyperlink(evt);
+            }
+        });
+        jScrollPane9.setViewportView(jEditorPane9);
+
+        javax.swing.GroupLayout Nico2Layout = new javax.swing.GroupLayout(Nico2);
+        Nico2.setLayout(Nico2Layout);
+        Nico2Layout.setHorizontalGroup(
+            Nico2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Nico2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Nico2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        Nico2Layout.setVerticalGroup(
+            Nico2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Nico2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab(Chapters.NICONICO2.getName(), Nico2);
+
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
 
         jTextField10.setEditable(false);
@@ -453,7 +526,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
         jEditorPane5.setContentType("text/html");
         jEditorPane5.setEditable(false);
         jEditorPane5.setFont(jEditorPane5.getFont());
-        jEditorPane5.setText("<html>Viewer on <a href=\"http://seiga.nicovideo.jp/manga/\">NicoNico's manga site</a>.  This viewer supports sounds and scrolling comments; however, the downloader will only download the images and sound effects.  Furthermore, downloading requires authentication, so a valid NicoNico login is necessary.</html>");
+        jEditorPane5.setText("<html>Viewer on <a href=\"http://seiga.nicovideo.jp/manga/\">NicoNico's site for user-published manga</a>.  This viewer supports sounds and scrolling comments; however, the downloader will only download the images and sound effects.  Furthermore, downloading requires authentication, so a valid NicoNico login is necessary.</html>");
         ((javax.swing.text.html.HTMLDocument)jEditorPane5.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane5.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
@@ -726,6 +799,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
     private javax.swing.JPanel Crochet;
     private javax.swing.JPanel MangaOnWeb;
     private javax.swing.JPanel Nico;
+    private javax.swing.JPanel Nico2;
     private javax.swing.JPanel PCViewer;
     private javax.swing.JPanel PluginFree;
     private javax.swing.JPanel Poco;
@@ -737,6 +811,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
     private javax.swing.JEditorPane jEditorPane6;
     private javax.swing.JEditorPane jEditorPane7;
     private javax.swing.JEditorPane jEditorPane8;
+    private javax.swing.JEditorPane jEditorPane9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -745,6 +820,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
@@ -760,6 +836,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
@@ -770,6 +847,8 @@ public class ExamplesFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
+    private javax.swing.JTextField jTextField18;
+    private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;

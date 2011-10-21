@@ -12,8 +12,6 @@ import java.io.*;
 import java.net.*;
 
 import org.w3c.dom.*;
-import org.xml.sax.*;
-import javax.xml.parsers.*;
 
 import anonscanlations.downloader.*;
 
@@ -39,19 +37,9 @@ public class ActibookChapter extends Chapter implements Serializable
         h = 0;
     }
 
-    private static Node getNode(Element doc, String tagName)
-    {
-        NodeList list = doc.getElementsByTagName(tagName);
-        if(list.getLength() < 1)
-            return(null);
-        Node element = list.item(0);
-        Node contents = element.getFirstChild();
-        return(contents);
-    }
-
     private static int getIntContents(Element doc, String tagName)
     {
-        Node contents = getNode(doc, tagName);
+        Node contents = DownloaderUtils.getNodeText(doc, tagName);
         if(contents == null)
             return(-1);
 
@@ -85,13 +73,13 @@ public class ActibookChapter extends Chapter implements Serializable
                 if(start == -1 || total == -1)
                     throw new Exception("No page range");
 
-                Node nameContents = getNode(doc, "name");
+                Node nameContents = DownloaderUtils.getNodeText(doc, "name");
                 if(nameContents == null)
                     throw new Exception("No name");
                 title = nameContents.getNodeValue();
 
-                Node typeContents = getNode(doc, "to_type");
-                if(nameContents == null)
+                Node typeContents = DownloaderUtils.getNodeText(doc, "to_type");
+                if(typeContents == null)
                     throw new Exception("No type");
                 type = typeContents.getNodeValue();
 
@@ -110,7 +98,7 @@ public class ActibookChapter extends Chapter implements Serializable
                 Document d = DownloaderUtils.makeDocument(page);
                 Element doc = d.getDocumentElement();
 
-                Node zoomsContents = getNode(doc, "zoom_s");
+                Node zoomsContents = DownloaderUtils.getNodeText(doc, "zoom_s");
                 if(zoomsContents == null)
                     throw new Exception("No zoom element");
                 String[] zooms = zoomsContents.getNodeValue().split(",");
