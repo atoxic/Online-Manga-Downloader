@@ -17,7 +17,8 @@ public enum Chapters
     MANGAONWEB("Manga On Web"),
     NICONICO("NicoNico"),
     PCVIEWER("PCViewer/DOR"),
-    PLUGINFREE("PluginFree");
+    PLUGINFREE("PluginFree"),
+    POCO("Poco");
 
     private final String name;
     Chapters(String _name)

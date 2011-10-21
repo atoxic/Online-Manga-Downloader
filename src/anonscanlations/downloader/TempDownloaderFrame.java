@@ -60,6 +60,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         emailField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
+        jRadioButton7 = new javax.swing.JRadioButton();
         downloadButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         viewerURLField = new javax.swing.JTextField();
@@ -135,6 +136,10 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, nicoRadioButton, org.jdesktop.beansbinding.ELProperty.create("${selected}"), passwordField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
+        radioButtonGroup.add(jRadioButton7);
+        jRadioButton7.setText(Chapters.POCO.getName());
+        jRadioButton7.setActionCommand("POCO");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -144,27 +149,26 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(clubSundayRadioButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clubSundayKeyURL, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE))
                     .addComponent(jRadioButton3)
                     .addComponent(jRadioButton5)
                     .addComponent(jRadioButton6)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(clubSundayRadioButton)
-                            .addComponent(nicoRadioButton))
+                        .addComponent(nicoRadioButton)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(clubSundayKeyURL, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)))))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jRadioButton7))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -178,7 +182,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -191,7 +195,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jRadioButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButton6)
-                .addGap(34, 34, 34))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButton7))
         );
 
         downloadButton.setText("Download");
@@ -230,7 +235,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(statusBar, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -243,12 +247,13 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(browseButton))
                             .addComponent(viewerURLField, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(downloadButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(exitButton)))
+                        .addComponent(exitButton))
+                    .addComponent(statusBar, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -264,12 +269,12 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                     .addComponent(viewerURLField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(downloadButton)
-                    .addComponent(exitButton)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(exitButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -325,6 +330,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             case MANGAONWEB:    chapter = new MangaOnWebChapter(viewerURL);     break;
             case PCVIEWER:      chapter = new PCViewerChapter(viewerURL);       break;
             case PLUGINFREE:    chapter = new PluginFreeChapter(viewerURL);     break;
+            case POCO:          chapter = new PocoChapter(viewerURL);           break;
             case CLUBSUNDAY:
             {
                 URL keyURL;
@@ -411,6 +417,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JRadioButton nicoRadioButton;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.ButtonGroup radioButtonGroup;

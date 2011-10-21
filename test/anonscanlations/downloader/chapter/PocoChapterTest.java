@@ -19,9 +19,10 @@ import anonscanlations.downloader.*;
 public class PocoChapterTest extends PocoChapter        // So I can access private members
 {
     private static final long CRC32[] =
-            new long[]{878575707L, 4258525291L, 2038831088L, 4276476124L,
-                    2075900910L, 109744020L, 3661107503L, 2762017388L,
-                    461546871L, 68445120L, 1897989602L, 1722973420L, 2670171597L};
+            new long[]{1664894238L, 235207973L, 958148213L, 2885041639L,
+                    1735256010L, 361631088L, 562778741L, 1674556494L,
+                    2406686717L, 685363998L, 934753219L, 3073342046L,
+                    2704109636L, 1906777089L};
 
     public PocoChapterTest(){}
 
@@ -37,13 +38,13 @@ public class PocoChapterTest extends PocoChapter        // So I can access priva
     @Test
     public void testInit() throws Exception
     {
-        PocoChapter instance = new PocoChapter(new URL("http://www.poco2.jp/viewer/play.php?partid=735b90b4568125ed6c3f678819b6e058"));
+        PocoChapter instance = new PocoChapter(new URL("http://www.poco2.jp/viewer/play.php?partid=f4b9ec30ad9f68f89b29639786cb62ef"));
         downloader().pause();
         instance.init();
         downloader().pause();
         downloader().waitUntilFinished();
 
-        assertTrue(instance.images.get(0).equals("http://www.poco2.jp/viewerset/story/0016/0048/00000067/650.jpg"));
+        assertTrue(instance.images.get(0).equals("http://www.poco2.jp/viewerset/story/0033/0069/00000094/1120.jpg"));
     }
 
     /**
@@ -53,14 +54,14 @@ public class PocoChapterTest extends PocoChapter        // So I can access priva
     public void testDownload() throws Exception
     {
         File directory = TestUtils.createTempDirectory();
-        PocoChapter instance = new PocoChapter(new URL("http://www.poco2.jp/viewer/play.php?partid=735b90b4568125ed6c3f678819b6e058"));
+        PocoChapter instance = new PocoChapter(new URL("http://www.poco2.jp/viewer/play.php?partid=f4b9ec30ad9f68f89b29639786cb62ef"));
 
         downloader().pause();
         instance.init();
         downloader().pause();
         downloader().waitUntilFinished();
 
-        assertTrue(instance.images.get(0).equals("http://www.poco2.jp/viewerset/story/0016/0048/00000067/650.jpg"));
+        assertTrue(instance.images.get(0).equals("http://www.poco2.jp/viewerset/story/0033/0069/00000094/1120.jpg"));
 
         downloader().pause();
         instance.download(directory);

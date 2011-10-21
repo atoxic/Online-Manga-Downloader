@@ -171,7 +171,7 @@ public class Downloader extends Thread
 
         init();
 
-        ActibookChapter chapter = new ActibookChapter(new URL("http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html"));
+        //ActibookChapter chapter = new ActibookChapter(new URL("http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html"));
         /*
         SundayChapter chapter = new SundayChapter(new URL("http://club.shogakukan.co.jp/dor/pcviewer_main.php?key1=SHWM&key2=takahasiru_001&key3=konshuunos_001&key4=0230-0&sp=-1&re=0&shd=d1b53e031df96f4b93037c3f8c1513415ef9b09d&otk=0f694497ed762f6e7970fff9e2c69529906dc223&vo=1"),
                                                 new URL("http://club.shogakukan.co.jp/"));
@@ -191,9 +191,10 @@ public class Downloader extends Thread
 
         //PocoChapter chapter = new PocoChapter(new URL("http://www.poco2.jp/viewer/play.php?partid=735b90b4568125ed6c3f678819b6e058"));
 
-        runChapter(chapter, new File("D:\\test"));
+        //runChapter(chapter, new File("D:\\test"));
         //System.exit(0);
-        //frame.setVisible(true);
+
+        frame.setVisible(true);
     }
 }
 

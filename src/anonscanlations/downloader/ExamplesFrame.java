@@ -89,6 +89,12 @@ public class ExamplesFrame extends javax.swing.JFrame {
         jTextField15 = new javax.swing.JTextField();
         jScrollPane7 = new javax.swing.JScrollPane();
         jEditorPane7 = new javax.swing.JEditorPane();
+        Poco = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jTextField16 = new javax.swing.JTextField();
+        jTextField17 = new javax.swing.JTextField();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jEditorPane8 = new javax.swing.JEditorPane();
 
         setTitle("Examples and Usage");
 
@@ -112,15 +118,12 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTextField1.setEditable(false);
         jTextField1.setText("http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html");
-        jTextField1.setCaretPosition(0);
 
         jTextField2.setEditable(false);
         jTextField2.setText("http://comic.mag-garden.co.jp/assets/files/blade_sengokuyoko01/_SWF_Window.html");
-        jTextField2.setCaretPosition(0);
 
         jTextField3.setEditable(false);
         jTextField3.setText("http://www.kadokawa.co.jp/tachiyomi/comic/201003000250/_SWF_Window.html?mode=1062");
-        jTextField3.setCaretPosition(0);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -188,15 +191,12 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTextField4.setEditable(false);
         jTextField4.setText("http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/");
-        jTextField4.setCaretPosition(0);
 
         jTextField5.setEditable(false);
         jTextField5.setText("http://club.shogakukan.co.jp/dor/pcviewer_main.php?key1=SHWM&key2=azumatakes_001&key3=choudokyuu_001&key4=0001-0&sp=-1&re=0&shd=e255451bc193d8388067ad31e2923665c88efc5d&otk=4a8acbcf319841d0d23bdcd9f25dfcc937172cd4");
-        jTextField5.setCaretPosition(0);
 
         jTextField6.setEditable(false);
         jTextField6.setText("http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/");
-        jTextField6.setCaretPosition(0);
 
         jLabel1.setText("If I want to download the first chapter (\"scene #1\") of this manga:");
 
@@ -275,11 +275,9 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTextField7.setEditable(false);
         jTextField7.setText("http://voyager-store.com/index.php?main_page=addon&module=ebooks/open_image_crochet&ebooks_id=17657&products_id=11956");
-        jTextField7.setCaretPosition(0);
 
         jTextField8.setEditable(false);
         jTextField8.setText("http://comic.bitway.ne.jp/kc/comic_tameshiyomi.html?isbn=9784063723953");
-        jTextField8.setCaretPosition(0);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -335,7 +333,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(Chapters.CROCHETTIME.getName(), Crochet);
@@ -344,7 +342,6 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTextField9.setEditable(false);
         jTextField9.setText("http://mangaonweb.com/viewer.do?ctsn=31811");
-        jTextField9.setCaretPosition(0);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -396,7 +393,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(Chapters.MANGAONWEB.getName(), MangaOnWeb);
@@ -405,13 +402,11 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTextField10.setEditable(false);
         jTextField10.setText("http://seiga.nicovideo.jp/watch/mg10942");
-        jTextField10.setCaretPosition(0);
 
         jLabel5.setText("E-Mail");
 
         jTextField11.setEditable(false);
         jTextField11.setText("yournicoemail@lol.com");
-        jTextField11.setCaretPosition(0);
         jTextField11.setPreferredSize(new java.awt.Dimension(120, 20));
 
         jLabel6.setText("Password");
@@ -485,7 +480,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(Chapters.NICONICO.getName(), Nico);
@@ -494,11 +489,9 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTextField12.setEditable(false);
         jTextField12.setText("http://view.books.yahoo.co.jp/dor/drm/dor_main.php?key1=blood-mikotoka01-0001&sp=-1&ad=1&re=0&xmlurl=http://stream01.books.yahoo.co.jp:8001/&shd=62862185b216b95c956c6c06b2af2e9b2a2aeb88");
-        jTextField12.setCaretPosition(0);
 
         jTextField13.setEditable(false);
         jTextField13.setText("http://ct.eb-webcomic.com/dor/pcviewer_main.php?key1=EB&key2=umetanitig_001&key3=evahsebunt_001&key4=0001-0&sp=-1&ad=1&re=1&otp=1&xmlurl=http://ct.eb-webcomic.com/stream/&shd=1ccefd53ebe69ff204c60dba9ade4b6334282e61");
-        jTextField13.setCaretPosition(0);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -554,7 +547,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(Chapters.PCVIEWER.getName(), PCViewer);
@@ -563,11 +556,9 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTextField14.setEditable(false);
         jTextField14.setText("http://futabasha.pluginfree.com/weblish/futabawebhigh/fsp/Oniichan_001/index.shtml?Mdn=1&rep=1");
-        jTextField14.setCaretPosition(0);
 
         jTextField15.setEditable(false);
         jTextField15.setText("http://ebook.comic-gekkin.com/weblish/gekkin/hanasakuiroha_001/index.shtml?rep=1");
-        jTextField15.setCaretPosition(0);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -609,7 +600,6 @@ public class ExamplesFrame extends javax.swing.JFrame {
         PluginFree.setLayout(PluginFreeLayout);
         PluginFreeLayout.setHorizontalGroup(
             PluginFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 733, Short.MAX_VALUE)
             .addGroup(PluginFreeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PluginFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -624,10 +614,77 @@ public class ExamplesFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(Chapters.PLUGINFREE.getName(), PluginFree);
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Examples"));
+
+        jTextField16.setEditable(false);
+        jTextField16.setText("http://www.poco2.jp/viewer/play.php?partid=735b90b4568125ed6c3f678819b6e058");
+
+        jTextField17.setEditable(false);
+        jTextField17.setText("http://www.poco2.jp/viewer/play.php?partid=f4b9ec30ad9f68f89b29639786cb62ef");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+                    .addComponent(jTextField17, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane8.setBorder(null);
+
+        jEditorPane8.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane8.setBorder(null);
+        jEditorPane8.setContentType("text/html");
+        jEditorPane8.setEditable(false);
+        jEditorPane8.setFont(jEditorPane8.getFont());
+        jEditorPane8.setText("<html>Flash-based viewer used on <a href=\"http://www.poco2.jp/\">PocoPoco</a>.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane8.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane8.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                hyperlink(evt);
+            }
+        });
+        jScrollPane8.setViewportView(jEditorPane8);
+
+        javax.swing.GroupLayout PocoLayout = new javax.swing.GroupLayout(Poco);
+        Poco.setLayout(PocoLayout);
+        PocoLayout.setHorizontalGroup(
+            PocoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PocoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PocoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        PocoLayout.setVerticalGroup(
+            PocoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PocoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(107, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab(Chapters.POCO.getName(), Poco);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -638,7 +695,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -671,6 +728,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
     private javax.swing.JPanel Nico;
     private javax.swing.JPanel PCViewer;
     private javax.swing.JPanel PluginFree;
+    private javax.swing.JPanel Poco;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JEditorPane jEditorPane2;
     private javax.swing.JEditorPane jEditorPane3;
@@ -678,6 +736,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
     private javax.swing.JEditorPane jEditorPane5;
     private javax.swing.JEditorPane jEditorPane6;
     private javax.swing.JEditorPane jEditorPane7;
+    private javax.swing.JEditorPane jEditorPane8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -685,6 +744,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
@@ -699,6 +759,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
@@ -707,6 +768,8 @@ public class ExamplesFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
+    private javax.swing.JTextField jTextField16;
+    private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;

@@ -28,7 +28,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jTabbedPane1" pref="245" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" pref="249" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -155,21 +155,18 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField2">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="http://comic.mag-garden.co.jp/assets/files/blade_sengokuyoko01/_SWF_Window.html"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField3">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="http://www.kadokawa.co.jp/tachiyomi/comic/201003000250/_SWF_Window.html?mode=1062"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -318,21 +315,18 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField5">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="http://club.shogakukan.co.jp/dor/pcviewer_main.php?key1=SHWM&amp;key2=azumatakes_001&amp;key3=choudokyuu_001&amp;key4=0001-0&amp;sp=-1&amp;re=0&amp;shd=e255451bc193d8388067ad31e2923665c88efc5d&amp;otk=4a8acbcf319841d0d23bdcd9f25dfcc937172cd4"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField6">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel1">
@@ -390,7 +384,7 @@
                       <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="78" max="32767" attributes="0"/>
+                      <EmptySpace pref="60" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -434,14 +428,12 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="http://voyager-store.com/index.php?main_page=addon&amp;module=ebooks/open_image_crochet&amp;ebooks_id=17657&amp;products_id=11956"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField8">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="http://comic.bitway.ne.jp/kc/comic_tameshiyomi.html?isbn=9784063723953"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -517,7 +509,7 @@
                       <Component id="jScrollPane4" min="-2" pref="17" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="129" max="32767" attributes="0"/>
+                      <EmptySpace pref="133" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -556,7 +548,6 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="http://mangaonweb.com/viewer.do?ctsn=31811"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -632,7 +623,7 @@
                       <Component id="jScrollPane5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="92" max="32767" attributes="0"/>
+                      <EmptySpace pref="76" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -689,7 +680,6 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="http://seiga.nicovideo.jp/watch/mg10942"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel5">
@@ -701,7 +691,6 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="yournicoemail@lol.com"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[120, 20]"/>
                     </Property>
@@ -794,7 +783,7 @@
                       <Component id="jScrollPane6" min="-2" pref="17" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="103" max="32767" attributes="0"/>
+                      <EmptySpace pref="107" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -838,14 +827,12 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="http://view.books.yahoo.co.jp/dor/drm/dor_main.php?key1=blood-mikotoka01-0001&amp;sp=-1&amp;ad=1&amp;re=0&amp;xmlurl=http://stream01.books.yahoo.co.jp:8001/&amp;shd=62862185b216b95c956c6c06b2af2e9b2a2aeb88"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField13">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="http://ct.eb-webcomic.com/dor/pcviewer_main.php?key1=EB&amp;key2=umetanitig_001&amp;key3=evahsebunt_001&amp;key4=0001-0&amp;sp=-1&amp;ad=1&amp;re=1&amp;otp=1&amp;xmlurl=http://ct.eb-webcomic.com/stream/&amp;shd=1ccefd53ebe69ff204c60dba9ade4b6334282e61"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -904,7 +891,6 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="733" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -922,7 +908,7 @@
                       <Component id="jScrollPane7" min="-2" pref="17" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="103" max="32767" attributes="0"/>
+                      <EmptySpace pref="107" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -966,14 +952,12 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="http://futabasha.pluginfree.com/weblish/futabawebhigh/fsp/Oniichan_001/index.shtml?Mdn=1&amp;rep=1"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField15">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="http://ebook.comic-gekkin.com/weblish/gekkin/hanasakuiroha_001/index.shtml?rep=1"/>
-                    <Property name="caretPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1012,6 +996,131 @@
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="((javax.swing.text.html.HTMLDocument)jEditorPane7.getDocument()).getStyleSheet().addRule(bodyRule);"/>
+                  </AuxValues>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="Poco">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="&lt;User Code&gt;">
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="Chapters.POCO.getName()" type="code"/>
+                </Property>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jPanel11" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jScrollPane8" alignment="1" pref="713" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane8" min="-2" pref="17" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="107" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanel11">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Examples"/>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jTextField16" alignment="1" pref="681" max="32767" attributes="0"/>
+                              <Component id="jTextField17" alignment="0" pref="681" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jTextField16" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jTextField17" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JTextField" name="jTextField16">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="text" type="java.lang.String" value="http://www.poco2.jp/viewer/play.php?partid=735b90b4568125ed6c3f678819b6e058"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTextField17">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="text" type="java.lang.String" value="http://www.poco2.jp/viewer/play.php?partid=f4b9ec30ad9f68f89b29639786cb62ef"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane8">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="null"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JEditorPane" name="jEditorPane8">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="(java.awt.Color)javax.swing.UIManager.get(&quot;Panel.background&quot;)" type="code"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="null"/>
+                    </Property>
+                    <Property name="contentType" type="java.lang.String" value="text/html"/>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+                      <FontInfo relative="true">
+                        <Font component="jEditorPane8" property="font" relativeSize="true" size="0"/>
+                      </FontInfo>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="&lt;html&gt;Flash-based viewer used on &lt;a href=&quot;http://www.poco2.jp/&quot;&gt;PocoPoco&lt;/a&gt;.&lt;/html&gt;"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="hyperlinkUpdate" listener="javax.swing.event.HyperlinkListener" parameters="javax.swing.event.HyperlinkEvent" handler="hyperlink"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="((javax.swing.text.html.HTMLDocument)jEditorPane8.getDocument()).getStyleSheet().addRule(bodyRule);"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
