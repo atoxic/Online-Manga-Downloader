@@ -134,7 +134,6 @@ public class CrochetTimeChapter extends Chapter
                 ((StringBuilder)FORMATTER.out()).setLength(0);
                 FORMATTER.format("%s&D&%d&%d%08x", fname, urlPart1, urlPart2, (int)(32767 * Math.random()) + 0x4000);
                 String result = FORMATTER.out().toString();
-                //System.out.println("res: " + result);
                 ret.add(result);
 
                 // eat up a NUL

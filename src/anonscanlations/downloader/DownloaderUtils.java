@@ -23,14 +23,18 @@ public class DownloaderUtils
 
     public static final HashMap<String, Exception> ERRORS = new HashMap<String, Exception>();
 
+    public static final ArrayList<String> LOG = new ArrayList<String>();
+
     public static void debug(String message)
     {
         System.out.println("DEBUG: " + message);
+        LOG.add(message);
     }
     public static void error(String message, Exception e, boolean fatal)
     {
         String msg = (fatal ? "" : "NON-") + "FATAL ERROR: " + message;
         System.err.println(msg);
+        LOG.add("!!!!! " + msg);
         addException(msg, e);
         if(fatal)
             System.exit(1);
@@ -38,6 +42,7 @@ public class DownloaderUtils
     public static void errorGUI(String message, Exception e, boolean fatal)
     {
         String msg = (fatal ? "" : "NON-") + "FATAL ERROR: " + message;
+        LOG.add("!!!!! " + msg);
         // don't report it again if it's been reported
         if(addException(msg, e))
         {
@@ -56,6 +61,8 @@ public class DownloaderUtils
         {
             System.err.println("LOGGER: Exception added");
             e.printStackTrace();
+            for(StackTraceElement element : e.getStackTrace())
+                LOG.add(element.toString());
         }
         return(true);
     }

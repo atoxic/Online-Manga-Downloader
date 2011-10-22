@@ -99,7 +99,7 @@ public class Downloader extends Thread
                     break;
                 
                 DownloadJob job = jobs.remove(0);
-                System.out.println("Running job: " + job);
+                DownloaderUtils.debug("Running job: " + job);
                 frame.setStatus(job.toString());
                 job.run();
             }

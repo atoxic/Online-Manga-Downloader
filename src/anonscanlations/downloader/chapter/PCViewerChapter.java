@@ -28,6 +28,8 @@ public class PCViewerChapter extends Chapter implements Serializable
         rangeStart = rangeEnd = 0;
         title = "";
 
+        DownloaderUtils.debug("Given URL: " + url);
+
         for(Map.Entry<String, String> entry : params.entrySet())
         {
             if(entry.getKey().startsWith("key"))
@@ -60,6 +62,8 @@ public class PCViewerChapter extends Chapter implements Serializable
             @Override
             public void run() throws Exception
             {
+                DownloaderUtils.debug("XML URL: " + url);
+
                 super.run();
 
                 DownloaderUtils.debug("XML: " + page);
@@ -91,7 +95,16 @@ public class PCViewerChapter extends Chapter implements Serializable
             PCViewerDownloadJob job = new PCViewerDownloadJob("Page " + i,
                         new URL(baseURL,
                             "content_dl.php?dtype=1&p=" + dataFolder + "&z=&x=0&re=0&ad=0&pre=&pno=" + i + "&" + getParams()),
-                        DownloaderUtils.fileName(directory, title, i, "jpg"));
+                        DownloaderUtils.fileName(directory, title, i, "jpg"))
+            {
+                @Override
+                public void run() throws Exception
+                {
+                    DownloaderUtils.debug("Page URL: " + url);
+
+                    super.run();
+                }
+            };
             downloader().addJob(job);
         }
     }

@@ -15,6 +15,7 @@ import anonscanlations.downloader.chapter.*;
 public class TempDownloaderFrame extends javax.swing.JFrame {
 
     private ExamplesFrame examples;
+    private LogFrame log;
 
     /** Creates new form TempDownloaderFrame */
     public TempDownloaderFrame() {
@@ -22,6 +23,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         // lazy init
         examples = null;
+
+        log = new LogFrame();
 
         PreferencesManager.registerWindow("OMD0.1.0_tempdlframe", this, false);
     }
@@ -67,6 +70,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         viewerURLField = new javax.swing.JTextField();
         statusBar = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Online Manga Downloader 0.1.2");
@@ -237,6 +241,13 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Log");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -258,7 +269,9 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                             .addComponent(viewerURLField, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(downloadButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(exitButton))
@@ -283,7 +296,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(downloadButton)
                     .addComponent(jButton1)
-                    .addComponent(exitButton))
+                    .addComponent(exitButton)
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -396,6 +410,18 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         examples.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JEditorPane editor = log.getEditor();
+
+        StringBuilder sb = new StringBuilder();
+        for(String s : DownloaderUtils.LOG)
+            sb.append(s).append('\n');
+
+        editor.setText(sb.toString());
+
+        log.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -416,6 +442,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JTextField emailField;
     private javax.swing.JButton exitButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
