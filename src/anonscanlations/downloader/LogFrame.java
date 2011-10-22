@@ -22,7 +22,7 @@ public class LogFrame extends javax.swing.JFrame {
     /** Creates new form LogForm */
     public LogFrame() {
         initComponents();
-        PreferencesManager.registerWindow("OMD0.1.0_logframe", this, false);
+        PreferencesManager.registerWindow("OMD0.1.0_logframe", this, true);
     }
 
     /** This method is called from within the constructor to
@@ -39,7 +39,7 @@ public class LogFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         LogEditor = new javax.swing.JEditorPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton1.setText("Copy");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +88,7 @@ public class LogFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        setVisible(false);
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
