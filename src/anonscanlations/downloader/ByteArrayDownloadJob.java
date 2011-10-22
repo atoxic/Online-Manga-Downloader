@@ -26,6 +26,8 @@ public class ByteArrayDownloadJob extends DownloadJob
     }
     public void run() throws Exception
     {
+        DownloaderUtils.debug("ByteArrayDownloadJob: " + url);
+
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         if(cookies != null)
             conn.setRequestProperty("Cookie", cookies);

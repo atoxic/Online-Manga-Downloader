@@ -40,6 +40,7 @@ public class LogFrame extends javax.swing.JFrame {
         LogEditor = new javax.swing.JEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Log");
 
         jButton1.setText("Copy");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

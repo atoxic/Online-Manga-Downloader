@@ -92,7 +92,6 @@ public class NicoNicoChapter extends Chapter
                 if(index == -1)
                     throw new Exception("Title not found");
                 title = page.substring(index + 7, page.indexOf("</", index));
-                DownloaderUtils.debug("title: " + title);
             }
         };
         PageDownloadJob data = new PageDownloadJob("Get data", new URL("http://seiga.nicovideo.jp/api/theme/data?theme_id=" + id), "UTF-8")

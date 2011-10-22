@@ -28,6 +28,8 @@ public class POSTDownloadJob extends DownloadJob
     }
     public void run() throws Exception
     {
+        DownloaderUtils.debug("POSTDownloadJob: " + url);
+
         conn = (HttpURLConnection) url.openConnection();
 
         conn.setDoOutput(true);

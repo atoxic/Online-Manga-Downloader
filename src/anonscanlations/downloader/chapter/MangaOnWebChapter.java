@@ -35,7 +35,6 @@ public class MangaOnWebChapter extends Chapter
         if(endIndex == -1)
             endIndex = urlString.length();
         ctsn = urlString.substring(urlString.indexOf('=', index) + 1, endIndex);
-        DownloaderUtils.debug("ctsn: " + ctsn);
         PageDownloadJob mainPage = new PageDownloadJob("Get the main page", new URL("http://mangaonweb.com/viewer.do?ctsn=" + ctsn), "UTF-8")
         {
             @Override

@@ -47,14 +47,12 @@ public class PluginFreeChapter extends Chapter implements Serializable
                 String cKV = title(page, "'cKV'");
                 if(cKV == null)
                     throw new Exception("no cKV");
-                DownloaderUtils.debug("cKV: " + cKV);
                 cKVInt = Integer.parseInt(cKV);
 
                 // root directory
                 hCN = title(page, "'hCN'");
                 if(hCN == null)
                     throw new Exception("no hCN");
-                DownloaderUtils.debug("hCN: " + hCN);
             }
         };
         downloader().addJob(index);
@@ -71,27 +69,22 @@ public class PluginFreeChapter extends Chapter implements Serializable
                     throw new Exception("No data");
                 String initVal = PluginFreeDecrypt.expand(page.substring(index + 15, page.indexOf("</DIV>", index)), cKVInt);
 
-                DownloaderUtils.debug("initVal: " + initVal);
-
                 // page number
                 String tPN = title(initVal, "'tPN'");
                 if(tPN == null)
                     throw new Exception("No total page number");
                 total = Integer.parseInt(tPN);
-                DownloaderUtils.debug("\t\t\ttotal: " + total);
 
                 // for decoding page individual files
                 String sISString = title(initVal, "'sIS'");
                 if(sISString == null)
                     throw new Exception("No sIS");
                 sIS = Integer.parseInt(sISString);
-                DownloaderUtils.debug("\t\t\tsIS: " + sIS);
 
                 // title
                 title = title(initVal, "'sHN'");
                 if(title == null)
                     throw new Exception("No sHN");
-                DownloaderUtils.debug("\t\t\tsHN: " + title);
 
                 // zoom values and dimensions
                 zoom = titleList(initVal, "'sFN'");
@@ -99,9 +92,6 @@ public class PluginFreeChapter extends Chapter implements Serializable
                 zoomHeightS = titleList(initVal, "'iHS'");
                 if(zoom == null || zoomWidthS == null || zoomHeightS == null)
                     throw new Exception("No zoom data");
-                DownloaderUtils.debug("\t\t\tzoomVals: " + zoom);
-                DownloaderUtils.debug("\t\t\tzoomWidths: " + zoomWidthS);
-                DownloaderUtils.debug("\t\t\tzoomHeights: " + zoomHeightS);
 
                 downloadURL = new URL(new URL("http://" + url.getHost()), "cgi-bin/widget.cgi?a=" + hCN + title + "/" + title).toString();
             }

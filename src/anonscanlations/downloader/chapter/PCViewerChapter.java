@@ -28,7 +28,7 @@ public class PCViewerChapter extends Chapter implements Serializable
         rangeStart = rangeEnd = 0;
         title = "";
 
-        DownloaderUtils.debug("Given URL: " + url);
+        DownloaderUtils.debug("PCVC Given URL: " + url);
 
         for(Map.Entry<String, String> entry : params.entrySet())
         {
@@ -62,11 +62,9 @@ public class PCViewerChapter extends Chapter implements Serializable
             @Override
             public void run() throws Exception
             {
-                DownloaderUtils.debug("XML URL: " + url);
-
                 super.run();
 
-                DownloaderUtils.debug("XML: " + page);
+                DownloaderUtils.debug("PCVC XML: " + page);
 
                 int index = page.indexOf("<DataFileFolder path=\"");
                 dataFolder = page.substring(index + 22, page.indexOf("\">", index));
@@ -78,9 +76,9 @@ public class PCViewerChapter extends Chapter implements Serializable
                 rangeStart = Integer.parseInt(range[0]);
                 rangeEnd = Integer.parseInt(range[1]);
 
-                DownloaderUtils.debug("dataFolder: " + dataFolder);
-                DownloaderUtils.debug("rangeStart: " + rangeStart);
-                DownloaderUtils.debug("rangeEnd: " + rangeEnd);
+                DownloaderUtils.debug("PCVC dataFolder: " + dataFolder);
+                DownloaderUtils.debug("PCVC rangeStart: " + rangeStart);
+                DownloaderUtils.debug("PCVC rangeEnd: " + rangeEnd);
             }
         };
         downloader().addJob(xml);
@@ -95,16 +93,7 @@ public class PCViewerChapter extends Chapter implements Serializable
             PCViewerDownloadJob job = new PCViewerDownloadJob("Page " + i,
                         new URL(baseURL,
                             "content_dl.php?dtype=1&p=" + dataFolder + "&z=&x=0&re=0&ad=0&pre=&pno=" + i + "&" + getParams()),
-                        DownloaderUtils.fileName(directory, title, i, "jpg"))
-            {
-                @Override
-                public void run() throws Exception
-                {
-                    DownloaderUtils.debug("Page URL: " + url);
-
-                    super.run();
-                }
-            };
+                        DownloaderUtils.fileName(directory, title, i, "jpg"));
             downloader().addJob(job);
         }
     }

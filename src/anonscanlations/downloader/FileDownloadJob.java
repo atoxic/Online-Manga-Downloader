@@ -26,6 +26,8 @@ public class FileDownloadJob extends DownloadJob
     }
     public void run() throws Exception
     {
+        DownloaderUtils.debug("FileDownloadJob: " + url);
+
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         if(cookies != null)
             conn.setRequestProperty("Cookie", cookies);

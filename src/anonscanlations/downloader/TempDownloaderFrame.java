@@ -73,7 +73,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Online Manga Downloader 0.1.2");
+        setTitle("Online Manga Downloader 0.1.3");
         setResizable(false);
 
         jLabel1.setText("Download Directory");

@@ -20,8 +20,6 @@ public class PCViewerDownloadJob extends FileDownloadJob
     {
         super(_description, _url, null, _cookies);
         realFile = _file;
-
-        DownloaderUtils.debug("URL: " + _url);
     }
     @Override
     public void run() throws Exception

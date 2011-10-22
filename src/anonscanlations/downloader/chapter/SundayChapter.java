@@ -93,11 +93,11 @@ public class SundayChapter extends Chapter
         }
         public void run() throws Exception
         {
-            DownloaderUtils.debug("url: " + url);
+            DownloaderUtils.debug("SessionDJ url: " + url);
             HttpURLConnection urlConn = (HttpURLConnection)url.openConnection();
             urlConn.setInstanceFollowRedirects(false);
             urlConn.connect();
-            DownloaderUtils.debug("code: " + urlConn.getResponseCode());
+            DownloaderUtils.debug("SessionDJ code: " + urlConn.getResponseCode());
 
             String headerName = null;
             for(int i = 1; (headerName = urlConn.getHeaderFieldKey(i)) != null; i++)
@@ -108,7 +108,7 @@ public class SundayChapter extends Chapter
                     int index = cookies.indexOf("SESS");
                     if(index != -1)
                     {
-                        DownloaderUtils.debug("cookies: " + cookies);
+                        DownloaderUtils.debug("SessionDJ cookies: " + cookies);
                         break;
                     }
                 }
@@ -121,7 +121,7 @@ public class SundayChapter extends Chapter
                     if(headerName.equals("Location"))
                     {
                         String line = urlConn.getHeaderField(i);
-                        DownloaderUtils.debug("line: " + line);
+                        DownloaderUtils.debug("SessionDJ line: " + line);
                         int index = line.indexOf("&otk=");
                         otk = line.substring(index + 5, line.indexOf('&', index + 1));
                     }
@@ -139,7 +139,7 @@ public class SundayChapter extends Chapter
                     index = line.indexOf("&otk=");
                     if(index != -1)
                     {
-                        DownloaderUtils.debug("line: " + line);
+                        DownloaderUtils.debug("SessionDJ line: " + line);
                         otk = line.substring(index + 5, line.indexOf('\'', index));
                         if(otk.indexOf('&') != -1)
                         {
@@ -153,7 +153,7 @@ public class SundayChapter extends Chapter
 
             urlConn.disconnect();
 
-            DownloaderUtils.debug("otk: " + otk);
+            DownloaderUtils.debug("SessionDJ otk: " + otk);
         }
     }
 
@@ -170,24 +170,7 @@ public class SundayChapter extends Chapter
                                 "&key2=" + key2 + "&key3=" + key3 +
                                 "&key4=" + key4 + "&sp=-1&re=0&shd=" + shd +
                                 "&otk=" + otk + "&vo=1");
-            DownloaderUtils.debug("URL: " + this.url);
-            this.cookies = SundayChapter.this.cookies;
-
-            super.run();
-        }
-    }
-
-    private class MainXMLDownloadJob extends PageDownloadJob
-    {
-        public MainXMLDownloadJob()
-        {
-            super("Downloads the main XML file", null, "UTF-8");
-        }
-        @Override
-        public void run() throws Exception
-        {
-            this.url = new URL(SundayChapter.this.url, "pcviewer_main.xml");
-            DownloaderUtils.debug("URL: " + this.url);
+            DownloaderUtils.debug("MainFileDJ URL: " + this.url);
             this.cookies = SundayChapter.this.cookies;
 
             super.run();
@@ -206,12 +189,12 @@ public class SundayChapter extends Chapter
             this.url = new URL(SundayChapter.this.url, "pcviewer_otk.php?key1=" + key1 +
                             "&key2=" + key2 + "&key3=" + key3 +
                             "&key4=" + key4 + "&sp=-1&re=0&otk=" + otk);
-            DownloaderUtils.debug("url: " + this.url);
+            DownloaderUtils.debug("XMLDJ url: " + this.url);
             this.cookies = SundayChapter.this.cookies;
 
             super.run();
 
-            DownloaderUtils.debug("xml: " + page);
+            DownloaderUtils.debug("XMLDJ xml: " + page);
 
             if(page.equals("NG") || page.contains("pagecount=\"0\""))
                 throw new Exception("XML file NG");
@@ -232,11 +215,11 @@ public class SundayChapter extends Chapter
             min = Integer.parseInt(list[0]);
             max = Integer.parseInt(list[1]);
 
-            DownloaderUtils.debug("serverTimestamp: " + serverTimestamp);
-            DownloaderUtils.debug("availTimestamp: " + availTimestamp);
-            DownloaderUtils.debug("timestamp: " + timestamp);
-            DownloaderUtils.debug("server: " + server);
-            DownloaderUtils.debug("range: " + min + " to " + max);
+            DownloaderUtils.debug("XMLDJ serverTimestamp: " + serverTimestamp);
+            DownloaderUtils.debug("XMLDJ availTimestamp: " + availTimestamp);
+            DownloaderUtils.debug("XMLDJ timestamp: " + timestamp);
+            DownloaderUtils.debug("XMLDJ server: " + server);
+            DownloaderUtils.debug("XMLDJ range: " + min + " to " + max);
         }
     }
 }

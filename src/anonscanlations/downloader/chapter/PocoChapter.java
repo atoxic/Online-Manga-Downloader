@@ -50,15 +50,12 @@ public class PocoChapter extends Chapter implements Serializable
                     throw new Exception("Error in retreiving data");
                 title = fileElm.getAttribute("title");
                 story = fileElm.getAttribute("story");
-                DownloaderUtils.debug("title: " + title);
-                DownloaderUtils.debug("story: " + story);
 
                 // Get pages
                 NodeList pageElms = doc.getElementsByTagName("Page");
                 for(int i = 0; i < pageElms.getLength(); i++)
                 {
                     Element pageElm = (Element)pageElms.item(i);
-                    DownloaderUtils.debug("page: " + pageElm.getAttribute("image"));
                     images.add(pageElm.getAttribute("image"));
                 }
             }
