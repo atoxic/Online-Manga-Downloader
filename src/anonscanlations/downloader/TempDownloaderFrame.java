@@ -25,6 +25,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         examples = null;
 
         log = new LogFrame();
+        DownloaderUtils.LOGEDITOR = log.getEditor();
 
         PreferencesManager.registerWindow("OMD0.1.0_tempdlframe", this, false);
     }
@@ -411,6 +412,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        /*
         JEditorPane editor = log.getEditor();
 
         StringBuilder sb = new StringBuilder();
@@ -418,6 +420,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             sb.append(s).append('\n');
 
         editor.setText(sb.toString());
+        // */
 
         log.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed

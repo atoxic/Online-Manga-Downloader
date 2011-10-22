@@ -25,16 +25,18 @@ public class DownloaderUtils
 
     public static final ArrayList<String> LOG = new ArrayList<String>();
 
+    public static JEditorPane LOGEDITOR = null;
+
     public static void debug(String message)
     {
         System.out.println("DEBUG: " + message);
-        LOG.add(message);
+        addToLog(message);
     }
     public static void error(String message, Exception e, boolean fatal)
     {
         String msg = (fatal ? "" : "NON-") + "FATAL ERROR: " + message;
         System.err.println(msg);
-        LOG.add("!!!!! " + msg);
+        addToLog("!!!!! " + msg);
         addException(msg, e);
         if(fatal)
             System.exit(1);
@@ -42,7 +44,7 @@ public class DownloaderUtils
     public static void errorGUI(String message, Exception e, boolean fatal)
     {
         String msg = (fatal ? "" : "NON-") + "FATAL ERROR: " + message;
-        LOG.add("!!!!! " + msg);
+        addToLog("!!!!! " + msg);
         // don't report it again if it's been reported
         if(addException(msg, e))
         {
@@ -50,6 +52,13 @@ public class DownloaderUtils
         }
         if(fatal)
             System.exit(1);
+    }
+
+    private static void addToLog(String message)
+    {
+        LOG.add(message);
+        if(LOGEDITOR != null)
+            LOGEDITOR.setText(LOGEDITOR.getText() + message + '\n');
     }
 
     private static boolean addException(String msg, Exception e)
