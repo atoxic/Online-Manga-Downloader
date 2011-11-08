@@ -153,6 +153,8 @@ public class Downloader extends Thread
 
                     frame.setStatus("Error");
                 }
+
+                System.exit(0);
             }
         };
         t.start();
@@ -193,6 +195,6 @@ public class Downloader extends Thread
 
         //runChapter(chapter, new File("D:\\test"));
         
-        frame.setVisible(true);
+        //frame.setVisible(true);
     }
 }

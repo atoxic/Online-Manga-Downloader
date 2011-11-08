@@ -19,7 +19,16 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
     /** Creates new form TempDownloaderFrame */
     public TempDownloaderFrame() {
-        initComponents();
+
+        // Try to use Windows look and feel
+        try
+        {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        }
+        catch(Exception e)
+        {
+            // couldn't find Windows look and feel: it couldn't be helped
+        }
 
         // lazy init
         examples = null;
@@ -28,6 +37,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         DownloaderUtils.LOGEDITOR = log.getEditor();
 
         PreferencesManager.registerWindow("OMD0.1.0_tempdlframe", this, false);
+
+        initComponents();
     }
 
     public void setStatus(String status)
