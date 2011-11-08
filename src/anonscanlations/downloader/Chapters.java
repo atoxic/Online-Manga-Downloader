@@ -15,6 +15,7 @@ public enum Chapters
     CLUBSUNDAY("Club Sunday"),
     CROCHETTIME("CrochetTime"),
     MANGAONWEB("Manga On Web"),
+    NICONICOACE("NicoNico E-Books"),
     NICONICO2("NicoNico Official"),
     NICONICO("NicoNico User-published"),
     PCVIEWER("PCViewer/DOR"),

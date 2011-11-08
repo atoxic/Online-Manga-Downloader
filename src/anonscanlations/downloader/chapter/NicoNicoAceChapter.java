@@ -3,6 +3,7 @@ package anonscanlations.downloader.chapter;
 import java.io.*;
 import java.util.*;
 import java.util.zip.*;
+import java.util.regex.*;
 import java.net.*;
 
 import org.xml.sax.*;
@@ -18,6 +19,8 @@ import anonscanlations.downloader.*;
  */
 public class NicoNicoAceChapter extends Chapter
 {
+    public static final Pattern IDMATCH = Pattern.compile("bk([0-9]+)$");
+
     private URL url;
 
     private transient String username, title, userid, bookid, dl_key, maki_address;
@@ -42,7 +45,11 @@ public class NicoNicoAceChapter extends Chapter
 
     public void init() throws Exception
     {
-        bookid = "584";
+        String file = url.getPath().substring(url.getPath().lastIndexOf('/') + 1);
+        Matcher matcher = IDMATCH.matcher(file);
+        if(!matcher.matches())
+            throw new Exception("Book ID not found");
+        bookid = matcher.group(1);
 
         login = new NicoNicoLoginDownloadJob(username, password);
 
