@@ -65,7 +65,7 @@ public class NicoNicoAceChapter extends Chapter
                 super.run();
 
                 userid = obj.getJSONObject("user").get("id").toString();
-                DownloaderUtils.debug(userid);
+                DownloaderUtils.debug("userid: " + userid);
             }
         };
 
@@ -78,7 +78,7 @@ public class NicoNicoAceChapter extends Chapter
                 super.run();
 
                 title = obj.getJSONObject("book").getString("name");
-                DownloaderUtils.debug(title);
+                DownloaderUtils.debug("title: " + title);
             }
         };
 
@@ -92,8 +92,8 @@ public class NicoNicoAceChapter extends Chapter
 
                 dl_key = obj.getString("dl_key");
                 maki_address = obj.getString("maki_address");
-                DownloaderUtils.debug(dl_key);
-                DownloaderUtils.debug(maki_address);
+                DownloaderUtils.debug("dl_key: " + dl_key);
+                DownloaderUtils.debug("maki_address: " + maki_address);
             }
         };
 
