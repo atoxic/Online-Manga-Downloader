@@ -8,6 +8,7 @@ import java.net.*;
 
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
+import com.bluecast.xml.*;
 
 import org.json.*;
 
@@ -30,7 +31,6 @@ public class NicoNicoAceChapter extends Chapter
 
     public NicoNicoAceChapter(URL _url, String _username, char[] _password)
     {
-        // TODO: actually use URL to parse.  It's assumed that the book id is 1
         url = _url;
         username = _username;
         password = _password;
@@ -123,7 +123,7 @@ public class NicoNicoAceChapter extends Chapter
                     while((line = reader.readLine()) != null)
                         page += line;
 
-                    XMLReader parser = XMLReaderFactory.createXMLReader();
+                    Piccolo parser = new Piccolo();
                     InputSource is = new InputSource(new StringReader(page));
                     is.setEncoding("UTF-8");
 

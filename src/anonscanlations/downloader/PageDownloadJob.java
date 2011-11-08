@@ -1,7 +1,6 @@
 package anonscanlations.downloader;
 
 import java.io.*;
-import java.util.*;
 import java.net.*;
 
 /**

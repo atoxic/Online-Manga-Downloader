@@ -172,7 +172,7 @@ public class Downloader extends Thread
         System.setProperty("http.agent", "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.20) Gecko/20110803 Firefox/3.6.20");
 
         init();
-        
+
         frame.setVisible(true);
     }
 }
