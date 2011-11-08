@@ -20,9 +20,10 @@ public class NicoNicoAceChapter extends Chapter
 {
     private URL url;
 
-    private transient String username, cookies, title, userid, bookid, dl_key, maki_address;
+    private transient String username, title, userid, bookid, dl_key, maki_address;
     private transient char[] password;
     private transient ArrayList<String> images;
+    private transient NicoNicoLoginDownloadJob login;
 
     public NicoNicoAceChapter(URL _url, String _username, char[] _password)
     {
@@ -30,110 +31,58 @@ public class NicoNicoAceChapter extends Chapter
         url = _url;
         username = _username;
         password = _password;
-        cookies = null;
         title = null;
         userid = null;
         dl_key = null;
         maki_address = null;
-
         bookid = null;
         images = new ArrayList<String>();
+        login = null;
     }
 
     public void init() throws Exception
     {
         bookid = "584";
 
-        DownloadJob login = new DownloadJob("Login to NicoNico")
-        {
-            public void run() throws Exception
-            {
-                URL url = new URL("https://secure.nicovideo.jp/secure/login?site=seiga");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setDoOutput(true);
-                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                wr.write("next_url=%2Fmanga%2F&mail=" + username + "&password=");
-                wr.write(password);
-                wr.flush();
+        login = new NicoNicoLoginDownloadJob(username, password);
 
-                if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
-                    throw new Exception("404 Page Not Found: " + url);
-                String headerName = null;
-                for(int i = 1; (headerName = conn.getHeaderFieldKey(i)) != null; i++)
-                {
-                    if(headerName.equals("Set-Cookie") && !conn.getHeaderField(i).contains("deleted"))
-                    {
-                        NicoNicoAceChapter.this.cookies = conn.getHeaderField(i);
-                    }
-                }
-            }
-        };
+        JSONDownloadJob service = new JSONDownloadJob("Get service info",
+                                            new URL("http://bkapi.seiga.nicovideo.jp/service/status"));
 
-        PageDownloadJob service = new PageDownloadJob("Get service info",
-                                            new URL("http://bkapi.seiga.nicovideo.jp/service/status"),
-                                            "UTF-8")
+        JSONDownloadJob user = new JSONDownloadJob("Get user info",
+                                            new URL("http://bkapi.seiga.nicovideo.jp/user/status"))
         {
             @Override
             public void run() throws Exception
             {
-                this.cookies = NicoNicoAceChapter.this.cookies;
-                url = new URL(url.toString() + "?" + (System.currentTimeMillis() / 1000) + (int)(Math.random() * 1000));
-
                 super.run();
 
-                DownloaderUtils.debug(page);
-            }
-        };
-
-        PageDownloadJob user = new PageDownloadJob("Get user info",
-                                            new URL("http://bkapi.seiga.nicovideo.jp/user/status"),
-                                            "UTF-8")
-        {
-            @Override
-            public void run() throws Exception
-            {
-                this.cookies = NicoNicoAceChapter.this.cookies;
-                url = new URL(url.toString() + "?" + (System.currentTimeMillis() / 1000) + (int)(Math.random() * 1000));
-
-                super.run();
-
-                JSONObject obj = new JSONObject(page);
                 userid = obj.getJSONObject("user").get("id").toString();
                 DownloaderUtils.debug(userid);
             }
         };
 
-        PageDownloadJob book = new PageDownloadJob("Get book info",
-                                            new URL("http://bkapi.seiga.nicovideo.jp/book/" + bookid),
-                                            "UTF-8")
+        JSONDownloadJob book = new JSONDownloadJob("Get book info",
+                                            new URL("http://bkapi.seiga.nicovideo.jp/book/" + bookid))
         {
             @Override
             public void run() throws Exception
             {
-                this.cookies = NicoNicoAceChapter.this.cookies;
-                url = new URL(url.toString() + "?" + (System.currentTimeMillis() / 1000) + (int)(Math.random() * 1000));
-
                 super.run();
 
-                JSONObject obj = new JSONObject(page);
                 title = obj.getJSONObject("book").getString("name");
                 DownloaderUtils.debug(title);
             }
         };
 
-        PageDownloadJob bookDownload = new PageDownloadJob("Get book download info",
-                                            new URL("http://bkapi.seiga.nicovideo.jp/book/" + bookid + "/download"),
-                                            "UTF-8")
+        JSONDownloadJob bookDownload = new JSONDownloadJob("Get book download info",
+                                            new URL("http://bkapi.seiga.nicovideo.jp/book/" + bookid + "/download"))
         {
             @Override
             public void run() throws Exception
             {
-                this.cookies = NicoNicoAceChapter.this.cookies;
-                url = new URL(url.toString() + "?" + (System.currentTimeMillis() / 1000) + (int)(Math.random() * 1000));
-
                 super.run();
 
-                JSONObject obj = new JSONObject(page);
                 dl_key = obj.getString("dl_key");
                 maki_address = obj.getString("maki_address");
                 DownloaderUtils.debug(dl_key);
@@ -141,44 +90,18 @@ public class NicoNicoAceChapter extends Chapter
             }
         };
 
-        PageDownloadJob lastRead = new PageDownloadJob("Get last read",
-                                            new URL("http://bkapi.seiga.nicovideo.jp/user/last_read?book_id=" + bookid),
-                                            "UTF-8")
+        JSONDownloadJob lastRead = new JSONDownloadJob("Get last read",
+                                            new URL("http://bkapi.seiga.nicovideo.jp/user/last_read?book_id=" + bookid));
+
+        ZipDownloadJob ePubInfo = new ZipDownloadJob("Getting ePubInfo", null)
         {
             @Override
             public void run() throws Exception
             {
-                this.cookies = NicoNicoAceChapter.this.cookies;
-                url = new URL(url.toString() + "&" + (System.currentTimeMillis() / 1000) + (int)(Math.random() * 1000));
+                post = "streaming=init&trial=true&bookid=" + bookid + "&userid=" + userid;
 
                 super.run();
 
-                JSONObject obj = new JSONObject(page);
-                DownloaderUtils.debug(obj.getString("message"));
-            }
-        };
-
-        DownloadJob ePubInfo = new DownloadJob("Getting ePubInfo")
-        {
-            public void run() throws Exception
-            {
-                HttpURLConnection conn = (HttpURLConnection) (new URL(maki_address)).openConnection();
-
-                conn.setRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
-                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                conn.setRequestProperty("x-nicobook-dl-key", dl_key);
-
-                conn.setDoOutput(true);
-                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                wr.write("streaming=init&trial=true&bookid=" + bookid + "&userid=" + userid);
-                //wr.write("streaming=resources&trial=true&bookid=1&resources=contents%2F000000460%2Fimg%2Fkgm00447%5F001%2Ejpg&userid=10638502");
-                wr.flush();
-                
-                if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
-                    throw new Exception("404 Page Not Found: " + maki_address);
-
-                //*
-                ZipInputStream input = new ZipInputStream(conn.getInputStream());
                 ZipEntry e;
                 while((e = input.getNextEntry()) != null)
                 {
@@ -217,15 +140,10 @@ public class NicoNicoAceChapter extends Chapter
                     });
 
                     parser.parse(is);
-                    // */
 
                     input.closeEntry();
                 }
                 input.close();
-                // */
-
-                for(String s : images)
-                    DownloaderUtils.debug("img 2: " + s);
             }
         };
 
@@ -247,26 +165,15 @@ public class NicoNicoAceChapter extends Chapter
             final int finalIndex = i;
             final String finalImage = images.get(finalIndex);
 
-            DownloadJob file = new DownloadJob("Page " + (i + 1))
+            ZipDownloadJob file = new ZipDownloadJob("Page " + (i + 1),
+                                            "streaming=resources&trial=true&bookid=" + bookid +
+                                            "&resources=" + URLEncoder.encode("contents/" + finalImage, "UTF-8") + "&userid=" + userid)
             {
+                @Override
                 public void run() throws Exception
                 {
-                    HttpURLConnection conn = (HttpURLConnection) (new URL(maki_address)).openConnection();
+                    super.run();
 
-                    conn.setRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
-                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                    conn.setRequestProperty("x-nicobook-dl-key", dl_key);
-
-                    conn.setDoOutput(true);
-                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                    wr.write("streaming=resources&trial=true&bookid=" + bookid + "&resources=" + URLEncoder.encode("contents/" + finalImage, "UTF-8") + "&userid=" + userid);
-                    DownloaderUtils.debug("Wrote: " + "streaming=resources&trial=true&bookid=1&resources=" + URLEncoder.encode("contents/" + finalImage, "UTF-8") + "&userid=" + userid);
-                    wr.flush();
-
-                    if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
-                        throw new Exception("404 Page Not Found: " + maki_address);
-
-                    ZipInputStream input = new ZipInputStream(conn.getInputStream());
                     ZipEntry e = input.getNextEntry();
                     FileOutputStream fout = new FileOutputStream(
                                                     DownloaderUtils.fileName(finalDirectory, title, finalIndex + 1,
@@ -280,6 +187,58 @@ public class NicoNicoAceChapter extends Chapter
                 }
             };
             downloader().addJob(file);
+        }
+    }
+
+    private class JSONDownloadJob extends PageDownloadJob
+    {
+        protected JSONObject obj;
+
+        public JSONDownloadJob(String _desc, URL _url)
+        {
+            super(_desc, _url, "UTF-8");
+        }
+
+        @Override
+        public void run() throws Exception
+        {
+            this.cookies = login.getCookies();
+            url = new URL(url.toString() + "?" + (System.currentTimeMillis() / 1000) + (int)(Math.random() * 1000));
+
+            super.run();
+
+            obj = new JSONObject(page);
+        }
+    }
+
+    private class ZipDownloadJob extends DownloadJob
+    {
+        protected ZipInputStream input;
+        protected String post;
+
+        public ZipDownloadJob(String _desc, String _post)
+        {
+            super(_desc);
+            post = _post;
+        }
+
+        public void run() throws Exception
+        {
+            HttpURLConnection conn = (HttpURLConnection) (new URL(maki_address)).openConnection();
+
+            conn.setRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("x-nicobook-dl-key", dl_key);
+
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(post);
+            wr.flush();
+
+            if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
+                throw new Exception("404 Page Not Found: " + maki_address);
+
+            input = new ZipInputStream(conn.getInputStream());
         }
     }
 }

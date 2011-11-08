@@ -19,7 +19,7 @@ public class NicoNicoChapter extends Chapter
 
     private URL url;
 
-    private transient String username, cookies, title, id;
+    private transient String username, title, id;
     private transient char[] password;
     private transient HashMap<String, NicoImage> images;
     public NicoNicoChapter(URL _url, String _username, char[] _password)
@@ -27,7 +27,6 @@ public class NicoNicoChapter extends Chapter
         url = _url;
         username = _username;
         password = _password;
-        cookies = null;
         title = null;
     }
 
@@ -56,36 +55,13 @@ public class NicoNicoChapter extends Chapter
         if(!matcher.matches())
             throw new Exception("ID not found");
         id = matcher.group(1);
-        DownloadJob login = new DownloadJob("Login to NicoNico")
-        {
-            public void run() throws Exception
-            {
-                URL url = new URL("https://secure.nicovideo.jp/secure/login?site=seiga");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setDoOutput(true);
-                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                wr.write("next_url=%2Fmanga%2F&mail=" + username + "&password=");
-                wr.write(password);
-                wr.flush();
-
-                if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
-                    throw new Exception("404 Page Not Found: " + url);
-                String headerName = null;
-                for(int i = 1; (headerName = conn.getHeaderFieldKey(i)) != null; i++)
-                {
-                    if(headerName.equals("Set-Cookie") && !conn.getHeaderField(i).contains("deleted"))
-                    {
-                        NicoNicoChapter.this.cookies = conn.getHeaderField(i);
-                    }
-                }
-            }
-        };
+        final NicoNicoLoginDownloadJob login = new NicoNicoLoginDownloadJob(username, password);
         PageDownloadJob info = new PageDownloadJob("Get info", new URL("http://seiga.nicovideo.jp/api/theme/info?id=" + id), "UTF-8")
         {
             @Override
             public void run() throws Exception
             {
-                this.cookies = NicoNicoChapter.this.cookies;
+                this.cookies = login.getCookies();
                 super.run();
 
                 int index = page.indexOf("<title>");
@@ -99,7 +75,7 @@ public class NicoNicoChapter extends Chapter
             @Override
             public void run() throws Exception
             {
-                this.cookies = NicoNicoChapter.this.cookies;
+                this.cookies = login.getCookies();
                 super.run();
                 parseData(page);
             }
