@@ -46,17 +46,6 @@ public class ExamplesFrame extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        ClubSunday = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jEditorPane2 = new javax.swing.JEditorPane();
-        jPanel4 = new javax.swing.JPanel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         Crochet = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jTextField7 = new javax.swing.JTextField();
@@ -111,6 +100,17 @@ public class ExamplesFrame extends javax.swing.JFrame {
         jTextField17 = new javax.swing.JTextField();
         jScrollPane8 = new javax.swing.JScrollPane();
         jEditorPane8 = new javax.swing.JEditorPane();
+        Shogakukan = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jEditorPane2 = new javax.swing.JEditorPane();
+        jPanel4 = new javax.swing.JPanel();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setTitle("Examples and Usage");
 
@@ -186,106 +186,6 @@ public class ExamplesFrame extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab(Chapters.ACTIBOOK.getName(), Actibook);
-
-        jScrollPane2.setBorder(null);
-
-        jEditorPane2.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
-        jEditorPane2.setBorder(null);
-        jEditorPane2.setContentType("text/html");
-        jEditorPane2.setEditable(false);
-        jEditorPane2.setFont(jEditorPane2.getFont());
-        jEditorPane2.setText("<html>Special viewer used on <a href=\"http://club.shogakukan.co.jp\">Club Sunday</a>.  It is PCViewer/DOR with an extra layer of protection.  As a result of the protection, an URL previous to the page must be given as well.</html>");
-        ((javax.swing.text.html.HTMLDocument)jEditorPane2.getDocument()).getStyleSheet().addRule(bodyRule);
-        jEditorPane2.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
-            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
-                hyperlink(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jEditorPane2);
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
-
-        jTextField4.setEditable(false);
-        jTextField4.setText("http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/");
-
-        jTextField5.setEditable(false);
-        jTextField5.setText("http://club.shogakukan.co.jp/dor/pcviewer_main.php?key1=SHWM&key2=azumatakes_001&key3=choudokyuu_001&key4=0001-0&sp=-1&re=0&shd=e255451bc193d8388067ad31e2923665c88efc5d&otk=4a8acbcf319841d0d23bdcd9f25dfcc937172cd4");
-
-        jTextField6.setEditable(false);
-        jTextField6.setText("http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/");
-
-        jLabel1.setText("If I want to download the first chapter (\"scene #1\") of this manga:");
-
-        jLabel2.setText("these would be the values I would fill out (the value after \"otk=\" will vary):");
-
-        jLabel3.setText("Viewer URL");
-
-        jLabel4.setText("Previous URL");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE))))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout ClubSundayLayout = new javax.swing.GroupLayout(ClubSunday);
-        ClubSunday.setLayout(ClubSundayLayout);
-        ClubSundayLayout.setHorizontalGroup(
-            ClubSundayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ClubSundayLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(ClubSundayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        ClubSundayLayout.setVerticalGroup(
-            ClubSundayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ClubSundayLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab(Chapters.CLUBSUNDAY.getName(), ClubSunday);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Examples"));
 
@@ -862,6 +762,106 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab(Chapters.POCO.getName(), Poco);
 
+        jScrollPane2.setBorder(null);
+
+        jEditorPane2.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane2.setBorder(null);
+        jEditorPane2.setContentType("text/html");
+        jEditorPane2.setEditable(false);
+        jEditorPane2.setFont(jEditorPane2.getFont());
+        jEditorPane2.setText("<html>Special viewer used on <a href=\"http://club.shogakukan.co.jp\">Club Sunday</a>.  It is PCViewer/DOR with an extra layer of protection.  As a result of the protection, an URL previous to the page must be given as well.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane2.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane2.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                hyperlink(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jEditorPane2);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+
+        jTextField4.setEditable(false);
+        jTextField4.setText("http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/");
+
+        jTextField5.setEditable(false);
+        jTextField5.setText("http://club.shogakukan.co.jp/dor/pcviewer_main.php?key1=SHWM&key2=azumatakes_001&key3=choudokyuu_001&key4=0001-0&sp=-1&re=0&shd=e255451bc193d8388067ad31e2923665c88efc5d&otk=4a8acbcf319841d0d23bdcd9f25dfcc937172cd4");
+
+        jTextField6.setEditable(false);
+        jTextField6.setText("http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/");
+
+        jLabel1.setText("If I want to download the first chapter (\"scene #1\") of this manga:");
+
+        jLabel2.setText("these would be the values I would fill out (the value after \"otk=\" will vary):");
+
+        jLabel3.setText("Viewer URL");
+
+        jLabel4.setText("Previous URL");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout ShogakukanLayout = new javax.swing.GroupLayout(Shogakukan);
+        Shogakukan.setLayout(ShogakukanLayout);
+        ShogakukanLayout.setHorizontalGroup(
+            ShogakukanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ShogakukanLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ShogakukanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        ShogakukanLayout.setVerticalGroup(
+            ShogakukanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ShogakukanLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab(Chapters.CLUBSUNDAY.getName(), Shogakukan);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -898,7 +898,6 @@ public class ExamplesFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Actibook;
-    private javax.swing.JPanel ClubSunday;
     private javax.swing.JPanel Crochet;
     private javax.swing.JPanel MangaOnWeb;
     private javax.swing.JPanel Nico;
@@ -907,6 +906,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
     private javax.swing.JPanel PCViewer;
     private javax.swing.JPanel PluginFree;
     private javax.swing.JPanel Poco;
+    private javax.swing.JPanel Shogakukan;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JEditorPane jEditorPane10;
     private javax.swing.JEditorPane jEditorPane2;

@@ -12,7 +12,7 @@ package anonscanlations.downloader;
 public enum Chapters
 {
     ACTIBOOK("Actibook"),
-    CLUBSUNDAY("Club Sunday"),
+    CLUBSUNDAY("Shogakukan"),
     CROCHETTIME("CrochetTime"),
     MANGAONWEB("Manga On Web"),
     NICONICOACE("NicoNico E-Books"),
