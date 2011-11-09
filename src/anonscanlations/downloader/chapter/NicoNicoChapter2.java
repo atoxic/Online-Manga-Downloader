@@ -4,7 +4,9 @@ import java.util.*;
 import java.io.*;
 import java.net.*;
 
-import org.w3c.dom.*;
+import org.xml.sax.*;
+import org.xml.sax.helpers.*;
+import com.bluecast.xml.*;
 
 import anonscanlations.downloader.*;
 
@@ -56,12 +58,43 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
 
                 super.run();
 
-                Document d = DownloaderUtils.makeDocument(page);
-                Element doc = d.getDocumentElement();
-                Node titleContents = DownloaderUtils.getNodeText(doc, "title");
-                if(titleContents == null)
-                    throw new Exception("No title");
-                title = titleContents.getNodeValue();
+                Piccolo parser = new Piccolo();
+                InputSource is = new InputSource(new StringReader(page));
+                is.setEncoding("UTF-8");
+
+                parser.setContentHandler(new DefaultHandler()
+                {
+                    private boolean inTitleTag = false;
+
+                    @Override
+                    public void characters(char[] ch, int start, int length)
+                    {
+                        if(inTitleTag)
+                            title = new String(ch, start, length);
+                    }
+
+                    @Override
+                    public void startElement(String uri, String localName, String qName, Attributes atts)
+                    {
+                        if(localName.equals("title"))
+                            inTitleTag = true;
+                    }
+                    @Override
+                    public void endElement(String uri, String localName, String qName) throws SAXException
+                    {
+                        if(localName.equals("title"))
+                            throw DownloaderUtils.DONE;
+                    }
+                });
+                try
+                {
+                    parser.parse(is);
+                }
+                catch(SAXException e)
+                {
+                    if(!e.equals(DownloaderUtils.DONE))
+                        throw e;
+                }
             }
         };
 
@@ -74,15 +107,34 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
 
                 super.run();
 
-                Document d = DownloaderUtils.makeDocument(page);
-                Element doc = d.getDocumentElement();
+                Piccolo parser = new Piccolo();
+                InputSource is = new InputSource(new StringReader(page));
+                is.setEncoding("UTF-8");
 
-                NodeList keys = doc.getElementsByTagName("key");
-                for(int i = 0; i < keys.getLength(); i += 2)
+                parser.setContentHandler(new DefaultHandler()
                 {
-                    images.add(((Element)keys.item(i + 1)).getTextContent());
-                    images.add(((Element)keys.item(i)).getTextContent());
-                }
+                    private Stack<String> tags = new Stack<String>();
+
+                    @Override
+                    public void characters(char[] ch, int start, int length)
+                    {
+                        if(tags.peek().equals("key"))
+                            images.add(images.size() / 2 * 2, new String(ch, start, length));
+                    }
+
+                    @Override
+                    public void startElement(String uri, String localName, String qName, Attributes atts)
+                    {
+                        tags.push(localName);
+                    }
+
+                    @Override
+                    public void endElement(String uri, String localName, String qName)
+                    {
+                        tags.pop();
+                    }
+                });
+                parser.parse(is);
             }
         };
 

@@ -4,7 +4,9 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-import org.w3c.dom.*;
+import org.xml.sax.*;
+import org.xml.sax.helpers.*;
+import com.bluecast.xml.*;
 
 import anonscanlations.downloader.*;
 
@@ -70,15 +72,22 @@ public class MangaOnWebChapter extends Chapter
 
                 paths = new ArrayList<String>();
 
-                Document d = DownloaderUtils.makeDocument(page);
-                Element doc = d.getDocumentElement();
+                Piccolo parser = new Piccolo();
+                InputSource is = new InputSource(new StringReader(page));
+                is.setEncoding("UTF-8");
 
-                NodeList pages = doc.getElementsByTagName("page");
-                for(int i = 0; i < pages.getLength(); i++)
+                parser.setContentHandler(new DefaultHandler()
                 {
-                    Element e = (Element)pages.item(i);
-                    paths.add(e.getAttribute("path"));
-                }
+                    @Override
+                    public void startElement(String uri, String localName, String qName, Attributes atts)
+                    {
+                        if(localName.equals("page"))
+                        {
+                            paths.add(atts.getValue("path"));
+                        }
+                    }
+                });
+                parser.parse(is);
             }
         };
         downloader().addJob(xml);

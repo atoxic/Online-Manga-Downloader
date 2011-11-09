@@ -11,7 +11,9 @@ import javax.imageio.*;
 import java.io.*;
 import java.net.*;
 
-import org.w3c.dom.*;
+import org.xml.sax.*;
+import org.xml.sax.helpers.*;
+import com.bluecast.xml.*;
 
 import anonscanlations.downloader.*;
 
@@ -37,16 +39,12 @@ public class ActibookChapter extends Chapter implements Serializable
         h = 0;
     }
 
-    private static int getIntContents(Element doc, String tagName)
+    private static int parseInt(String str)
     {
-        Node contents = DownloaderUtils.getNodeText(doc, tagName);
-        if(contents == null)
-            return(-1);
-
         int ret = -1;
         try
         {
-            ret = Integer.parseInt(contents.getNodeValue());
+            ret = Integer.parseInt(str);
         }
         catch(NumberFormatException nfe)
         {
@@ -64,28 +62,42 @@ public class ActibookChapter extends Chapter implements Serializable
             {
                 super.run();
 
-                Document d = DownloaderUtils.makeDocument(page);
-                Element doc = d.getDocumentElement();
+                Piccolo parser = new Piccolo();
+                InputSource is = new InputSource(new StringReader(page));
+                is.setEncoding("UTF-8");
 
-                // get start and total
-                start = getIntContents(doc, "start");
-                total = getIntContents(doc, "total");
-                if(start == -1 || total == -1)
-                    throw new Exception("No page range");
+                parser.setContentHandler(new DefaultHandler()
+                {
+                    private Stack<String> tags = new Stack<String>();
 
-                Node nameContents = DownloaderUtils.getNodeText(doc, "name");
-                if(nameContents == null)
-                    throw new Exception("No name");
-                title = nameContents.getNodeValue();
+                    @Override
+                    public void characters(char[] ch, int off, int length)
+                    {
+                        if(tags.size() == 2)
+                        {
+                            String tag = tags.peek(), str = new String(ch, off, length);
+                            if(tag.equals("name"))          title = str;
+                            else if(tag.equals("to_type"))  type = str;
+                            else if(tag.equals("w"))        w = parseInt(str);
+                            else if(tag.equals("h"))        h = parseInt(str);
+                            else if(tag.equals("start"))    start = parseInt(str);
+                            else if(tag.equals("total"))    total = parseInt(str);
+                        }
+                    }
 
-                Node typeContents = DownloaderUtils.getNodeText(doc, "to_type");
-                if(typeContents == null)
-                    throw new Exception("No type");
-                type = typeContents.getNodeValue();
+                    @Override
+                    public void startElement(String uri, String localName, String qName, Attributes atts)
+                    {
+                        tags.push(localName);
+                    }
 
-                w = getIntContents(doc, "w");
-                h = getIntContents(doc, "h");
-                // no error checking here
+                    @Override
+                    public void endElement(String uri, String localName, String qName)
+                    {
+                        tags.pop();
+                    }
+                });
+                parser.parse(is);
             }
         };
         PageDownloadJob viewerXML = new PageDownloadJob("viewer.xml for zoom level", new URL(url, "books/db/viewer.xml"), "UTF-8")
@@ -95,16 +107,47 @@ public class ActibookChapter extends Chapter implements Serializable
             {
                 super.run();
 
-                Document d = DownloaderUtils.makeDocument(page);
-                Element doc = d.getDocumentElement();
+                Piccolo parser = new Piccolo();
+                InputSource is = new InputSource(new StringReader(page));
+                is.setEncoding("UTF-8");
 
-                Node zoomsContents = DownloaderUtils.getNodeText(doc, "zoom_s");
-                if(zoomsContents == null)
-                    throw new Exception("No zoom element");
-                String[] zooms = zoomsContents.getNodeValue().split(",");
-                if(zooms.length == 0)
-                    throw new Exception("No zoom values");
-                zoom = zooms[zooms.length - 1];
+                parser.setContentHandler(new DefaultHandler()
+                {
+                    private boolean inZoomSTag = false;
+
+                    @Override
+                    public void characters(char[] ch, int start, int length)
+                    {
+                        if(inZoomSTag)
+                        {
+                            String zooms = new String(ch, start, length);
+                            String[] zoomLevels = zooms.split(",");
+                            zoom = zoomLevels[zoomLevels.length - 1];
+                        }
+                    }
+
+                    @Override
+                    public void startElement(String uri, String localName, String qName, Attributes atts)
+                    {
+                        if(localName.equals("zoom_s"))
+                            inZoomSTag = true;
+                    }
+                    @Override
+                    public void endElement(String uri, String localName, String qName) throws SAXException
+                    {
+                        if(localName.equals("zoom_s"))
+                            throw DownloaderUtils.DONE;
+                    }
+                });
+                try
+                {
+                    parser.parse(is);
+                }
+                catch(SAXException e)
+                {
+                    if(!e.equals(DownloaderUtils.DONE))
+                        throw e;
+                }
             }
         };
         downloader().addJob(bookXML);

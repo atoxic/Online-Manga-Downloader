@@ -201,4 +201,6 @@ public class DownloaderUtils
         Node contents = element.getFirstChild();
         return(contents);
     }
+
+    public static final SAXException DONE = new SAXException("Sax parsing done");
 }

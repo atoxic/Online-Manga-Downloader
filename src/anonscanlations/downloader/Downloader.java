@@ -173,6 +173,11 @@ public class Downloader extends Thread
 
         init();
 
-        frame.setVisible(true);
+        //ActibookChapter chapter = new ActibookChapter(new URL("http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html"));
+        ActibookChapter chapter = new ActibookChapter(new URL("http://www.dokidokivisual.com/comics/book/actibook/wb40537/_SWF_Window.html"));
+
+        runChapter(chapter, new File("D:\\test"));
+
+        //frame.setVisible(true);
     }
 }

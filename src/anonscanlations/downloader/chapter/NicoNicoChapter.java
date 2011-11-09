@@ -5,7 +5,9 @@ import java.util.*;
 import java.util.regex.*;
 import java.net.*;
 
-import org.w3c.dom.*;
+import org.xml.sax.*;
+import org.xml.sax.helpers.*;
+import com.bluecast.xml.*;
 
 import anonscanlations.downloader.*;
 
@@ -34,13 +36,14 @@ public class NicoNicoChapter extends Chapter
     {
         private String id, se_path;
         private ArrayList<String> comments, user_hashes;
-        NicoImage(String _id)
+        public NicoImage()
         {
-            id = _id;
+            id = null;
             se_path = null;
             comments = new ArrayList<String>();
             user_hashes = new ArrayList<String>();
         }
+        public void setID(String _id){ id = _id; }
         public void setSEPath(String _se_path){ se_path = _se_path; }
         public void addComment(String comment, String hash)
         {
@@ -89,27 +92,66 @@ public class NicoNicoChapter extends Chapter
     {
         images = new HashMap<String, NicoImage>();
 
-        Document d = DownloaderUtils.makeDocument(page);
-        Element doc = d.getDocumentElement();
+        Piccolo parser = new Piccolo();
+        InputSource is = new InputSource(new StringReader(page));
+        is.setEncoding("UTF-8");
 
-        Element imageList = (Element)doc.getElementsByTagName("image_list").item(0);
-        NodeList imageElements = imageList.getChildNodes();
-        for(int i = 0; i < imageElements.getLength(); i++)
+        parser.setContentHandler(new DefaultHandler()
         {
-            Node n = imageElements.item(i);
-            if(!(n instanceof Element))
-                continue;
-            Element image = (Element)n;
-            Element image_id = (Element)image.getElementsByTagName("id").item(0);
-            NicoImage nicoImage = new NicoImage(image_id.getTextContent());
-            images.put(nicoImage.id, nicoImage);
+            private boolean inImageTag, inIDTag, inSETag;
+            private NicoImage image;
 
-            NodeList se_path = image.getElementsByTagName("se_path");
-            if(se_path.getLength() > 0)
             {
-                nicoImage.setSEPath(((Element)se_path.item(0)).getTextContent());
+                inImageTag = false;
+                inIDTag = false;
+                inSETag = false;
+                image = null;
             }
-        }
+
+            @Override
+            public void characters(char[] ch, int start, int length)
+            {
+                if(inIDTag)
+                    image.setID(new String(ch, start, length));
+                else if(inSETag)
+                    image.setSEPath(new String(ch, start, length));
+            }
+
+            @Override
+            public void startElement(String uri, String localName, String qName, Attributes atts)
+            {
+                if(localName.equals("image"))
+                {
+                    inImageTag = true;
+                    image = new NicoImage();
+                }
+                else if(inImageTag)
+                {
+                    if(localName.equals("id"))
+                        inIDTag = true;
+                    else if(localName.equals("se_path"))
+                        inSETag = true;
+                }
+            }
+            @Override
+            public void endElement(String uri, String localName, String qName)
+            {
+                if(localName.equals("image"))
+                {
+                    inImageTag = false;
+                    if(image.id != null)
+                        images.put(image.id, image);
+                }
+                else if(inImageTag)
+                {
+                    if(localName.equals("id"))
+                        inIDTag = false;
+                    else if(localName.equals("se_path"))
+                        inSETag = false;
+                }
+            }
+        });
+        parser.parse(is);
     }
 
     public void download(File directory) throws Exception

@@ -4,7 +4,9 @@ import java.util.*;
 import java.io.*;
 import java.net.*;
 
-import org.w3c.dom.*;
+import org.xml.sax.*;
+import org.xml.sax.helpers.*;
+import com.bluecast.xml.*;
 
 import anonscanlations.downloader.*;
 
@@ -41,23 +43,27 @@ public class PocoChapter extends Chapter implements Serializable
             {
                 super.run();
 
-                Document d = DownloaderUtils.makeDocument(page);
-                Element doc = d.getDocumentElement();
+                Piccolo parser = new Piccolo();
+                InputSource is = new InputSource(new StringReader(page));
+                is.setEncoding("UTF-8");
 
-                // Get the File element
-                Element fileElm = (Element)(doc.getElementsByTagName("File").item(0));
-                if(!fileElm.getAttribute("errorType").equals("0"))
-                    throw new Exception("Error in retreiving data");
-                title = fileElm.getAttribute("title");
-                story = fileElm.getAttribute("story");
-
-                // Get pages
-                NodeList pageElms = doc.getElementsByTagName("Page");
-                for(int i = 0; i < pageElms.getLength(); i++)
+                parser.setContentHandler(new DefaultHandler()
                 {
-                    Element pageElm = (Element)pageElms.item(i);
-                    images.add(pageElm.getAttribute("image"));
-                }
+                    @Override
+                    public void startElement(String uri, String localName, String qName, Attributes atts)
+                    {
+                        if(localName.equals("File"))
+                        {
+                            title = atts.getValue("title");
+                            story = atts.getValue("story");
+                        }
+                        else if(localName.equals("Page"))
+                        {
+                            images.add(atts.getValue("image"));
+                        }
+                    }
+                });
+                parser.parse(is);
             }
         };
 
