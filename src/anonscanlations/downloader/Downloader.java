@@ -100,7 +100,10 @@ public class Downloader extends Thread
                 
                 DownloadJob job = jobs.remove(0);
                 DownloaderUtils.debug("Running job: " + job);
-                frame.setStatus(job.toString());
+
+                if(frame != null)
+                    frame.setStatus(job.toString());
+                
                 job.run();
             }
             catch(InterruptedException ie)
@@ -131,27 +134,31 @@ public class Downloader extends Thread
             {
                 try
                 {
-                    frame.setStatus("Initializing");
+                    if(frame != null)
+                        frame.setStatus("Initializing");
+
                     currentThread.pause();
                     chapter.init();
                     currentThread.pause();
-
                     currentThread.waitUntilFinished();
 
-                    frame.setStatus("Downloading");
+                    if(frame != null)
+                        frame.setStatus("Downloading");
+
                     currentThread.pause();
                     chapter.download(directory);
                     currentThread.pause();
-
                     currentThread.waitUntilFinished();
 
-                    frame.setStatus("Finished");
+                    if(frame != null)
+                        frame.setStatus("Finished");
                 }
                 catch(Exception e)
                 {
                     DownloaderUtils.errorGUI("Error in spawning download jobs", e, false);
 
-                    frame.setStatus("Error");
+                    if(frame != null)
+                        frame.setStatus("Error");
                 }
 
                 System.exit(0);
@@ -164,20 +171,28 @@ public class Downloader extends Thread
     {
         currentThread = new Downloader();
         currentThread.start();
-        frame = new TempDownloaderFrame();
+        
+        
     }
 
     public static void main(String[] args) throws Exception
     {
-        System.setProperty("http.agent", "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.20) Gecko/20110803 Firefox/3.6.20");
+        // unnecessary, but just to appear like a real viewer
+        System.setProperty("http.agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0");
 
+        // initialize backend
         init();
-
-        //ActibookChapter chapter = new ActibookChapter(new URL("http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html"));
-        ActibookChapter chapter = new ActibookChapter(new URL("http://www.dokidokivisual.com/comics/book/actibook/wb40537/_SWF_Window.html"));
-
-        runChapter(chapter, new File("D:\\test"));
-
-        //frame.setVisible(true);
+        
+        // Try to use native look and feel
+        try
+        {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        }
+        catch(Exception e)
+        {
+            // couldn't find native look and feel: it couldn't be helped
+        }
+        frame = new TempDownloaderFrame();
+        frame.setVisible(true);
     }
 }

@@ -8,6 +8,10 @@ import java.util.*;
 import java.io.*;
 import java.net.*;
 
+import org.xml.sax.*;
+import org.xml.sax.helpers.*;
+import com.bluecast.xml.*;
+
 import anonscanlations.downloader.*;
 
 /**
@@ -39,6 +43,7 @@ public class PCViewerChapter extends Chapter implements Serializable
         }
     }
 
+    // generate params for URL query string
     protected String getParams()
     {
         String ret = "";
@@ -66,15 +71,29 @@ public class PCViewerChapter extends Chapter implements Serializable
 
                 DownloaderUtils.debug("PCVC XML: " + page);
 
-                int index = page.indexOf("<DataFileFolder path=\"");
-                dataFolder = page.substring(index + 22, page.indexOf("\">", index));
+                Piccolo parser = new Piccolo();
+                InputSource is = new InputSource(new StringReader(page));
+                is.setEncoding("UTF-8");
 
-                index = page.indexOf("<SamplePageList list=\"");
-                String rangeString = page.substring(index + 22, page.indexOf("\"", index + 22));
-                String range[] = rangeString.split("-");
+                parser.setContentHandler(new DefaultHandler()
+                {
+                    @Override
+                    public void startElement(String uri, String localName, String qName, Attributes atts)
+                    {
+                        if(localName.equals("DataFileFolder"))
+                        {
+                            dataFolder = atts.getValue("path");
+                        }
+                        else if(localName.equals("SamplePageList"))
+                        {
+                            String range[] = atts.getValue("list").split("-");
 
-                rangeStart = Integer.parseInt(range[0]);
-                rangeEnd = Integer.parseInt(range[1]);
+                            rangeStart = Integer.parseInt(range[0]);
+                            rangeEnd = Integer.parseInt(range[1]);
+                        }
+                    }
+                });
+                parser.parse(is);
 
                 DownloaderUtils.debug("PCVC dataFolder: " + dataFolder);
                 DownloaderUtils.debug("PCVC rangeStart: " + rangeStart);
