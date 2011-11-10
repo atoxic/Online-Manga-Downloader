@@ -28,6 +28,7 @@ public class NicoNicoAceChapter extends Chapter
     private transient char[] password;
     private transient ArrayList<String> images;
     private transient NicoNicoLoginDownloadJob login;
+    private transient boolean is_trial;
 
     public NicoNicoAceChapter(URL _url, String _username, char[] _password)
     {
@@ -41,6 +42,7 @@ public class NicoNicoAceChapter extends Chapter
         bookid = null;
         images = new ArrayList<String>();
         login = null;
+        is_trial = true;
     }
 
     public void init() throws Exception
@@ -92,6 +94,7 @@ public class NicoNicoAceChapter extends Chapter
 
                 dl_key = obj.getString("dl_key");
                 maki_address = obj.getString("maki_address");
+                is_trial = obj.getBoolean("is_trial");
                 DownloaderUtils.debug("dl_key: " + dl_key);
                 DownloaderUtils.debug("maki_address: " + maki_address);
             }
@@ -105,7 +108,7 @@ public class NicoNicoAceChapter extends Chapter
             @Override
             public void run() throws Exception
             {
-                post = "streaming=init&trial=true&bookid=" + bookid + "&userid=" + userid;
+                post = "streaming=init&trial=" + is_trial + "&bookid=" + bookid + "&userid=" + userid;
 
                 super.run();
 
@@ -173,7 +176,7 @@ public class NicoNicoAceChapter extends Chapter
             final String finalImage = images.get(finalIndex);
 
             ZipDownloadJob file = new ZipDownloadJob("Page " + (i + 1),
-                                            "streaming=resources&trial=true&bookid=" + bookid +
+                                            "streaming=resources&trial=" + is_trial + "&bookid=" + bookid +
                                             "&resources=" + URLEncoder.encode("contents/" + finalImage, "UTF-8") + "&userid=" + userid)
             {
                 @Override

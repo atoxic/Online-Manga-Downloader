@@ -182,7 +182,7 @@ public class Downloader extends Thread
 
         // initialize backend
         init();
-        
+
         // Try to use native look and feel
         try
         {
