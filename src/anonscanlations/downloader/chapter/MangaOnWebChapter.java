@@ -107,8 +107,6 @@ public class MangaOnWebChapter extends Chapter
                 @Override
                 public void run() throws Exception
                 {
-
-
                     super.run();
                     bfkey.decrypt(buf, 0);
 

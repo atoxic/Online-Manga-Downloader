@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.zip.*;
 import java.util.regex.*;
 import java.net.*;
+import java.security.*;
 
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
@@ -28,7 +29,7 @@ public class NicoNicoAceChapter extends Chapter
     private transient char[] password;
     private transient ArrayList<String> images;
     private transient NicoNicoLoginDownloadJob login;
-    private transient boolean is_trial;
+    private transient boolean is_trial, use_drm;
 
     public NicoNicoAceChapter(URL _url, String _username, char[] _password)
     {
@@ -43,6 +44,7 @@ public class NicoNicoAceChapter extends Chapter
         images = new ArrayList<String>();
         login = null;
         is_trial = true;
+        use_drm = false;
     }
 
     public void init() throws Exception
@@ -52,6 +54,7 @@ public class NicoNicoAceChapter extends Chapter
         if(!matcher.matches())
             throw new Exception("Book ID not found");
         bookid = matcher.group(1);
+        DownloaderUtils.debug("bookid: " + bookid);
 
         login = new NicoNicoLoginDownloadJob(username, password);
 
@@ -95,15 +98,18 @@ public class NicoNicoAceChapter extends Chapter
                 dl_key = obj.getString("dl_key");
                 maki_address = obj.getString("maki_address");
                 is_trial = obj.getBoolean("is_trial");
+                use_drm = obj.getBoolean("use_drm");
                 DownloaderUtils.debug("dl_key: " + dl_key);
                 DownloaderUtils.debug("maki_address: " + maki_address);
+                DownloaderUtils.debug("is_trial: " + is_trial);
+                DownloaderUtils.debug("use_drm: " + use_drm);
             }
         };
 
         JSONDownloadJob lastRead = new JSONDownloadJob("Get last read",
                                             new URL("http://bkapi.seiga.nicovideo.jp/user/last_read?book_id=" + bookid));
 
-        ZipDownloadJob ePubInfo = new ZipDownloadJob("Getting ePubInfo", null)
+        NicoEBooksDownloadJob ePubInfo = new NicoEBooksDownloadJob("Getting ePubInfo", null)
         {
             @Override
             public void run() throws Exception
@@ -121,10 +127,22 @@ public class NicoNicoAceChapter extends Chapter
                         continue;
                     }
 
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-                    String page = "", line;
-                    while((line = reader.readLine()) != null)
-                        page += line;
+                    String page;
+
+                    if(use_drm)
+                    {
+                        byte[] array = readToBytes(input);
+                        ARC4 arc4 = new ARC4(key);
+                        page = new String(arc4.arc4Crypt(array));
+                    }
+                    else
+                    {
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                        String line;
+                        page = "";
+                        while((line = reader.readLine()) != null)
+                            page += line;
+                    }
 
                     Piccolo parser = new Piccolo();
                     InputSource is = new InputSource(new StringReader(page));
@@ -135,7 +153,7 @@ public class NicoNicoAceChapter extends Chapter
                         @Override
                         public void startElement(String uri, String localName, String qName, Attributes atts)
                         {
-                            if(localName.equals("img"))
+                            if(localName.equals("img") && atts.getValue("class").equals("img-screen"))
                                 images.add(atts.getValue("src"));
                         }
                     });
@@ -175,7 +193,7 @@ public class NicoNicoAceChapter extends Chapter
             final int finalIndex = i;
             final String finalImage = images.get(finalIndex);
 
-            ZipDownloadJob file = new ZipDownloadJob("Page " + (i + 1),
+            NicoEBooksDownloadJob file = new NicoEBooksDownloadJob("Page " + (i + 1),
                                             "streaming=resources&trial=" + is_trial + "&bookid=" + bookid +
                                             "&resources=" + URLEncoder.encode("contents/" + finalImage, "UTF-8") + "&userid=" + userid)
             {
@@ -183,15 +201,26 @@ public class NicoNicoAceChapter extends Chapter
                 public void run() throws Exception
                 {
                     super.run();
-
-                    ZipEntry e = input.getNextEntry();
+                    
+                    input.getNextEntry();
                     FileOutputStream fout = new FileOutputStream(
                                                     DownloaderUtils.fileName(finalDirectory, title, finalIndex + 1,
                                                                         finalImage.substring(finalImage.lastIndexOf('.') + 1)));
-                    for(int c = input.read(); c != -1; c = input.read())
+
+                    if(use_drm)
                     {
-                        fout.write(c);
+                        byte[] array = readToBytes(input);
+                        ARC4 arc4 = new ARC4(key);
+                        fout.write(arc4.arc4Crypt(array));
                     }
+                    else
+                    {
+                        for(int c = input.read(); c != -1; c = input.read())
+                        {
+                            fout.write(c);
+                        }
+                    }
+
                     fout.close();
                     input.close();
                 }
@@ -221,20 +250,26 @@ public class NicoNicoAceChapter extends Chapter
         }
     }
 
-    private class ZipDownloadJob extends DownloadJob
+    private class NicoEBooksDownloadJob extends DownloadJob
     {
-        protected ZipInputStream input;
         protected String post;
+        protected HttpURLConnection conn;
 
-        public ZipDownloadJob(String _desc, String _post)
+        protected byte[] key;
+        protected ZipInputStream input;
+
+        public NicoEBooksDownloadJob(String _desc, String _post)
         {
             super(_desc);
             post = _post;
+            conn = null;
+            key = null;
+            input = null;
         }
 
         public void run() throws Exception
         {
-            HttpURLConnection conn = (HttpURLConnection) (new URL(maki_address)).openConnection();
+            conn = (HttpURLConnection) (new URL(maki_address)).openConnection();
 
             conn.setRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -248,7 +283,63 @@ public class NicoNicoAceChapter extends Chapter
             if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
                 throw new Exception("404 Page Not Found: " + maki_address);
 
-            input = new ZipInputStream(conn.getInputStream());
+            InputStream in = conn.getInputStream();
+            byte[] array = readToBytes(in);
+            in.close();
+
+            if(use_drm)
+                key = createKey(array);
+            input = new ZipInputStream(new ByteArrayInputStream(array));
         }
+    }
+
+    private static final int FIXED_LOCAL_FILE_HEADER_LENGTH = 30,
+                            FILENAME_LENGTH_POSITION = 26,
+                            EXTRAFIELD_LENGTH_POSITION = 28;
+    private static final String SEED = "ojtDYr93p-h-9yt-ghOUG08fwigap1u0fnV";
+
+    private byte[] createKey(byte[] array) throws Exception
+    {
+        int start = ((int)array[FILENAME_LENGTH_POSITION + 1] << 8) +
+                            (int)array[FILENAME_LENGTH_POSITION];
+
+        int length = ((int)array[EXTRAFIELD_LENGTH_POSITION + 1] << 8) +
+                        (int)array[EXTRAFIELD_LENGTH_POSITION];
+
+        byte[] salt = new byte[length];
+        for(int i = 0; i < length; i++)
+            salt[i] = array[FIXED_LOCAL_FILE_HEADER_LENGTH + start + i];
+
+        int _loc_5 = salt[0] & 0xff;
+        int userIdIndex = (_loc_5 & 192) >> 6;
+        int identifierBookIdIndex = (_loc_5 & 48) >> 4;
+        int seedIndex = (_loc_5 & 12) >> 2;
+        int saltIndex = _loc_5 & 3;
+
+        byte[][] _loc_4 = new byte[4][];
+        _loc_4[userIdIndex] = userid.getBytes("UTF-8");
+        _loc_4[identifierBookIdIndex] = bookid.getBytes("UTF-8");
+        _loc_4[seedIndex] = SEED.getBytes("UTF-8");
+        _loc_4[saltIndex] = salt;
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        for(byte[] ba : _loc_4)
+            bos.write(ba);
+        byte[] bytes = bos.toByteArray();
+        bos.close();
+
+        return(MessageDigest.getInstance("MD5").digest(bytes));
+    }
+
+    private static byte[] readToBytes(InputStream in) throws IOException
+    {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] array = new byte[1024];
+        int len;
+        while((len = in.read(array)) != -1)
+            bos.write(array, 0, len);
+        array = bos.toByteArray();
+        bos.close();
+        return(array);
     }
 }

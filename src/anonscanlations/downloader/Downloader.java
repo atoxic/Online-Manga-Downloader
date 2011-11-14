@@ -183,6 +183,7 @@ public class Downloader extends Thread
         // initialize backend
         init();
 
+        //*
         // Try to use native look and feel
         try
         {
@@ -194,5 +195,6 @@ public class Downloader extends Thread
         }
         frame = new TempDownloaderFrame();
         frame.setVisible(true);
+        // */
     }
 }
