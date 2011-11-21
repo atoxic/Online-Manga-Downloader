@@ -26,17 +26,12 @@ public class ByteArrayDownloadJob extends DownloadJob
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         setRequestProperties(conn);
+        sendPOSTData(conn);
         if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
             throw new Exception("404 File Not Found: " + url);
 
         InputStream in = conn.getInputStream();
-        bytes = new byte[conn.getContentLength()];
-        int read, offset = 0;
-        while((read = in.read(bytes, offset, bytes.length - offset)) != -1)
-        {
-            offset += read;
-        }
-        in.close();
+        bytes = DownloaderUtils.readAllBytes(in);
     }
 }
 

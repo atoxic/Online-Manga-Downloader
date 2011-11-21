@@ -2,8 +2,9 @@
  * Coded by /a/non, for /a/non
  */
 
-package anonscanlations.downloader;
+package anonscanlations.downloader.chapter;
 
+import anonscanlations.downloader.Downloader;
 import java.io.*;
 import java.util.*;
 

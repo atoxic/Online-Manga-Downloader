@@ -26,12 +26,12 @@ public class YahooBookstoreDownloadJob extends ByteArrayDownloadJob
                                             (byte)0x79, (byte)0xb9, (byte)0x57, (byte)0xa8};
     // TODO: add support for user keys
 
-    private OutputStream os;
+    private File file;
 
-    public YahooBookstoreDownloadJob(String _desc, URL _url, OutputStream _os)
+    public YahooBookstoreDownloadJob(String _desc, URL _url, File _file)
     {
         super(_desc, _url);
-        os = _os;
+        file = _file;
     }
 
     @Override
@@ -91,10 +91,12 @@ public class YahooBookstoreDownloadJob extends ByteArrayDownloadJob
         byte[] decrypted2 = new byte[decrypted.length - i5];
         System.arraycopy(decrypted, 0, decrypted2, 0, decrypted2.length);
 
-        InputStream inflater = new InflaterInputStream(new ByteArrayInputStream(decrypted2), new Inflater(true));
+        InputStream inflater = new ByteArrayInputStream(decrypted2);
+        OutputStream fos = new InflaterOutputStream(new FileOutputStream(file), new Inflater(true));
         byte[] buf = new byte[1024];
         while(inflater.read(buf) != -1)
-            os.write(buf);
+            fos.write(buf);
         inflater.close();
+        fos.close();
     }
 }

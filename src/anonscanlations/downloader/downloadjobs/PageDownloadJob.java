@@ -27,6 +27,7 @@ public class PageDownloadJob extends DownloadJob
 
         conn = (HttpURLConnection) url.openConnection();
         setRequestProperties(conn);
+        sendPOSTData(conn);
         if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
             throw new Exception("404 Page Not Found: " + url);
         BufferedReader stream = new BufferedReader(new InputStreamReader(conn.getInputStream(), encoding));

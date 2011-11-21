@@ -4,6 +4,7 @@
 
 package anonscanlations.downloader;
 
+import anonscanlations.downloader.chapter.Chapter;
 import anonscanlations.downloader.downloadjobs.DownloadJob;
 import java.io.*;
 import java.util.*;
@@ -184,8 +185,7 @@ public class Downloader extends Thread
 
         // initialize backend
         init();
-        
-        //*
+
         // Try to use native look and feel
         try
         {
@@ -194,9 +194,9 @@ public class Downloader extends Thread
         catch(Exception e)
         {
             // couldn't find native look and feel: it couldn't be helped
+            DownloaderUtils.error("Could not set look and feel to native LnF", e, false);
         }
         frame = new TempDownloaderFrame();
         frame.setVisible(true);
-        // */
     }
 }

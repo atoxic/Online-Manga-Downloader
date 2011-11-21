@@ -111,14 +111,14 @@ public class NicoNicoAceChapter extends Chapter
         JSONDownloadJob lastRead = new JSONDownloadJob("Get last read",
                                             new URL("http://bkapi.seiga.nicovideo.jp/user/last_read?book_id=" + bookid));
 
-        EPubDownloadJob ePubInfo = new EPubDownloadJob("Getting ePubInfo", null, null)
+        EPubDownloadJob ePubInfo = new EPubDownloadJob("Getting ePubInfo", null)
         {
             byte[] key;
 
             @Override
             public void run() throws Exception
             {
-                data = "streaming=init&trial=" + is_trial + "&bookid=" + bookid + "&userid=" + userid;
+                setPOSTData("streaming=init&trial=" + is_trial + "&bookid=" + bookid + "&userid=" + userid);
                 url = new URL(maki_address);
 
                 addRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
@@ -205,12 +205,15 @@ public class NicoNicoAceChapter extends Chapter
             final int finalIndex = i;
             final String finalImage = images.get(finalIndex);
 
-            EPubDownloadJob file = new EPubDownloadJob("Page " + (i + 1),
-                                            maki,
-                                            "streaming=resources&trial=" + is_trial + "&bookid=" + bookid +
-                                            "&resources=" + URLEncoder.encode("contents/" + finalImage, "UTF-8") + "&userid=" + userid)
+            EPubDownloadJob file = new EPubDownloadJob("Page " + (i + 1), maki)
             {
                 byte[] key;
+                boolean read;
+
+                {
+                    key = null;
+                    read = false;
+                }
 
                 public void doByteInput(ByteArrayInputStream byte_input) throws Exception
                 {
@@ -223,6 +226,10 @@ public class NicoNicoAceChapter extends Chapter
 
                 public void doZipEntryInput(ZipInputStream input, ZipEntry e) throws Exception
                 {
+                    if(read)
+                        return;
+                    read = true;
+
                     FileOutputStream fout = new FileOutputStream(
                                                     DownloaderUtils.fileName(finalDirectory, title, finalIndex + 1,
                                                                         finalImage.substring(finalImage.lastIndexOf('.') + 1)));
@@ -243,6 +250,8 @@ public class NicoNicoAceChapter extends Chapter
                     fout.close();
                 }
             };
+            file.setPOSTData("streaming=resources&trial=" + is_trial + "&bookid=" + bookid +
+                            "&resources=" + URLEncoder.encode("contents/" + finalImage, "UTF-8") + "&userid=" + userid);
             file.addRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
             file.addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             file.addRequestProperty("x-nicobook-dl-key", dl_key);

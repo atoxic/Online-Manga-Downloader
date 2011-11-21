@@ -1,5 +1,6 @@
 package anonscanlations.downloader;
 
+import anonscanlations.downloader.chapter.Chapter;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;

@@ -33,6 +33,7 @@ public class ImageDownloadJob extends DownloadJob
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         setRequestProperties(conn);
+        sendPOSTData(conn);
         if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
             throw new Exception("404 File Not Found: " + url);
 
