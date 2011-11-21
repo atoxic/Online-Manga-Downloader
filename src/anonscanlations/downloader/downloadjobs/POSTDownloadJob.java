@@ -12,13 +12,12 @@ import anonscanlations.downloader.*;
 public class POSTDownloadJob extends DownloadJob
 {
     protected URL url;
-    protected String encoding, page, data;
+    protected String  data;
     protected HttpURLConnection conn;
-    public POSTDownloadJob(String _description, URL _url, String _encoding, String _data)
+    public POSTDownloadJob(String _description, URL _url, String _data)
     {
         super(_description);
         url = _url;
-        encoding = _encoding;
         data = _data;
         conn = null;
     }
@@ -35,14 +34,5 @@ public class POSTDownloadJob extends DownloadJob
         
         if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
             throw new Exception("404 Page Not Found: " + url);
-        BufferedReader stream = new BufferedReader(new InputStreamReader(conn.getInputStream(), encoding));
-
-	page = "";
-        String line;
-
-	while((line = stream.readLine()) != null)
-	    page += line;
-
-        stream.close();
     }
 }

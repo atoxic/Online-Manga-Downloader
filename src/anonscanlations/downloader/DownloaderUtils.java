@@ -140,7 +140,7 @@ public class DownloaderUtils
         return(source);
     }
 
-    public static byte[] readToBytes(InputStream in) throws IOException
+    public static byte[] readAllBytes(InputStream in) throws IOException
     {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         byte[] array = new byte[1024];
@@ -150,6 +150,16 @@ public class DownloaderUtils
         array = bos.toByteArray();
         bos.close();
         return(array);
+    }
+
+    public static String readAllLines(InputStream in, String encoding) throws IOException
+    {
+        StringBuilder page = new StringBuilder();
+        String line;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in, encoding));
+        while((line = reader.readLine()) != null)
+            page.append(line).append('\n');
+        return(page.toString());
     }
 
     private static final StringBuilder SB = new StringBuilder();

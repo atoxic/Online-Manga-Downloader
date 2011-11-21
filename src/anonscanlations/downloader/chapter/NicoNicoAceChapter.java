@@ -111,69 +111,78 @@ public class NicoNicoAceChapter extends Chapter
         JSONDownloadJob lastRead = new JSONDownloadJob("Get last read",
                                             new URL("http://bkapi.seiga.nicovideo.jp/user/last_read?book_id=" + bookid));
 
-        NicoEBooksDownloadJob ePubInfo = new NicoEBooksDownloadJob("Getting ePubInfo", null)
+        EPubDownloadJob ePubInfo = new EPubDownloadJob("Getting ePubInfo", null, null)
         {
+            byte[] key;
+
             @Override
             public void run() throws Exception
             {
-                post = "streaming=init&trial=" + is_trial + "&bookid=" + bookid + "&userid=" + userid;
+                data = "streaming=init&trial=" + is_trial + "&bookid=" + bookid + "&userid=" + userid;
+                url = new URL(maki_address);
 
+                addRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
+                addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                addRequestProperty("x-nicobook-dl-key", dl_key);
+                
                 super.run();
+            }
 
-                ZipEntry e;
-                while((e = input.getNextEntry()) != null)
+            public void doByteInput(ByteArrayInputStream byte_input) throws Exception
+            {
+                if(use_drm)
                 {
-                    if(!e.getName().endsWith(".xhtml"))
-                    {
-                        input.closeEntry();
-                        continue;
-                    }
-
-                    String page;
-
-                    if(use_drm)
-                    {
-                        byte[] array = DownloaderUtils.readToBytes(input);
-                        ARC4 arc4 = new ARC4(key);
-                        page = new String(arc4.arc4Crypt(array));
-                    }
-                    else
-                    {
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-                        String line;
-                        page = "";
-                        while((line = reader.readLine()) != null)
-                            page += line;
-                    }
-
-                    Piccolo parser = new Piccolo();
-                    InputSource is = new InputSource(new StringReader(page));
-                    is.setEncoding("UTF-8");
-
-                    parser.setContentHandler(new DefaultHandler()
-                    {
-                        @Override
-                        public void startElement(String uri, String localName, String qName, Attributes atts)
-                        {
-                            if(localName.equals("img") && atts.getValue("class").equals("img-screen"))
-                                images.add(atts.getValue("src"));
-                        }
-                    });
-                    // make it not get the dtd file
-                    parser.setEntityResolver(new EntityResolver()
-                    {
-                        @Override
-                        public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException
-                        {
-                            return(systemId.contains("dtd") ? new InputSource(new StringReader("")) : null);
-                        }
-                    });
-
-                    parser.parse(is);
-
-                    input.closeEntry();
+                    byte[] array = DownloaderUtils.readAllBytes(byte_input);
+                    key = createKey(array);
                 }
-                input.close();
+            }
+
+            public void doZipEntryInput(ZipInputStream input, ZipEntry e) throws Exception
+            {
+                if(!e.getName().endsWith(".xhtml"))
+                    return;
+
+                String page;
+
+                if(use_drm)
+                {
+                    byte[] array = DownloaderUtils.readAllBytes(input);
+                    ARC4 arc4 = new ARC4(key);
+                    page = new String(arc4.arc4Crypt(array));
+                }
+                else
+                {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                    String line;
+                    page = "";
+                    while((line = reader.readLine()) != null)
+                        page += line;
+                }
+
+                Piccolo parser = new Piccolo();
+                InputSource is = new InputSource(new StringReader(page));
+                is.setEncoding("UTF-8");
+
+                parser.setContentHandler(new DefaultHandler()
+                {
+                    @Override
+                    public void startElement(String uri, String localName, String qName, Attributes atts)
+                    {
+                        if(localName.equals("img") && atts.getValue("class").equals("img-screen"))
+                            images.add(atts.getValue("src"));
+                    }
+                });
+                // make it not get the dtd file
+                parser.setEntityResolver(new EntityResolver()
+                {
+                    @Override
+                    public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException
+                    {
+                        return(systemId.contains("dtd") ? new InputSource(new StringReader("")) : null);
+                    }
+                });
+
+                parser.parse(is);
             }
         };
 
@@ -189,44 +198,54 @@ public class NicoNicoAceChapter extends Chapter
     public void download(File directory) throws Exception
     {
         final File finalDirectory = directory;
+        URL maki = new URL(maki_address);
 
         for(int i = 0; i < images.size(); i++)
         {
             final int finalIndex = i;
             final String finalImage = images.get(finalIndex);
 
-            NicoEBooksDownloadJob file = new NicoEBooksDownloadJob("Page " + (i + 1),
+            EPubDownloadJob file = new EPubDownloadJob("Page " + (i + 1),
+                                            maki,
                                             "streaming=resources&trial=" + is_trial + "&bookid=" + bookid +
                                             "&resources=" + URLEncoder.encode("contents/" + finalImage, "UTF-8") + "&userid=" + userid)
             {
-                @Override
-                public void run() throws Exception
+                byte[] key;
+
+                public void doByteInput(ByteArrayInputStream byte_input) throws Exception
                 {
-                    super.run();
-                    
-                    input.getNextEntry();
+                    if(use_drm)
+                    {
+                        byte[] array = DownloaderUtils.readAllBytes(byte_input);
+                        key = createKey(array);
+                    }
+                }
+
+                public void doZipEntryInput(ZipInputStream input, ZipEntry e) throws Exception
+                {
                     FileOutputStream fout = new FileOutputStream(
                                                     DownloaderUtils.fileName(finalDirectory, title, finalIndex + 1,
                                                                         finalImage.substring(finalImage.lastIndexOf('.') + 1)));
-
                     if(use_drm)
                     {
-                        byte[] array = DownloaderUtils.readToBytes(input);
+                        byte[] array = DownloaderUtils.readAllBytes(input);
                         ARC4 arc4 = new ARC4(key);
                         fout.write(arc4.arc4Crypt(array));
                     }
                     else
                     {
-                        for(int c = input.read(); c != -1; c = input.read())
+                        byte[] buf = new byte[1024];
+                        while(input.read(buf) != -1)
                         {
-                            fout.write(c);
+                            fout.write(buf);
                         }
                     }
-
                     fout.close();
-                    input.close();
                 }
             };
+            file.addRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
+            file.addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            file.addRequestProperty("x-nicobook-dl-key", dl_key);
             downloader().addJob(file);
         }
     }
@@ -249,49 +268,6 @@ public class NicoNicoAceChapter extends Chapter
             super.run();
 
             obj = new JSONObject(page);
-        }
-    }
-
-    private class NicoEBooksDownloadJob extends DownloadJob
-    {
-        protected String post;
-        protected HttpURLConnection conn;
-
-        protected byte[] key;
-        protected ZipInputStream input;
-
-        public NicoEBooksDownloadJob(String _desc, String _post)
-        {
-            super(_desc);
-            post = _post;
-            conn = null;
-            key = null;
-            input = null;
-        }
-
-        public void run() throws Exception
-        {
-            conn = (HttpURLConnection) (new URL(maki_address)).openConnection();
-
-            conn.setRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("x-nicobook-dl-key", dl_key);
-
-            conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-            wr.write(post);
-            wr.flush();
-
-            if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
-                throw new Exception("404 Page Not Found: " + maki_address);
-
-            InputStream in = conn.getInputStream();
-            byte[] array = DownloaderUtils.readToBytes(in);
-            in.close();
-
-            if(use_drm)
-                key = createKey(array);
-            input = new ZipInputStream(new ByteArrayInputStream(array));
         }
     }
 

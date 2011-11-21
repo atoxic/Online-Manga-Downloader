@@ -37,12 +37,14 @@ public class PocoChapter extends Chapter implements Serializable
         if(partid == null)
             throw new Exception("Invalid URL: partid not found");
 
-        POSTDownloadJob load = new POSTDownloadJob("Get data", new URL("http://www.poco2.jp/viewerset/common/load.php"), "UTF-8", "partid=" + partid)
+        POSTDownloadJob load = new POSTDownloadJob("Get data", new URL("http://www.poco2.jp/viewerset/common/load.php"), "partid=" + partid)
         {
             @Override
             public void run() throws Exception
             {
                 super.run();
+
+                String page = DownloaderUtils.readAllLines(conn.getInputStream(), "UTF-8");
 
                 Piccolo parser = new Piccolo();
                 InputSource is = new InputSource(new StringReader(page));
