@@ -20,7 +20,8 @@ public enum Chapters
     NICONICO("NicoNico User-published"),
     PCVIEWER("PCViewer/DOR"),
     PLUGINFREE("PluginFree"),
-    POCO("Poco");
+    POCO("Poco"),
+    YAHOOBOOKSTORE("Yahoo Bookstore");
 
     private final String name;
     Chapters(String _name)

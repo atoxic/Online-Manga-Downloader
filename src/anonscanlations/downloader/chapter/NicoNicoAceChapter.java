@@ -174,14 +174,7 @@ public class NicoNicoAceChapter extends Chapter
                     }
                 });
                 // make it not get the dtd file
-                parser.setEntityResolver(new EntityResolver()
-                {
-                    @Override
-                    public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException
-                    {
-                        return(systemId.contains("dtd") ? new InputSource(new StringReader("")) : null);
-                    }
-                });
+                parser.setEntityResolver(new DefaultEntityResolver());
 
                 parser.parse(is);
             }

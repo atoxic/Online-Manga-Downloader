@@ -43,7 +43,7 @@ public class PreferencesManager
             PREFS.putBoolean("initialized", true);
             PREFS.putBoolean(KEY_SERVERCHECK, true);
             PREFS.putBoolean(KEY_SUBMIT, false);
-            PREFS.put(KEY_DOWNLOADDIR, "./downloads/");
+            PREFS.put(KEY_DOWNLOADDIR, new java.io.File(".").getAbsoluteFile().getParent());
         }
     }
 

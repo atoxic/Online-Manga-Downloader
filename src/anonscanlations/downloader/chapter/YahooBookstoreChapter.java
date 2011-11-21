@@ -111,7 +111,7 @@ public class YahooBookstoreChapter extends Chapter
                         tags.pop();
                     }
                 });
-
+                parser.setEntityResolver(new DefaultEntityResolver());
                 parser.parse(is);
 
                 if(path == null)
@@ -178,6 +178,7 @@ public class YahooBookstoreChapter extends Chapter
                         }
                     }
                 });
+                parser.setEntityResolver(new DefaultEntityResolver());
                 parser.parse(is);
             }
         };

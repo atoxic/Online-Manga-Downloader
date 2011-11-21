@@ -154,6 +154,7 @@ public class NicoNicoChapter extends Chapter
                 }
             }
         });
+        parser.setEntityResolver(new DefaultEntityResolver());
         parser.parse(is);
     }
 

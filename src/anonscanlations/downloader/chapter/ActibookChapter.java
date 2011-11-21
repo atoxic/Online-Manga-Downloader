@@ -100,6 +100,7 @@ public class ActibookChapter extends Chapter implements Serializable
                         tags.pop();
                     }
                 });
+                parser.setEntityResolver(new DefaultEntityResolver());
                 parser.parse(is);
             }
         };
@@ -142,6 +143,7 @@ public class ActibookChapter extends Chapter implements Serializable
                             throw DownloaderUtils.DONE;
                     }
                 });
+                parser.setEntityResolver(new DefaultEntityResolver());
                 try
                 {
                     parser.parse(is);

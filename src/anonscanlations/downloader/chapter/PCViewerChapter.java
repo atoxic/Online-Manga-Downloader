@@ -97,6 +97,7 @@ public class PCViewerChapter extends Chapter implements Serializable
                         }
                     }
                 });
+                parser.setEntityResolver(new DefaultEntityResolver());
                 parser.parse(is);
 
                 DownloaderUtils.debug("PCVC dataFolder: " + dataFolder);

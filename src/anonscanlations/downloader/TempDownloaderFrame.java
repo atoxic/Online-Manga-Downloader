@@ -70,6 +70,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
+        jRadioButton9 = new javax.swing.JRadioButton();
         downloadButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         viewerURLField = new javax.swing.JTextField();
@@ -82,10 +83,15 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Online Manga Downloader 0.1.4");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                TempDownloaderFrame.this.windowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Download Directory");
 
-        downloadDirectoryField.setText(new java.io.File(".").getAbsoluteFile().getParent());
+        downloadDirectoryField.setText(PreferencesManager.PREFS.get(PreferencesManager.KEY_DOWNLOADDIR, new java.io.File(".").getAbsoluteFile().getParent()));
         downloadDirectoryField.setName("Directory"); // NOI18N
 
         browseButton.setText("Browse...");
@@ -235,6 +241,11 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jLabel5))
         );
 
+        jRadioButton9.setText(Chapters.YAHOOBOOKSTORE.getName());
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton9, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -260,7 +271,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clubSundayKeyURL, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)))
+                        .addComponent(clubSundayKeyURL, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
+                    .addComponent(jRadioButton9))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -291,6 +303,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                     .addComponent(clubSundayRadioButton)
                     .addComponent(clubSundayKeyURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButton9)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -348,11 +362,11 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(manual)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 394, Short.MAX_VALUE)
                         .addComponent(jButton1))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
@@ -392,8 +406,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(manual)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(downloadButton)
@@ -451,13 +465,14 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
             switch(c)
             {
-                case ACTIBOOK:      chapter = new ActibookChapter(viewerURL);       break;
-                case CROCHETTIME:   chapter = new CrochetTimeChapter(viewerURL);    break;
-                case MANGAONWEB:    chapter = new MangaOnWebChapter(viewerURL);     break;
-                case PCVIEWER:      chapter = new PCViewerChapter(viewerURL);       break;
-                case PLUGINFREE:    chapter = new PluginFreeChapter(viewerURL);     break;
-                case POCO:          chapter = new PocoChapter(viewerURL);           break;
-                case NICONICO2:     chapter = new NicoNicoChapter2(viewerURL);      break;
+                case ACTIBOOK:          chapter = new ActibookChapter(viewerURL);           break;
+                case CROCHETTIME:       chapter = new CrochetTimeChapter(viewerURL);        break;
+                case MANGAONWEB:        chapter = new MangaOnWebChapter(viewerURL);         break;
+                case PCVIEWER:          chapter = new PCViewerChapter(viewerURL);           break;
+                case PLUGINFREE:        chapter = new PluginFreeChapter(viewerURL);         break;
+                case POCO:              chapter = new PocoChapter(viewerURL);               break;
+                case NICONICO2:         chapter = new NicoNicoChapter2(viewerURL);          break;
+                case YAHOOBOOKSTORE:    chapter = new YahooBookstoreChapter(viewerURL);     break;
                 case CLUBSUNDAY:
                 {
                     URL keyURL;
@@ -495,10 +510,12 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             chapters.add(new ActibookChapter(viewerURL));
             chapters.add(new PCViewerChapter(viewerURL));
             chapters.add(new PluginFreeChapter(viewerURL));
+            chapters.add(new YahooBookstoreChapter(viewerURL));
             chapters.add(new CrochetTimeChapter(viewerURL));
             chapters.add(new MangaOnWebChapter(viewerURL));
             chapters.add(new PocoChapter(viewerURL));
             chapters.add(new NicoNicoChapter2(viewerURL));
+            chapters.add(new SundayChapter(viewerURL));
 
             Downloader.autodetectChapter(chapters, downloadDirectory);
         }
@@ -553,6 +570,11 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         clubSundayKeyURL.setEnabled(manual.isSelected() && clubSundayRadioButton.isSelected());
     }//GEN-LAST:event_radioButtonItemStateChanged
 
+    private void windowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowClosing
+        PreferencesManager.PREFS.put(PreferencesManager.KEY_DOWNLOADDIR,
+                                downloadDirectoryField.getText());
+    }//GEN-LAST:event_windowClosing
+
     /**
     * @param args the command line arguments
     */
@@ -590,6 +612,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JRadioButton jRadioButton8;
+    private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JRadioButton manual;
     private javax.swing.JRadioButton nicoAceRadioButton;
     private javax.swing.JRadioButton nicoRadioButton;

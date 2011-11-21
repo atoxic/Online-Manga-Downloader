@@ -88,6 +88,8 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
                             throw DownloaderUtils.DONE;
                     }
                 });
+
+                parser.setEntityResolver(new DefaultEntityResolver());
                 try
                 {
                     parser.parse(is);
@@ -136,6 +138,7 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
                         tags.pop();
                     }
                 });
+                parser.setEntityResolver(new DefaultEntityResolver());
                 parser.parse(is);
             }
         };

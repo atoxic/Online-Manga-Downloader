@@ -94,14 +94,21 @@ public class Downloader extends Thread
         {
             try
             {
-                // So everything done to the thread after this (adding jobs, suspending) happens after I start waiting
+                /*
+                 * So everything done to the thread after this
+                 * (adding jobs, suspending) happens after I start waiting.
+                 * This is important if those actions were triggered by
+                 * the downloader finishing the queue.
+                 */
                 synchronized(waitForJobs)
                 {
                     if(jobs.isEmpty())
+                    {
                         synchronized(finished)
                         {
                             finished.notifyAll();
                         }
+                    }
                     while(!die && (jobs.isEmpty() || suspended))
                     {
                         waitForJobs.wait();

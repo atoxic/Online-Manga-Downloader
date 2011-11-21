@@ -66,6 +66,7 @@ public class PocoChapter extends Chapter implements Serializable
                         }
                     }
                 });
+                parser.setEntityResolver(new DefaultEntityResolver());
                 parser.parse(is);
             }
         };

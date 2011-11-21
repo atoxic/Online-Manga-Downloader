@@ -89,6 +89,7 @@ public class MangaOnWebChapter extends Chapter
                         }
                     }
                 });
+                parser.setEntityResolver(new DefaultEntityResolver());
                 parser.parse(is);
             }
         };

@@ -30,10 +30,24 @@ public class SundayChapter extends Chapter
     private transient int min, max;
     private transient long timestamp;
 
+    public SundayChapter(URL _url)
+    {
+        this(_url, null);
+    }
     public SundayChapter(URL _url, URL _keyURL)
     {
         keyURL = _keyURL;
         url = _url;
+        key1 = null;
+        key2 = null;
+        key3 = null;
+        key4 = null;
+        shd = null;
+    }
+
+    public ArrayList<DownloadJob> init() throws Exception
+    {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
 
         HashMap<String, String> params = DownloaderUtils.getQueryMap(url);
         key1 = params.get("key1");
@@ -41,11 +55,7 @@ public class SundayChapter extends Chapter
         key3 = params.get("key3");
         key4 = params.get("key4");
         shd = params.get("shd");
-    }
-
-    public ArrayList<DownloadJob> init() throws Exception
-    {
-        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
+        
         SessionDownloadJob session = new SessionDownloadJob(keyURL);
         MainFileDownloadJob mainFile = new MainFileDownloadJob();
         XMLDownloadJob xml = new XMLDownloadJob();
@@ -99,6 +109,18 @@ public class SundayChapter extends Chapter
         }
         public void run() throws Exception
         {
+            if(url == null)
+            {
+                KeyURLDialog dialog = new KeyURLDialog();
+                dialog.setVisible(true);
+                synchronized(dialog.lock)
+                {
+                    dialog.lock.wait();
+                }
+                url = new URL(dialog.getURL());
+                dialog.dispose();
+            }
+
             DownloaderUtils.debug("SessionDJ url: " + url);
             HttpURLConnection urlConn = (HttpURLConnection)url.openConnection();
             urlConn.setInstanceFollowRedirects(false);
