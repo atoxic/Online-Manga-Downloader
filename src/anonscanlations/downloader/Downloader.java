@@ -165,8 +165,51 @@ public class Downloader extends Thread
                     if(frame != null)
                         frame.setStatus("Error");
                 }
+            }
+        };
+        t.start();
+    }
 
-                System.exit(0);
+    public static void autodetectChapter(ArrayList<Chapter> _chapters, File _directory)
+    {
+        final ArrayList<Chapter> chapters = _chapters;
+        final File directory = _directory;
+        Thread t = new Thread()
+        {
+            @Override
+            public void run()
+            {
+                for(Chapter chapter : chapters)
+                {
+                    try
+                    {
+                        if(frame != null)
+                            frame.setStatus("Trying handler: " + chapter.getClass());
+
+                        currentThread.pause();
+                        chapter.init();
+                        currentThread.pause();
+                        currentThread.waitUntilFinished();
+
+                        if(frame != null)
+                            frame.setStatus("Downloading");
+
+                        currentThread.pause();
+                        chapter.download(directory);
+                        currentThread.pause();
+                        currentThread.waitUntilFinished();
+                        
+                        if(frame != null)
+                            frame.setStatus("Finished");
+
+                        return;
+                    }
+                    catch(Exception e)
+                    {
+                    }
+                }
+                if(frame != null)
+                    frame.setStatus("Error: could not autodetect");
             }
         };
         t.start();
