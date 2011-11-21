@@ -488,9 +488,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Examples"/>
       </Properties>
-      <BindingProperties>
-        <BindingProperty name="enabled" source="manual" sourcePath="${selected}" target="jButton1" targetPath="enabled" updateStrategy="0" immediately="false"/>
-      </BindingProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>

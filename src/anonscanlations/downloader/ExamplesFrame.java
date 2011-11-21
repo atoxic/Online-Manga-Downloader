@@ -903,7 +903,7 @@ public class ExamplesFrame extends javax.swing.JFrame {
         jEditorPane11.setContentType("text/html");
         jEditorPane11.setEditable(false);
         jEditorPane11.setFont(jEditorPane11.getFont());
-        jEditorPane11.setText("<html>Native viewer application used for <a href=\"http://bookstore.yahoo.co.jp/\">Yahoo Bookstore</a>.  The downloader for this viewer can download the chapter if you give it either <a href=\"http://bookstore.yahoo.co.jp/shoshi-118408/\">the page that triggers the viewer to open the chapter</a> or the \"ybookstore://\" link (view the source to find it; in this case, \"ybookstore://?s=1&i=118408&v=1\").  It does not support downloading books you have bought yet (i.e. it only downloads the publicly downloadable parts).</html>");
+        jEditorPane11.setText("<html>Native viewer application used for <a href=\"http://bookstore.yahoo.co.jp/\">Yahoo Bookstore</a>.  The downloader for this viewer can download the chapter if you give it either <a href=\"http://bookstore.yahoo.co.jp/shoshi-118408/\">the page with a link that opens the viewer</a> (usually has a blue button that says  \"立ち読み\") or the \"ybookstore://\" link (view the source to find it; in this case, \"ybookstore://?s=1&i=118408&v=1\").  It does not support downloading books you have bought yet (i.e. it only downloads the publicly downloadable parts).</html>");
         ((javax.swing.text.html.HTMLDocument)jEditorPane11.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane11.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {

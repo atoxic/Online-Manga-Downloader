@@ -24,7 +24,7 @@ public enum Chapters
     YAHOOBOOKSTORE("Yahoo Bookstore");
 
     private final String name;
-    Chapters(String _name)
+    private Chapters(String _name)
     {
         name = _name;
     }

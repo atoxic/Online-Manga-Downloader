@@ -94,6 +94,8 @@ public class Downloader extends Thread
         {
             try
             {
+                List<DownloadJob> top;
+                
                 /*
                  * So everything done to the thread after this
                  * (adding jobs, suspending) happens after I start waiting.
@@ -113,12 +115,12 @@ public class Downloader extends Thread
                     {
                         waitForJobs.wait();
                     }
+                    if(die)
+                        break;
+                    top = jobs.remove(0);
                 }
                 
-                if(die)
-                    break;
-                
-                for(DownloadJob job : jobs.remove(0))
+                for(DownloadJob job : top)
                 {
                     DownloaderUtils.debug("Running job: " + job);
                     if(frame != null)
@@ -246,6 +248,7 @@ public class Downloader extends Thread
                     }
                     catch(Exception e)
                     {
+                        DownloaderUtils.error("Handler failed: " + chapter.getClass(), e, false);
                     }
                     currentThread.unpause();
                 }
