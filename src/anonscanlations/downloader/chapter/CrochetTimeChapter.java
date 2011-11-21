@@ -396,7 +396,7 @@ public class CrochetTimeChapter extends Chapter
 
     public ArrayList<DownloadJob> download(File directory) throws Exception
     {
-        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
+        ArrayList<DownloadJob> jobsList = new ArrayList<DownloadJob>();
 
         // for the file list and downloaded files
         final File temp = File.createTempFile("crochettime_temp_", ".bin"),
@@ -444,8 +444,8 @@ public class CrochetTimeChapter extends Chapter
                 }
             };
 
-            list.add(page);
+            jobsList.add(page);
         }
-        return(list);
+        return(jobsList);
     }
 }
