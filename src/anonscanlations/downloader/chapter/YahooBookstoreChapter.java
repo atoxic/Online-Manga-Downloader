@@ -38,29 +38,33 @@ public class YahooBookstoreChapter extends Chapter
 
     public void init() throws Exception
     {
-        PageDownloadJob page = new PageDownloadJob("Get page and find id", url, "UTF-8")
+        if(url.getProtocol().equals("http"))
         {
-            @Override
-            public void run() throws Exception
+            PageDownloadJob page = new PageDownloadJob("Get page and find id", url, "UTF-8")
             {
-                super.run();
-
-                int index = page.indexOf("ybookstore://");
-                if(index == -1)
-                    throw new Exception("URI not found");
-
-                String query = page.substring(page.indexOf('?', index) + 1,
-                                            page.indexOf('"', index));
-
-                String[] params = query.split("&");
-                for(String param : params)
+                @Override
+                public void run() throws Exception
                 {
-                    String[] pair = param.split("=");
-                    if(pair[0].equals("i"))
-                        id = pair[1];
+                    super.run();
+
+                    int index = page.indexOf("ybookstore://");
+                    if(index == -1)
+                        throw new Exception("URI not found");
+
+                    URL uri = new URL(page.substring(index, page.indexOf('"', index)));
+                    Map<String, String> params = DownloaderUtils.getQueryMap(uri);
+                    id = params.get("i");
                 }
-            }
-        };
+            };
+            downloader().addJob(page);
+        }
+        else if(url.getProtocol().equals("ybookstore"))
+        {
+            Map<String, String> params = DownloaderUtils.getQueryMap(url);
+            id = params.get("i");
+        }
+        else
+            throw new Exception("Unknown protocol");
 
         PageDownloadJob ePubData = new PageDownloadJob("Get info on ePub file", null, "UTF-8")
         {
@@ -176,7 +180,7 @@ public class YahooBookstoreChapter extends Chapter
             }
         };
 
-        downloader().addJob(page);
+        
         downloader().addJob(ePubData);
         downloader().addJob(ePub);
     }
