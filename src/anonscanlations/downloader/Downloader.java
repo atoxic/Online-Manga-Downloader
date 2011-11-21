@@ -6,14 +6,9 @@ package anonscanlations.downloader;
 
 import java.io.*;
 import java.util.*;
-import java.net.*;
-import java.util.zip.*;
-import javax.crypto.*;
-import javax.crypto.spec.*;
 
 import anonscanlations.downloader.chapter.*;
 import anonscanlations.downloader.downloadjobs.*;
-import anonscanlations.downloader.extern.*;
 
 /**
  * This is the thread that processes all download jobs
@@ -39,9 +34,9 @@ public class Downloader extends Thread
     }
     public void addJobs(ArrayList<DownloadJob> job)
     {
+        jobs.add(job);
         synchronized(waitForJobs)
         {
-            jobs.add(job);
             waitForJobs.notify();
         }
     }

@@ -2,11 +2,8 @@ package anonscanlations.downloader.downloadjobs;
 
 import java.io.*;
 import java.net.*;
-import java.util.*;
 
-import anonscanlations.downloader.*;
 import anonscanlations.downloader.chapter.*;
-import anonscanlations.downloader.downloadjobs.*;
 
 /**
  *

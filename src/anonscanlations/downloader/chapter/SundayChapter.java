@@ -8,11 +8,8 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-import java.math.*;
 import java.security.*;
-import javax.xml.parsers.*;
 import org.w3c.dom.*;
-import org.xml.sax.*;
 
 import anonscanlations.downloader.*;
 import anonscanlations.downloader.downloadjobs.*;

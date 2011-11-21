@@ -1,9 +1,7 @@
 package anonscanlations.downloader.downloadjobs;
 
-import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
-import java.util.*;
 import java.net.*;
 import javax.imageio.*;
 

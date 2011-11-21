@@ -3,8 +3,6 @@ package anonscanlations.downloader.chapter.ybookstore;
 import java.io.*;
 import java.net.*;
 
-import anonscanlations.downloader.*;
-
 /**
  *
  * @author /a/non <anonymousscanlations@gmail.com>

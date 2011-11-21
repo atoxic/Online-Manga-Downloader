@@ -419,7 +419,7 @@ public class CrochetTimeChapter extends Chapter
 
                     decryptFile(temp, tempOut);
                     
-                    BufferedInputStream input = new BufferedInputStream(new ZInputStream(new FileInputStream(tempOut)));
+                    BufferedInputStream input = new BufferedInputStream(new InflaterInputStream(new FileInputStream(tempOut)));
                     FileOutputStream output = new FileOutputStream(DownloaderUtils.fileName(finalDirectory, path, finalIndex, "jpg"));
                     byte[] buf = new byte[1024];
                     try

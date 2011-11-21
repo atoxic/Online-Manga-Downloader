@@ -1,7 +1,5 @@
 package anonscanlations.downloader.chapter;
 
-import anonscanlations.downloader.*;
-
 /**
  *
  * @author /a/non <anonymousscanlations@gmail.com>
