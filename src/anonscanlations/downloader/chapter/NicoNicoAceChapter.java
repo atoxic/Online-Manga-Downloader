@@ -33,6 +33,10 @@ public class NicoNicoAceChapter extends Chapter
     private transient NicoNicoLoginDownloadJob login;
     private transient boolean is_trial, use_drm;
 
+    public NicoNicoAceChapter(URL _url)
+    {
+        this(_url, null, null);
+    }
     public NicoNicoAceChapter(URL _url, String _username, char[] _password)
     {
         url = _url;

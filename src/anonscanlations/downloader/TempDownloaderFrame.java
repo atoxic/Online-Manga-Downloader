@@ -81,7 +81,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jRadioButton8 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Online Manga Downloader 0.1.4");
+        setTitle("Online Manga Downloader 0.1.5");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -516,6 +516,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             chapters.add(new PocoChapter(viewerURL));
             chapters.add(new NicoNicoChapter2(viewerURL));
             chapters.add(new SundayChapter(viewerURL));
+            chapters.add(new NicoNicoAceChapter(viewerURL));
+            chapters.add(new NicoNicoChapter(viewerURL));
 
             Downloader.autodetectChapter(chapters, downloadDirectory);
         }

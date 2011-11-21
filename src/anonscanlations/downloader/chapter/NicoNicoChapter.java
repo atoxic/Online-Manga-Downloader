@@ -25,6 +25,10 @@ public class NicoNicoChapter extends Chapter
     private transient String username, title, id;
     private transient char[] password;
     private transient HashMap<String, NicoImage> images;
+    public NicoNicoChapter(URL _url)
+    {
+        this(_url, null, null);
+    }
     public NicoNicoChapter(URL _url, String _username, char[] _password)
     {
         url = _url;

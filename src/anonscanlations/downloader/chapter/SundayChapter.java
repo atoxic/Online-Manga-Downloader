@@ -23,6 +23,8 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class SundayChapter extends Chapter
 {
+    public static final KeyURLDialog DIALOG = new KeyURLDialog();
+
     private String key1, key2, key3, key4, shd;
     private URL url, keyURL;
 
@@ -111,14 +113,7 @@ public class SundayChapter extends Chapter
         {
             if(url == null)
             {
-                KeyURLDialog dialog = new KeyURLDialog();
-                dialog.setVisible(true);
-                synchronized(dialog.lock)
-                {
-                    dialog.lock.wait();
-                }
-                url = new URL(dialog.getURL());
-                dialog.dispose();
+                url = new URL(DIALOG.getURL());
             }
 
             DownloaderUtils.debug("SessionDJ url: " + url);
