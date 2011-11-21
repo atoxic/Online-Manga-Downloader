@@ -53,8 +53,9 @@ public class NicoNicoChapter extends Chapter
         }
     }
 
-    public void init() throws Exception
+    public ArrayList<DownloadJob> init() throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         Matcher matcher = IDMATCH.matcher(url.toString());
         if(!matcher.matches())
             throw new Exception("ID not found");
@@ -84,9 +85,10 @@ public class NicoNicoChapter extends Chapter
                 parseData(page);
             }
         };
-        downloader().addJob(login);
-        downloader().addJob(info);
-        downloader().addJob(data);
+        list.add(login);
+        list.add(info);
+        list.add(data);
+        return(list);
     }
 
     private void parseData(String page) throws Exception
@@ -155,24 +157,26 @@ public class NicoNicoChapter extends Chapter
         parser.parse(is);
     }
 
-    public void download(File directory) throws Exception
+    public ArrayList<DownloadJob> download(File directory) throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         int i = 1;
         for(NicoImage image : images.values())
         {
             FileDownloadJob page = new FileDownloadJob("Page " + i,
                             new URL("http://lohas.nicoseiga.jp/thumb/" + image.id + "l?"),
                             DownloaderUtils.fileName(directory, title, i, "jpg"));
-            downloader().addJob(page);
+            list.add(page);
             if(image.se_path != null)
             {
                 FileDownloadJob sfx = new FileDownloadJob("Page " + i + " SFX",
                             new URL("http://lohas.nicoseiga.jp/" + image.se_path),
                             DownloaderUtils.fileName(directory, title, i, "mp3"));
-                downloader().addJob(sfx);
+                list.add(sfx);
             }
             
             i++;
         }
+        return(list);
     }
 }

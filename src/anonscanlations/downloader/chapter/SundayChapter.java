@@ -43,26 +43,29 @@ public class SundayChapter extends Chapter
         shd = params.get("shd");
     }
 
-    public void init() throws Exception
+    public ArrayList<DownloadJob> init() throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         SessionDownloadJob session = new SessionDownloadJob(keyURL);
         MainFileDownloadJob mainFile = new MainFileDownloadJob();
         XMLDownloadJob xml = new XMLDownloadJob();
         
-        downloader().addJob(session);
-        downloader().addJob(mainFile);
-        downloader().addJob(xml);
+        list.add(session);
+        list.add(mainFile);
+        list.add(xml);
+        return(list);
     }
     
-    public void download(File directory) throws Exception
+    public ArrayList<DownloadJob> download(File directory) throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         final MessageDigest md5 = MessageDigest.getInstance("MD5");
         String origURL = server + "data/" + key1 + "/" + key2 + "/" + key3 + "/" + key4 + "/bin/";
 
         for(int i = min; i <= max; i++)
         {
-            String url = origURL + key3 + "_" + key4 + "_" + String.format("%04d", i) + ".bin?e=" + timestamp,
-                    toHash = "e47ec34c9cf59bca8d8eb865896b74ff88f953d3" + url,
+            String imageURL = origURL + key3 + "_" + key4 + "_" + String.format("%04d", i) + ".bin?e=" + timestamp,
+                    toHash = "e47ec34c9cf59bca8d8eb865896b74ff88f953d3" + imageURL,
                     hashedURL = "";
             md5.reset();
             md5.update(toHash.getBytes());
@@ -77,11 +80,13 @@ public class SundayChapter extends Chapter
                     hashedURL += tmp;
             }
 
-            url += "&h=" + hashedURL;
+            imageURL += "&h=" + hashedURL;
 
-            PCViewerDownloadJob file = new PCViewerDownloadJob("Page " + i, new URL(url), DownloaderUtils.fileName(directory, key3 + "_c" + key4, i, "jpg"));
-            downloader().addJob(file);
+            PCViewerDownloadJob file = new PCViewerDownloadJob("Page " + i, new URL(imageURL), DownloaderUtils.fileName(directory, key3 + "_c" + key4, i, "jpg"));
+            list.add(file);
         }
+
+        return(list);
     }
 
     private class SessionDownloadJob extends DownloadJob

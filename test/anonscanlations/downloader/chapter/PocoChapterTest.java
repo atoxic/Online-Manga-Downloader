@@ -39,10 +39,10 @@ public class PocoChapterTest extends PocoChapter        // So I can access priva
     public void testInit() throws Exception
     {
         PocoChapter instance = new PocoChapter(new URL("http://www.poco2.jp/viewer/play.php?partid=f4b9ec30ad9f68f89b29639786cb62ef"));
-        downloader().pause();
-        instance.init();
-        downloader().pause();
-        downloader().waitUntilFinished();
+        Downloader.getDownloader().pause();
+        Downloader.getDownloader().addJobs(instance.init());
+        Downloader.getDownloader().pause();
+        Downloader.getDownloader().waitUntilFinished();
 
         assertTrue(instance.images.get(0).equals("http://www.poco2.jp/viewerset/story/0033/0069/00000094/1120.jpg"));
     }
@@ -56,17 +56,17 @@ public class PocoChapterTest extends PocoChapter        // So I can access priva
         File directory = TestUtils.createTempDirectory();
         PocoChapter instance = new PocoChapter(new URL("http://www.poco2.jp/viewer/play.php?partid=f4b9ec30ad9f68f89b29639786cb62ef"));
 
-        downloader().pause();
-        instance.init();
-        downloader().pause();
-        downloader().waitUntilFinished();
+        Downloader.getDownloader().pause();
+        Downloader.getDownloader().addJobs(instance.init());
+        Downloader.getDownloader().pause();
+        Downloader.getDownloader().waitUntilFinished();
 
         assertTrue(instance.images.get(0).equals("http://www.poco2.jp/viewerset/story/0033/0069/00000094/1120.jpg"));
 
-        downloader().pause();
-        instance.download(directory);
-        downloader().pause();
-        downloader().waitUntilFinished();
+        Downloader.getDownloader().pause();
+        Downloader.getDownloader().addJobs(instance.download(directory));
+        Downloader.getDownloader().pause();
+        Downloader.getDownloader().waitUntilFinished();
 
         assertTrue(CRC32.length >= directory.listFiles().length);
         int i = 0;

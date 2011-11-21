@@ -4,8 +4,6 @@
 
 package anonscanlations.downloader;
 
-import anonscanlations.downloader.chapter.Chapter;
-import anonscanlations.downloader.downloadjobs.DownloadJob;
 import java.io.*;
 import java.util.*;
 import java.net.*;
@@ -14,51 +12,60 @@ import javax.crypto.*;
 import javax.crypto.spec.*;
 
 import anonscanlations.downloader.chapter.*;
+import anonscanlations.downloader.downloadjobs.*;
 import anonscanlations.downloader.extern.*;
 
 /**
- *
- * @author Administrator
+ * This is the thread that processes all download jobs
+ * @author /a/non
  */
 public class Downloader extends Thread
 {
     private static TempDownloaderFrame frame;
     private static Downloader currentThread;
-    private static List<DownloadJob> jobs;
+    private static List<List<DownloadJob>> jobs;
     
     private boolean die, suspended;
     private Exception error;
     private final Object finished, waitForJobs;
     private Downloader()
     {
-        jobs = Collections.synchronizedList(new ArrayList<DownloadJob>());
+        jobs = Collections.synchronizedList(new ArrayList<List<DownloadJob>>());
         die = false;
         suspended = false;
         error = null;
         finished = new Object();
         waitForJobs = new Object();
     }
-    public void addJob(DownloadJob job)
+    public void addJobs(ArrayList<DownloadJob> job)
     {
-        jobs.add(job);
         synchronized(waitForJobs)
         {
+            jobs.add(job);
             waitForJobs.notify();
         }
     }
     private void kill()
     {
-        die = true;
         synchronized(waitForJobs)
         {
+            die = true;
             waitForJobs.notify();
         }
     }
     public void pause()
     {
-        suspended = !suspended;
         synchronized(waitForJobs)
         {
+            suspended = true;
+            waitForJobs.notify();
+        }
+    }
+    public void unpause()
+    {
+        synchronized(waitForJobs)
+        {
+            suspended = false;
             waitForJobs.notify();
         }
     }
@@ -87,13 +94,14 @@ public class Downloader extends Thread
         {
             try
             {
-                if(jobs.isEmpty())
-                    synchronized(finished)
-                    {
-                        finished.notifyAll();
-                    }
+                // So everything done to the thread after this (adding jobs, suspending) happens after I start waiting
                 synchronized(waitForJobs)
                 {
+                    if(jobs.isEmpty())
+                        synchronized(finished)
+                        {
+                            finished.notifyAll();
+                        }
                     while(!die && (jobs.isEmpty() || suspended))
                     {
                         waitForJobs.wait();
@@ -103,21 +111,19 @@ public class Downloader extends Thread
                 if(die)
                     break;
                 
-                DownloadJob job = jobs.remove(0);
-                DownloaderUtils.debug("Running job: " + job);
-
-                if(frame != null)
-                    frame.setStatus(job.toString());
-                
-                job.run();
+                for(DownloadJob job : jobs.remove(0))
+                {
+                    DownloaderUtils.debug("Running job: " + job);
+                    if(frame != null)
+                        frame.setStatus(job.toString());
+                    job.run();
+                }
             }
             catch(InterruptedException ie)
             {
             }
             catch(Exception e)
             {
-                DownloaderUtils.errorGUI("Error in executing download jobs", e, false);
-                jobs.clear();
                 error = e;
             }
         }
@@ -128,7 +134,7 @@ public class Downloader extends Thread
         return(currentThread);
     }
 
-    public static void runChapter(Chapter _chapter, File _directory)
+    public static Thread runChapter(Chapter _chapter, File _directory)
     {
         final Chapter chapter = _chapter;
         final File directory = _directory;
@@ -143,16 +149,16 @@ public class Downloader extends Thread
                         frame.setStatus("Initializing");
 
                     currentThread.pause();
-                    chapter.init();
-                    currentThread.pause();
+                    currentThread.addJobs(chapter.init());
+                    currentThread.unpause();
                     currentThread.waitUntilFinished();
 
                     if(frame != null)
                         frame.setStatus("Downloading");
 
                     currentThread.pause();
-                    chapter.download(directory);
-                    currentThread.pause();
+                    currentThread.addJobs(chapter.download(directory));
+                    currentThread.unpause();
                     currentThread.waitUntilFinished();
 
                     if(frame != null)
@@ -160,17 +166,19 @@ public class Downloader extends Thread
                 }
                 catch(Exception e)
                 {
-                    DownloaderUtils.errorGUI("Error in spawning download jobs", e, false);
+                    DownloaderUtils.errorGUI("Error in spawning or executing download jobs", e, false);
 
                     if(frame != null)
                         frame.setStatus("Error");
                 }
+                currentThread.unpause();
             }
         };
         t.start();
+        return(t);
     }
 
-    public static void autodetectChapter(ArrayList<Chapter> _chapters, File _directory)
+    public static Thread autodetectChapter(ArrayList<Chapter> _chapters, File _directory)
     {
         final ArrayList<Chapter> chapters = _chapters;
         final File directory = _directory;
@@ -183,36 +191,40 @@ public class Downloader extends Thread
                 {
                     try
                     {
+                        DownloaderUtils.debug("Trying handler: " + chapter.getClass());
                         if(frame != null)
                             frame.setStatus("Trying handler: " + chapter.getClass());
 
                         currentThread.pause();
-                        chapter.init();
-                        currentThread.pause();
+                        currentThread.addJobs(chapter.init());
+                        currentThread.unpause();
                         currentThread.waitUntilFinished();
 
                         if(frame != null)
                             frame.setStatus("Downloading");
 
                         currentThread.pause();
-                        chapter.download(directory);
-                        currentThread.pause();
+                        currentThread.addJobs(chapter.download(directory));
+                        currentThread.unpause();
                         currentThread.waitUntilFinished();
                         
                         if(frame != null)
                             frame.setStatus("Finished");
-
+                        
+                        currentThread.unpause();
                         return;
                     }
                     catch(Exception e)
                     {
                     }
+                    currentThread.unpause();
                 }
                 if(frame != null)
                     frame.setStatus("Error: could not autodetect");
             }
         };
         t.start();
+        return(t);
     }
 
     public static void init() throws Exception

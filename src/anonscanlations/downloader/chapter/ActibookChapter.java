@@ -54,8 +54,10 @@ public class ActibookChapter extends Chapter implements Serializable
         return(ret);
     }
 
-    public void init() throws Exception
+    public ArrayList<DownloadJob> init() throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
+
         PageDownloadJob bookXML = new PageDownloadJob("book.xml for page range and title", new URL(url, "books/db/book.xml"), "UTF-8")
         {
             @Override
@@ -151,12 +153,15 @@ public class ActibookChapter extends Chapter implements Serializable
                 }
             }
         };
-        downloader().addJob(bookXML);
-        downloader().addJob(viewerXML);
+        list.add(bookXML);
+        list.add(viewerXML);
+        return(list);
     }
 
-    public void download(File directory) throws Exception
+    public ArrayList<DownloadJob> download(File directory) throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
+
         final File finalDirectory = directory;
         if(type.equals("normal"))
         {
@@ -175,7 +180,7 @@ public class ActibookChapter extends Chapter implements Serializable
                     {
                         grid[x][y] = new ImageDownloadJob("Page " + i + " (" + x + ", " + y + ")",
                                         new URL(url, "books/images/" + zoom + "/g_" + i + "/x" + (x + 1) + "y" + (y + 1) + ".jpg"));
-                        downloader().addJob(grid[x][y]);
+                        list.add(grid[x][y]);
                     }
                 }
                 DownloadJob combine = new DownloadJob("Combine page " + i)
@@ -197,7 +202,7 @@ public class ActibookChapter extends Chapter implements Serializable
                         ImageIO.write(complete, "JPEG", DownloaderUtils.fileName(finalDirectory, title, finalIndex, "jpg"));
                     }
                 };
-                downloader().addJob(combine);
+                list.add(combine);
             }
         }
         else if(type.equals("rich"))
@@ -206,12 +211,13 @@ public class ActibookChapter extends Chapter implements Serializable
             {
                 FileDownloadJob page = new FileDownloadJob("Page " + i, new URL(url, "books/images/" + zoom + "/" + i + ".jpg"),
                                                                         DownloaderUtils.fileName(directory, title, i, "jpg"));
-                downloader().addJob(page);
+                list.add(page);
             }
         }
         else
         {
             throw new Exception("This type of Actibook is unknown: \"" + type + ".\"  Please report this bug.");
         }
+        return(list);
     }
 }

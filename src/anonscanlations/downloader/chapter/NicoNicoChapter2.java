@@ -31,8 +31,9 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
     }
 
     @Override
-    public void init() throws Exception
+    public ArrayList<DownloadJob> init() throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         PageDownloadJob index = new PageDownloadJob("Get the given url", url, "UTF-8")
         {
             @Override
@@ -139,14 +140,17 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
             }
         };
 
-        downloader().addJob(index);
-        downloader().addJob(theme);
-        downloader().addJob(data);
+        list.add(index);
+        list.add(theme);
+        list.add(data);
+        return(list);
     }
 
     @Override
-    public void download(File directory) throws Exception
+    public ArrayList<DownloadJob> download(File directory) throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
+
         int i = 1;
         for(String image : images)
         {
@@ -186,9 +190,11 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
                     fos.close();
                 }
             };
-            downloader().addJob(page);
+            list.add(page);
 
             i++;
         }
+        
+        return(list);
     }
 }

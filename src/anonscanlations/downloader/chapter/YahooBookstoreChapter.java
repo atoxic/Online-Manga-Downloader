@@ -36,8 +36,10 @@ public class YahooBookstoreChapter extends Chapter
         images = new ArrayList<String>();
     }
 
-    public void init() throws Exception
+    public ArrayList<DownloadJob> init() throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
+
         if(url.getProtocol().equals("http"))
         {
             PageDownloadJob page = new PageDownloadJob("Get page and find id", url, "UTF-8")
@@ -56,7 +58,7 @@ public class YahooBookstoreChapter extends Chapter
                     id = params.get("i");
                 }
             };
-            downloader().addJob(page);
+            list.add(page);
         }
         else if(url.getProtocol().equals("ybookstore"))
         {
@@ -180,12 +182,13 @@ public class YahooBookstoreChapter extends Chapter
             }
         };
 
-        
-        downloader().addJob(ePubData);
-        downloader().addJob(ePub);
+        list.add(ePubData);
+        list.add(ePub);
+        return(list);
     }
-    public void download(File directory) throws Exception
+    public ArrayList<DownloadJob> download(File directory) throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         URL base = new URL(path);
         int i = 1;
         for(String image : images)
@@ -194,8 +197,9 @@ public class YahooBookstoreChapter extends Chapter
             YahooBookstoreDownloadJob page = new YahooBookstoreDownloadJob("Page " + i, new URL(base, image),
                                         DownloaderUtils.fileName(directory, title, i, extension));
 
-            downloader().addJob(page);
+            list.add(page);
             i++;
         }
+        return(list);
     }
 }

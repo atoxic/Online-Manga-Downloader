@@ -35,14 +35,18 @@ public class PluginFreeChapter extends Chapter implements Serializable
         sIS = 0;
     }
 
-    public void init() throws IOException
+    public ArrayList<DownloadJob> init() throws IOException
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
+
         PageDownloadJob index = new PageDownloadJob("Get index page", new URL(url, "index.shtml"), "Shift_JIS")
         {
             @Override
             public void run() throws Exception
             {
                 super.run();
+
+                DownloaderUtils.debug("index");
 
                 // content Key Value
                 String cKV = title(page, "'cKV'");
@@ -56,7 +60,7 @@ public class PluginFreeChapter extends Chapter implements Serializable
                     throw new Exception("no hCN");
             }
         };
-        downloader().addJob(index);
+        list.add(index);
 
         PageDownloadJob initVal = new PageDownloadJob("Get initVal page", new URL(url, "InitVal.html"), "Shift_JIS")
         {
@@ -97,11 +101,15 @@ public class PluginFreeChapter extends Chapter implements Serializable
                 downloadURL = new URL(new URL("http://" + url.getHost()), "cgi-bin/widget.cgi?a=" + hCN + title + "/" + title).toString();
             }
         };
-        downloader().addJob(initVal);
+        list.add(initVal);
+
+        return(list);
     }
 
-    public void download(File directory) throws IOException
+    public ArrayList<DownloadJob> download(File directory) throws IOException
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
+
         final File finalDirectory = directory;
         for(int i = 1; i <= total; i++)
         {
@@ -119,7 +127,7 @@ public class PluginFreeChapter extends Chapter implements Serializable
                 {
                     grid[x][y] = new ImageDownloadJob("Page " + i + " (" + x + ", " + y + ")",
                                     new URL(prefix + PluginFreeDecrypt.getIpntStr(sIS, i, zoomVal, x, y) + ".jpg"));
-                    downloader().addJob(grid[x][y]);
+                    list.add(grid[x][y]);
                 }
             }
             DownloadJob combine = new DownloadJob("Combine page " + i)
@@ -140,8 +148,10 @@ public class PluginFreeChapter extends Chapter implements Serializable
                     ImageIO.write(complete, "JPEG", DownloaderUtils.fileName(finalDirectory, title, finalIndex, "jpg"));
                 }
             };
-            downloader().addJob(combine);
+            list.add(combine);
         }
+
+        return(list);
     }
 
     private String title(String page, String ID)

@@ -28,8 +28,9 @@ public class MangaOnWebChapter extends Chapter
         url = _url;
     }
 
-    public void init() throws Exception
+    public ArrayList<DownloadJob> init() throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         String urlString = url.toString();
         int index = urlString.indexOf("ctsn=");
         if(index == -1)
@@ -59,7 +60,7 @@ public class MangaOnWebChapter extends Chapter
                 crcod = param(page, "crcod");
             }
         };
-        downloader().addJob(mainPage);
+        list.add(mainPage);
 
         PageDownloadJob xml = new PageDownloadJob("Get XML file", null, "UTF-8")
         {
@@ -91,11 +92,13 @@ public class MangaOnWebChapter extends Chapter
                 parser.parse(is);
             }
         };
-        downloader().addJob(xml);
+        list.add(xml);
+        return(list);
     }
 
-    public void download(File directory) throws Exception
+    public ArrayList<DownloadJob> download(File directory) throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         final File finalDirectory = directory;
         byte[] key = {99, 49, 51, 53, 100, 54, 56, 56, 57, 57, 99, 56, 50, 54, 99, 101, 100, 55, 99, 52, 57, 98, 99, 55, 54, 97, 97, 57, 52, 56, 57, 48};
         final BlowfishKey bfkey = new BlowfishKey(key);
@@ -120,8 +123,9 @@ public class MangaOnWebChapter extends Chapter
                 }
             };
             page.addRequestProperty("Cookie", cookies);
-            downloader().addJob(page);
+            list.add(page);
         }
+        return(list);
     }
 
     // get something like "param=return&"

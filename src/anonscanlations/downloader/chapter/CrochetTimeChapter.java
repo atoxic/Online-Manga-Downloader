@@ -325,8 +325,9 @@ public class CrochetTimeChapter extends Chapter
         url = _url;
     }
 
-    public void init() throws Exception
+    public ArrayList<DownloadJob> init() throws Exception
     {
+        ArrayList<DownloadJob> ret = new ArrayList<DownloadJob>();
         PageDownloadJob mainPage = new PageDownloadJob("Get the page", url, "UTF-8")
         {
             @Override
@@ -388,12 +389,15 @@ public class CrochetTimeChapter extends Chapter
                 temp.delete();
             }
         };
-        downloader().addJob(mainPage);
-        downloader().addJob(getList);
+        ret.add(mainPage);
+        ret.add(getList);
+        return(ret);
     }
 
-    public void download(File directory) throws Exception
+    public ArrayList<DownloadJob> download(File directory) throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
+
         // for the file list and downloaded files
         final File temp = File.createTempFile("crochettime_temp_", ".bin"),
         // for the decrypt files
@@ -440,7 +444,8 @@ public class CrochetTimeChapter extends Chapter
                 }
             };
 
-            downloader().addJob(page);
+            list.add(page);
         }
+        return(list);
     }
 }

@@ -49,8 +49,9 @@ public class NicoNicoAceChapter extends Chapter
         use_drm = false;
     }
 
-    public void init() throws Exception
+    public ArrayList<DownloadJob> init() throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         String file = url.getPath().substring(url.getPath().lastIndexOf('/') + 1);
         Matcher matcher = IDMATCH.matcher(file);
         if(!matcher.matches())
@@ -186,17 +187,20 @@ public class NicoNicoAceChapter extends Chapter
             }
         };
 
-        downloader().addJob(login);
-        downloader().addJob(service);
-        downloader().addJob(user);
-        downloader().addJob(book);
-        downloader().addJob(bookDownload);
-        downloader().addJob(lastRead);
-        downloader().addJob(ePubInfo);
+        list.add(login);
+        list.add(service);
+        list.add(user);
+        list.add(book);
+        list.add(bookDownload);
+        list.add(lastRead);
+        list.add(ePubInfo);
+        return(list);
     }
 
-    public void download(File directory) throws Exception
+    public ArrayList<DownloadJob> download(File directory) throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
+        
         final File finalDirectory = directory;
         URL maki = new URL(maki_address);
 
@@ -255,8 +259,10 @@ public class NicoNicoAceChapter extends Chapter
             file.addRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
             file.addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             file.addRequestProperty("x-nicobook-dl-key", dl_key);
-            downloader().addJob(file);
+            list.add(file);
         }
+
+        return(list);
     }
 
     private class JSONDownloadJob extends PageDownloadJob

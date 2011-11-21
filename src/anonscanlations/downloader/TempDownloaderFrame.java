@@ -47,6 +47,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         radioButtonGroup = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         downloadDirectoryField = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
@@ -75,6 +76,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         statusBar = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        manual = new javax.swing.JRadioButton();
+        jRadioButton8 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Online Manga Downloader 0.1.4");
@@ -96,10 +99,17 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Type"));
 
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jPanel1, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         radioButtonGroup.add(jRadioButton1);
         jRadioButton1.setSelected(true);
         jRadioButton1.setText(Chapters.ACTIBOOK.getName());
         jRadioButton1.setActionCommand("ACTIBOOK");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton1, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton1ActionPerformed(evt);
@@ -110,16 +120,26 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jRadioButton2.setText(Chapters.CROCHETTIME.getName());
         jRadioButton2.setActionCommand("CROCHETTIME");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton2, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         radioButtonGroup.add(jRadioButton3);
         jRadioButton3.setText(Chapters.MANGAONWEB.getName());
         jRadioButton3.setActionCommand("MANGAONWEB");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton3, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         radioButtonGroup.add(nicoRadioButton);
         nicoRadioButton.setText(Chapters.NICONICO.getName());
         nicoRadioButton.setActionCommand("NICONICO");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), nicoRadioButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         nicoRadioButton.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                nicoRadioButtonItemStateChanged(evt);
+                radioButtonItemStateChanged(evt);
             }
         });
 
@@ -127,16 +147,30 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jRadioButton5.setText(Chapters.PCVIEWER.getName());
         jRadioButton5.setActionCommand("PCVIEWER");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton5, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         radioButtonGroup.add(jRadioButton6);
         jRadioButton6.setText(Chapters.PLUGINFREE.getName());
         jRadioButton6.setActionCommand("PLUGINFREE");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton6, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
 
         radioButtonGroup.add(clubSundayRadioButton);
         clubSundayRadioButton.setText(Chapters.CLUBSUNDAY.getName());
         clubSundayRadioButton.setActionCommand("CLUBSUNDAY");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clubSundayRadioButton, org.jdesktop.beansbinding.ELProperty.create("${selected}"), clubSundayKeyURL, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), clubSundayRadioButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
+
+        clubSundayRadioButton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                radioButtonItemStateChanged(evt);
+            }
+        });
+
+        clubSundayKeyURL.setEnabled(false);
 
         jLabel3.setText("Previous URL");
 
@@ -144,16 +178,26 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jRadioButton7.setText(Chapters.POCO.getName());
         jRadioButton7.setActionCommand("POCO");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton7, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         radioButtonGroup.add(jRadioButton4);
         jRadioButton4.setText(Chapters.NICONICO2.getName());
         jRadioButton4.setActionCommand("NICONICO2");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton4, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         radioButtonGroup.add(nicoAceRadioButton);
         nicoAceRadioButton.setText(Chapters.NICONICOACE.getName());
         nicoAceRadioButton.setActionCommand("NICONICOACE");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), nicoAceRadioButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         nicoAceRadioButton.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                nicoRadioButtonItemStateChanged(evt);
+                radioButtonItemStateChanged(evt);
             }
         });
 
@@ -273,6 +317,10 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         });
 
         jButton1.setText("Examples");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jButton1, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -286,6 +334,13 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(manual);
+        manual.setText("Manual");
+
+        buttonGroup1.add(jRadioButton8);
+        jRadioButton8.setSelected(true);
+        jRadioButton8.setText("Auto-detect");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -293,6 +348,10 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(manual)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 394, Short.MAX_VALUE)
+                        .addComponent(jButton1))
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -307,13 +366,12 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                             .addComponent(viewerURLField, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(downloadButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(exitButton))
-                    .addComponent(statusBar, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
+                    .addComponent(statusBar, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                    .addComponent(jRadioButton8))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -329,11 +387,16 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                     .addComponent(viewerURLField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButton8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(manual)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(downloadButton)
-                    .addComponent(jButton1)
                     .addComponent(exitButton)
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -381,47 +444,64 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             return;
         }
 
-        Chapters c = Chapters.valueOf(radioButtonGroup.getSelection().getActionCommand());
-        Chapter chapter = null;
-
-        switch(c)
+        if(manual.isSelected())
         {
-            case ACTIBOOK:      chapter = new ActibookChapter(viewerURL);       break;
-            case CROCHETTIME:   chapter = new CrochetTimeChapter(viewerURL);    break;
-            case MANGAONWEB:    chapter = new MangaOnWebChapter(viewerURL);     break;
-            case PCVIEWER:      chapter = new PCViewerChapter(viewerURL);       break;
-            case PLUGINFREE:    chapter = new PluginFreeChapter(viewerURL);     break;
-            case POCO:          chapter = new PocoChapter(viewerURL);           break;
-            case NICONICO2:     chapter = new NicoNicoChapter2(viewerURL);      break;
-            case CLUBSUNDAY:
-            {
-                URL keyURL;
-                try
-                {
-                    keyURL = new URL(clubSundayKeyURL.getText());
-                }
-                catch(Exception e)
-                {
-                    DownloaderUtils.errorGUI("Malformed URL", e, false);
-                    return;
-                }
-                chapter = new SundayChapter(viewerURL, keyURL);
-                break;
-            }
-            case NICONICO:
-            {
-                chapter = new NicoNicoChapter(viewerURL, emailField.getText(), passwordField.getPassword());
-                break;
-            }
-            case NICONICOACE:
-            {
-                chapter = new NicoNicoAceChapter(viewerURL, emailField.getText(), passwordField.getPassword());
-                break;
-            }
-        }
+            Chapters c = Chapters.valueOf(radioButtonGroup.getSelection().getActionCommand());
+            Chapter chapter = null;
 
-        if(chapter != null)
-            Downloader.runChapter(chapter, downloadDirectory);
+            switch(c)
+            {
+                case ACTIBOOK:      chapter = new ActibookChapter(viewerURL);       break;
+                case CROCHETTIME:   chapter = new CrochetTimeChapter(viewerURL);    break;
+                case MANGAONWEB:    chapter = new MangaOnWebChapter(viewerURL);     break;
+                case PCVIEWER:      chapter = new PCViewerChapter(viewerURL);       break;
+                case PLUGINFREE:    chapter = new PluginFreeChapter(viewerURL);     break;
+                case POCO:          chapter = new PocoChapter(viewerURL);           break;
+                case NICONICO2:     chapter = new NicoNicoChapter2(viewerURL);      break;
+                case CLUBSUNDAY:
+                {
+                    URL keyURL;
+                    try
+                    {
+                        keyURL = new URL(clubSundayKeyURL.getText());
+                    }
+                    catch(Exception e)
+                    {
+                        DownloaderUtils.errorGUI("Malformed URL", e, false);
+                        return;
+                    }
+                    chapter = new SundayChapter(viewerURL, keyURL);
+                    break;
+                }
+                case NICONICO:
+                {
+                    chapter = new NicoNicoChapter(viewerURL, emailField.getText(), passwordField.getPassword());
+                    break;
+                }
+                case NICONICOACE:
+                {
+                    chapter = new NicoNicoAceChapter(viewerURL, emailField.getText(), passwordField.getPassword());
+                    break;
+                }
+            }
+
+            if(chapter != null)
+                Downloader.runChapter(chapter, downloadDirectory);
+        }
+        // auto detection
+        else
+        {
+            ArrayList<Chapter> chapters = new ArrayList<Chapter>();
+            chapters.add(new ActibookChapter(viewerURL));
+            chapters.add(new PCViewerChapter(viewerURL));
+            chapters.add(new PluginFreeChapter(viewerURL));
+            chapters.add(new CrochetTimeChapter(viewerURL));
+            chapters.add(new MangaOnWebChapter(viewerURL));
+            chapters.add(new PocoChapter(viewerURL));
+            chapters.add(new NicoNicoChapter2(viewerURL));
+
+            Downloader.autodetectChapter(chapters, downloadDirectory);
+        }
     }//GEN-LAST:event_downloadButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
@@ -467,10 +547,11 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         log.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void nicoRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_nicoRadioButtonItemStateChanged
-        emailField.setEnabled(nicoRadioButton.isSelected() || nicoAceRadioButton.isSelected());
-        passwordField.setEnabled(nicoRadioButton.isSelected() || nicoAceRadioButton.isSelected());
-    }//GEN-LAST:event_nicoRadioButtonItemStateChanged
+    private void radioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radioButtonItemStateChanged
+        emailField.setEnabled(manual.isSelected() && (nicoRadioButton.isSelected() || nicoAceRadioButton.isSelected()));
+        passwordField.setEnabled(manual.isSelected() && (nicoRadioButton.isSelected() || nicoAceRadioButton.isSelected()));
+        clubSundayKeyURL.setEnabled(manual.isSelected() && clubSundayRadioButton.isSelected());
+    }//GEN-LAST:event_radioButtonItemStateChanged
 
     /**
     * @param args the command line arguments
@@ -485,6 +566,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseButton;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField clubSundayKeyURL;
     private javax.swing.JRadioButton clubSundayRadioButton;
     private javax.swing.JButton downloadButton;
@@ -507,6 +589,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
+    private javax.swing.JRadioButton jRadioButton8;
+    private javax.swing.JRadioButton manual;
     private javax.swing.JRadioButton nicoAceRadioButton;
     private javax.swing.JRadioButton nicoRadioButton;
     private javax.swing.JPasswordField passwordField;

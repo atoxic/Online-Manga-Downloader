@@ -29,19 +29,9 @@ public class PCViewerChapter extends Chapter implements Serializable
     public PCViewerChapter(URL _url)
     {
         url = _url;
-        params = DownloaderUtils.getQueryMap(url);
+        params = null;
         rangeStart = rangeEnd = 0;
         title = "";
-
-        DownloaderUtils.debug("PCVC Given URL: " + url);
-
-        for(Map.Entry<String, String> entry : params.entrySet())
-        {
-            if(entry.getKey().startsWith("key"))
-            {
-                title += entry.getValue();
-            }
-        }
     }
 
     // generate params for URL query string
@@ -58,8 +48,21 @@ public class PCViewerChapter extends Chapter implements Serializable
         return(ret);
     }
 
-    public void init() throws Exception
+    public ArrayList<DownloadJob> init() throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
+
+        DownloaderUtils.debug("PCVC Given URL: " + url);
+        params = DownloaderUtils.getQueryMap(url);
+
+        for(Map.Entry<String, String> entry : params.entrySet())
+        {
+            if(entry.getKey().startsWith("key"))
+            {
+                title += entry.getValue();
+            }
+        }
+
         PageDownloadJob xml = new PageDownloadJob("Get XML file", 
                                     new URL(new URL(params.get("xmlurl")),
                                             "content_dl.php?dtype=0&z=&x=0&re=0&ad=0&pre=&p=&" + getParams()),
@@ -101,11 +104,14 @@ public class PCViewerChapter extends Chapter implements Serializable
                 DownloaderUtils.debug("PCVC rangeEnd: " + rangeEnd);
             }
         };
-        downloader().addJob(xml);
+        list.add(xml);
+
+        return(list);
     }
 
-    public void download(File directory) throws Exception
+    public ArrayList<DownloadJob> download(File directory) throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         URL baseURL = new URL(params.get("xmlurl"));
 
         for(int i = rangeStart; i <= rangeEnd; i++)
@@ -114,7 +120,8 @@ public class PCViewerChapter extends Chapter implements Serializable
                         new URL(baseURL,
                             "content_dl.php?dtype=1&p=" + dataFolder + "&z=&x=0&re=0&ad=0&pre=&pno=" + i + "&" + getParams()),
                         DownloaderUtils.fileName(directory, title, i, "jpg"));
-            downloader().addJob(job);
+            list.add(job);
         }
+        return(list);
     }
 }

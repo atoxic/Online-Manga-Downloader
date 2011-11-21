@@ -4,6 +4,8 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="radioButtonGroup">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -31,6 +33,11 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="manual" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="394" max="32767" attributes="0"/>
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -49,14 +56,13 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="downloadButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="262" max="32767" attributes="0"/>
+                      <EmptySpace pref="345" max="32767" attributes="0"/>
                       <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="exitButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="statusBar" alignment="0" pref="530" max="32767" attributes="0"/>
+                  <Component id="jRadioButton8" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -77,11 +83,17 @@
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
+              <Component id="jRadioButton8" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="manual" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="downloadButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="exitButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -131,6 +143,9 @@
           </Border>
         </Property>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="enabled" source="manual" sourcePath="${selected}" target="jPanel1" targetPath="enabled" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -213,6 +228,9 @@
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="ACTIBOOK"/>
           </Properties>
+          <BindingProperties>
+            <BindingProperty name="enabled" source="manual" sourcePath="${selected}" target="jRadioButton1" targetPath="enabled" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton1ActionPerformed"/>
           </Events>
@@ -227,6 +245,9 @@
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="CROCHETTIME"/>
           </Properties>
+          <BindingProperties>
+            <BindingProperty name="enabled" source="manual" sourcePath="${selected}" target="jRadioButton2" targetPath="enabled" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="jRadioButton3">
           <Properties>
@@ -238,6 +259,9 @@
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="MANGAONWEB"/>
           </Properties>
+          <BindingProperties>
+            <BindingProperty name="enabled" source="manual" sourcePath="${selected}" target="jRadioButton3" targetPath="enabled" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="nicoRadioButton">
           <Properties>
@@ -249,8 +273,11 @@
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="NICONICO"/>
           </Properties>
+          <BindingProperties>
+            <BindingProperty name="enabled" source="manual" sourcePath="${selected}" target="nicoRadioButton" targetPath="enabled" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
           <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="nicoRadioButtonItemStateChanged"/>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="radioButtonItemStateChanged"/>
           </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="jRadioButton5">
@@ -263,6 +290,9 @@
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="PCVIEWER"/>
           </Properties>
+          <BindingProperties>
+            <BindingProperty name="enabled" source="manual" sourcePath="${selected}" target="jRadioButton5" targetPath="enabled" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="jRadioButton6">
           <Properties>
@@ -274,6 +304,9 @@
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="PLUGINFREE"/>
           </Properties>
+          <BindingProperties>
+            <BindingProperty name="enabled" source="manual" sourcePath="${selected}" target="jRadioButton6" targetPath="enabled" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="clubSundayRadioButton">
           <Properties>
@@ -285,11 +318,17 @@
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="CLUBSUNDAY"/>
           </Properties>
+          <BindingProperties>
+            <BindingProperty name="enabled" source="manual" sourcePath="${selected}" target="clubSundayRadioButton" targetPath="enabled" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="radioButtonItemStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="clubSundayKeyURL">
-          <BindingProperties>
-            <BindingProperty name="enabled" source="clubSundayRadioButton" sourcePath="${selected}" target="clubSundayKeyURL" targetPath="enabled" updateStrategy="0" immediately="false"/>
-          </BindingProperties>
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -306,6 +345,9 @@
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="POCO"/>
           </Properties>
+          <BindingProperties>
+            <BindingProperty name="enabled" source="manual" sourcePath="${selected}" target="jRadioButton7" targetPath="enabled" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="jRadioButton4">
           <Properties>
@@ -317,6 +359,9 @@
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="NICONICO2"/>
           </Properties>
+          <BindingProperties>
+            <BindingProperty name="enabled" source="manual" sourcePath="${selected}" target="jRadioButton4" targetPath="enabled" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="nicoAceRadioButton">
           <Properties>
@@ -328,8 +373,11 @@
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="NICONICOACE"/>
           </Properties>
+          <BindingProperties>
+            <BindingProperty name="enabled" source="manual" sourcePath="${selected}" target="nicoAceRadioButton" targetPath="enabled" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
           <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="nicoRadioButtonItemStateChanged"/>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="radioButtonItemStateChanged"/>
           </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -424,6 +472,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Examples"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="enabled" source="manual" sourcePath="${selected}" target="jButton1" targetPath="enabled" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
@@ -435,6 +486,23 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="manual">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Manual"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButton8">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="Auto-detect"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

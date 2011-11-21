@@ -29,8 +29,10 @@ public class PocoChapter extends Chapter implements Serializable
         images = new ArrayList<String>();
     }
 
-    public void init() throws Exception
+    public ArrayList<DownloadJob> init() throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
+
         HashMap<String, String> params = DownloaderUtils.getQueryMap(url);
 
         String partid = params.get("partid");
@@ -69,17 +71,23 @@ public class PocoChapter extends Chapter implements Serializable
         };
         load.setPOSTData("partid=" + partid);
 
-        downloader().addJob(load);
+        list.add(load);
+
+        return(list);
     }
-    public void download(File directory) throws Exception
+    public ArrayList<DownloadJob> download(File directory) throws Exception
     {
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
+
         int i = 1;
         for(String image : images)
         {
             FileDownloadJob page = new FileDownloadJob("Page " + i, new URL(image),
                     DownloaderUtils.fileName(directory, title + "_" + story, i, "jpg"));
-            downloader().addJob(page);
+            list.add(page);
             i++;
         }
+
+        return(list);
     }
 }
