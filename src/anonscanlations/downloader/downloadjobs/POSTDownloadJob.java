@@ -1,7 +1,9 @@
-package anonscanlations.downloader;
+package anonscanlations.downloader.downloadjobs;
 
 import java.io.*;
 import java.net.*;
+
+import anonscanlations.downloader.*;
 
 /**
  *
@@ -10,18 +12,13 @@ import java.net.*;
 public class POSTDownloadJob extends DownloadJob
 {
     protected URL url;
-    protected String encoding, page, cookies, data;
+    protected String encoding, page, data;
     protected HttpURLConnection conn;
     public POSTDownloadJob(String _description, URL _url, String _encoding, String _data)
-    {
-        this(_description, _url, _encoding, _data, null);
-    }
-    public POSTDownloadJob(String _description, URL _url, String _encoding, String _data, String _cookies)
     {
         super(_description);
         url = _url;
         encoding = _encoding;
-        cookies = _cookies;
         data = _data;
         conn = null;
     }
@@ -30,14 +27,12 @@ public class POSTDownloadJob extends DownloadJob
         DownloaderUtils.debug("POSTDownloadJob: " + url);
 
         conn = (HttpURLConnection) url.openConnection();
-
+        setRequestProperties(conn);
         conn.setDoOutput(true);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
-
-        if(cookies != null)
-            conn.setRequestProperty("Cookie", cookies);
+        
         if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
             throw new Exception("404 Page Not Found: " + url);
         BufferedReader stream = new BufferedReader(new InputStreamReader(conn.getInputStream(), encoding));

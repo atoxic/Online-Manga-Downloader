@@ -10,6 +10,7 @@ import java.util.*;
 import java.net.*;
 
 import anonscanlations.downloader.*;
+import anonscanlations.downloader.downloadjobs.*;
 
 // the images are zlib-comrpessed then encrypted
 import com.jcraft.jzlib.*;

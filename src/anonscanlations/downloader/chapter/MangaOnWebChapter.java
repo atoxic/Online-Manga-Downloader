@@ -9,6 +9,7 @@ import org.xml.sax.helpers.*;
 import com.bluecast.xml.*;
 
 import anonscanlations.downloader.*;
+import anonscanlations.downloader.downloadjobs.*;
 
 /**
  *
@@ -66,7 +67,7 @@ public class MangaOnWebChapter extends Chapter
             public void run() throws Exception
             {
                 this.url = new URL("http://mangaonweb.com/page.do?cdn=" + cdn + "&cpn=book.xml&crcod=" + crcod + "&rid=" + (int)(Math.random() * 10000));
-                this.cookies = MangaOnWebChapter.this.cookies;
+                addRequestProperty("Cookie", MangaOnWebChapter.this.cookies);
 
                 super.run();
 
@@ -102,19 +103,23 @@ public class MangaOnWebChapter extends Chapter
         {
             final int finalIndex = i;
             // rid is just a random number from 0-9999
-            ByteArrayDownloadJob page = new ByteArrayDownloadJob("Page " + i, new URL("http://mangaonweb.com/page.do?cdn=" + cdn + "&cpn=" + paths.get(i) + "&crcod=" + crcod + "&rid=" + (int)(Math.random() * 10000)), cookies)
+            ByteArrayDownloadJob page = new ByteArrayDownloadJob("Page " + i, 
+                                            new URL("http://mangaonweb.com/page.do?cdn=" + cdn
+                                                    + "&cpn=" + paths.get(i) + "&crcod=" + crcod
+                                                    + "&rid=" + (int)(Math.random() * 10000)))
             {
                 @Override
                 public void run() throws Exception
                 {
                     super.run();
-                    bfkey.decrypt(buf, 0);
+                    bfkey.decrypt(bytes, 0);
 
                     RandomAccessFile output = new RandomAccessFile(DownloaderUtils.fileName(finalDirectory, ctsn, finalIndex, "jpg"), "rw");
-                    output.write(buf);
+                    output.write(bytes);
                     output.close();
                 }
             };
+            page.addRequestProperty("Cookie", cookies);
             downloader().addJob(page);
         }
     }

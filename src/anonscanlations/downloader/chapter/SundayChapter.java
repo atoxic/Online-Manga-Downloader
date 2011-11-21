@@ -15,6 +15,7 @@ import org.w3c.dom.*;
 import org.xml.sax.*;
 
 import anonscanlations.downloader.*;
+import anonscanlations.downloader.downloadjobs.*;
 
 /**
  *
@@ -171,7 +172,8 @@ public class SundayChapter extends Chapter
                                 "&key4=" + key4 + "&sp=-1&re=0&shd=" + shd +
                                 "&otk=" + otk + "&vo=1");
             DownloaderUtils.debug("MainFileDJ URL: " + this.url);
-            this.cookies = SundayChapter.this.cookies;
+
+            addRequestProperty("Cookie", SundayChapter.this.cookies);
 
             super.run();
         }
@@ -190,7 +192,8 @@ public class SundayChapter extends Chapter
                             "&key2=" + key2 + "&key3=" + key3 +
                             "&key4=" + key4 + "&sp=-1&re=0&otk=" + otk);
             DownloaderUtils.debug("XMLDJ url: " + this.url);
-            this.cookies = SundayChapter.this.cookies;
+            
+            addRequestProperty("Cookie", SundayChapter.this.cookies);
 
             super.run();
 

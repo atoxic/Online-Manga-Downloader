@@ -16,6 +16,7 @@ import org.xml.sax.helpers.*;
 import com.bluecast.xml.*;
 
 import anonscanlations.downloader.*;
+import anonscanlations.downloader.downloadjobs.*;
 
 /**
  *

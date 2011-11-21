@@ -2,7 +2,7 @@ package anonscanlations.downloader.chapter;
 
 /**
  *
- * @author Administrator
+ * @author /a/non
  */
 public class BlowfishKey
 {

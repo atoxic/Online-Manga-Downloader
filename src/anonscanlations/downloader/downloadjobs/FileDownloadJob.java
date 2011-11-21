@@ -1,8 +1,10 @@
-package anonscanlations.downloader;
+package anonscanlations.downloader.downloadjobs;
 
 import java.io.*;
 import java.util.*;
 import java.net.*;
+
+import anonscanlations.downloader.*;
 
 /**
  *
@@ -11,26 +13,19 @@ import java.net.*;
 public class FileDownloadJob extends DownloadJob
 {
     protected URL url;
-    protected String cookies;
     protected File file;
     public FileDownloadJob(String _description, URL _url, File _file)
-    {
-        this(_description, _url, _file, null);
-    }
-    public FileDownloadJob(String _description, URL _url, File _file, String _cookies)
     {
         super(_description);
         url = _url;
         file = _file;
-        cookies = _cookies;
     }
     public void run() throws Exception
     {
         DownloaderUtils.debug("FileDownloadJob: " + url);
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        if(cookies != null)
-            conn.setRequestProperty("Cookie", cookies);
+        setRequestProperties(conn);
         if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
             throw new Exception("404 File Not Found: " + url);
 

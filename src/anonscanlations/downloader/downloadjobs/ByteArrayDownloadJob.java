@@ -1,8 +1,10 @@
-package anonscanlations.downloader;
+package anonscanlations.downloader.downloadjobs;
 
 import java.io.*;
 import java.util.*;
 import java.net.*;
+
+import anonscanlations.downloader.*;
 
 /**
  *
@@ -11,33 +13,26 @@ import java.net.*;
 public class ByteArrayDownloadJob extends DownloadJob
 {
     protected URL url;
-    protected String cookies;
-    protected byte[] buf;
+    protected byte[] bytes;
     public ByteArrayDownloadJob(String _description, URL _url)
-    {
-        this(_description, _url, null);
-    }
-    public ByteArrayDownloadJob(String _description, URL _url, String _cookies)
     {
         super(_description);
         url = _url;
-        cookies = _cookies;
-        buf = null;
+        bytes = null;
     }
     public void run() throws Exception
     {
         DownloaderUtils.debug("ByteArrayDownloadJob: " + url);
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        if(cookies != null)
-            conn.setRequestProperty("Cookie", cookies);
+        setRequestProperties(conn);
         if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
             throw new Exception("404 File Not Found: " + url);
 
         InputStream in = conn.getInputStream();
-        buf = new byte[conn.getContentLength()];
+        bytes = new byte[conn.getContentLength()];
         int read, offset = 0;
-        while((read = in.read(buf, offset, buf.length - offset)) != -1)
+        while((read = in.read(bytes, offset, bytes.length - offset)) != -1)
         {
             offset += read;
         }

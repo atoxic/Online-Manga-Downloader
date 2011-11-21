@@ -14,6 +14,8 @@ import com.bluecast.xml.*;
 import org.json.*;
 
 import anonscanlations.downloader.*;
+import anonscanlations.downloader.extern.*;
+import anonscanlations.downloader.downloadjobs.*;
 
 /**
  *
@@ -131,7 +133,7 @@ public class NicoNicoAceChapter extends Chapter
 
                     if(use_drm)
                     {
-                        byte[] array = readToBytes(input);
+                        byte[] array = DownloaderUtils.readToBytes(input);
                         ARC4 arc4 = new ARC4(key);
                         page = new String(arc4.arc4Crypt(array));
                     }
@@ -209,7 +211,7 @@ public class NicoNicoAceChapter extends Chapter
 
                     if(use_drm)
                     {
-                        byte[] array = readToBytes(input);
+                        byte[] array = DownloaderUtils.readToBytes(input);
                         ARC4 arc4 = new ARC4(key);
                         fout.write(arc4.arc4Crypt(array));
                     }
@@ -241,7 +243,7 @@ public class NicoNicoAceChapter extends Chapter
         @Override
         public void run() throws Exception
         {
-            this.cookies = login.getCookies();
+            addRequestProperty("Cookie", login.getCookies());
             url = new URL(url.toString() + "?" + (System.currentTimeMillis() / 1000) + (int)(Math.random() * 1000));
 
             super.run();
@@ -284,7 +286,7 @@ public class NicoNicoAceChapter extends Chapter
                 throw new Exception("404 Page Not Found: " + maki_address);
 
             InputStream in = conn.getInputStream();
-            byte[] array = readToBytes(in);
+            byte[] array = DownloaderUtils.readToBytes(in);
             in.close();
 
             if(use_drm)
@@ -331,15 +333,5 @@ public class NicoNicoAceChapter extends Chapter
         return(MessageDigest.getInstance("MD5").digest(bytes));
     }
 
-    private static byte[] readToBytes(InputStream in) throws IOException
-    {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        byte[] array = new byte[1024];
-        int len;
-        while((len = in.read(array)) != -1)
-            bos.write(array, 0, len);
-        array = bos.toByteArray();
-        bos.close();
-        return(array);
-    }
+    
 }

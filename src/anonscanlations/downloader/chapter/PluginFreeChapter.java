@@ -12,6 +12,7 @@ import java.awt.*;
 import java.net.*;
 
 import anonscanlations.downloader.*;
+import anonscanlations.downloader.downloadjobs.*;
 
 /**
  *

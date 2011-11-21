@@ -18,7 +18,7 @@
  *
  */
 
-package anonscanlations.downloader;
+package anonscanlations.downloader.extern;
 
 import java.io.File;
 import java.io.FileInputStream;

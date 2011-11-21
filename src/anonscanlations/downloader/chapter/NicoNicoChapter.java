@@ -10,6 +10,7 @@ import org.xml.sax.helpers.*;
 import com.bluecast.xml.*;
 
 import anonscanlations.downloader.*;
+import anonscanlations.downloader.downloadjobs.*;
 
 /** 
  * 
@@ -64,7 +65,7 @@ public class NicoNicoChapter extends Chapter
             @Override
             public void run() throws Exception
             {
-                this.cookies = login.getCookies();
+                addRequestProperty("Cookie", login.getCookies());
                 super.run();
 
                 int index = page.indexOf("<title>");
@@ -78,7 +79,7 @@ public class NicoNicoChapter extends Chapter
             @Override
             public void run() throws Exception
             {
-                this.cookies = login.getCookies();
+                addRequestProperty("Cookie", login.getCookies());
                 super.run();
                 parseData(page);
             }

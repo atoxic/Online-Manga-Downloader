@@ -140,6 +140,18 @@ public class DownloaderUtils
         return(source);
     }
 
+    public static byte[] readToBytes(InputStream in) throws IOException
+    {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] array = new byte[1024];
+        int len;
+        while((len = in.read(array)) != -1)
+            bos.write(array, 0, len);
+        array = bos.toByteArray();
+        bos.close();
+        return(array);
+    }
+
     private static final StringBuilder SB = new StringBuilder();
     private static final Formatter FORMATTER = new Formatter(SB, Locale.US);
     private static final String BAD_CHARS ="[\\\\/:*?\"<>\\|]";

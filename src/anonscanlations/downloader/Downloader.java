@@ -4,12 +4,16 @@
 
 package anonscanlations.downloader;
 
-import anonscanlations.downloader.chapter.SundayChapter;
+import anonscanlations.downloader.downloadjobs.DownloadJob;
 import java.io.*;
 import java.util.*;
 import java.net.*;
+import java.util.zip.*;
+import javax.crypto.*;
+import javax.crypto.spec.*;
 
 import anonscanlations.downloader.chapter.*;
+import anonscanlations.downloader.extern.*;
 
 /**
  *
@@ -171,8 +175,6 @@ public class Downloader extends Thread
     {
         currentThread = new Downloader();
         currentThread.start();
-        
-        
     }
 
     public static void main(String[] args) throws Exception
@@ -182,7 +184,7 @@ public class Downloader extends Thread
 
         // initialize backend
         init();
-
+        
         //*
         // Try to use native look and feel
         try

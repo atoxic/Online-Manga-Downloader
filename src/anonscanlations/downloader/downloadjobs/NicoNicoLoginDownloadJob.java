@@ -1,4 +1,4 @@
-package anonscanlations.downloader;
+package anonscanlations.downloader.downloadjobs;
 
 import java.io.*;
 import java.net.*;
@@ -26,6 +26,7 @@ public class NicoNicoLoginDownloadJob extends DownloadJob
     {
         URL url = new URL("https://secure.nicovideo.jp/secure/login?site=seiga");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        setRequestProperties(conn);
         conn.setDoOutput(true);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write("next_url=%2Fmanga%2F&mail=" + username + "&password=");
