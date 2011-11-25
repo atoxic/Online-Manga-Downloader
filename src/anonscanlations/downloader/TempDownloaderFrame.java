@@ -435,7 +435,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 downloadDirectory.mkdirs();
             else if(!downloadDirectory.isDirectory())
             {
-                DownloaderUtils.errorGUI("Not a directory", null, false);
+                DownloaderUtils.errorGUI("Directory not found or not a directory", null, false);
                 return;
             }
         }
