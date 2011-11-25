@@ -12,7 +12,7 @@ import anonscanlations.downloader.downloadjobs.*;
 
 /**
  *
- * @author Administrator
+ * @author /a/non
  */
 public class WebYoungJumpChapter extends Chapter
 {
