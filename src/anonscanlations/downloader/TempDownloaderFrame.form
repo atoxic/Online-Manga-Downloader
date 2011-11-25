@@ -447,9 +447,13 @@
         </Container>
         <Component class="javax.swing.JRadioButton" name="jRadioButton9">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="radioButtonGroup"/>
+            </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="Chapters.YAHOOBOOKSTORE.getName()" type="code"/>
             </Property>
+            <Property name="actionCommand" type="java.lang.String" value="YAHOOBOOKSTORE"/>
           </Properties>
           <BindingProperties>
             <BindingProperty name="enabled" source="manual" sourcePath="${selected}" target="jRadioButton9" targetPath="enabled" updateStrategy="0" immediately="false"/>

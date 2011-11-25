@@ -173,7 +173,8 @@ public class NicoNicoAceChapter extends Chapter
                     @Override
                     public void startElement(String uri, String localName, String qName, Attributes atts)
                     {
-                        if(localName.equals("img") && atts.getValue("class").equals("img-screen"))
+                        if(localName.equals("img") && atts.getValue("class") != null
+                                && atts.getValue("class").equals("img-screen"))
                             images.add(atts.getValue("src"));
                     }
                 });

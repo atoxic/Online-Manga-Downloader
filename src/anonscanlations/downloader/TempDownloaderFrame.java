@@ -241,7 +241,9 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jLabel5))
         );
 
+        radioButtonGroup.add(jRadioButton9);
         jRadioButton9.setText(Chapters.YAHOOBOOKSTORE.getName());
+        jRadioButton9.setActionCommand("YAHOOBOOKSTORE");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton9, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);

@@ -193,7 +193,12 @@ public class DownloaderUtils
 
     public static HashMap<String, String> getQueryMap(java.net.URL url)
     {
-        String[] params = url.getQuery().split("&");
+        return(getQueryMapFromQueryString(url.getQuery()));
+    }
+    
+    public static HashMap<String, String> getQueryMapFromQueryString(String str)
+    {
+        String[] params = str.split("&");
         HashMap<String, String> map = new HashMap<String, String>();
         for(String param : params)
         {

@@ -22,13 +22,13 @@ public class YahooBookstoreChapter extends Chapter
     //http://ebook.yahooapis.jp/v1/epubdata/public?appid=h9Qsaf6kzaJ.EqJij8Ec.J7_NagjVdMdN4Ot0L0TAPf5&goods_id=135393&bookshelf_id=1&public=TRUE&update=FALSE&refereeing=FALSE
 
     private URL url;
-    private String id, ePubURI, publicPath, path, title;
+    private Map<String, String> params;
+    private String ePubURI, publicPath, path, title;
     private ArrayList<String> images;
 
     public YahooBookstoreChapter(URL _url)
     {
         url = _url;
-        id = null;
         ePubURI = null;
         publicPath = null;
         path = null;
@@ -54,16 +54,14 @@ public class YahooBookstoreChapter extends Chapter
                         throw new Exception("URI not found");
 
                     URL uri = new URL(page.substring(index, page.indexOf('"', index)));
-                    Map<String, String> params = DownloaderUtils.getQueryMap(uri);
-                    id = params.get("i");
+                    params = DownloaderUtils.getQueryMap(uri);
                 }
             };
             list.add(page);
         }
         else if(url.getProtocol().equals("ybookstore"))
         {
-            Map<String, String> params = DownloaderUtils.getQueryMap(url);
-            id = params.get("i");
+            params = DownloaderUtils.getQueryMap(url);
         }
         else
             throw new Exception("Unknown protocol");
@@ -73,8 +71,9 @@ public class YahooBookstoreChapter extends Chapter
             @Override
             public void run() throws Exception
             {
+                // TODO: make this compatibile with bought products
                 url = new URL("http://ebook.yahooapis.jp/v1/epubdata/public?appid="
-                            + APPID + "&goods_id=" + id
+                            + APPID + "&goods_id=" + params.get("i")
                             + "&bookshelf_id=1&public=TRUE&update=FALSE&refereeing=FALSE");
 
                 super.run();
@@ -114,8 +113,7 @@ public class YahooBookstoreChapter extends Chapter
                 parser.setEntityResolver(new DefaultEntityResolver());
                 parser.parse(is);
 
-                if(path == null)
-                    path = publicPath;
+                path = publicPath;
             }
         };
 
@@ -131,10 +129,13 @@ public class YahooBookstoreChapter extends Chapter
             public void doByteInput(ByteArrayInputStream byte_input) throws Exception {}
             public void doZipEntryInput(ZipInputStream input, ZipEntry e) throws Exception
             {
+                String page = DownloaderUtils.readAllLines(input, "UTF-8");
+                
+                DownloaderUtils.debug("=== File: " + e.getName() + " ===");
+                DownloaderUtils.debug(page);
+                
                 if(!e.getName().equals("META-INF/encryption.xml") && !e.getName().equals("OEBPS/content.opf"))
                     return;
-
-                String page = DownloaderUtils.readAllLines(input, "UTF-8");
                 
                 Piccolo parser = new Piccolo();
                 InputSource is = new InputSource(new StringReader(page));
