@@ -29,6 +29,8 @@ public class WebYoungJumpChapter extends Chapter
     @Override
     public ArrayList<DownloadJob> init() throws Exception
     {
+        DownloaderUtils.checkHTTP(url);
+        
         PageDownloadJob check = new PageDownloadJob("Check if it's a Young Jump viewer", url, "UTF-8")
         {
             @Override

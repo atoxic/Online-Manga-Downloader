@@ -327,6 +327,8 @@ public class CrochetTimeChapter extends Chapter
 
     public ArrayList<DownloadJob> init() throws Exception
     {
+        DownloaderUtils.checkHTTP(url);
+        
         ArrayList<DownloadJob> ret = new ArrayList<DownloadJob>();
         PageDownloadJob mainPage = new PageDownloadJob("Get the page", url, "UTF-8")
         {

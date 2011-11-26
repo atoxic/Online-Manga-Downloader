@@ -8,6 +8,8 @@ import java.io.*;
 import java.util.*;
 import java.net.*;
 
+import java.util.concurrent.locks.*;
+
 import anonscanlations.downloader.chapter.*;
 import anonscanlations.downloader.downloadjobs.*;
 
@@ -19,27 +21,32 @@ public class Downloader extends Thread
 {
     private static TempDownloaderFrame frame;
     private static Downloader currentThread;
-    private static List<List<DownloadJob>> jobs;
     
+    private List<List<DownloadJob>> jobs;
     private boolean die, suspended;
     private Exception error;
-    private final Object finished, waitForJobs;
+    private final Object waitForJobs;
+    private final Lock processing;
     private Downloader()
     {
         jobs = Collections.synchronizedList(new ArrayList<List<DownloadJob>>());
+        
         die = false;
         suspended = false;
         error = null;
-        finished = new Object();
+        
         waitForJobs = new Object();
+        processing = new ReentrantLock();
     }
     public void addJobs(ArrayList<DownloadJob> job)
     {
+        DownloaderUtils.debug("Downloader Operation: Enter AJ");
         jobs.add(job);
         synchronized(waitForJobs)
         {
             waitForJobs.notify();
         }
+        DownloaderUtils.debug("Downloader Operation: Exit AJ");
     }
     private void kill()
     {
@@ -51,37 +58,51 @@ public class Downloader extends Thread
     }
     public void pause()
     {
+        DownloaderUtils.debug("Downloader Operation: Enter Pause");
         synchronized(waitForJobs)
         {
             suspended = true;
             waitForJobs.notify();
         }
+        DownloaderUtils.debug("Downloader Operation: Exit Pause");
     }
     public void unpause()
     {
+        DownloaderUtils.debug("Downloader Operation: Enter Unpause");
         synchronized(waitForJobs)
         {
             suspended = false;
             waitForJobs.notify();
         }
+        DownloaderUtils.debug("Downloader Operation: Exit Unpause");
     }
     public void waitUntilFinished() throws Exception
     {
-        if(jobs.isEmpty())
-            return;
-        Exception errorCopy = null;
-        synchronized(finished)
+        while(true)
         {
-            finished.wait();
-            if(error != null)
+            try
             {
-                errorCopy = error;
-                error = null;
+                processing.lock();
+                DownloaderUtils.debug("WUF Lock Acquired");
+                if(error != null)
+                {
+                    DownloaderUtils.debug("WUF Throwing Error");
+                    ExecutionException e = new ExecutionException(error);
+                    error = null;
+                    throw e;
+                }
+                if(jobs.isEmpty())
+                {
+                    DownloaderUtils.debug("WUF Thread Finished");
+                    return;
+                }
+            }
+            finally
+            {
+                DownloaderUtils.debug("WUF Lock Released");
+                processing.unlock();
             }
         }
-        if(errorCopy != null)
-            throw errorCopy;
-        return;
     }
     @Override
     public void run()
@@ -90,8 +111,6 @@ public class Downloader extends Thread
         {
             try
             {
-                List<DownloadJob> top;
-                
                 /*
                  * So everything done to the thread after this
                  * (adding jobs, suspending) happens after I start waiting.
@@ -100,22 +119,25 @@ public class Downloader extends Thread
                  */
                 synchronized(waitForJobs)
                 {
-                    if(jobs.isEmpty())
-                    {
-                        synchronized(finished)
-                        {
-                            finished.notifyAll();
-                        }
-                    }
                     while(!die && (jobs.isEmpty() || suspended))
                     {
+                        DownloaderUtils.debug("Thread Wait");
                         waitForJobs.wait();
+                        DownloaderUtils.debug("Thread Wake");
                     }
                     if(die)
                         break;
-                    top = jobs.remove(0);
                 }
-                
+            }
+            catch(InterruptedException ie)
+            {
+                DownloaderUtils.error("Waiting loop interrupted", ie, false);
+            }
+            
+            try
+            {
+                processing.lock();
+                List<DownloadJob> top = jobs.remove(0);
                 for(DownloadJob job : top)
                 {
                     DownloaderUtils.debug("Running job: " + job);
@@ -124,12 +146,13 @@ public class Downloader extends Thread
                     job.run();
                 }
             }
-            catch(InterruptedException ie)
-            {
-            }
             catch(Exception e)
             {
                 error = e;
+            }
+            finally
+            {
+                processing.unlock();
             }
         }
     }
@@ -150,33 +173,52 @@ public class Downloader extends Thread
             {
                 try
                 {
+                    DownloaderUtils.debug("run Spot 1");
+                    
                     if(frame != null)
                         frame.setStatus("Initializing");
-
+                    
+                    DownloaderUtils.debug("run Spot 2");
+                    
                     currentThread.pause();
                     currentThread.addJobs(chapter.init());
                     currentThread.unpause();
                     currentThread.waitUntilFinished();
+                    
+                    DownloaderUtils.debug("run Spot 3");
 
                     if(frame != null)
                         frame.setStatus("Downloading");
+                    
+                    DownloaderUtils.debug("run Spot 4");
 
                     currentThread.pause();
                     currentThread.addJobs(chapter.download(directory));
                     currentThread.unpause();
                     currentThread.waitUntilFinished();
+                    
+                    DownloaderUtils.debug("run Spot 5");
 
                     if(frame != null)
                         frame.setStatus("Finished");
+                    
+                    DownloaderUtils.debug("run Spot 6");
+                }
+                catch(ExecutionException e)
+                {
+                    DownloaderUtils.errorGUI("Error in executing download jobs", e.getException(), false);
+
+                    if(frame != null)
+                        frame.setStatus("Error: " + e.getException().getMessage());
                 }
                 catch(Exception e)
                 {
-                    DownloaderUtils.errorGUI("Error in spawning or executing download jobs", e, false);
+                    DownloaderUtils.errorGUI("Error in spawning download jobs", e, false);
 
                     if(frame != null)
-                        frame.setStatus("Error");
+                        frame.setStatus("Error: " + e.getMessage());
                 }
-                currentThread.unpause();
+                
             }
         };
         t.start();
@@ -199,8 +241,8 @@ public class Downloader extends Thread
                     try
                     {
                         // Trying Nico; need login (only once)
-                        if((chapter.getClass() == NicoNicoChapter.class
-                            || chapter.getClass() == NicoNicoAceChapter.class)
+                        if((chapter instanceof NicoNicoChapter
+                            || chapter instanceof NicoNicoAceChapter)
                             && !nicoLogin)
                         {
                             NicoNicoLoginDownloadJob.DIALOG.setVisible(true);
@@ -210,7 +252,7 @@ public class Downloader extends Thread
                             }
                             nicoLogin = true;
                         }
-                        else if(chapter.getClass() == SundayChapter.class)
+                        else if(chapter instanceof SundayChapter)
                         {
                             SundayChapter.DIALOG.setVisible(true);
                             synchronized(SundayChapter.DIALOG.lock)
@@ -227,7 +269,9 @@ public class Downloader extends Thread
                         currentThread.addJobs(chapter.init());
                         currentThread.unpause();
                         currentThread.waitUntilFinished();
-
+                        
+                        DownloaderUtils.debug("autodetect Spot 2");
+                        
                         if(frame != null)
                             frame.setStatus("Downloading");
 
@@ -236,17 +280,19 @@ public class Downloader extends Thread
                         currentThread.unpause();
                         currentThread.waitUntilFinished();
                         
+                        DownloaderUtils.debug("autodetect Spot 3");
+                        
                         if(frame != null)
                             frame.setStatus("Finished");
-                        
-                        currentThread.unpause();
                         return;
                     }
                     catch(Exception e)
                     {
-                        DownloaderUtils.error("Handler failed: " + chapter.getClass(), e, false);
+                        DownloaderUtils.error("Handler failed: " + chapter.getClass(),
+                                e instanceof ExecutionException ? 
+                                    ((ExecutionException)e).getException() :
+                                    e, false);
                     }
-                    currentThread.unpause();
                 }
                 if(frame != null)
                     frame.setStatus("Error: could not autodetect");
@@ -271,7 +317,7 @@ public class Downloader extends Thread
         
         // initialize backend
         init();
-        
+            
         // Try to use native look and feel
         try
         {

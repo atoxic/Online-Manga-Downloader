@@ -73,7 +73,7 @@ public class DownloaderUtils
             System.err.println("LOGGER: Exception added");
             e.printStackTrace();
             for(StackTraceElement element : e.getStackTrace())
-                LOG.add(element.toString());
+                addToLog(element.toString());
         }
         return(true);
     }
@@ -231,6 +231,12 @@ public class DownloaderUtils
         Document d = builder.parse(is);
 
         return(d);
+    }
+    
+    public static void checkHTTP(URL url) throws IOException
+    {
+        if(!url.getProtocol().equals("http"))
+            throw new IOException("Can only use http");
     }
     
     private static final StringBuilder SB = new StringBuilder();

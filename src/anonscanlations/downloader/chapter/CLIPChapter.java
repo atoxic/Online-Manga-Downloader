@@ -46,6 +46,8 @@ public class CLIPChapter extends Chapter
     @Override
     public ArrayList<DownloadJob> init() throws Exception
     {
+        if(!url.getProtocol().equals("http"))
+            throw new IOException("Can only use http");
         if(!url.getHost().contains("comic-rush.jp"))
             throw new UnsupportedOperationException("This download currently only supports Comic Rush");
         

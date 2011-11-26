@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.*;
 import java.util.zip.*;
 
+import anonscanlations.downloader.*;
+
 /**
  *
  * @author /a/non <anonymousscanlations@gmail.com>
@@ -28,11 +30,16 @@ public abstract class EPubDownloadJob extends ByteArrayDownloadJob
         
         ZipInputStream input = new ZipInputStream(new ByteArrayInputStream(bytes));
         ZipEntry e;
+        
+        DownloaderUtils.debug("Spot 2");
+        
         while((e = input.getNextEntry()) != null)
         {
             doZipEntryInput(input, e);
             input.closeEntry();
         }
+        
+        DownloaderUtils.debug("Spot 5");
         input.close();
     }
 

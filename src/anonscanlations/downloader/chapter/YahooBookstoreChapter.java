@@ -123,13 +123,17 @@ public class YahooBookstoreChapter extends Chapter
             public void run() throws Exception
             {
                 url = new URL(ePubURI);
+                DownloaderUtils.debug("Spot 1");
                 super.run();
+                DownloaderUtils.debug("Spot 6");
             }
 
             public void doByteInput(ByteArrayInputStream byte_input) throws Exception {}
             public void doZipEntryInput(ZipInputStream input, ZipEntry e) throws Exception
             {
                 String page = DownloaderUtils.readAllLines(input, "UTF-8");
+                
+                DownloaderUtils.debug("Spot 3");
                 
                 DownloaderUtils.debug("=== File: " + e.getName() + " ===");
                 DownloaderUtils.debug(page);
@@ -181,6 +185,8 @@ public class YahooBookstoreChapter extends Chapter
                 });
                 parser.setEntityResolver(new DefaultEntityResolver());
                 parser.parse(is);
+                
+                DownloaderUtils.debug("Spot 4");
             }
         };
 

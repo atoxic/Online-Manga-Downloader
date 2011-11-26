@@ -37,6 +37,8 @@ public class PluginFreeChapter extends Chapter implements Serializable
 
     public ArrayList<DownloadJob> init() throws IOException
     {
+        DownloaderUtils.checkHTTP(url);
+        
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
 
         PageDownloadJob index = new PageDownloadJob("Get index page", new URL(url, "index.shtml"), "Shift_JIS")

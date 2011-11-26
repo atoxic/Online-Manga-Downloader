@@ -50,6 +50,8 @@ public class PCViewerChapter extends Chapter implements Serializable
 
     public ArrayList<DownloadJob> init() throws Exception
     {
+        DownloaderUtils.checkHTTP(url);
+        
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
 
         DownloaderUtils.debug("PCVC Given URL: " + url);

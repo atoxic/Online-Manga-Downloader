@@ -31,6 +31,8 @@ public class PocoChapter extends Chapter implements Serializable
 
     public ArrayList<DownloadJob> init() throws Exception
     {
+        DownloaderUtils.checkHTTP(url);
+        
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
 
         HashMap<String, String> params = DownloaderUtils.getQueryMap(url);

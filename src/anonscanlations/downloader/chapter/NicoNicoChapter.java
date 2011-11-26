@@ -59,6 +59,8 @@ public class NicoNicoChapter extends Chapter
 
     public ArrayList<DownloadJob> init() throws Exception
     {
+        DownloaderUtils.checkHTTP(url);
+        
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         Matcher matcher = IDMATCH.matcher(url.toString());
         if(!matcher.matches())

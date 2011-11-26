@@ -39,6 +39,8 @@ public class Flipper3Chapter extends Chapter
     @Override
     public ArrayList<DownloadJob> init() throws Exception
     {
+        DownloaderUtils.checkHTTP(url);
+        
         PageDownloadJob page = new PageDownloadJob("Get book.xml", new URL(url, "book.xml"), "UTF-8")
         {
             @Override

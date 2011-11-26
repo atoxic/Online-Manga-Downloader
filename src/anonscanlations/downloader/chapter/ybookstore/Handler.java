@@ -24,6 +24,9 @@ public class Handler extends URLStreamHandler
             super(_url);
         }
         @Override
-        public void connect() throws IOException { }
+        public void connect() throws IOException
+        {
+            throw new IOException("Trying to connect using YahooBookstoreURLConnection");
+        }
     }
 }

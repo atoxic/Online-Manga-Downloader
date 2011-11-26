@@ -56,6 +56,9 @@ public class ActibookChapter extends Chapter implements Serializable
 
     public ArrayList<DownloadJob> init() throws Exception
     {
+        if(!url.getProtocol().equals("http"))
+            throw new IOException("Can only use http");
+        
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
 
         PageDownloadJob bookXML = new PageDownloadJob("book.xml for page range and title", new URL(url, "books/db/book.xml"), "UTF-8")

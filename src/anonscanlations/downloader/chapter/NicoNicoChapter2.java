@@ -33,6 +33,8 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
     @Override
     public ArrayList<DownloadJob> init() throws Exception
     {
+        DownloaderUtils.checkHTTP(url);
+        
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         PageDownloadJob index = new PageDownloadJob("Get the given url", url, "UTF-8")
         {

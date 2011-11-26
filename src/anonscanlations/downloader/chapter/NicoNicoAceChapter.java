@@ -55,6 +55,8 @@ public class NicoNicoAceChapter extends Chapter
 
     public ArrayList<DownloadJob> init() throws Exception
     {
+        DownloaderUtils.checkHTTP(url);
+        
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         String file = url.getPath().substring(url.getPath().lastIndexOf('/') + 1);
         Matcher matcher = IDMATCH.matcher(file);
@@ -100,7 +102,16 @@ public class NicoNicoAceChapter extends Chapter
             @Override
             public void run() throws Exception
             {
-                super.run();
+                try
+                {
+                    super.run();
+                }
+                catch(IOException e)
+                {
+                    if(conn.getResponseCode() == 401)
+                        throw new IOException("Your NicoNico account isn't registered to view BookWalker chapters");
+                    throw e;
+                }
 
                 dl_key = obj.getString("dl_key");
                 maki_address = obj.getString("maki_address");
