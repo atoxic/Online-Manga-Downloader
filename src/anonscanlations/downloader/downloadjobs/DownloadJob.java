@@ -32,8 +32,9 @@ public abstract class DownloadJob
         headers.put(_key, _value);
     }
 
-    protected final void setRequestProperties(URLConnection conn)
+    protected final void setRequestProperties(HttpURLConnection conn)
     {
+        conn.setInstanceFollowRedirects(true);
         for(Map.Entry<String, String> e : headers.entrySet())
             conn.setRequestProperty(e.getKey(), e.getValue());
     }

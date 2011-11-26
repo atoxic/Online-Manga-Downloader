@@ -15,7 +15,7 @@ import anonscanlations.downloader.*;
 import anonscanlations.downloader.downloadjobs.*;
 
 /**
- *
+ * Grand Jump, Monthly Heroes
  * @author /a/non
  */
 public class Flipper3Chapter extends Chapter

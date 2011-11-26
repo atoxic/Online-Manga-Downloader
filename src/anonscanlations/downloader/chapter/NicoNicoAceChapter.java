@@ -276,7 +276,7 @@ public class NicoNicoAceChapter extends Chapter
         public void run() throws Exception
         {
             addRequestProperty("Cookie", login.getCookies());
-            url = new URL(url.toString() + "?" + (System.currentTimeMillis() / 1000) + (int)(Math.random() * 1000));
+            url = new URL(url.toString() + "?" + System.currentTimeMillis());
 
             super.run();
 

@@ -7,6 +7,7 @@ package anonscanlations.downloader;
 import javax.swing.*;
 
 import java.io.*;
+import java.net.*;
 import java.util.*;
 
 import org.w3c.dom.*;
@@ -19,12 +20,13 @@ import javax.xml.parsers.*;
  */
 public class DownloaderUtils
 {
+    /* ===============================================
+     * ERROR HANDLING
+     * ===============================================
+     */
     public static final boolean SPILL_GUTS = true;
-
     public static final HashMap<String, Exception> ERRORS = new HashMap<String, Exception>();
-
     public static final ArrayList<String> LOG = new ArrayList<String>();
-
     public static JEditorPane LOGEDITOR = null;
 
     public static void debug(String message)
@@ -75,7 +77,12 @@ public class DownloaderUtils
         }
         return(true);
     }
-
+    
+    /* ===============================================
+     * NETWORKING AND I/O
+     * ===============================================
+     */
+    
     // Source http://www.rgagnon.com/javadetails/java-0307.html
     private static final HashMap<String,String> htmlEntities = new HashMap<String,String>();
     static
@@ -161,17 +168,24 @@ public class DownloaderUtils
             page.append(line).append('\n');
         return(page.toString());
     }
-
-    private static final StringBuilder SB = new StringBuilder();
-    private static final Formatter FORMATTER = new Formatter(SB, Locale.US);
-    private static final String BAD_CHARS ="[\\\\/:*?\"<>\\|]";
-
-    public static File fileName(File directory, String title, int page, String ext)
+    
+    public static URL getRedirectURL(URL url) throws IOException
     {
-        SB.setLength(0);
-        FORMATTER.format("%s_%03d.%s", title, page, ext);
-        String saveTitle = SB.toString().replace(' ', '_').replaceAll(BAD_CHARS, "");
-        return(new File(directory, saveTitle));
+        if(url == null)
+            return(null);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setInstanceFollowRedirects(false);
+        if(conn.getResponseCode() < 300 && conn.getResponseCode() > 302)
+            return(url);
+        String headerName = null;
+        for(int i = 1; (headerName = conn.getHeaderFieldKey(i)) != null; i++)
+        {
+            if(headerName.equals("Location"))
+            {
+                return(new URL(url, conn.getHeaderField(i)));
+            }
+        }
+        return(url);
     }
 
     public static void browse(java.net.URL url)
@@ -218,16 +232,18 @@ public class DownloaderUtils
 
         return(d);
     }
+    
+    private static final StringBuilder SB = new StringBuilder();
+    private static final Formatter FORMATTER = new Formatter(SB, Locale.US);
+    private static final String BAD_CHARS ="[\\\\/:*?\"<>\\|]";
 
-    public static Node getNodeText(Element doc, String tagName)
+    public static File fileName(File directory, String title, int page, String ext)
     {
-        NodeList list = doc.getElementsByTagName(tagName);
-        if(list.getLength() < 1)
-            return(null);
-        Node element = list.item(0);
-        Node contents = element.getFirstChild();
-        return(contents);
+        SB.setLength(0);
+        FORMATTER.format("%s_%03d.%s", title, page, ext);
+        String saveTitle = SB.toString().replace(' ', '_').replaceAll(BAD_CHARS, "");
+        return(new File(directory, saveTitle));
     }
-
+    
     public static final SAXException DONE = new SAXException("Sax parsing done");
 }

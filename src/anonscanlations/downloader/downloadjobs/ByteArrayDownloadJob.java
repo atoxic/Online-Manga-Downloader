@@ -32,5 +32,10 @@ public class ByteArrayDownloadJob extends DownloadJob
         InputStream in = conn.getInputStream();
         bytes = DownloaderUtils.readAllBytes(in);
     }
+    
+    public byte[] getBytes()
+    {
+        return(bytes);
+    }
 }
 
