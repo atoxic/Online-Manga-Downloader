@@ -72,6 +72,7 @@ public class DownloaderUtils
         {
             System.err.println("LOGGER: Exception added");
             e.printStackTrace();
+            addToLog(e.getMessage());
             for(StackTraceElement element : e.getStackTrace())
                 addToLog(element.toString());
         }

@@ -18,7 +18,7 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class NicoNicoChapter extends Chapter
 {
-    public static final Pattern IDMATCH = Pattern.compile(".*?([0-9]+)$");
+    public static final Pattern IDMATCH = Pattern.compile("mg([0-9]+)$");
 
     private URL url;
 

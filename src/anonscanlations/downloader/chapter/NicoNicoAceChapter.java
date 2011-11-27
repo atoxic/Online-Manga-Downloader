@@ -32,6 +32,7 @@ public class NicoNicoAceChapter extends Chapter
     private transient ArrayList<String> images;
     private transient NicoNicoLoginDownloadJob login;
     private transient boolean is_trial, use_drm;
+    private transient long dl_key_time;
 
     public NicoNicoAceChapter(URL _url)
     {
@@ -45,6 +46,7 @@ public class NicoNicoAceChapter extends Chapter
         title = null;
         userid = null;
         dl_key = null;
+        dl_key_time = 0;
         maki_address = null;
         bookid = null;
         images = new ArrayList<String>();
@@ -114,6 +116,7 @@ public class NicoNicoAceChapter extends Chapter
                 }
 
                 dl_key = obj.getString("dl_key");
+                dl_key_time = System.currentTimeMillis();
                 maki_address = obj.getString("maki_address");
                 is_trial = obj.getBoolean("is_trial");
                 use_drm = obj.getBoolean("use_drm");
@@ -209,15 +212,41 @@ public class NicoNicoAceChapter extends Chapter
     public ArrayList<DownloadJob> download(File directory) throws Exception
     {
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
-        
-        final File finalDirectory = directory;
         URL maki = new URL(maki_address);
+        
+        final JSONDownloadJob renewKey = new JSONDownloadJob("Renew key",
+                                            new URL("http://bkapi.seiga.nicovideo.jp/book/" + bookid + "/download"))
+        {
+            @Override
+            public void run() throws Exception
+            {
+                if(System.currentTimeMillis() - dl_key_time >= 3300000)
+                {
+                    try
+                    {
+                        super.run();
+                    }
+                    catch(IOException e)
+                    {
+                        if(conn.getResponseCode() == 401)
+                            throw new IOException("Your NicoNico account isn't registered to view BookWalker chapters");
+                        throw e;
+                    }
 
+                    dl_key = obj.getString("dl_key");
+                    dl_key_time = System.currentTimeMillis();
+                    DownloaderUtils.debug("dl_key: " + dl_key);
+                }
+            }
+        };
+        
         for(int i = 0; i < images.size(); i++)
         {
-            final int finalIndex = i;
-            final String finalImage = images.get(finalIndex);
-
+            final File f = DownloaderUtils.fileName(directory, title, i + 1,
+                            images.get(i).substring(images.get(i).lastIndexOf('.') + 1));
+            if(f.exists())
+                continue;
+            
             EPubDownloadJob file = new EPubDownloadJob("Page " + (i + 1), maki)
             {
                 byte[] key;
@@ -243,9 +272,7 @@ public class NicoNicoAceChapter extends Chapter
                         return;
                     read = true;
 
-                    FileOutputStream fout = new FileOutputStream(
-                                                    DownloaderUtils.fileName(finalDirectory, title, finalIndex + 1,
-                                                                        finalImage.substring(finalImage.lastIndexOf('.') + 1)));
+                    FileOutputStream fout = new FileOutputStream(f);
                     if(use_drm)
                     {
                         byte[] array = DownloaderUtils.readAllBytes(input);
@@ -264,10 +291,11 @@ public class NicoNicoAceChapter extends Chapter
                 }
             };
             file.setPOSTData("streaming=resources&trial=" + is_trial + "&bookid=" + bookid +
-                            "&resources=" + URLEncoder.encode("contents/" + finalImage, "UTF-8") + "&userid=" + userid);
+                            "&resources=" + URLEncoder.encode("contents/" + images.get(i), "UTF-8") + "&userid=" + userid);
             file.addRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
             file.addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             file.addRequestProperty("x-nicobook-dl-key", dl_key);
+            list.add(renewKey);
             list.add(file);
         }
 
