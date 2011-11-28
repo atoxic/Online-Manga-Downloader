@@ -314,10 +314,10 @@ public class Downloader extends Thread
         System.setProperty("http.agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0");
         // in order to handle custom protocols
         System.setProperty("java.protocol.handler.pkgs", "anonscanlations.downloader.chapter");
-        
+
         // initialize backend
         init();
-            
+
         // Try to use native look and feel
         try
         {

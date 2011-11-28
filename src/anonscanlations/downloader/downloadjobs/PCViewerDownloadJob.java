@@ -9,21 +9,21 @@ import anonscanlations.downloader.chapter.*;
  *
  * @author /a/non <anonymousscanlations@gmail.com>
  */
-public class PCViewerDownloadJob extends FileDownloadJob
+public class PCViewerDownloadJob extends ByteArrayDownloadJob
 {
-    protected File realFile;
+    protected File file;
     public PCViewerDownloadJob(String _description, URL _url, File _file)
     {
-        super(_description, _url, null);
-        realFile = _file;
+        super(_description, _url);
+        file = _file;
     }
     @Override
     public void run() throws Exception
     {
-        File temp = File.createTempFile("pcviewer_temp", ".bin");
-        file = temp;
         super.run();
-        PCViewerDecrypt.decryptFile(temp, realFile);
-        temp.delete();
+        PCViewerDecrypt.decrypt(bytes);
+        FileOutputStream out = new FileOutputStream(file);
+        out.write(bytes, 8, bytes.length - 8);
+        out.close();
     }
 }
