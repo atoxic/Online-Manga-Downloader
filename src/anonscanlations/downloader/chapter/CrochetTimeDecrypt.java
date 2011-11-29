@@ -92,8 +92,6 @@ public class CrochetTimeDecrypt
     {
         ArrayList<String> ret = new ArrayList<String>();
 
-        //RandomAccessFile file = new RandomAccessFile(f, "r");
-
         int i = bigEndianInt(bytes, 8);
 
         while(i < bytes.length)
