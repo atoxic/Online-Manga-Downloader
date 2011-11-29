@@ -9,7 +9,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Online Manga Downloader 0.1.5.4 Return of the Bug Fixes"/>
+    <Property name="title" type="java.lang.String" value="Online Manga Downloader 0.1.5.5 Return of the Bug Fixes"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
