@@ -27,6 +27,7 @@ public class Downloader extends Thread
     private Exception error;
     private final Object waitForJobs;
     private final Lock processing;
+    private final Condition notProcessing;
     private Downloader()
     {
         jobs = Collections.synchronizedList(new ArrayList<List<DownloadJob>>());
@@ -37,6 +38,8 @@ public class Downloader extends Thread
         
         waitForJobs = new Object();
         processing = new ReentrantLock();
+        notProcessing = processing.newCondition();
+        setPriority(MAX_PRIORITY);
     }
     public void addJobs(ArrayList<DownloadJob> job)
     {
@@ -96,6 +99,9 @@ public class Downloader extends Thread
                     DownloaderUtils.debug("WUF Thread Finished");
                     return;
                 }
+                DownloaderUtils.debug("WUF notProcessing Waiting");
+                notProcessing.await();
+                DownloaderUtils.debug("WUF notProcessing Waking");
             }
             finally
             {
@@ -136,8 +142,13 @@ public class Downloader extends Thread
             
             try
             {
+                DownloaderUtils.debug("Thread Locking");
                 processing.lock();
+                DownloaderUtils.debug("Thread Locked; Signalling notProcessing");
+                notProcessing.signalAll();
+                DownloaderUtils.debug("Thread Removing Job");
                 List<DownloadJob> top = jobs.remove(0);
+                DownloaderUtils.debug("Thread Running Jobset");
                 for(DownloadJob job : top)
                 {
                     DownloaderUtils.debug("Running job: " + job);
@@ -148,10 +159,12 @@ public class Downloader extends Thread
             }
             catch(Exception e)
             {
+                DownloaderUtils.debug("Thread Reached Error: " + e);
                 error = e;
             }
             finally
             {
+                DownloaderUtils.debug("Thread Releasing Lock");
                 processing.unlock();
             }
         }
@@ -183,6 +196,7 @@ public class Downloader extends Thread
                     currentThread.pause();
                     currentThread.addJobs(chapter.init());
                     currentThread.unpause();
+                    Thread.sleep(100);
                     currentThread.waitUntilFinished();
                     
                     DownloaderUtils.debug("run Spot 3");
@@ -221,6 +235,7 @@ public class Downloader extends Thread
                 
             }
         };
+        t.setPriority(MIN_PRIORITY);
         t.start();
         return(t);
     }
@@ -298,6 +313,7 @@ public class Downloader extends Thread
                     frame.setStatus("Error: could not autodetect");
             }
         };
+        t.setPriority(MIN_PRIORITY);
         t.start();
         return(t);
     }

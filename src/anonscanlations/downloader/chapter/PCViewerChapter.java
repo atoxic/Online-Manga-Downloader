@@ -90,12 +90,20 @@ public class PCViewerChapter extends Chapter implements Serializable
                         {
                             dataFolder = atts.getValue("path");
                         }
+                        else if(localName.equals("TotalPageCount"))
+                        {
+                            rangeStart = 0;
+                            rangeEnd = Integer.parseInt(atts.getValue("pagecount")) - 1;
+                        }
                         else if(localName.equals("SamplePageList"))
                         {
                             String range[] = atts.getValue("list").split("-");
 
-                            rangeStart = Integer.parseInt(range[0]);
-                            rangeEnd = Integer.parseInt(range[1]);
+                            if(range.length == 2)
+                            {
+                                rangeStart = Integer.parseInt(range[0]);
+                                rangeEnd = Integer.parseInt(range[1]);
+                            }
                         }
                     }
                 });

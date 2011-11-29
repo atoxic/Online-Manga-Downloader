@@ -33,6 +33,14 @@ public class PreferencesManager
                 saveWindowPrefs(KEYS.get(e.getWindow()), e.getWindow());
             }
         }
+        @Override
+        public void windowClosed(WindowEvent e)
+        {
+            if(KEYS.containsKey(e.getWindow()))
+            {
+                saveWindowPrefs(KEYS.get(e.getWindow()), e.getWindow());
+            }
+        }
     };
 
     // set preferences to default values if they haven't been touched at all

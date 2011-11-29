@@ -207,8 +207,9 @@ public class DownloaderUtils
     }
 
     public static HashMap<String, String> getQueryMap(java.net.URL url)
+            throws UnsupportedEncodingException
     {
-        return(getQueryMapFromQueryString(url.getQuery()));
+        return(getQueryMapFromQueryString(URLDecoder.decode(url.getQuery(), "UTF-8")));
     }
     
     public static HashMap<String, String> getQueryMapFromQueryString(String str)
@@ -240,15 +241,11 @@ public class DownloaderUtils
             throw new IOException("Can only use http");
     }
     
-    private static final StringBuilder SB = new StringBuilder();
-    private static final Formatter FORMATTER = new Formatter(SB, Locale.US);
     private static final String BAD_CHARS ="[\\\\/:*?\"<>\\|]";
 
     public static File fileName(File directory, String title, int page, String ext)
     {
-        SB.setLength(0);
-        FORMATTER.format("%s_%03d.%s", title, page, ext);
-        String saveTitle = SB.toString().replace(' ', '_').replaceAll(BAD_CHARS, "");
+        String saveTitle = String.format("%s_%03d.%s", title, page, ext).replace(' ', '_').replaceAll(BAD_CHARS, "");
         return(new File(directory, saveTitle));
     }
     
