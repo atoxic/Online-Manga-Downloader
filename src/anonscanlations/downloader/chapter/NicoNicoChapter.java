@@ -170,9 +170,12 @@ public class NicoNicoChapter extends Chapter
         int i = 1;
         for(NicoImage image : images.values())
         {
+            File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+            if(f.exists())
+                continue;       // yes, ignore the mp3 as well
             FileDownloadJob page = new FileDownloadJob("Page " + i,
                             new URL("http://lohas.nicoseiga.jp/thumb/" + image.id + "l?"),
-                            DownloaderUtils.fileName(directory, title, i, "jpg"));
+                            f);
             list.add(page);
             if(image.se_path != null)
             {

@@ -108,6 +108,9 @@ public class CrochetTimeChapter extends Chapter
         for(int i = 0; i < list.size(); i++)
         {
             final int finalIndex = i;
+            final File f = DownloaderUtils.fileName(finalDirectory, path, finalIndex, "jpg");
+            if(f.exists())
+                continue;
 
             ByteArrayDownloadJob page = new ByteArrayDownloadJob("Page " + i,
                                         new URL(dbmd + CrochetTimeDecrypt.scrambleURL(filepath + list.get(i))))
@@ -120,7 +123,7 @@ public class CrochetTimeChapter extends Chapter
                     CrochetTimeDecrypt.decrypt(bytes);
                     
                     BufferedInputStream input = new BufferedInputStream(new InflaterInputStream(new ByteArrayInputStream(bytes)));
-                    FileOutputStream output = new FileOutputStream(DownloaderUtils.fileName(finalDirectory, path, finalIndex, "jpg"));
+                    FileOutputStream output = new FileOutputStream(f);
                     byte[] buf = new byte[1024];
                     try
                     {

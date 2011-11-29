@@ -112,10 +112,12 @@ public class PluginFreeChapter extends Chapter implements Serializable
     {
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
 
-        final File finalDirectory = directory;
         for(int i = 1; i <= total; i++)
         {
-            final int finalIndex = i;
+            final File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+            if(f.exists())
+                continue;
+
             final String prefix = downloadURL + "_" + String.format("%03d", i) + "_" + (zoom.length() < 2 ? "0" + zoom : zoom);
             final int zoomVal = Integer.parseInt(zoom),
                         w = Integer.parseInt(zoomWidthS),
@@ -147,7 +149,7 @@ public class PluginFreeChapter extends Chapter implements Serializable
                             g.drawImage(grid[x][y].getImage(), x * GRID_W, y * GRID_H, null);
                         }
                     }
-                    ImageIO.write(complete, "JPEG", DownloaderUtils.fileName(finalDirectory, title, finalIndex, "jpg"));
+                    ImageIO.write(complete, "JPEG", f);
                 }
             };
             list.add(combine);

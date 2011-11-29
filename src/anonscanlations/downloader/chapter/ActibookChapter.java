@@ -214,8 +214,11 @@ public class ActibookChapter extends Chapter implements Serializable
         {
             for(int i = start; i < start + total; i++)
             {
-                FileDownloadJob page = new FileDownloadJob("Page " + i, new URL(url, "books/images/" + zoom + "/" + i + ".jpg"),
-                                                                        DownloaderUtils.fileName(directory, title, i, "jpg"));
+                File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+                if(f.exists())
+                    continue;
+                FileDownloadJob page = new FileDownloadJob("Page " + i,
+                                            new URL(url, "books/images/" + zoom + "/" + i + ".jpg"), f);
                 list.add(page);
             }
         }

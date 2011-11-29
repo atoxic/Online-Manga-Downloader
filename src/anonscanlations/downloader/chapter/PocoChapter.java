@@ -85,8 +85,10 @@ public class PocoChapter extends Chapter implements Serializable
         int i = 1;
         for(String image : images)
         {
-            FileDownloadJob page = new FileDownloadJob("Page " + i, new URL(image),
-                    DownloaderUtils.fileName(directory, title + "_" + story, i, "jpg"));
+            File f = DownloaderUtils.fileName(directory, title + "_" + story, i, "jpg");
+            if(f.exists())
+                continue;
+            FileDownloadJob page = new FileDownloadJob("Page " + i, new URL(image), f);
             list.add(page);
             i++;
         }

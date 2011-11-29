@@ -186,6 +186,8 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
         for(String image : images)
         {
             final File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+            if(f.exists())
+                continue;
             ByteArrayDownloadJob page = new ByteArrayDownloadJob("Page " + i, new URL("http://eco.nicoseiga.jp/comic/" + image))
             {
                 @Override

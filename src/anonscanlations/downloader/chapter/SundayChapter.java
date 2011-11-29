@@ -75,6 +75,10 @@ public class SundayChapter extends Chapter
 
         for(int i = min; i <= max; i++)
         {
+            final File f = DownloaderUtils.fileName(directory, key3 + "_c" + key4, i, "jpg");
+            if(f.exists())
+                continue;
+            
             String imageURL = origURL + key3 + "_" + key4 + "_" + String.format("%04d", i) + ".bin?e=" + timestamp,
                     toHash = "e47ec34c9cf59bca8d8eb865896b74ff88f953d3" + imageURL,
                     hashedURL = "";
@@ -93,7 +97,7 @@ public class SundayChapter extends Chapter
 
             imageURL += "&h=" + hashedURL;
 
-            PCViewerDownloadJob file = new PCViewerDownloadJob("Page " + i, new URL(imageURL), DownloaderUtils.fileName(directory, key3 + "_c" + key4, i, "jpg"));
+            PCViewerDownloadJob file = new PCViewerDownloadJob("Page " + i, new URL(imageURL), f);
             list.add(file);
         }
 

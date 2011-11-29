@@ -84,11 +84,13 @@ public class WebYoungJumpChapter extends Chapter
     public ArrayList<DownloadJob> download(File directory) throws Exception
     {
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
-        final File finalDirectory = directory;
         
         for(int i = 1; i <= numPages; i++)
         {
             final int finalIndex = i;
+            final File f = DownloaderUtils.fileName(directory, title, i, "jpeg");
+            if(f.exists())
+                continue;
             list.add(new DownloadJob("Page " + i)
             {
                 @Override
@@ -101,10 +103,7 @@ public class WebYoungJumpChapter extends Chapter
                         if(tag.getClass() == DefineJPEGImage.class)
                         {
                             byte[] bytes = ((DefineJPEGImage)tag).getImage();
-                            FileOutputStream fos = new FileOutputStream(
-                                                        DownloaderUtils.fileName(finalDirectory,
-                                                                                title, finalIndex,
-                                                                                "jpeg"));
+                            FileOutputStream fos = new FileOutputStream(f);
                             fos.write(bytes);
                             fos.close();
                         }

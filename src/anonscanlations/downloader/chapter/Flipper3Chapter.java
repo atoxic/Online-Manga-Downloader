@@ -105,14 +105,16 @@ public class Flipper3Chapter extends Chapter
     public ArrayList<DownloadJob> download(File directory) throws Exception
     {
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
-        final File finalDirectory = directory;
         
         final int gridW = (int)Math.ceil(1.0f * pageWidth * maxMag / sliceWidth);
         final int gridH = (int)Math.ceil(1.0f * pageHeight * maxMag / sliceHeight);
         DownloaderUtils.debug("grid: " + gridW + ", " + gridH);
         for(int i = 1; i <= total; i++)
         {
-            final int finalIndex = i;
+            final File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+            if(f.exists())
+                continue;
+            
             final ImageDownloadJob grid[][] = new ImageDownloadJob[gridW][gridH];
             for(int y = 0; y < gridH; y++)
             {
@@ -139,7 +141,7 @@ public class Flipper3Chapter extends Chapter
                             g.drawImage(grid[x][y].getImage(), x * sliceWidth, y * sliceHeight, null);
                         }
                     }
-                    ImageIO.write(complete, "JPEG", DownloaderUtils.fileName(finalDirectory, title, finalIndex, "jpg"));
+                    ImageIO.write(complete, "JPEG", f);
                 }
             };
             list.add(combine);

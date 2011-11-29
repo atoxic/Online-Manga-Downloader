@@ -102,12 +102,13 @@ public class MangaOnWebChapter extends Chapter
     public ArrayList<DownloadJob> download(File directory) throws Exception
     {
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
-        final File finalDirectory = directory;
         byte[] key = {99, 49, 51, 53, 100, 54, 56, 56, 57, 57, 99, 56, 50, 54, 99, 101, 100, 55, 99, 52, 57, 98, 99, 55, 54, 97, 97, 57, 52, 56, 57, 48};
         final BlowfishKey bfkey = new BlowfishKey(key);
         for(int i = 0; i < paths.size(); i++)
         {
-            final int finalIndex = i;
+            final File f = DownloaderUtils.fileName(directory, ctsn, i, "jpg");
+            if(f.exists())
+                continue;
             // rid is just a random number from 0-9999
             ByteArrayDownloadJob page = new ByteArrayDownloadJob("Page " + i, 
                                             new URL("http://mangaonweb.com/page.do?cdn=" + cdn
@@ -120,7 +121,7 @@ public class MangaOnWebChapter extends Chapter
                     super.run();
                     bfkey.decrypt(bytes, 0);
 
-                    RandomAccessFile output = new RandomAccessFile(DownloaderUtils.fileName(finalDirectory, ctsn, finalIndex, "jpg"), "rw");
+                    FileOutputStream output = new FileOutputStream(f);
                     output.write(bytes);
                     output.close();
                 }

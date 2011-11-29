@@ -185,7 +185,6 @@ public class CLIPChapter extends Chapter
     @Override
     public ArrayList<DownloadJob> download(File directory) throws Exception
     {
-        final File finalDirectory = directory;
         DownloaderUtils.debug("title: " + title);
         for(int page : pages)
             DownloaderUtils.debug("page: " + page);
@@ -232,26 +231,35 @@ public class CLIPChapter extends Chapter
                 DownloaderUtils.debug("decodeKey: " + Arrays.toString(decodeKey));
             }
         };
-        DownloadJob firstPageDecode = new DownloadJob("Decode page 1")
-        {
-            @Override
-            public void run() throws Exception
-            {
-                byte[] dec = CLIPDecrypt.decodeBinary(firstPage.getBytes(), decodeKey);
-                FileOutputStream fos = new FileOutputStream(DownloaderUtils.fileName(finalDirectory, title, pages.get(0), "jpg"));
-                fos.write(dec);
-                fos.close();
-            }
-        };
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         list.add(firstPage);
         list.add(getTime);
         list.add(getKey);
-        list.add(firstPageDecode);
+
+        final File firstPageFile = DownloaderUtils.fileName(directory, title, pages.get(0), "jpg");
+        if(!firstPageFile.exists())
+        {
+            DownloadJob firstPageDecode = new DownloadJob("Decode page 1")
+            {
+                @Override
+                public void run() throws Exception
+                {
+                    byte[] dec = CLIPDecrypt.decodeBinary(firstPage.getBytes(), decodeKey);
+                    FileOutputStream fos = new FileOutputStream(firstPageFile);
+                    fos.write(dec);
+                    fos.close();
+                }
+            };
+            list.add(firstPageDecode);
+        }
         
         for(int i = 1; i < pages.size(); i++)
         {
             final int page = pages.get(i);
+            final File f = DownloaderUtils.fileName(directory, title, page, "jpg");
+            if(f.exists())
+                continue;
+
             ByteArrayDownloadJob pageJob = 
                 new ByteArrayDownloadJob("Page " + page,
                     new URL("http://release-stg.clip-studio.com/api/getExpandedImageFile?" +
@@ -267,9 +275,7 @@ public class CLIPChapter extends Chapter
                 {
                     super.run();
                     byte[] dec = CLIPDecrypt.decodeBinary(bytes, decodeKey);
-                    FileOutputStream fos = 
-                            new FileOutputStream(DownloaderUtils.fileName(finalDirectory, 
-                                                    title, page, "jpg"));
+                    FileOutputStream fos = new FileOutputStream(f);
                     fos.write(dec);
                     fos.close();
                 }

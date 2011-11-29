@@ -127,10 +127,13 @@ public class PCViewerChapter extends Chapter implements Serializable
 
         for(int i = rangeStart; i <= rangeEnd; i++)
         {
+            final File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+            if(f.exists())
+                continue;
             PCViewerDownloadJob job = new PCViewerDownloadJob("Page " + i,
                         new URL(baseURL,
                             "content_dl.php?dtype=1&p=" + dataFolder + "&z=&x=0&re=0&ad=0&pre=&pno=" + i + "&" + getParams()),
-                        DownloaderUtils.fileName(directory, title, i, "jpg"));
+                        f);
             list.add(job);
         }
         return(list);
