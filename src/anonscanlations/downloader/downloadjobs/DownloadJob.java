@@ -11,9 +11,8 @@ import java.net.*;
 public abstract class DownloadJob
 {
     protected String description;
-
-    private Map<String, String> headers;
-    private String data;
+    protected final Map<String, String> headers;
+    protected String data;
 
     public DownloadJob(String _description)
     {
