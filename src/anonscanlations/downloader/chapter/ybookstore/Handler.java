@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 
 /**
- *
+ * Handles ybookstore protocol
  * @author /a/non <anonymousscanlations@gmail.com>
  */
 public class Handler extends URLStreamHandler
