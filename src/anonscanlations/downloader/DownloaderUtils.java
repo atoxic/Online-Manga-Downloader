@@ -176,7 +176,7 @@ public class DownloaderUtils
             return(null);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setInstanceFollowRedirects(false);
-        if(conn.getResponseCode() < 300 && conn.getResponseCode() > 302)
+        if(conn.getResponseCode() < 300 || conn.getResponseCode() > 302)
             return(url);
         String headerName = null;
         for(int i = 1; (headerName = conn.getHeaderFieldKey(i)) != null; i++)
