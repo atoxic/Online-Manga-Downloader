@@ -249,31 +249,20 @@ public class Downloader extends Thread
             @Override
             public void run()
             {
-                boolean nicoLogin = false;
+                LoginManager s = new LoginManager();
 
                 for(Chapter chapter : chapters)
                 {
                     try
                     {
-                        // Trying Nico; need login (only once)
-                        if((chapter instanceof NicoNicoChapter
-                            || chapter instanceof NicoNicoAceChapter)
-                            && !nicoLogin)
+                        Object lock = s.showDialog(chapter);
+                        if(lock != null)
                         {
-                            NicoNicoLoginDownloadJob.DIALOG.setVisible(true);
-                            synchronized(NicoNicoLoginDownloadJob.DIALOG.lock)
+                            synchronized(lock)
                             {
-                                NicoNicoLoginDownloadJob.DIALOG.lock.wait();
+                                lock.wait();
                             }
-                            nicoLogin = true;
-                        }
-                        else if(chapter instanceof SundayChapter)
-                        {
-                            SundayChapter.DIALOG.setVisible(true);
-                            synchronized(SundayChapter.DIALOG.lock)
-                            {
-                                SundayChapter.DIALOG.lock.wait();
-                            }
+                            chapter.getRequiredInfo(s);
                         }
 
                         DownloaderUtils.debug("Trying handler: " + chapter.getClass());

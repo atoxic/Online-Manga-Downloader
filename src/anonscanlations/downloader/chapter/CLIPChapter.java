@@ -42,6 +42,16 @@ public class CLIPChapter extends Chapter
         password = _password;
         cookies = null;
     }
+
+    @Override
+    public void getRequiredInfo(LoginManager s) throws Exception
+    {
+        if(username == null || password == null)
+        {
+            username = s.getComicRushLogin().getEMail();
+            password = s.getComicRushLogin().getPassword();
+        }
+    }
     
     @Override
     public ArrayList<DownloadJob> init() throws Exception
@@ -296,13 +306,8 @@ public class CLIPChapter extends Chapter
         @Override
         public void run() throws Exception
         {
-            /*
-            if(username == null && password == null)
-            {
-                username = DIALOG.getEMail();
-                password = DIALOG.getPassword();
-            }
-            // */
+            if(username == null || password == null)
+                throw new Exception("No login");
 
             URL url = new URL("https://www.comic-rush.jp/login");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();

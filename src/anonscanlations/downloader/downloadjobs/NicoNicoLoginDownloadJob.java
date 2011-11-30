@@ -3,16 +3,12 @@ package anonscanlations.downloader.downloadjobs;
 import java.io.*;
 import java.net.*;
 
-import anonscanlations.downloader.*;
-
 /**
  *
  * @author /a/non <anonymousscanlations@gmail.com>
  */
 public class NicoNicoLoginDownloadJob extends DownloadJob
 {
-    public static final NicoLoginDialog DIALOG = new NicoLoginDialog();
-
     public String username, cookies;
     // TODO: make password handling absolutely secure
     public char[] password;
@@ -28,11 +24,8 @@ public class NicoNicoLoginDownloadJob extends DownloadJob
 
     public void run() throws Exception
     {
-        if(username == null && password == null)
-        {
-            username = DIALOG.getEMail();
-            password = DIALOG.getPassword();
-        }
+        if(username == null || password == null)
+            throw new Exception("No login");
 
         URL url = new URL("https://secure.nicovideo.jp/secure/login?site=seiga");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

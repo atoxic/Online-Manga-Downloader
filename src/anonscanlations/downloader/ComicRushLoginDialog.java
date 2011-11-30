@@ -10,15 +10,17 @@ package anonscanlations.downloader;
  *
  * @author /a/non <anonymousscanlations@gmail.com>
  */
-public class KeyURLDialog extends javax.swing.JFrame {
+public class ComicRushLoginDialog extends javax.swing.JFrame {
 
-    private String url;
+    private String email;
+    private char[] password;
 
     /** Creates new form KeyURLDialog */
-    public KeyURLDialog() {
-        url = null;
+    public ComicRushLoginDialog() {
+        email = null;
+        password = null;
         initComponents();
-        PreferencesManager.registerWindow("OMD0.1.0_keyURL", this, false);
+        PreferencesManager.registerWindow("OMD0.1.0_comicRushLogin", this, false);
     }
 
     /** This method is called from within the constructor to
@@ -31,11 +33,14 @@ public class KeyURLDialog extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        URLTextField = new javax.swing.JTextField();
+        EMailField = new javax.swing.JTextField();
         OKButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        PasswordField = new javax.swing.JPasswordField();
 
-        setTitle("Shogakukan Handler: Previous URL Needed");
+        setTitle("CLIP (Comic Rush) Handler: Comic Rush Login Information May Be Needed");
         setResizable(false);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
@@ -43,7 +48,7 @@ public class KeyURLDialog extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("<html>Is it from a Shogakukan website, such as Club Sunday?<br/>\nIf so, please input the URL to the page that opened the viewer and press \"OK.\"<br/>\nIf not, press \"Cancel.\"</html>");
+        jLabel1.setText("<html>Is it an item bought from Comic Rush?<br/> If so, please input your Comic Rush login information and press \"OK\" in order to authenticate.<br/> If not, press \"Cancel.\"</html>");
 
         OKButton.setText("OK");
         OKButton.addActionListener(new java.awt.event.ActionListener() {
@@ -59,6 +64,10 @@ public class KeyURLDialog extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("E-Mail");
+
+        jLabel3.setText("Password");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,12 +75,19 @@ public class KeyURLDialog extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(URLTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(OKButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CancelButton)))
+                        .addComponent(CancelButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EMailField, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                            .addComponent(PasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -80,12 +96,18 @@ public class KeyURLDialog extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(URLTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EMailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelButton)
                     .addComponent(OKButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -93,7 +115,10 @@ public class KeyURLDialog extends javax.swing.JFrame {
 
     private void action(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_action
         if(evt.getSource() == OKButton)
-           url = URLTextField.getText();
+        {
+           email = EMailField.getText();
+           password = PasswordField.getPassword();
+        }
         setVisible(false);
     }//GEN-LAST:event_action
 
@@ -104,9 +129,14 @@ public class KeyURLDialog extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_windowClose
 
-    public String getURL()
+    public String getEMail()
     {
-        return(url);
+        return(email);
+    }
+
+    public char[] getPassword()
+    {
+        return(password);
     }
 
     /**
@@ -115,16 +145,19 @@ public class KeyURLDialog extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KeyURLDialog().setVisible(true);
+                new ComicRushLoginDialog().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
+    private javax.swing.JTextField EMailField;
     private javax.swing.JButton OKButton;
-    private javax.swing.JTextField URLTextField;
+    private javax.swing.JPasswordField PasswordField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 
 }

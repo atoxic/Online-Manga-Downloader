@@ -57,6 +57,16 @@ public class NicoNicoChapter extends Chapter
         }
     }
 
+    @Override
+    public void getRequiredInfo(LoginManager s) throws Exception
+    {
+        if(username == null || password == null)
+        {
+            username = s.getNicoLogin().getEMail();
+            password = s.getNicoLogin().getPassword();
+        }
+    }
+
     public ArrayList<DownloadJob> init() throws Exception
     {
         DownloaderUtils.checkHTTP(url);

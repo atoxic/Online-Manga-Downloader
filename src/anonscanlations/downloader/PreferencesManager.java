@@ -23,13 +23,14 @@ public class PreferencesManager
 
     private static final HashMap<Window, String> KEYS = new HashMap<Window, String>();
 
-    private static final WindowListener LISTENER = new WindowAdapter()
+    private static final WindowListener WINDOW_LISTENER = new WindowAdapter()
     {
         @Override
         public void windowClosing(WindowEvent e)
         {
             if(KEYS.containsKey(e.getWindow()))
             {
+                DownloaderUtils.debug("PrefManager: Closing: " + KEYS.get(e.getWindow()));
                 saveWindowPrefs(KEYS.get(e.getWindow()), e.getWindow());
             }
         }
@@ -38,7 +39,21 @@ public class PreferencesManager
         {
             if(KEYS.containsKey(e.getWindow()))
             {
+                DownloaderUtils.debug("PrefManager: Closed: " + KEYS.get(e.getWindow()));
                 saveWindowPrefs(KEYS.get(e.getWindow()), e.getWindow());
+            }
+        }
+    };
+    private static final ComponentListener COMPONENT_LISTENER = new ComponentAdapter()
+    {
+        @Override
+        public void componentHidden(ComponentEvent e)
+        {
+            Component c = e.getComponent();
+            if(c instanceof Window && KEYS.containsKey((Window)c))
+            {
+                DownloaderUtils.debug("PrefManager: Hidden: " + KEYS.get((Window)c));
+                saveWindowPrefs(KEYS.get((Window)c), (Window)c);
             }
         }
     };
@@ -59,7 +74,8 @@ public class PreferencesManager
     {
         loadWindowPrefs(key, w, size);
         KEYS.put(w, key);
-        w.addWindowListener(LISTENER);
+        w.addWindowListener(WINDOW_LISTENER);
+        w.addComponentListener(COMPONENT_LISTENER);
     }
 
     public static void saveWindowPrefs(String key, Window w)

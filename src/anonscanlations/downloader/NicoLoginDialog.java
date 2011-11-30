@@ -12,13 +12,11 @@ package anonscanlations.downloader;
  */
 public class NicoLoginDialog extends javax.swing.JFrame {
 
-    public final Object lock;
     private String email;
     private char[] password;
 
     /** Creates new form KeyURLDialog */
     public NicoLoginDialog() {
-        lock = new Object();
         email = null;
         password = null;
         initComponents();
@@ -125,9 +123,9 @@ public class NicoLoginDialog extends javax.swing.JFrame {
     }//GEN-LAST:event_action
 
     private void windowClose(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_windowClose
-        synchronized(lock)
+        synchronized(this)
         {
-            lock.notify();
+            this.notifyAll();
         }
     }//GEN-LAST:event_windowClose
 

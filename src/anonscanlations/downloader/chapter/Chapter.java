@@ -7,6 +7,7 @@ package anonscanlations.downloader.chapter;
 import java.io.*;
 import java.util.*;
 
+import anonscanlations.downloader.*;
 import anonscanlations.downloader.downloadjobs.*;
 
 /**
@@ -15,6 +16,7 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public abstract class Chapter implements Serializable
 {
+    public void getRequiredInfo(LoginManager s) throws Exception {}
     /**
      * Makes jobs that initialize the chapter.
      * @return              A batch of jobs to initialize the chapter

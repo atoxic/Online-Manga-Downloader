@@ -20,8 +20,6 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class SundayChapter extends Chapter
 {
-    public static final KeyURLDialog DIALOG = new KeyURLDialog();
-
     private String key1, key2, key3, key4, shd;
     private URL url, keyURL;
 
@@ -42,6 +40,15 @@ public class SundayChapter extends Chapter
         key3 = null;
         key4 = null;
         shd = null;
+    }
+
+    @Override
+    public void getRequiredInfo(LoginManager s) throws Exception
+    {
+        if(keyURL == null)
+        {
+            keyURL = new URL(s.getKey().getURL());
+        }
     }
 
     public ArrayList<DownloadJob> init() throws Exception
@@ -114,11 +121,6 @@ public class SundayChapter extends Chapter
         }
         public void run() throws Exception
         {
-            if(url == null)
-            {
-                url = new URL(DIALOG.getURL());
-            }
-
             DownloaderUtils.debug("SessionDJ url: " + url);
             HttpURLConnection urlConn = (HttpURLConnection)url.openConnection();
             urlConn.setInstanceFollowRedirects(false);
