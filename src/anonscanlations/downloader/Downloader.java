@@ -333,7 +333,7 @@ public class Downloader extends Thread
             // couldn't find native look and feel: it couldn't be helped
             DownloaderUtils.error("Could not set look and feel to native LnF", e, false);
         }
-        frame = new TempDownloaderFrame();
+        frame = TempDownloaderFrame.getFrame();
         frame.setVisible(true);
     }
 }

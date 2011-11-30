@@ -15,20 +15,31 @@ import anonscanlations.downloader.chapter.*;
  */
 public class TempDownloaderFrame extends javax.swing.JFrame {
 
-    private ExamplesFrame examples;
+    // Singleton
+    private static TempDownloaderFrame FRAME;
+
+    private String bodyRule;
     private LogFrame log;
 
     /** Creates new form TempDownloaderFrame */
-    public TempDownloaderFrame() {
-        // lazy init
-        examples = null;
+    private TempDownloaderFrame() {
+
+        java.awt.Font font = javax.swing.UIManager.getFont("Label.font");
+        bodyRule = "body { font-family: " + font.getFamily() + "; " + "font-size: " + font.getSize() + "pt; }";
 
         log = new LogFrame();
         DownloaderUtils.LOGEDITOR = log.getEditor();
 
         PreferencesManager.registerWindow("OMD0.1.0_tempdlframe", this, false);
-
+        
         initComponents();
+    }
+
+    public static TempDownloaderFrame getFrame()
+    {
+        if(FRAME == null)
+            FRAME = new TempDownloaderFrame();
+        return(FRAME);
     }
 
     public void setStatus(String status)
@@ -46,39 +57,114 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        radioButtonGroup = new javax.swing.ButtonGroup();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
+        downloadDirectoryLabel = new javax.swing.JLabel();
         downloadDirectoryField = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        nicoRadioButton = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        clubSundayRadioButton = new javax.swing.JRadioButton();
-        clubSundayKeyURL = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        nicoAceRadioButton = new javax.swing.JRadioButton();
-        jPanel2 = new javax.swing.JPanel();
-        emailField = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        passwordField = new javax.swing.JPasswordField();
-        jRadioButton9 = new javax.swing.JRadioButton();
+        viewerURLLabel = new javax.swing.JLabel();
         downloadButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         viewerURLField = new javax.swing.JTextField();
         statusBar = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        logButton = new javax.swing.JButton();
         manual = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
+        auto = new javax.swing.JRadioButton();
+        jPanel1 = new javax.swing.JPanel();
+        tabPane = new javax.swing.JTabbedPane();
+        Actibook = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
+        jPanel2 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        Crochet = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jTextField7 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jEditorPane3 = new javax.swing.JEditorPane();
+        MangaOnWeb = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jTextField9 = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jEditorPane4 = new javax.swing.JEditorPane();
+        Nico = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jTextField10 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jTextField27 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        nicoNicoPassword1 = new javax.swing.JPasswordField();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jEditorPane5 = new javax.swing.JEditorPane();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        nicoNicoPassword = new javax.swing.JPasswordField();
+        jLabel12 = new javax.swing.JLabel();
+        nicoNicoEMail = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        Nico2 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        jTextField18 = new javax.swing.JTextField();
+        jTextField19 = new javax.swing.JTextField();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jEditorPane9 = new javax.swing.JEditorPane();
+        NicoAce = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jTextField20 = new javax.swing.JTextField();
+        jTextField21 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jTextField28 = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        nicoNicoPassword2 = new javax.swing.JPasswordField();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jEditorPane10 = new javax.swing.JEditorPane();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        nicoNicoAceEMail = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        nicoNicoAcePassword = new javax.swing.JPasswordField();
+        jSeparator2 = new javax.swing.JSeparator();
+        PCViewer = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jTextField12 = new javax.swing.JTextField();
+        jTextField13 = new javax.swing.JTextField();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jEditorPane6 = new javax.swing.JEditorPane();
+        PluginFree = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jTextField14 = new javax.swing.JTextField();
+        jTextField15 = new javax.swing.JTextField();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jEditorPane7 = new javax.swing.JEditorPane();
+        Poco = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jTextField16 = new javax.swing.JTextField();
+        jTextField17 = new javax.swing.JTextField();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jEditorPane8 = new javax.swing.JEditorPane();
+        Shogakukan = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jEditorPane2 = new javax.swing.JEditorPane();
+        jPanel4 = new javax.swing.JPanel();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        clubSundayKeyURL = new javax.swing.JTextField();
+        YahooBookstore = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jTextField23 = new javax.swing.JTextField();
+        jTextField24 = new javax.swing.JTextField();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jEditorPane11 = new javax.swing.JEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Online Manga Downloader 0.1.5.5 Return of the Bug Fixes");
@@ -89,7 +175,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Download Directory");
+        downloadDirectoryLabel.setText("Download Directory");
 
         downloadDirectoryField.setText(PreferencesManager.PREFS.get(PreferencesManager.KEY_DOWNLOADDIR, new java.io.File(".").getAbsoluteFile().getParent()));
         downloadDirectoryField.setName("Directory"); // NOI18N
@@ -101,208 +187,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Viewer URL");
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Type"));
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jPanel1, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        radioButtonGroup.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText(Chapters.ACTIBOOK.getName());
-        jRadioButton1.setActionCommand("ACTIBOOK");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton1, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        radioButtonGroup.add(jRadioButton2);
-        jRadioButton2.setText(Chapters.CROCHETTIME.getName());
-        jRadioButton2.setActionCommand("CROCHETTIME");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton2, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        radioButtonGroup.add(jRadioButton3);
-        jRadioButton3.setText(Chapters.MANGAONWEB.getName());
-        jRadioButton3.setActionCommand("MANGAONWEB");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton3, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        radioButtonGroup.add(nicoRadioButton);
-        nicoRadioButton.setText(Chapters.NICONICO.getName());
-        nicoRadioButton.setActionCommand("NICONICO");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), nicoRadioButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        nicoRadioButton.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                radioButtonItemStateChanged(evt);
-            }
-        });
-
-        radioButtonGroup.add(jRadioButton5);
-        jRadioButton5.setText(Chapters.PCVIEWER.getName());
-        jRadioButton5.setActionCommand("PCVIEWER");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton5, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        radioButtonGroup.add(jRadioButton6);
-        jRadioButton6.setText(Chapters.PLUGINFREE.getName());
-        jRadioButton6.setActionCommand("PLUGINFREE");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton6, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        radioButtonGroup.add(clubSundayRadioButton);
-        clubSundayRadioButton.setText(Chapters.CLUBSUNDAY.getName());
-        clubSundayRadioButton.setActionCommand("CLUBSUNDAY");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), clubSundayRadioButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        clubSundayRadioButton.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                radioButtonItemStateChanged(evt);
-            }
-        });
-
-        clubSundayKeyURL.setEnabled(false);
-
-        jLabel3.setText("Previous URL");
-
-        radioButtonGroup.add(jRadioButton7);
-        jRadioButton7.setText(Chapters.POCO.getName());
-        jRadioButton7.setActionCommand("POCO");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton7, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        radioButtonGroup.add(jRadioButton4);
-        jRadioButton4.setText(Chapters.NICONICO2.getName());
-        jRadioButton4.setActionCommand("NICONICO2");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton4, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        radioButtonGroup.add(nicoAceRadioButton);
-        nicoAceRadioButton.setText(Chapters.NICONICOACE.getName());
-        nicoAceRadioButton.setActionCommand("NICONICOACE");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), nicoAceRadioButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        nicoAceRadioButton.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                radioButtonItemStateChanged(evt);
-            }
-        });
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("NicoNico Account Login"));
-
-        emailField.setEnabled(false);
-
-        jLabel5.setText("Password");
-
-        jLabel4.setText("E-Mail");
-
-        passwordField.setEnabled(false);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel4)
-                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jLabel5))
-        );
-
-        radioButtonGroup.add(jRadioButton9);
-        jRadioButton9.setText(Chapters.YAHOOBOOKSTORE.getName());
-        jRadioButton9.setActionCommand("YAHOOBOOKSTORE");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton9, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton7)
-                    .addComponent(jRadioButton6)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nicoRadioButton)
-                            .addComponent(nicoAceRadioButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jRadioButton5)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(clubSundayRadioButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clubSundayKeyURL, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
-                    .addComponent(jRadioButton9))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jRadioButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nicoRadioButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nicoAceRadioButton))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clubSundayRadioButton)
-                    .addComponent(clubSundayKeyURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        viewerURLLabel.setText("Viewer URL");
 
         downloadButton.setText("Download");
         downloadButton.addActionListener(new java.awt.event.ActionListener() {
@@ -321,58 +206,988 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         statusBar.setEditable(false);
         statusBar.setText("Status:");
 
-        jButton1.setText("Examples");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        logButton.setText("Log");
+        logButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Log");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                logButtonActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(manual);
         manual.setText("Manual");
 
-        buttonGroup1.add(jRadioButton8);
-        jRadioButton8.setSelected(true);
-        jRadioButton8.setText("Auto-detect");
+        buttonGroup1.add(auto);
+        auto.setSelected(true);
+        auto.setText("Auto-detect");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), tabPane, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jScrollPane1.setBorder(null);
+
+        jEditorPane1.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane1.setBorder(null);
+        jEditorPane1.setContentType("text/html");
+        jEditorPane1.setEditable(false);
+        jEditorPane1.setFont(jEditorPane1.getFont());
+        jEditorPane1.setText("<html>Flash-based viewer that ends with <b>\"_SWF_Window.html\"</b>.  Sites such as <a href=\"http://www.square-enix.com/jp/magazine/ganganonline/\">GanGan Online</a>, <a href=\"http://comic.mag-garden.co.jp/blade/\">Mag Garden Comic Online</a>, and <a href=\"http://www.kadokawa.co.jp/comic/tachiyomi.html\">Kadokawa Tachiyomi</a> deploys this.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane1.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane1.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                jEditorPane1hyperlink(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jEditorPane1);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Examples"));
+
+        jTextField1.setEditable(false);
+        jTextField1.setText("http://www.square-enix.com/jp/magazine/ganganonline/comic/ryushika/viewer/001/_SWF_Window.html");
+
+        jTextField2.setEditable(false);
+        jTextField2.setText("http://comic.mag-garden.co.jp/assets/files/blade_sengokuyoko01/_SWF_Window.html");
+
+        jTextField3.setEditable(false);
+        jTextField3.setText("http://www.kadokawa.co.jp/tachiyomi/comic/201003000250/_SWF_Window.html?mode=1062");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout ActibookLayout = new javax.swing.GroupLayout(Actibook);
+        Actibook.setLayout(ActibookLayout);
+        ActibookLayout.setHorizontalGroup(
+            ActibookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ActibookLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ActibookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        ActibookLayout.setVerticalGroup(
+            ActibookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ActibookLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(131, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab(Chapters.ACTIBOOK.getName(), Actibook);
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Examples"));
+
+        jTextField7.setEditable(false);
+        jTextField7.setText("http://voyager-store.com/index.php?main_page=addon&module=ebooks/open_image_crochet&ebooks_id=17657&products_id=11956");
+
+        jTextField8.setEditable(false);
+        jTextField8.setText("http://comic.bitway.ne.jp/kc/comic_tameshiyomi.html?isbn=9784063723953");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jScrollPane3.setBorder(null);
+
+        jEditorPane3.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane3.setBorder(null);
+        jEditorPane3.setContentType("text/html");
+        jEditorPane3.setEditable(false);
+        jEditorPane3.setFont(jEditorPane3.getFont());
+        jEditorPane3.setText("<html>Viewer used on sites such the <a href=\"http://voyager-store.com/\">Voyager Store</a> and <a href=\"http://kc.kodansha.co.jp/\">Kodansha's comic site</a> that uses a separate browser plugin.  Currently, it's not programmatically possible to decode some information necessary to download the files, so only the Voyager Store and Kodansha are supported.  Due to the Voyager Store's lack of authentication, this downloader can and will download every page in the product as if you bought it if you give it the \"try\" link.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane3.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane3.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                jEditorPane3hyperlink(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jEditorPane3);
+
+        javax.swing.GroupLayout CrochetLayout = new javax.swing.GroupLayout(Crochet);
+        Crochet.setLayout(CrochetLayout);
+        CrochetLayout.setHorizontalGroup(
+            CrochetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrochetLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CrochetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        CrochetLayout.setVerticalGroup(
+            CrochetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrochetLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(109, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab(Chapters.CROCHETTIME.getName(), Crochet);
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+
+        jTextField9.setEditable(false);
+        jTextField9.setText("http://mangaonweb.com/viewer.do?ctsn=31811");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jScrollPane4.setBorder(null);
+
+        jEditorPane4.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane4.setBorder(null);
+        jEditorPane4.setContentType("text/html");
+        jEditorPane4.setEditable(false);
+        jEditorPane4.setFont(jEditorPane4.getFont());
+        jEditorPane4.setText("<html>Flash-based viewer used on <a href=\"http://mangaonweb.com/welcome.do\">MangaOnWeb</a>.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane4.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane4.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                jEditorPane4hyperlink(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jEditorPane4);
+
+        javax.swing.GroupLayout MangaOnWebLayout = new javax.swing.GroupLayout(MangaOnWeb);
+        MangaOnWeb.setLayout(MangaOnWebLayout);
+        MangaOnWebLayout.setHorizontalGroup(
+            MangaOnWebLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MangaOnWebLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(MangaOnWebLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        MangaOnWebLayout.setVerticalGroup(
+            MangaOnWebLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MangaOnWebLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(198, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab(Chapters.MANGAONWEB.getName(), MangaOnWeb);
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+
+        jTextField10.setEditable(false);
+        jTextField10.setText("http://seiga.nicovideo.jp/watch/mg10942");
+
+        jLabel14.setText("E-Mail");
+
+        jTextField27.setEditable(false);
+        jTextField27.setText("yournicoemail@lol.com");
+
+        jLabel15.setText("Password");
+
+        nicoNicoPassword1.setEditable(false);
+        nicoNicoPassword1.setText("hunter12");
+        nicoNicoPassword1.setPreferredSize(new java.awt.Dimension(120, 20));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nicoNicoPassword1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nicoNicoPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addContainerGap(4, Short.MAX_VALUE))
+        );
+
+        jScrollPane5.setBorder(null);
+
+        jEditorPane5.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane5.setBorder(null);
+        jEditorPane5.setContentType("text/html");
+        jEditorPane5.setEditable(false);
+        jEditorPane5.setFont(jEditorPane5.getFont());
+        jEditorPane5.setText("<html>Viewer on <a href=\"http://seiga.nicovideo.jp/manga/\">NicoNico's site for user-published manga</a>.  This viewer supports sounds and scrolling comments; however, the downloader will only download the images and sound effects.  Furthermore, downloading requires authentication, so a valid NicoNico login is necessary.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane5.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane5.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                jEditorPane5hyperlink(evt);
+            }
+        });
+        jScrollPane5.setViewportView(jEditorPane5);
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Login Info"));
+
+        jLabel11.setText("E-Mail");
+
+        nicoNicoPassword.setPreferredSize(new java.awt.Dimension(120, 20));
+
+        jLabel12.setText("Password");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nicoNicoEMail, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nicoNicoPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(nicoNicoEMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nicoNicoPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout NicoLayout = new javax.swing.GroupLayout(Nico);
+        Nico.setLayout(NicoLayout);
+        NicoLayout.setHorizontalGroup(
+            NicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NicoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(NicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        NicoLayout.setVerticalGroup(
+            NicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NicoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(76, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab(Chapters.NICONICO.getName(), Nico);
+
+        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+
+        jTextField18.setEditable(false);
+        jTextField18.setText("http://seiga.nicovideo.jp/nanoace/watch/5001");
+
+        jTextField19.setEditable(false);
+        jTextField19.setText("http://seiga.nicovideo.jp/sdandgo/watch/7001");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField18, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(jTextField19, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane9.setBorder(null);
+
+        jEditorPane9.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane9.setBorder(null);
+        jEditorPane9.setContentType("text/html");
+        jEditorPane9.setEditable(false);
+        jEditorPane9.setFont(jEditorPane9.getFont());
+        jEditorPane9.setText("<html>Viewer used for tie-ins with official magazines such as <a href=\"http://info.nicovideo.jp/seiga/nanoace/\">Nano Ace (from Oct 3, 2011 to Nov 7)</a> and the now-defunct <a href=\"http://info.nicovideo.jp/seiga/sdandgo/\">SDMP (from Oct 21, 2011 to Nov 18)</a>.  The examples below may have expired.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane9.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane9.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                jEditorPane9hyperlink(evt);
+            }
+        });
+        jScrollPane9.setViewportView(jEditorPane9);
+
+        javax.swing.GroupLayout Nico2Layout = new javax.swing.GroupLayout(Nico2);
+        Nico2.setLayout(Nico2Layout);
+        Nico2Layout.setHorizontalGroup(
+            Nico2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Nico2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Nico2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        Nico2Layout.setVerticalGroup(
+            Nico2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Nico2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(157, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab(Chapters.NICONICO2.getName(), Nico2);
+
+        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+
+        jTextField20.setEditable(false);
+        jTextField20.setText("http://seiga.nicovideo.jp/watch/bk714");
+
+        jTextField21.setEditable(false);
+        jTextField21.setText("http://seiga.nicovideo.jp/watch/bk584");
+
+        jLabel16.setText("E-Mail");
+
+        jTextField28.setEditable(false);
+        jTextField28.setText("yournicoemail@lol.com");
+
+        jLabel17.setText("Password");
+
+        nicoNicoPassword2.setEditable(false);
+        nicoNicoPassword2.setText("hunter12");
+        nicoNicoPassword2.setPreferredSize(new java.awt.Dimension(120, 20));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField20, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(jTextField21, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nicoNicoPassword2, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nicoNicoPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addContainerGap())
+        );
+
+        jScrollPane10.setBorder(null);
+
+        jEditorPane10.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane10.setBorder(null);
+        jEditorPane10.setContentType("text/html");
+        jEditorPane10.setEditable(false);
+        jEditorPane10.setFont(jEditorPane10.getFont());
+        jEditorPane10.setText("<html>Viewer used for <a href=\"http://seiga.nicovideo.jp/book/\">e-books hosted on NicoNico.</a>  NicoNico login info is required.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane10.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane10.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                jEditorPane10hyperlink(evt);
+            }
+        });
+        jScrollPane10.setViewportView(jEditorPane10);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Login Info"));
+
+        jLabel18.setText("E-Mail");
+
+        jLabel19.setText("Password");
+
+        nicoNicoAcePassword.setPreferredSize(new java.awt.Dimension(120, 20));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nicoNicoAceEMail, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nicoNicoAcePassword, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(nicoNicoAceEMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nicoNicoAcePassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout NicoAceLayout = new javax.swing.GroupLayout(NicoAce);
+        NicoAce.setLayout(NicoAceLayout);
+        NicoAceLayout.setHorizontalGroup(
+            NicoAceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NicoAceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(NicoAceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        NicoAceLayout.setVerticalGroup(
+            NicoAceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NicoAceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab(Chapters.NICONICOACE.getName(), NicoAce);
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Examples"));
+
+        jTextField12.setEditable(false);
+        jTextField12.setText("http://view.books.yahoo.co.jp/dor/drm/dor_main.php?key1=blood-mikotoka01-0001&sp=-1&ad=1&re=0&xmlurl=http://stream01.books.yahoo.co.jp:8001/&shd=62862185b216b95c956c6c06b2af2e9b2a2aeb88");
+
+        jTextField13.setEditable(false);
+        jTextField13.setText("http://ct.eb-webcomic.com/dor/pcviewer_main.php?key1=EB&key2=umetanitig_001&key3=evahsebunt_001&key4=0001-0&sp=-1&ad=1&re=1&otp=1&xmlurl=http://ct.eb-webcomic.com/stream/&shd=1ccefd53ebe69ff204c60dba9ade4b6334282e61");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(jTextField13, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane6.setBorder(null);
+
+        jEditorPane6.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane6.setBorder(null);
+        jEditorPane6.setContentType("text/html");
+        jEditorPane6.setEditable(false);
+        jEditorPane6.setFont(jEditorPane6.getFont());
+        jEditorPane6.setText("<html>Flash-based viewer used on sites suched as <a href=\"http://comics.yahoo.co.jp\">Yahoo Comics</a> and <a href=\"http://www.famitsu.com/comic_clear/\">Famitsu Comic Clear (series that start with \"se_\")</a>.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane6.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane6.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                jEditorPane6hyperlink(evt);
+            }
+        });
+        jScrollPane6.setViewportView(jEditorPane6);
+
+        javax.swing.GroupLayout PCViewerLayout = new javax.swing.GroupLayout(PCViewer);
+        PCViewer.setLayout(PCViewerLayout);
+        PCViewerLayout.setHorizontalGroup(
+            PCViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PCViewerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PCViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        PCViewerLayout.setVerticalGroup(
+            PCViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PCViewerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(157, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab(Chapters.PCVIEWER.getName(), PCViewer);
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Examples"));
+
+        jTextField14.setEditable(false);
+        jTextField14.setText("http://futabasha.pluginfree.com/weblish/futabawebhigh/fsp/Oniichan_001/index.shtml?Mdn=1&rep=1");
+
+        jTextField15.setEditable(false);
+        jTextField15.setText("http://ebook.comic-gekkin.com/weblish/gekkin/hanasakuiroha_001/index.shtml?rep=1");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(jTextField15, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane7.setBorder(null);
+
+        jEditorPane7.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane7.setBorder(null);
+        jEditorPane7.setContentType("text/html");
+        jEditorPane7.setEditable(false);
+        jEditorPane7.setFont(jEditorPane7.getFont());
+        jEditorPane7.setText("<html>Javascript-based viewer used on sites suched as <a href=\"http://comichigh.jp/webcomic.html\">Comic High</a> and <a href=\"http://www.comic-gekkin.com\">Comic Gekkin</a>.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane7.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane7.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                jEditorPane7hyperlink(evt);
+            }
+        });
+        jScrollPane7.setViewportView(jEditorPane7);
+
+        javax.swing.GroupLayout PluginFreeLayout = new javax.swing.GroupLayout(PluginFree);
+        PluginFree.setLayout(PluginFreeLayout);
+        PluginFreeLayout.setHorizontalGroup(
+            PluginFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PluginFreeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PluginFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        PluginFreeLayout.setVerticalGroup(
+            PluginFreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PluginFreeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(172, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab(Chapters.PLUGINFREE.getName(), PluginFree);
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Examples"));
+
+        jTextField16.setEditable(false);
+        jTextField16.setText("http://www.poco2.jp/viewer/play.php?partid=735b90b4568125ed6c3f678819b6e058");
+
+        jTextField17.setEditable(false);
+        jTextField17.setText("http://www.poco2.jp/viewer/play.php?partid=f4b9ec30ad9f68f89b29639786cb62ef");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(jTextField17, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane8.setBorder(null);
+
+        jEditorPane8.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane8.setBorder(null);
+        jEditorPane8.setContentType("text/html");
+        jEditorPane8.setEditable(false);
+        jEditorPane8.setFont(jEditorPane8.getFont());
+        jEditorPane8.setText("<html>Flash-based viewer used on <a href=\"http://www.poco2.jp/\">PocoPoco</a>.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane8.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane8.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                jEditorPane8hyperlink(evt);
+            }
+        });
+        jScrollPane8.setViewportView(jEditorPane8);
+
+        javax.swing.GroupLayout PocoLayout = new javax.swing.GroupLayout(Poco);
+        Poco.setLayout(PocoLayout);
+        PocoLayout.setHorizontalGroup(
+            PocoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PocoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PocoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        PocoLayout.setVerticalGroup(
+            PocoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PocoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(172, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab(Chapters.POCO.getName(), Poco);
+
+        jScrollPane2.setBorder(null);
+
+        jEditorPane2.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane2.setBorder(null);
+        jEditorPane2.setContentType("text/html");
+        jEditorPane2.setEditable(false);
+        jEditorPane2.setFont(jEditorPane2.getFont());
+        jEditorPane2.setText("<html>Special viewer used on <a href=\"http://club.shogakukan.co.jp\">Club Sunday</a>.  It is PCViewer/DOR with an extra layer of protection.  As a result of the protection, an URL previous to the page must be given as well.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane2.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane2.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                jEditorPane2hyperlink(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jEditorPane2);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+
+        jTextField4.setEditable(false);
+        jTextField4.setText("http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/");
+
+        jTextField5.setEditable(false);
+        jTextField5.setText("http://club.shogakukan.co.jp/dor/pcviewer_main.php?key1=SHWM&key2=azumatakes_001&key3=choudokyuu_001&key4=0001-0&sp=-1&re=0&shd=e255451bc193d8388067ad31e2923665c88efc5d&otk=4a8acbcf319841d0d23bdcd9f25dfcc937172cd4");
+
+        jTextField6.setEditable(false);
+        jTextField6.setText("http://club.shogakukan.co.jp/magazine/SH_CSNDY/choudokyuu_001/detail/");
+
+        jLabel1.setText("If I want to download the first chapter (\"scene #1\") of this manga:");
+
+        jLabel2.setText("these would be the values I would fill out (the value after \"otk=\" will vary):");
+
+        jLabel3.setText("Viewer URL");
+
+        jLabel4.setText("Previous URL");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addContainerGap())
+        );
+
+        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Additional Information"));
+
+        jLabel13.setText("Previous URL");
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(clubSundayKeyURL, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clubSundayKeyURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout ShogakukanLayout = new javax.swing.GroupLayout(Shogakukan);
+        Shogakukan.setLayout(ShogakukanLayout);
+        ShogakukanLayout.setHorizontalGroup(
+            ShogakukanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ShogakukanLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ShogakukanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        ShogakukanLayout.setVerticalGroup(
+            ShogakukanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ShogakukanLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab(Chapters.CLUBSUNDAY.getName(), Shogakukan);
+
+        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder("Examples"));
+
+        jTextField23.setEditable(false);
+        jTextField23.setText("http://bookstore.yahoo.co.jp/shoshi-118408/");
+
+        jTextField24.setEditable(false);
+        jTextField24.setText("ybookstore://?s=1&i=118408&v=1");
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(jTextField24, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane11.setBorder(null);
+
+        jEditorPane11.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane11.setBorder(null);
+        jEditorPane11.setContentType("text/html");
+        jEditorPane11.setEditable(false);
+        jEditorPane11.setFont(jEditorPane11.getFont());
+        jEditorPane11.setText("<html>Native viewer application used for <a href=\"http://bookstore.yahoo.co.jp/\">Yahoo Bookstore</a>.  The downloader for this viewer can download the chapter if you give it either <a href=\"http://bookstore.yahoo.co.jp/shoshi-118408/\">the page with a link that opens the viewer</a> (usually has a blue button that says  \"立ち読み\") or the \"ybookstore://\" link (view the source to find it; in this case, \"ybookstore://?s=1&i=118408&v=1\").  It does not support downloading books you have bought yet (i.e. it only downloads the publicly downloadable parts).</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane11.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane11.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                jEditorPane11hyperlink(evt);
+            }
+        });
+        jScrollPane11.setViewportView(jEditorPane11);
+
+        javax.swing.GroupLayout YahooBookstoreLayout = new javax.swing.GroupLayout(YahooBookstore);
+        YahooBookstore.setLayout(YahooBookstoreLayout);
+        YahooBookstoreLayout.setHorizontalGroup(
+            YahooBookstoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(YahooBookstoreLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(YahooBookstoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        YahooBookstoreLayout.setVerticalGroup(
+            YahooBookstoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(YahooBookstoreLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(109, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab(Chapters.YAHOOBOOKSTORE.getName(), YahooBookstore);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabPane)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(5, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(manual)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 394, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                        .addComponent(downloadButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 468, Short.MAX_VALUE)
+                        .addComponent(logButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(exitButton))
+                    .addComponent(statusBar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
+                    .addComponent(auto, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(viewerURLLabel)
+                                .addComponent(downloadDirectoryLabel))
+                            .addComponent(manual))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(downloadDirectoryField, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                                .addComponent(downloadDirectoryField, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(browseButton))
-                            .addComponent(viewerURLField, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(downloadButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(exitButton))
-                    .addComponent(statusBar, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
-                    .addComponent(jRadioButton8))
+                            .addComponent(viewerURLField, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -380,26 +1195,24 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(downloadDirectoryLabel)
                     .addComponent(downloadDirectoryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(browseButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewerURLField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(viewerURLLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton8)
+                .addComponent(auto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(manual)
-                    .addComponent(jButton1))
+                .addComponent(manual)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(downloadButton)
                     .addComponent(exitButton)
-                    .addComponent(jButton2))
+                    .addComponent(logButton)
+                    .addComponent(downloadButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -443,7 +1256,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         if(manual.isSelected())
         {
-            Chapters c = Chapters.valueOf(radioButtonGroup.getSelection().getActionCommand());
+            Chapters c = Chapters.fromName(tabPane.getTitleAt(tabPane.getSelectedIndex()));
             Chapter chapter = null;
 
             switch(c)
@@ -473,12 +1286,12 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 }
                 case NICONICO:
                 {
-                    chapter = new NicoNicoChapter(viewerURL, emailField.getText(), passwordField.getPassword());
+                    chapter = new NicoNicoChapter(viewerURL, nicoNicoEMail.getText(), nicoNicoPassword.getPassword());
                     break;
                 }
                 case NICONICOACE:
                 {
-                    chapter = new NicoNicoAceChapter(viewerURL, emailField.getText(), passwordField.getPassword());
+                    chapter = new NicoNicoAceChapter(viewerURL, nicoNicoAceEMail.getText(),nicoNicoAcePassword.getPassword());
                     break;
                 }
             }
@@ -526,15 +1339,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_browseButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(examples == null)
-        {
-            examples = new ExamplesFrame();
-        }
-        examples.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void logButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logButtonActionPerformed
         /*
         JEditorPane editor = log.getEditor();
 
@@ -546,18 +1351,78 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         // */
 
         log.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void radioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radioButtonItemStateChanged
-        emailField.setEnabled(manual.isSelected() && (nicoRadioButton.isSelected() || nicoAceRadioButton.isSelected()));
-        passwordField.setEnabled(manual.isSelected() && (nicoRadioButton.isSelected() || nicoAceRadioButton.isSelected()));
-        clubSundayKeyURL.setEnabled(manual.isSelected() && clubSundayRadioButton.isSelected());
-    }//GEN-LAST:event_radioButtonItemStateChanged
+    }//GEN-LAST:event_logButtonActionPerformed
 
     private void windowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowClosing
         PreferencesManager.PREFS.put(PreferencesManager.KEY_DOWNLOADDIR,
                                 downloadDirectoryField.getText());
     }//GEN-LAST:event_windowClosing
+
+    private void jEditorPane1hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane1hyperlink
+        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
+            DownloaderUtils.browse(evt.getURL());
+        }
+}//GEN-LAST:event_jEditorPane1hyperlink
+
+    private void jEditorPane3hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane3hyperlink
+        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
+            DownloaderUtils.browse(evt.getURL());
+        }
+}//GEN-LAST:event_jEditorPane3hyperlink
+
+    private void jEditorPane4hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane4hyperlink
+        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
+            DownloaderUtils.browse(evt.getURL());
+        }
+}//GEN-LAST:event_jEditorPane4hyperlink
+
+    private void jEditorPane5hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane5hyperlink
+        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
+            DownloaderUtils.browse(evt.getURL());
+        }
+}//GEN-LAST:event_jEditorPane5hyperlink
+
+    private void jEditorPane9hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane9hyperlink
+        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
+            DownloaderUtils.browse(evt.getURL());
+        }
+}//GEN-LAST:event_jEditorPane9hyperlink
+
+    private void jEditorPane10hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane10hyperlink
+        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
+            DownloaderUtils.browse(evt.getURL());
+        }
+}//GEN-LAST:event_jEditorPane10hyperlink
+
+    private void jEditorPane6hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane6hyperlink
+        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
+            DownloaderUtils.browse(evt.getURL());
+        }
+}//GEN-LAST:event_jEditorPane6hyperlink
+
+    private void jEditorPane7hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane7hyperlink
+        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
+            DownloaderUtils.browse(evt.getURL());
+        }
+}//GEN-LAST:event_jEditorPane7hyperlink
+
+    private void jEditorPane8hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane8hyperlink
+        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
+            DownloaderUtils.browse(evt.getURL());
+        }
+}//GEN-LAST:event_jEditorPane8hyperlink
+
+    private void jEditorPane2hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane2hyperlink
+        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
+            DownloaderUtils.browse(evt.getURL());
+        }
+}//GEN-LAST:event_jEditorPane2hyperlink
+
+    private void jEditorPane11hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane11hyperlink
+        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
+            DownloaderUtils.browse(evt.getURL());
+        }
+}//GEN-LAST:event_jEditorPane11hyperlink
 
     /**
     * @param args the command line arguments
@@ -571,39 +1436,114 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Actibook;
+    private javax.swing.JPanel Crochet;
+    private javax.swing.JPanel MangaOnWeb;
+    private javax.swing.JPanel Nico;
+    private javax.swing.JPanel Nico2;
+    private javax.swing.JPanel NicoAce;
+    private javax.swing.JPanel PCViewer;
+    private javax.swing.JPanel PluginFree;
+    private javax.swing.JPanel Poco;
+    private javax.swing.JPanel Shogakukan;
+    private javax.swing.JPanel YahooBookstore;
+    private javax.swing.JRadioButton auto;
     private javax.swing.JButton browseButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField clubSundayKeyURL;
-    private javax.swing.JRadioButton clubSundayRadioButton;
     private javax.swing.JButton downloadButton;
     private javax.swing.JTextField downloadDirectoryField;
-    private javax.swing.JTextField emailField;
+    private javax.swing.JLabel downloadDirectoryLabel;
     private javax.swing.JButton exitButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JEditorPane jEditorPane10;
+    private javax.swing.JEditorPane jEditorPane11;
+    private javax.swing.JEditorPane jEditorPane2;
+    private javax.swing.JEditorPane jEditorPane3;
+    private javax.swing.JEditorPane jEditorPane4;
+    private javax.swing.JEditorPane jEditorPane5;
+    private javax.swing.JEditorPane jEditorPane6;
+    private javax.swing.JEditorPane jEditorPane7;
+    private javax.swing.JEditorPane jEditorPane8;
+    private javax.swing.JEditorPane jEditorPane9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
+    private javax.swing.JTextField jTextField14;
+    private javax.swing.JTextField jTextField15;
+    private javax.swing.JTextField jTextField16;
+    private javax.swing.JTextField jTextField17;
+    private javax.swing.JTextField jTextField18;
+    private javax.swing.JTextField jTextField19;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField20;
+    private javax.swing.JTextField jTextField21;
+    private javax.swing.JTextField jTextField23;
+    private javax.swing.JTextField jTextField24;
+    private javax.swing.JTextField jTextField27;
+    private javax.swing.JTextField jTextField28;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
+    private javax.swing.JButton logButton;
     private javax.swing.JRadioButton manual;
-    private javax.swing.JRadioButton nicoAceRadioButton;
-    private javax.swing.JRadioButton nicoRadioButton;
-    private javax.swing.JPasswordField passwordField;
-    private javax.swing.ButtonGroup radioButtonGroup;
+    private javax.swing.JTextField nicoNicoAceEMail;
+    private javax.swing.JPasswordField nicoNicoAcePassword;
+    private javax.swing.JTextField nicoNicoEMail;
+    private javax.swing.JPasswordField nicoNicoPassword;
+    private javax.swing.JPasswordField nicoNicoPassword1;
+    private javax.swing.JPasswordField nicoNicoPassword2;
     private javax.swing.JTextField statusBar;
+    private javax.swing.JTabbedPane tabPane;
     private javax.swing.JTextField viewerURLField;
+    private javax.swing.JLabel viewerURLLabel;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 

@@ -7,7 +7,6 @@ package anonscanlations.downloader;
 public enum Chapters
 {
     ACTIBOOK("Actibook"),
-    CLUBSUNDAY("Shogakukan"),
     CROCHETTIME("CrochetTime"),
     FLIPPER3("Flipper3"),
     MANGAONWEB("Manga On Web"),
@@ -17,6 +16,7 @@ public enum Chapters
     PCVIEWER("PCViewer/DOR"),
     PLUGINFREE("PluginFree"),
     POCO("Poco"),
+    CLUBSUNDAY("Shogakukan"),
     WEBYOUNGJUMP("Web Young Jump"),
     YAHOOBOOKSTORE("Yahoo Bookstore");
 
@@ -28,5 +28,20 @@ public enum Chapters
     public String getName()
     {
         return(name);
+    }
+    @Override
+    public String toString()
+    {
+        return(name);
+    }
+
+    public static Chapters fromName(String name)
+    {
+        for(Chapters c : Chapters.class.getEnumConstants())
+        {
+            if(c.getName().equals(name))
+                return(c);
+        }
+        return(null);
     }
 }
