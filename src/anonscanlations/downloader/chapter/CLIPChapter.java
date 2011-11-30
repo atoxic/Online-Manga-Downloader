@@ -74,17 +74,20 @@ public class CLIPChapter extends Chapter
                     DownloaderUtils.debug("url: " + originalURL);
                     
                     HttpURLConnection conn = (HttpURLConnection) originalURL.openConnection();
-                    DownloaderUtils.debug("cookies: " + cookies.substring(0, cookies.indexOf(";")));
-                    conn.setRequestProperty("Cookie", cookies.substring(0, cookies.indexOf(";")));
+                    conn.setRequestProperty("Cookie", cookies);
                     conn.setInstanceFollowRedirects(false);
-                    DownloaderUtils.debug("response: " + conn.getResponseCode());
-                    if(conn.getResponseCode() < 300 && conn.getResponseCode() > 302)
+                    DownloaderUtils.debug("Response: " + conn.getResponseCode());
+                    if(conn.getResponseCode() < 300 || conn.getResponseCode() > 302)
+                    {
+                        url = originalURL;
                         return;
+                    }
                     String headerName = null;
                     for(int i = 1; (headerName = conn.getHeaderFieldKey(i)) != null; i++)
                     {
                         if(headerName.equals("Location"))
                         {
+                            DownloaderUtils.debug("Redirect to: " + conn.getHeaderField(i));
                             url = new URL(originalURL, conn.getHeaderField(i));
                         }
                     }

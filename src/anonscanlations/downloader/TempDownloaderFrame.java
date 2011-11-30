@@ -78,12 +78,30 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
+        ComicRush = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jTextField11 = new javax.swing.JTextField();
+        jTextField22 = new javax.swing.JTextField();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        jEditorPane12 = new javax.swing.JEditorPane();
+        jSeparator4 = new javax.swing.JSeparator();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        rushPassword = new javax.swing.JPasswordField();
+        jLabel21 = new javax.swing.JLabel();
+        rushEMail = new javax.swing.JTextField();
         Crochet = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jEditorPane3 = new javax.swing.JEditorPane();
+        Flipper3 = new javax.swing.JPanel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        jEditorPane13 = new javax.swing.JEditorPane();
+        jPanel18 = new javax.swing.JPanel();
+        jTextField25 = new javax.swing.JTextField();
+        jTextField26 = new javax.swing.JTextField();
         MangaOnWeb = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jTextField9 = new javax.swing.JTextField();
@@ -159,6 +177,12 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jPanel15 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         clubSundayKeyURL = new javax.swing.JTextField();
+        WebYoungJump = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jTextField29 = new javax.swing.JTextField();
+        jTextField30 = new javax.swing.JTextField();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        jEditorPane14 = new javax.swing.JEditorPane();
         YahooBookstore = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jTextField23 = new javax.swing.JTextField();
@@ -234,7 +258,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         ((javax.swing.text.html.HTMLDocument)jEditorPane1.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane1.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
-                jEditorPane1hyperlink(evt);
+                hyperlink(evt);
             }
         });
         jScrollPane1.setViewportView(jEditorPane1);
@@ -291,10 +315,117 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.ACTIBOOK.getName(), Actibook);
+
+        jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+
+        jTextField11.setEditable(false);
+        jTextField11.setText("http://comic-rush.jp/viewer/sample?contentId=4305&product_id=0000000045-00-0000");
+
+        jTextField22.setEditable(false);
+        jTextField22.setText("http://comic-rush.jp/viewer/free?site_id=20011&service_id=1&content_id=4305&hash=dce114cd7a10105420e4f831b3b0dffa&extraData=r_4ed5c1a8bcedb5.12209575");
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(jTextField22, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane12.setBorder(null);
+
+        jEditorPane12.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane12.setBorder(null);
+        jEditorPane12.setContentType("text/html");
+        jEditorPane12.setEditable(false);
+        jEditorPane12.setFont(jEditorPane12.getFont());
+        jEditorPane12.setText("<html>Flash-based viewer used on <a href=\"http://comic-rush.jp/content/comic/free\">Comic Rush</a>.  Works with items you've bought (requires login information) on Comic Rush.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane12.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane12.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                hyperlink(evt);
+            }
+        });
+        jScrollPane12.setViewportView(jEditorPane12);
+
+        jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder("Login Info (If you bought the item)"));
+
+        jLabel20.setText("E-Mail");
+
+        rushPassword.setPreferredSize(new java.awt.Dimension(120, 20));
+
+        jLabel21.setText("Password");
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rushEMail, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rushPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(rushEMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rushPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout ComicRushLayout = new javax.swing.GroupLayout(ComicRush);
+        ComicRush.setLayout(ComicRushLayout);
+        ComicRushLayout.setHorizontalGroup(
+            ComicRushLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ComicRushLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ComicRushLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                    .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        ComicRushLayout.setVerticalGroup(
+            ComicRushLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ComicRushLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(101, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab(Chapters.COMICRUSH.getName(), ComicRush);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Examples"));
 
@@ -335,7 +466,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         ((javax.swing.text.html.HTMLDocument)jEditorPane3.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane3.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
-                jEditorPane3hyperlink(evt);
+                hyperlink(evt);
             }
         });
         jScrollPane3.setViewportView(jEditorPane3);
@@ -358,10 +489,77 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.CROCHETTIME.getName(), Crochet);
+
+        jScrollPane13.setBorder(null);
+
+        jEditorPane13.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane13.setBorder(null);
+        jEditorPane13.setContentType("text/html");
+        jEditorPane13.setEditable(false);
+        jEditorPane13.setFont(jEditorPane13.getFont());
+        jEditorPane13.setText("<html>Flash-based viewer used on <a href=\"http://grandjump.shueisha.co.jp/original/index.html\">Grand Jump</a> and <a href=\"http://www.heros-web.com/\">Monthly Heroes</a>.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane13.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane13.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                hyperlink(evt);
+            }
+        });
+        jScrollPane13.setViewportView(jEditorPane13);
+
+        jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+
+        jTextField25.setEditable(false);
+        jTextField25.setText("http://grandjump.shueisha.co.jp/original/otome/");
+
+        jTextField26.setEditable(false);
+        jTextField26.setText("http://www.heros-web.com/works/viewer/ultraman_001/index.html");
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(jTextField26, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout Flipper3Layout = new javax.swing.GroupLayout(Flipper3);
+        Flipper3.setLayout(Flipper3Layout);
+        Flipper3Layout.setHorizontalGroup(
+            Flipper3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Flipper3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Flipper3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        Flipper3Layout.setVerticalGroup(
+            Flipper3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Flipper3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(189, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab(Chapters.FLIPPER3.getName(), Flipper3);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
 
@@ -395,7 +593,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         ((javax.swing.text.html.HTMLDocument)jEditorPane4.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane4.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
-                jEditorPane4hyperlink(evt);
+                hyperlink(evt);
             }
         });
         jScrollPane4.setViewportView(jEditorPane4);
@@ -418,7 +616,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.MANGAONWEB.getName(), MangaOnWeb);
@@ -481,7 +679,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         ((javax.swing.text.html.HTMLDocument)jEditorPane5.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane5.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
-                jEditorPane5hyperlink(evt);
+                hyperlink(evt);
             }
         });
         jScrollPane5.setViewportView(jEditorPane5);
@@ -544,7 +742,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.NICONICO.getName(), Nico);
@@ -588,7 +786,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         ((javax.swing.text.html.HTMLDocument)jEditorPane9.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane9.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
-                jEditorPane9hyperlink(evt);
+                hyperlink(evt);
             }
         });
         jScrollPane9.setViewportView(jEditorPane9);
@@ -611,7 +809,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(173, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.NICONICO2.getName(), Nico2);
@@ -680,7 +878,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         ((javax.swing.text.html.HTMLDocument)jEditorPane10.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane10.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
-                jEditorPane10hyperlink(evt);
+                hyperlink(evt);
             }
         });
         jScrollPane10.setViewportView(jEditorPane10);
@@ -743,7 +941,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.NICONICOACE.getName(), NicoAce);
@@ -787,7 +985,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         ((javax.swing.text.html.HTMLDocument)jEditorPane6.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane6.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
-                jEditorPane6hyperlink(evt);
+                hyperlink(evt);
             }
         });
         jScrollPane6.setViewportView(jEditorPane6);
@@ -810,7 +1008,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(173, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.PCVIEWER.getName(), PCViewer);
@@ -854,7 +1052,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         ((javax.swing.text.html.HTMLDocument)jEditorPane7.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane7.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
-                jEditorPane7hyperlink(evt);
+                hyperlink(evt);
             }
         });
         jScrollPane7.setViewportView(jEditorPane7);
@@ -877,7 +1075,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.PLUGINFREE.getName(), PluginFree);
@@ -921,7 +1119,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         ((javax.swing.text.html.HTMLDocument)jEditorPane8.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane8.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
-                jEditorPane8hyperlink(evt);
+                hyperlink(evt);
             }
         });
         jScrollPane8.setViewportView(jEditorPane8);
@@ -944,7 +1142,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.POCO.getName(), Poco);
@@ -960,7 +1158,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         ((javax.swing.text.html.HTMLDocument)jEditorPane2.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane2.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
-                jEditorPane2hyperlink(evt);
+                hyperlink(evt);
             }
         });
         jScrollPane2.setViewportView(jEditorPane2);
@@ -1074,10 +1272,79 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.CLUBSUNDAY.getName(), Shogakukan);
+
+        jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
+
+        jTextField29.setEditable(false);
+        jTextField29.setText("http://yj.shueisha.co.jp/info/new_serial201109/papakiki1/");
+
+        jTextField30.setEditable(false);
+        jTextField30.setText("http://youngjump.jp/web_comic/haioku/1/");
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField29, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(jTextField30, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane14.setBorder(null);
+
+        jEditorPane14.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane14.setBorder(null);
+        jEditorPane14.setContentType("text/html");
+        jEditorPane14.setEditable(false);
+        jEditorPane14.setFont(jEditorPane14.getFont());
+        jEditorPane14.setText("<html>Viewer used on <a href=\"http://youngjump.jp/web_comic/\">Web Young Jump</a>.</html>");
+        ((javax.swing.text.html.HTMLDocument)jEditorPane14.getDocument()).getStyleSheet().addRule(bodyRule);
+        jEditorPane14.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                hyperlink(evt);
+            }
+        });
+        jScrollPane14.setViewportView(jEditorPane14);
+
+        javax.swing.GroupLayout WebYoungJumpLayout = new javax.swing.GroupLayout(WebYoungJump);
+        WebYoungJump.setLayout(WebYoungJumpLayout);
+        WebYoungJumpLayout.setHorizontalGroup(
+            WebYoungJumpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 648, Short.MAX_VALUE)
+            .addGroup(WebYoungJumpLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(WebYoungJumpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel19, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        WebYoungJumpLayout.setVerticalGroup(
+            WebYoungJumpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 306, Short.MAX_VALUE)
+            .addGroup(WebYoungJumpLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(189, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab(Chapters.WEBYOUNGJUMP.getName(), WebYoungJump);
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder("Examples"));
 
@@ -1118,7 +1385,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         ((javax.swing.text.html.HTMLDocument)jEditorPane11.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane11.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
-                jEditorPane11hyperlink(evt);
+                hyperlink(evt);
             }
         });
         jScrollPane11.setViewportView(jEditorPane11);
@@ -1141,7 +1408,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.YAHOOBOOKSTORE.getName(), YahooBookstore);
@@ -1150,13 +1417,11 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabPane)
+            .addComponent(tabPane, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(5, Short.MAX_VALUE))
+            .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1207,8 +1472,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(manual)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exitButton)
                     .addComponent(logButton)
@@ -1263,11 +1528,13 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             {
                 case ACTIBOOK:          chapter = new ActibookChapter(viewerURL);           break;
                 case CROCHETTIME:       chapter = new CrochetTimeChapter(viewerURL);        break;
+                case FLIPPER3:          chapter = new Flipper3Chapter(viewerURL);           break;
                 case MANGAONWEB:        chapter = new MangaOnWebChapter(viewerURL);         break;
                 case PCVIEWER:          chapter = new PCViewerChapter(viewerURL);           break;
                 case PLUGINFREE:        chapter = new PluginFreeChapter(viewerURL);         break;
                 case POCO:              chapter = new PocoChapter(viewerURL);               break;
                 case NICONICO2:         chapter = new NicoNicoChapter2(viewerURL);          break;
+                case WEBYOUNGJUMP:      chapter = new WebYoungJumpChapter(viewerURL);       break;
                 case YAHOOBOOKSTORE:    chapter = new YahooBookstoreChapter(viewerURL);     break;
                 case CLUBSUNDAY:
                 {
@@ -1282,6 +1549,11 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                         return;
                     }
                     chapter = new SundayChapter(viewerURL, keyURL);
+                    break;
+                }
+                case COMICRUSH:
+                {
+                    chapter = new CLIPChapter(viewerURL, rushEMail.getText(), rushPassword.getPassword());
                     break;
                 }
                 case NICONICO:
@@ -1358,71 +1630,12 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                                 downloadDirectoryField.getText());
     }//GEN-LAST:event_windowClosing
 
-    private void jEditorPane1hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane1hyperlink
-        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
+    private void hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_hyperlink
+        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED)
+        {
             DownloaderUtils.browse(evt.getURL());
         }
-}//GEN-LAST:event_jEditorPane1hyperlink
-
-    private void jEditorPane3hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane3hyperlink
-        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
-            DownloaderUtils.browse(evt.getURL());
-        }
-}//GEN-LAST:event_jEditorPane3hyperlink
-
-    private void jEditorPane4hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane4hyperlink
-        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
-            DownloaderUtils.browse(evt.getURL());
-        }
-}//GEN-LAST:event_jEditorPane4hyperlink
-
-    private void jEditorPane5hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane5hyperlink
-        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
-            DownloaderUtils.browse(evt.getURL());
-        }
-}//GEN-LAST:event_jEditorPane5hyperlink
-
-    private void jEditorPane9hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane9hyperlink
-        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
-            DownloaderUtils.browse(evt.getURL());
-        }
-}//GEN-LAST:event_jEditorPane9hyperlink
-
-    private void jEditorPane10hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane10hyperlink
-        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
-            DownloaderUtils.browse(evt.getURL());
-        }
-}//GEN-LAST:event_jEditorPane10hyperlink
-
-    private void jEditorPane6hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane6hyperlink
-        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
-            DownloaderUtils.browse(evt.getURL());
-        }
-}//GEN-LAST:event_jEditorPane6hyperlink
-
-    private void jEditorPane7hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane7hyperlink
-        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
-            DownloaderUtils.browse(evt.getURL());
-        }
-}//GEN-LAST:event_jEditorPane7hyperlink
-
-    private void jEditorPane8hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane8hyperlink
-        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
-            DownloaderUtils.browse(evt.getURL());
-        }
-}//GEN-LAST:event_jEditorPane8hyperlink
-
-    private void jEditorPane2hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane2hyperlink
-        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
-            DownloaderUtils.browse(evt.getURL());
-        }
-}//GEN-LAST:event_jEditorPane2hyperlink
-
-    private void jEditorPane11hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_jEditorPane11hyperlink
-        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED) {
-            DownloaderUtils.browse(evt.getURL());
-        }
-}//GEN-LAST:event_jEditorPane11hyperlink
+    }//GEN-LAST:event_hyperlink
 
     /**
     * @param args the command line arguments
@@ -1437,7 +1650,9 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Actibook;
+    private javax.swing.JPanel ComicRush;
     private javax.swing.JPanel Crochet;
+    private javax.swing.JPanel Flipper3;
     private javax.swing.JPanel MangaOnWeb;
     private javax.swing.JPanel Nico;
     private javax.swing.JPanel Nico2;
@@ -1446,6 +1661,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JPanel PluginFree;
     private javax.swing.JPanel Poco;
     private javax.swing.JPanel Shogakukan;
+    private javax.swing.JPanel WebYoungJump;
     private javax.swing.JPanel YahooBookstore;
     private javax.swing.JRadioButton auto;
     private javax.swing.JButton browseButton;
@@ -1458,6 +1674,9 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JEditorPane jEditorPane10;
     private javax.swing.JEditorPane jEditorPane11;
+    private javax.swing.JEditorPane jEditorPane12;
+    private javax.swing.JEditorPane jEditorPane13;
+    private javax.swing.JEditorPane jEditorPane14;
     private javax.swing.JEditorPane jEditorPane2;
     private javax.swing.JEditorPane jEditorPane3;
     private javax.swing.JEditorPane jEditorPane4;
@@ -1477,6 +1696,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
@@ -1486,6 +1707,10 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1497,6 +1722,9 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1508,8 +1736,10 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
@@ -1521,11 +1751,16 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField21;
+    private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextField23;
     private javax.swing.JTextField jTextField24;
+    private javax.swing.JTextField jTextField25;
+    private javax.swing.JTextField jTextField26;
     private javax.swing.JTextField jTextField27;
     private javax.swing.JTextField jTextField28;
+    private javax.swing.JTextField jTextField29;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField30;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
@@ -1540,6 +1775,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JPasswordField nicoNicoPassword;
     private javax.swing.JPasswordField nicoNicoPassword1;
     private javax.swing.JPasswordField nicoNicoPassword2;
+    private javax.swing.JTextField rushEMail;
+    private javax.swing.JPasswordField rushPassword;
     private javax.swing.JTextField statusBar;
     private javax.swing.JTabbedPane tabPane;
     private javax.swing.JTextField viewerURLField;
