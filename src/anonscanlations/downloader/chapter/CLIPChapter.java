@@ -315,7 +315,9 @@ public class CLIPChapter extends Chapter
 
             conn.setDoOutput(true);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-            wr.write("do=1&x=38&y=32&mailaddress=" + username + "&password=");
+            wr.write("do=1&x=" + (int)(Math.random() * 180) +
+                    "&y=" + (int)(Math.random() * 60) +
+                    "&mailaddress=" + username + "&password=");
             wr.write(password);
             wr.flush();
 

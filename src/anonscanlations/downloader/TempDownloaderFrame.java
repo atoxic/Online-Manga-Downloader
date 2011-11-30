@@ -116,12 +116,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, manual, org.jdesktop.beansbinding.ELProperty.create("${selected}"), jRadioButton1, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
-
         radioButtonGroup.add(jRadioButton2);
         jRadioButton2.setText(Chapters.CROCHETTIME.getName());
         jRadioButton2.setActionCommand("CROCHETTIME");
@@ -326,11 +320,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         statusBar.setEditable(false);
         statusBar.setText("Status:");
-        statusBar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                statusBarActionPerformed(evt);
-            }
-        });
 
         jButton1.setText("Examples");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -421,10 +410,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
     private void downloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadButtonActionPerformed
         
         File downloadDirectory;
@@ -510,12 +495,15 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             chapters.add(new PluginFreeChapter(viewerURL));
             chapters.add(new YahooBookstoreChapter(viewerURL));
             chapters.add(new CrochetTimeChapter(viewerURL));
+            chapters.add(new Flipper3Chapter(viewerURL));
+            chapters.add(new WebYoungJumpChapter(viewerURL));
             chapters.add(new MangaOnWebChapter(viewerURL));
             chapters.add(new PocoChapter(viewerURL));
             chapters.add(new NicoNicoChapter2(viewerURL));
             chapters.add(new SundayChapter(viewerURL));
             chapters.add(new NicoNicoAceChapter(viewerURL));
             chapters.add(new NicoNicoChapter(viewerURL));
+            chapters.add(new CLIPChapter(viewerURL));
 
             Downloader.autodetectChapter(chapters, downloadDirectory);
         }
@@ -537,10 +525,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             downloadDirectoryField.setText(chooser.getSelectedFile().getAbsolutePath());
         }
     }//GEN-LAST:event_browseButtonActionPerformed
-
-    private void statusBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusBarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_statusBarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(examples == null)

@@ -64,7 +64,7 @@ public class SundayChapter extends Chapter
         key4 = params.get("key4");
         shd = params.get("shd");
         
-        SessionDownloadJob session = new SessionDownloadJob(keyURL);
+        SessionDownloadJob session = new SessionDownloadJob();
         MainFileDownloadJob mainFile = new MainFileDownloadJob();
         XMLDownloadJob xml = new XMLDownloadJob();
         
@@ -113,16 +113,17 @@ public class SundayChapter extends Chapter
 
     private class SessionDownloadJob extends DownloadJob
     {
-        private URL url;
-        public SessionDownloadJob(URL _url)
+        public SessionDownloadJob()
         {
             super("Starts a new session");
-            url = _url;
         }
         public void run() throws Exception
         {
-            DownloaderUtils.debug("SessionDJ url: " + url);
-            HttpURLConnection urlConn = (HttpURLConnection)url.openConnection();
+            if(keyURL == null)
+                throw new Exception("No previous URL");
+
+            DownloaderUtils.debug("SessionDJ url: " + keyURL);
+            HttpURLConnection urlConn = (HttpURLConnection)keyURL.openConnection();
             urlConn.setInstanceFollowRedirects(false);
             urlConn.connect();
             DownloaderUtils.debug("SessionDJ code: " + urlConn.getResponseCode());
