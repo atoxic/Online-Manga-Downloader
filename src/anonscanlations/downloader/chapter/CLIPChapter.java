@@ -213,9 +213,7 @@ public class CLIPChapter extends Chapter
                 public void run() throws Exception
                 {
                     byte[] dec = CLIPDecrypt.decodeBinary(firstPage.getBytes(), decodeKey);
-                    FileOutputStream fos = new FileOutputStream(firstPageFile);
-                    fos.write(dec);
-                    fos.close();
+                    DownloaderUtils.safeWrite(dec, firstPageFile);
                 }
             };
             list.add(firstPageDecode);
@@ -243,9 +241,7 @@ public class CLIPChapter extends Chapter
                 {
                     super.run();
                     byte[] dec = CLIPDecrypt.decodeBinary(response.bodyAsBytes(), decodeKey);
-                    FileOutputStream fos = new FileOutputStream(f);
-                    fos.write(dec);
-                    fos.close();
+                    DownloaderUtils.safeWrite(dec, f);
                 }
             };
             list.add(pageJob);

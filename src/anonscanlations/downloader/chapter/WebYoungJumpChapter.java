@@ -31,13 +31,14 @@ public class WebYoungJumpChapter extends Chapter
     public ArrayList<DownloadJob> init() throws Exception
     {
         DownloaderUtils.checkHTTP(url);
-        
         JSoupDownloadJob check = new JSoupDownloadJob("Check if it's a Young Jump viewer", url)
         {
             @Override
             public void run() throws Exception
             {
                 super.run();
+                // in case of redirects
+                url = response.url();
                 Document d = response.parse();
                 String str = JSoupUtils.elementAttr(d, "param[name=FlashVars]", "value");
                 HashMap<String, String> params = 
@@ -81,25 +82,34 @@ public class WebYoungJumpChapter extends Chapter
         
         for(int i = 1; i <= numPages; i++)
         {
-            final int finalIndex = i;
             final File f = DownloaderUtils.fileName(directory, title, i, "jpeg");
             if(f.exists())
                 continue;
-            list.add(new DownloadJob("Page " + i)
+            list.add(new JSoupDownloadJob("Page " + i, new URL(url, "page/" + i + ".swf"))
             {
                 @Override
                 public void run() throws Exception
                 {
-                    Movie m = new Movie();
-                    m.decodeFromUrl(new URL(url, "page/" + finalIndex + ".swf"));
+                    super.run();
+                    ByteArrayInputStream bais = null;
+                    Movie m = null;
+                    try
+                    {
+                        bais = new ByteArrayInputStream(response.bodyAsBytes());
+                        m = new Movie();
+                        m.decodeFromStream(bais);
+                    }
+                    finally
+                    {
+                        if(bais != null)
+                            bais.close();
+                    }
                     for(MovieTag tag : m.getObjects())
                     {
                         if(tag.getClass() == DefineJPEGImage.class)
                         {
                             byte[] bytes = ((DefineJPEGImage)tag).getImage();
-                            FileOutputStream fos = new FileOutputStream(f);
-                            fos.write(bytes);
-                            fos.close();
+                            DownloaderUtils.safeWrite(bytes, f);
                         }
                     }
                 }

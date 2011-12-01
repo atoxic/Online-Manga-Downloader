@@ -3,6 +3,7 @@ package anonscanlations.downloader.downloadjobs;
 import java.io.*;
 import java.net.*;
 
+import anonscanlations.downloader.*;
 import anonscanlations.downloader.chapter.*;
 
 /**
@@ -23,8 +24,6 @@ public class PCViewerDownloadJob extends JSoupDownloadJob
         super.run();
         byte[] bytes = response.bodyAsBytes();
         PCViewerDecrypt.decrypt(bytes);
-        FileOutputStream out = new FileOutputStream(file);
-        out.write(bytes, 8, bytes.length - 8);
-        out.close();
+        DownloaderUtils.safeWrite(bytes, 8, bytes.length - 8, file);
     }
 }

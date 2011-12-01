@@ -10,11 +10,12 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+import org.jsoup.*;
 import org.w3c.dom.*;
 import org.xml.sax.*;
 import javax.xml.parsers.*;
 
-/**
+/** Random utility functions
  *
  * @author /a/non
  */
@@ -154,8 +155,7 @@ public class DownloaderUtils
         while(continueLoop);
         return(source);
     }
-
-    //*
+    
     public static byte[] readAllBytes(InputStream in) throws IOException
     {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -167,7 +167,25 @@ public class DownloaderUtils
         bos.close();
         return(array);
     }
-    // */
+
+    public static void safeWrite(byte[] bytes, File f) throws IOException
+    {
+        safeWrite(bytes, 0, bytes.length, f);
+    }
+    public static void safeWrite(byte[] bytes, int off, int len, File f) throws IOException
+    {
+        FileOutputStream fos = null;
+        try
+        {
+            fos = new FileOutputStream(f);
+            fos.write(bytes, off, len);
+        }
+        finally
+        {
+            if(fos != null)
+                fos.close();
+        }
+    }
 
     public static String readAllLines(InputStream in, String encoding) throws IOException
     {
@@ -183,19 +201,8 @@ public class DownloaderUtils
     {
         if(url == null)
             return(null);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setInstanceFollowRedirects(false);
-        if(conn.getResponseCode() < 300 || conn.getResponseCode() > 302)
-            return(url);
-        String headerName = null;
-        for(int i = 1; (headerName = conn.getHeaderFieldKey(i)) != null; i++)
-        {
-            if(headerName.equals("Location"))
-            {
-                return(new URL(url, conn.getHeaderField(i)));
-            }
-        }
-        return(url);
+        Connection.Response response = Jsoup.connect(url.toString()).followRedirects(true).execute();
+        return(response.url());
     }
 
     public static void browse(java.net.URL url)
@@ -210,7 +217,7 @@ public class DownloaderUtils
             }
             catch(Exception e)
             {
-                DownloaderUtils.errorGUI("couldn't browse to page: " + url, e, false);
+                DownloaderUtils.errorGUI("Couldn't browse to page: " + url, e, false);
             }
         }
     }

@@ -176,9 +176,7 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
 
                     byte[] bytes = response.bodyAsBytes();
                     decrypt(bytes);
-                    FileOutputStream fos = new FileOutputStream(f);
-                    fos.write(bytes);
-                    fos.close();
+                    DownloaderUtils.safeWrite(bytes, f);
                 }
             };
             list.add(page);

@@ -3,8 +3,7 @@ package anonscanlations.downloader.downloadjobs;
 import java.util.*;
 import java.net.*;
 
-/** Requires my modified JSoup
- *
+/** Requires my forked JSoup (fixed cookie handling)
  * @author /a/non <anonymousscanlations@gmail.com>
  */
 public class NicoNicoLoginDownloadJob extends JSoupDownloadJob

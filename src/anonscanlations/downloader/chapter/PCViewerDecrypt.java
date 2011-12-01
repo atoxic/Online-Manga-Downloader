@@ -38,48 +38,4 @@ public class PCViewerDecrypt
             data[i] = (byte)(data[i] ^ data[i + 1]);
         }
     }
-
-    public static void decryptFile(File inputFile, File outputFile) throws IOException
-    {
-        FileInputStream fis = new FileInputStream(inputFile);
-        FileOutputStream fos = new FileOutputStream(outputFile);
-
-        long length = inputFile.length();
-
-        byte[] data = new byte[(int)length];
-        int offset = 0, read = 0;
-        while(offset < data.length
-               && (read = fis.read(data, offset, data.length - offset)) >= 0)
-        {
-            offset += read;
-        }
-        fis.close();
-
-        decrypt(data);
-
-        fos.write(data, 8, (int)(length - 8));
-        fos.close();
-    }
-
-    public static void encryptFile(File inputFile, File outputFile) throws IOException
-    {
-        FileInputStream fis = new FileInputStream(inputFile);
-        FileOutputStream fos = new FileOutputStream(outputFile);
-
-        long length = inputFile.length();
-
-        byte[] data = new byte[(int)length];
-        int offset = 0, read = 0;
-        while(offset < data.length
-               && (read = fis.read(data, offset, data.length - offset)) >= 0)
-        {
-            offset += read;
-        }
-        fis.close();
-
-        encrypt(data);
-
-        fos.write(data, 8, (int)(length - 8));
-        fos.close();
-    }
 }

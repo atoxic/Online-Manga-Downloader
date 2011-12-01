@@ -86,7 +86,16 @@ public class NicoNicoAceChapter extends Chapter
             @Override
             public void run() throws Exception
             {
-                super.run();
+                try
+                {
+                    super.run();
+                }
+                catch(IOException e)
+                {
+                    if(e.getMessage().startsWith("401"))
+                        throw new IOException("Incorrect login");
+                    throw e;
+                }
 
                 userid = obj.getJSONObject("user").get("id").toString();
                 DownloaderUtils.debug("userid: " + userid);
@@ -118,7 +127,7 @@ public class NicoNicoAceChapter extends Chapter
                 }
                 catch(IOException e)
                 {
-                    if(response.statusCode() == 401)
+                    if(e.getMessage().startsWith("401"))
                         throw new IOException("Your NicoNico account isn't registered to view BookWalker chapters");
                     throw e;
                 }
@@ -182,11 +191,7 @@ public class NicoNicoAceChapter extends Chapter
                 }
                 else
                 {
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-                    String line;
-                    page = "";
-                    while((line = reader.readLine()) != null)
-                        page += line;
+                    page = DownloaderUtils.readAllLines(input, "UTF-8");
                 }
 
                 Document d = Jsoup.parse(page);
@@ -227,7 +232,7 @@ public class NicoNicoAceChapter extends Chapter
                     }
                     catch(IOException e)
                     {
-                        if(response.statusCode() == 401)
+                        if(e.getMessage().startsWith("401"))
                             throw new IOException("Your NicoNico account isn't registered to view BookWalker chapters");
                         throw e;
                     }
@@ -271,22 +276,16 @@ public class NicoNicoAceChapter extends Chapter
                         return;
                     read = true;
 
-                    FileOutputStream fout = new FileOutputStream(f);
+                    byte[] array = DownloaderUtils.readAllBytes(input);
                     if(use_drm)
                     {
-                        byte[] array = DownloaderUtils.readAllBytes(input);
                         ARC4 arc4 = new ARC4(key);
-                        fout.write(arc4.arc4Crypt(array));
+                        DownloaderUtils.safeWrite(arc4.arc4Crypt(array), f);
                     }
                     else
                     {
-                        byte[] buf = new byte[1024];
-                        while(input.read(buf) != -1)
-                        {
-                            fout.write(buf);
-                        }
+                        DownloaderUtils.safeWrite(array, f);
                     }
-                    fout.close();
                 }
             };
             file.addPOSTData("streaming", "resources");
@@ -294,10 +293,6 @@ public class NicoNicoAceChapter extends Chapter
             file.addPOSTData("bookid", bookid);
             file.addPOSTData("userid", userid);
             file.addPOSTData("resources", "contents/" + images.get(i));
-            /*
-            file.setPOSTData("streaming=resources&trial=" + is_trial + "&bookid=" + bookid +
-                            "&resources=" + URLEncoder.encode("contents/" + images.get(i), "UTF-8") + "&userid=" + userid);
-            // */
             file.addRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
             file.addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             file.addRequestProperty("x-nicobook-dl-key", dl_key);

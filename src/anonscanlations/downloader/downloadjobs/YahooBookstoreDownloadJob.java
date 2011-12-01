@@ -6,6 +6,8 @@ import java.util.zip.*;
 import javax.crypto.*;
 import javax.crypto.spec.*;
 
+import anonscanlations.downloader.*;
+
 /**
  *
  * @author /a/non <anonymousscanlations@gmail.com>
@@ -36,15 +38,10 @@ public class YahooBookstoreDownloadJob extends JSoupDownloadJob
     @Override
     public void run() throws Exception
     {
-        OutputStream temp;
-
         super.run();
-
         byte[] bytes = response.bodyAsBytes();
 
-        temp = new FileOutputStream(new File(file.toString() + ".1"));
-        temp.write(bytes);
-        temp.close();
+        DownloaderUtils.safeWrite(bytes, new File(file.toString() + ".1"));
 
         SecretKeySpec k = new SecretKeySpec(publicKey, "AES");
         int i1 = 0;
@@ -94,21 +91,26 @@ public class YahooBookstoreDownloadJob extends JSoupDownloadJob
         memoryStream.close();
         byte[] decrypted = memoryStream.toByteArray();
 
-        temp = new FileOutputStream(new File(file.toString() + ".2"));
-        temp.write(decrypted);
-        temp.close();
+        DownloaderUtils.safeWrite(decrypted, new File(file.toString() + ".2"));
 
         int i5 = decrypted[decrypted.length - 1] & 0xff;
         byte[] decrypted2 = new byte[decrypted.length - i5];
         System.arraycopy(decrypted, 0, decrypted2, 0, decrypted2.length);
 
-        temp = new FileOutputStream(new File(file.toString() + ".3"));
-        temp.write(decrypted2);
-        temp.close();
-
-        OutputStream fos = new InflaterOutputStream(new FileOutputStream(file),
-                                                new Inflater(true));
-        fos.write(decrypted2);
-        fos.close();
+        DownloaderUtils.safeWrite(decrypted2, new File(file.toString() + ".3"));
+        
+        OutputStream fos = null;
+        try
+        {
+            anonscanlations.downloader.DownloaderUtils.debug("length: " + decrypted2.length);
+            fos = new InflaterOutputStream(new FileOutputStream(file),
+                                                    new Inflater(true));
+            fos.write(decrypted2);
+        }
+        finally
+        {
+            if(fos != null)
+                fos.close();
+        }
     }
 }

@@ -26,22 +26,34 @@ public abstract class EPubDownloadJob extends JSoupDownloadJob
 
         byte[] bytes = response.bodyAsBytes();
 
-        ByteArrayInputStream byte_input = new ByteArrayInputStream(bytes);
-        doByteInput(byte_input);
-        byte_input.close();
-        ZipInputStream input = new ZipInputStream(new ByteArrayInputStream(bytes));
-        ZipEntry e;
-        
-        DownloaderUtils.debug("Spot 2");
-        
-        while((e = input.getNextEntry()) != null)
+        ByteArrayInputStream byte_input = null;
+        try
         {
-            doZipEntryInput(input, e);
-            input.closeEntry();
+            byte_input = new ByteArrayInputStream(bytes);
+            doByteInput(byte_input);
+        }
+        finally
+        {
+            if(byte_input != null)
+                byte_input.close();
         }
         
-        DownloaderUtils.debug("Spot 5");
-        input.close();
+        ZipInputStream input = null;
+        try
+        {
+            input = new ZipInputStream(new ByteArrayInputStream(bytes));
+            ZipEntry e;
+            while((e = input.getNextEntry()) != null)
+            {
+                doZipEntryInput(input, e);
+                input.closeEntry();
+            }
+        }
+        finally
+        {
+            if(input != null)
+                input.close();
+        }
     }
 
     public abstract void doByteInput(ByteArrayInputStream byte_input) throws Exception;

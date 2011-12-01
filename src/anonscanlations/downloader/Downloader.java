@@ -261,8 +261,8 @@ public class Downloader extends Thread
                             {
                                 lock.wait();
                             }
-                            chapter.getRequiredInfo(s);
                         }
+                        chapter.getRequiredInfo(s);
 
                         DownloaderUtils.debug("Trying handler: " + chapter.getClass());
                         if(frame != null)

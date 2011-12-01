@@ -103,9 +103,7 @@ public class MangaOnWebChapter extends Chapter
                     
                     byte[] bytes = response.bodyAsBytes();
                     bfkey.decrypt(bytes, 0);
-                    FileOutputStream output = new FileOutputStream(f);
-                    output.write(bytes);
-                    output.close();
+                    DownloaderUtils.safeWrite(bytes, f);
                 }
             };
             page.setCookies(cookies);

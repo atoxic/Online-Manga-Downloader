@@ -38,7 +38,7 @@ public class Flipper3Chapter extends Chapter
     public ArrayList<DownloadJob> init() throws Exception
     {
         DownloaderUtils.checkHTTP(url);
-        
+        url = DownloaderUtils.getRedirectURL(url);
         JSoupDownloadJob page = new JSoupDownloadJob("Get book.xml", new URL(url, "book.xml"))
         {
             @Override

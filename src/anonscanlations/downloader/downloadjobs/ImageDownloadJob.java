@@ -27,9 +27,17 @@ public class ImageDownloadJob extends JSoupDownloadJob
     {
         super.run();
 
-        ByteArrayInputStream bais = new ByteArrayInputStream(response.bodyAsBytes());
-        image = ImageIO.read(bais);
-        bais.close();
+        ByteArrayInputStream bais = null;
+        try
+        {
+            bais = new ByteArrayInputStream(response.bodyAsBytes());
+            image = ImageIO.read(bais);
+        }
+        finally
+        {
+            if(bais != null)
+                bais.close();
+        }
     }
 }
 

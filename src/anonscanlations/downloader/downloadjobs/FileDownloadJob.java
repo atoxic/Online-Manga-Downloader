@@ -3,6 +3,8 @@ package anonscanlations.downloader.downloadjobs;
 import java.io.*;
 import java.net.*;
 
+import anonscanlations.downloader.*;
+
 /**
  *
  * @author /a/non <anonymousscanlations@gmail.com>
@@ -20,9 +22,7 @@ public class FileDownloadJob extends JSoupDownloadJob
     {
         super.run();
 
-        FileOutputStream fos = new FileOutputStream(file);
-        fos.write(response.bodyAsBytes());
-        fos.close();
+        DownloaderUtils.safeWrite(response.bodyAsBytes(), file);
     }
 }
 
