@@ -1,6 +1,6 @@
 package anonscanlations.downloader;
 
-import anonscanlations.downloader.chapter.Chapter;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
@@ -18,6 +18,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     // Singleton
     private static TempDownloaderFrame FRAME;
 
+    private Color editorPaneColor;
     private String bodyRule;
     private LogFrame log;
 
@@ -26,6 +27,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         java.awt.Font font = javax.swing.UIManager.getFont("Label.font");
         bodyRule = "body { font-family: " + font.getFamily() + "; " + "font-size: " + font.getSize() + "pt; }";
+        editorPaneColor = javax.swing.UIManager.getColor("JPanel.background");
 
         log = new LogFrame();
         DownloaderUtils.LOGEDITOR = log.getEditor();
@@ -191,7 +193,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jEditorPane11 = new javax.swing.JEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Online Manga Downloader 0.1.5.6 Return of the Bug Fixes");
+        setTitle("Online Manga Downloader 0.1.5.7 Return of the Bug Fixes");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -249,7 +251,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(null);
 
-        jEditorPane1.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane1.setBackground(javax.swing.UIManager.getColor("JPanel.background"));
         jEditorPane1.setBorder(null);
         jEditorPane1.setContentType("text/html");
         jEditorPane1.setEditable(false);
@@ -315,7 +317,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.ACTIBOOK.getName(), Actibook);
@@ -350,7 +352,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         jScrollPane12.setBorder(null);
 
-        jEditorPane12.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane12.setBackground(editorPaneColor);
         jEditorPane12.setBorder(null);
         jEditorPane12.setContentType("text/html");
         jEditorPane12.setEditable(false);
@@ -422,7 +424,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.COMICRUSH.getName(), ComicRush);
@@ -457,7 +459,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         jScrollPane3.setBorder(null);
 
-        jEditorPane3.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane3.setBackground(editorPaneColor);
         jEditorPane3.setBorder(null);
         jEditorPane3.setContentType("text/html");
         jEditorPane3.setEditable(false);
@@ -489,14 +491,14 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.CROCHETTIME.getName(), Crochet);
 
         jScrollPane13.setBorder(null);
 
-        jEditorPane13.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane13.setBackground(editorPaneColor);
         jEditorPane13.setBorder(null);
         jEditorPane13.setContentType("text/html");
         jEditorPane13.setEditable(false);
@@ -556,7 +558,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.FLIPPER3.getName(), Flipper3);
@@ -584,7 +586,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         jScrollPane4.setBorder(null);
 
-        jEditorPane4.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane4.setBackground(editorPaneColor);
         jEditorPane4.setBorder(null);
         jEditorPane4.setContentType("text/html");
         jEditorPane4.setEditable(false);
@@ -616,7 +618,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.MANGAONWEB.getName(), MangaOnWeb);
@@ -670,7 +672,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         jScrollPane5.setBorder(null);
 
-        jEditorPane5.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane5.setBackground(editorPaneColor);
         jEditorPane5.setBorder(null);
         jEditorPane5.setContentType("text/html");
         jEditorPane5.setEditable(false);
@@ -742,7 +744,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.NICONICO.getName(), Nico);
@@ -777,7 +779,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         jScrollPane9.setBorder(null);
 
-        jEditorPane9.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane9.setBackground(editorPaneColor);
         jEditorPane9.setBorder(null);
         jEditorPane9.setContentType("text/html");
         jEditorPane9.setEditable(false);
@@ -809,7 +811,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.NICONICO2.getName(), Nico2);
@@ -869,7 +871,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         jScrollPane10.setBorder(null);
 
-        jEditorPane10.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane10.setBackground(editorPaneColor);
         jEditorPane10.setBorder(null);
         jEditorPane10.setContentType("text/html");
         jEditorPane10.setEditable(false);
@@ -941,7 +943,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.NICONICOACE.getName(), NicoAce);
@@ -976,7 +978,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         jScrollPane6.setBorder(null);
 
-        jEditorPane6.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane6.setBackground(editorPaneColor);
         jEditorPane6.setBorder(null);
         jEditorPane6.setContentType("text/html");
         jEditorPane6.setEditable(false);
@@ -1008,7 +1010,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.PCVIEWER.getName(), PCViewer);
@@ -1043,7 +1045,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         jScrollPane7.setBorder(null);
 
-        jEditorPane7.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane7.setBackground(editorPaneColor);
         jEditorPane7.setBorder(null);
         jEditorPane7.setContentType("text/html");
         jEditorPane7.setEditable(false);
@@ -1075,7 +1077,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.PLUGINFREE.getName(), PluginFree);
@@ -1110,7 +1112,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         jScrollPane8.setBorder(null);
 
-        jEditorPane8.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane8.setBackground(editorPaneColor);
         jEditorPane8.setBorder(null);
         jEditorPane8.setContentType("text/html");
         jEditorPane8.setEditable(false);
@@ -1142,14 +1144,14 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.POCO.getName(), Poco);
 
         jScrollPane2.setBorder(null);
 
-        jEditorPane2.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane2.setBackground(editorPaneColor);
         jEditorPane2.setBorder(null);
         jEditorPane2.setContentType("text/html");
         jEditorPane2.setEditable(false);
@@ -1272,7 +1274,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.CLUBSUNDAY.getName(), Shogakukan);
@@ -1307,7 +1309,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         jScrollPane14.setBorder(null);
 
-        jEditorPane14.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane14.setBackground(editorPaneColor);
         jEditorPane14.setBorder(null);
         jEditorPane14.setContentType("text/html");
         jEditorPane14.setEditable(false);
@@ -1325,7 +1327,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         WebYoungJump.setLayout(WebYoungJumpLayout);
         WebYoungJumpLayout.setHorizontalGroup(
             WebYoungJumpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 648, Short.MAX_VALUE)
             .addGroup(WebYoungJumpLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(WebYoungJumpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1335,13 +1336,12 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         );
         WebYoungJumpLayout.setVerticalGroup(
             WebYoungJumpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 306, Short.MAX_VALUE)
             .addGroup(WebYoungJumpLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.WEBYOUNGJUMP.getName(), WebYoungJump);
@@ -1376,7 +1376,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         jScrollPane11.setBorder(null);
 
-        jEditorPane11.setBackground((java.awt.Color)javax.swing.UIManager.get("Panel.background"));
+        jEditorPane11.setBackground(editorPaneColor);
         jEditorPane11.setBorder(null);
         jEditorPane11.setContentType("text/html");
         jEditorPane11.setEditable(false);
@@ -1631,7 +1631,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_windowClosing
 
     private void hyperlink(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_hyperlink
-        if(evt.getEventType() == javax.swing.event. HyperlinkEvent.EventType.ACTIVATED)
+        if(evt.getEventType() == javax.swing.event.HyperlinkEvent.EventType.ACTIVATED
+                && tabPane.isEnabled())
         {
             DownloaderUtils.browse(evt.getURL());
         }
