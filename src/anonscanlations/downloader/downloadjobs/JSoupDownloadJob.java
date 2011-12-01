@@ -29,7 +29,7 @@ public class JSoupDownloadJob extends DownloadJob
         init = false;
     }
 
-    public void init() throws Exception
+    protected void init() throws Exception
     {
         init = true;
         conn = Jsoup.connect(url.toString()).followRedirects(true).timeout(10000);
@@ -50,8 +50,10 @@ public class JSoupDownloadJob extends DownloadJob
     {
         if(!init)
             init();
-        DownloaderUtils.debug("JSoupDJ (" + getClass() + "): " + url);
+        DownloaderUtils.debug("JSoupDJ (" + getClass() + "): URL: " + url);
         response = conn.execute();
+        DownloaderUtils.debug("JSoupDJ (" + getClass() + "): Response Headers: " + response.headers());
+        //long length = Long.parseLong(response.header("Content-Length"));
     }
 
     public byte[] getBytes()

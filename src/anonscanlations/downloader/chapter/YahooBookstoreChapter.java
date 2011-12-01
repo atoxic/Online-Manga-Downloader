@@ -203,7 +203,10 @@ public class YahooBookstoreChapter extends Chapter
             String extension = image.substring(image.lastIndexOf('.') + 1);
             File f = DownloaderUtils.fileName(directory, title, i, extension);
             if(f.exists())
+            {
+                i++;
                 continue;
+            }
             
             YahooBookstoreDownloadJob page = new YahooBookstoreDownloadJob("Page " + i, new URL(base, image), f);
             list.add(page);

@@ -68,11 +68,15 @@ public class CLIPChapter extends Chapter
             JSoupDownloadJob redirect = new JSoupDownloadJob("Redirect to page", originalURL)
             {
                 @Override
+                protected void init() throws Exception
+                {
+                    super.init();
+                    conn.followRedirects(false);
+                }
+                @Override
                 public void run() throws Exception
                 {
                     setCookies(CLIPChapter.this.cookies);
-                    super.init();
-                    conn.followRedirects(false);
                     super.run();
 
                     if(response.statusCode() < 300 || response.statusCode() > 302)

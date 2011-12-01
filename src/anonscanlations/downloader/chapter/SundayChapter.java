@@ -119,6 +119,12 @@ public class SundayChapter extends Chapter
             super("Starts a new session", null);
         }
         @Override
+        protected void init() throws Exception
+        {
+            super.init();
+            conn.followRedirects(false);
+        }
+        @Override
         public void run() throws Exception
         {
             if(keyURL == null)
@@ -126,14 +132,9 @@ public class SundayChapter extends Chapter
             DownloaderUtils.debug("SessionDJ url: " + keyURL);
             url = keyURL;
 
-            super.init();
-
-            conn.followRedirects(false);
-
             super.run();
             
             SundayChapter.this.cookies = response.cookies();
-            
             if(response.statusCode() >= 300 && response.statusCode() <= 302)
             {
                 String location = response.headers().get("Location");

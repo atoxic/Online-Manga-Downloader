@@ -186,7 +186,10 @@ public class NicoNicoChapter extends Chapter
         {
             File f = DownloaderUtils.fileName(directory, title, i, "jpg");
             if(f.exists())
+            {
+                i++;
                 continue;       // yes, ignore the mp3 as well
+            }
             FileDownloadJob page = new FileDownloadJob("Page " + i,
                             new URL("http://lohas.nicoseiga.jp/thumb/" + image.id + "l?"),
                             f);

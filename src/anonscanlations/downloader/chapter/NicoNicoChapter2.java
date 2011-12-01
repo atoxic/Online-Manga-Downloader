@@ -163,7 +163,10 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
         {
             final File f = DownloaderUtils.fileName(directory, title, i, "jpg");
             if(f.exists())
+            {
+                i++;
                 continue;
+            }
             JSoupDownloadJob page = new JSoupDownloadJob("Page " + i, new URL("http://eco.nicoseiga.jp/comic/" + image))
             {
                 @Override
