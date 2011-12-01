@@ -9,13 +9,13 @@ import java.net.*;
 import java.util.*;
 
 import java.security.*;
-import org.w3c.dom.*;
+import org.jsoup.nodes.*;
 
 import anonscanlations.downloader.*;
 import anonscanlations.downloader.downloadjobs.*;
 
 /**
- *
+ * TODO: paid shogakukan chapters
  * @author /a/non
  */
 public class SundayChapter extends Chapter
@@ -23,7 +23,8 @@ public class SundayChapter extends Chapter
     private String key1, key2, key3, key4, shd;
     private URL url, keyURL;
 
-    private transient String cookies, otk, server;
+    private transient Map<String, String> cookies;
+    private transient String otk, server;
     private transient int min, max;
     private transient long timestamp;
 
@@ -111,86 +112,58 @@ public class SundayChapter extends Chapter
         return(list);
     }
 
-    private class SessionDownloadJob extends DownloadJob
+    private class SessionDownloadJob extends JSoupDownloadJob
     {
         public SessionDownloadJob()
         {
-            super("Starts a new session");
+            super("Starts a new session", null);
         }
+        @Override
         public void run() throws Exception
         {
             if(keyURL == null)
                 throw new Exception("No previous URL");
-
             DownloaderUtils.debug("SessionDJ url: " + keyURL);
-            HttpURLConnection urlConn = (HttpURLConnection)keyURL.openConnection();
-            urlConn.setInstanceFollowRedirects(false);
-            urlConn.connect();
-            DownloaderUtils.debug("SessionDJ code: " + urlConn.getResponseCode());
+            url = keyURL;
 
-            String headerName = null;
-            for(int i = 1; (headerName = urlConn.getHeaderFieldKey(i)) != null; i++)
-            {
-                if(headerName.equals("Set-Cookie"))
-                {
-                    cookies = urlConn.getHeaderField(i);
-                    int index = cookies.indexOf("SESS");
-                    if(index != -1)
-                    {
-                        DownloaderUtils.debug("SessionDJ cookies: " + cookies);
-                        break;
-                    }
-                }
-            }
+            super.init();
 
-            if(urlConn.getResponseCode() == 302)
+            conn.followRedirects(false);
+
+            super.run();
+            
+            SundayChapter.this.cookies = response.cookies();
+            
+            if(response.statusCode() >= 300 && response.statusCode() <= 302)
             {
-                for(int i = 1; (headerName = urlConn.getHeaderFieldKey(i)) != null; i++)
-                {
-                    if(headerName.equals("Location"))
-                    {
-                        String line = urlConn.getHeaderField(i);
-                        DownloaderUtils.debug("SessionDJ line: " + line);
-                        int index = line.indexOf("&otk=");
-                        otk = line.substring(index + 5, line.indexOf('&', index + 1));
-                    }
-                }
+                String location = response.headers().get("Location");
+                DownloaderUtils.debug("SessionDJ (Redirect) line: " + location);
+                int index = location.indexOf("&otk=");
+                otk = location.substring(index + 5, location.indexOf('&', index + 1));
             }
             else
             {
-                BufferedReader stream = new BufferedReader(
-                                            new InputStreamReader(
-                                                urlConn.getInputStream(), "UTF-8"));
-                String line;
-                int index;
-                while((line = stream.readLine()) != null)
+                String page = response.body();
+                int index = page.indexOf("&otk=");
+                if(index != -1)
                 {
-                    index = line.indexOf("&otk=");
-                    if(index != -1)
+                    otk = page.substring(index + 5, page.indexOf('\'', index));
+                    if(otk.indexOf('&') != -1)
                     {
-                        DownloaderUtils.debug("SessionDJ line: " + line);
-                        otk = line.substring(index + 5, line.indexOf('\'', index));
-                        if(otk.indexOf('&') != -1)
-                        {
-                            otk = otk.substring(0, otk.indexOf('&'));
-                        }
-                        break;
+                        otk = otk.substring(0, otk.indexOf('&'));
                     }
                 }
-                stream.close();
             }
-
-            urlConn.disconnect();
 
             DownloaderUtils.debug("SessionDJ otk: " + otk);
         }
     }
 
-    private class MainFileDownloadJob extends PageDownloadJob
+    private class MainFileDownloadJob extends JSoupDownloadJob
     {
         public MainFileDownloadJob()
         {
-            super("Downloads the main file", null, "UTF-8");
+            super("Downloads the main file", null);
         }
         @Override
         public void run() throws Exception
@@ -200,18 +173,17 @@ public class SundayChapter extends Chapter
                                 "&key4=" + key4 + "&sp=-1&re=0&shd=" + shd +
                                 "&otk=" + otk + "&vo=1");
             DownloaderUtils.debug("MainFileDJ URL: " + this.url);
-
-            addRequestProperty("Cookie", SundayChapter.this.cookies);
+            setCookies(SundayChapter.this.cookies);
 
             super.run();
         }
     }
 
-    private class XMLDownloadJob extends PageDownloadJob
+    private class XMLDownloadJob extends JSoupDownloadJob
     {
         public XMLDownloadJob()
         {
-            super("Downloads the XML file", null, "UTF-8");
+            super("Downloads the XML file", null);
         }
         @Override
         public void run() throws Exception
@@ -220,27 +192,20 @@ public class SundayChapter extends Chapter
                             "&key2=" + key2 + "&key3=" + key3 +
                             "&key4=" + key4 + "&sp=-1&re=0&otk=" + otk);
             DownloaderUtils.debug("XMLDJ url: " + this.url);
-            
-            addRequestProperty("Cookie", SundayChapter.this.cookies);
+            setCookies(SundayChapter.this.cookies);
 
             super.run();
 
+            String page = response.body();
             DownloaderUtils.debug("XMLDJ xml: " + page);
-
             if(page.equals("NG") || page.contains("pagecount=\"0\""))
                 throw new Exception("XML file NG");
             
-            Document d = DownloaderUtils.makeDocument(page);
-            Element root = d.getDocumentElement();
-
-            String serverTimestamp = ((Element)root.getElementsByTagName("ServerTimestamp").item(0))
-                                        .getAttribute("val"),
-                    availTimestamp = ((Element)root.getElementsByTagName("AvailableTime").item(0))
-                                        .getAttribute("val");
-            server = ((Element)root.getElementsByTagName("ContentsServerPath").item(0))
-                                        .getAttribute("val");
-            String list[] = ((Element)root.getElementsByTagName("SamplePageList").item(0))
-                                        .getAttribute("list").split("-");
+            Document d = response.parse();
+            String serverTimestamp = JSoupUtils.elementAttr(d, "ServerTimestamp", "val"),
+                    availTimestamp = JSoupUtils.elementAttr(d, "AvailableTime", "val");
+            server = JSoupUtils.elementAttr(d, "ContentsServerPath", "val");
+            String list[] = JSoupUtils.elementAttr(d, "SamplePageList", "list").split("-");
 
             timestamp = Long.parseLong(serverTimestamp) + Long.parseLong(availTimestamp);
             min = Integer.parseInt(list[0]);

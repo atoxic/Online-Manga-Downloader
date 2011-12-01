@@ -11,42 +11,22 @@ import java.net.*;
 public abstract class DownloadJob
 {
     protected String description;
-    protected final Map<String, String> headers;
-    protected String data;
+    protected final Map<String, String> headers, data;
 
     public DownloadJob(String _description)
     {
         description = _description;
         headers = new HashMap<String, String>();
-        data = null;
+        data = new HashMap<String, String>();
     }
 
-    public final void setPOSTData(String _data)
+    public final void addPOSTData(String _key, String _value)
     {
-        data = _data;
+        data.put(_key, _value);
     }
-
     public final void addRequestProperty(String _key, String _value)
     {
         headers.put(_key, _value);
-    }
-
-    protected final void setRequestProperties(HttpURLConnection conn)
-    {
-        conn.setInstanceFollowRedirects(true);
-        for(Map.Entry<String, String> e : headers.entrySet())
-            conn.setRequestProperty(e.getKey(), e.getValue());
-    }
-
-    protected final void sendPOSTData(URLConnection conn) throws Exception
-    {
-        if(data != null)
-        {
-            conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-            wr.write(data);
-            wr.flush();
-        }
     }
 
     @Override

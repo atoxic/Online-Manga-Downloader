@@ -35,13 +35,13 @@ public class CrochetTimeChapter extends Chapter
         DownloaderUtils.checkHTTP(url);
         
         ArrayList<DownloadJob> ret = new ArrayList<DownloadJob>();
-        PageDownloadJob mainPage = new PageDownloadJob("Get the page", url, "UTF-8")
+        JSoupDownloadJob mainPage = new JSoupDownloadJob("Get the page", url)
         {
             @Override
             public void run() throws Exception
             {
                 super.run();
-                
+                String page = response.body();
                 int index = page.indexOf("var book"), start = -1, end = -1;
                 // Voyager
                 if(index != -1)
@@ -75,7 +75,7 @@ public class CrochetTimeChapter extends Chapter
                 DownloaderUtils.debug("path: " + path);
             }
         };
-        ByteArrayDownloadJob getList = new ByteArrayDownloadJob("Get the file list", null)
+        JSoupDownloadJob getList = new JSoupDownloadJob("Get the file list", null)
         {
             @Override
             public void run() throws Exception
@@ -86,6 +86,7 @@ public class CrochetTimeChapter extends Chapter
                 
                 super.run();
 
+                byte[] bytes = response.bodyAsBytes();
                 list = CrochetTimeDecrypt.fileList(bytes);
                 if(list.isEmpty())
                     throw new Exception("No file list");
@@ -110,7 +111,7 @@ public class CrochetTimeChapter extends Chapter
             if(f.exists())
                 continue;
 
-            ByteArrayDownloadJob page = new ByteArrayDownloadJob("Page " + i,
+            JSoupDownloadJob page = new JSoupDownloadJob("Page " + i,
                                         new URL(dbmd + CrochetTimeDecrypt.scrambleURL(filepath + list.get(i))))
             {
                 @Override
@@ -118,6 +119,7 @@ public class CrochetTimeChapter extends Chapter
                 {
                     super.run();
 
+                    byte[] bytes = response.bodyAsBytes();
                     CrochetTimeDecrypt.decrypt(bytes);
                     
                     BufferedInputStream input = new BufferedInputStream(new InflaterInputStream(new ByteArrayInputStream(bytes)));

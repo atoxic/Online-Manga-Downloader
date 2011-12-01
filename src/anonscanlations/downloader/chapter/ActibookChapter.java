@@ -11,9 +11,7 @@ import javax.imageio.*;
 import java.io.*;
 import java.net.*;
 
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
-import com.bluecast.xml.*;
+import org.jsoup.nodes.*;
 
 import anonscanlations.downloader.*;
 import anonscanlations.downloader.downloadjobs.*;
@@ -28,7 +26,8 @@ public class ActibookChapter extends Chapter implements Serializable
 
     private URL url;
     private String zoom, title, type;
-    private int start, total, w, h;
+    private int start, total;
+    private float w, h;
 
     public ActibookChapter(URL myURL)
     {
@@ -40,20 +39,6 @@ public class ActibookChapter extends Chapter implements Serializable
         h = 0;
     }
 
-    private static int parseInt(String str)
-    {
-        int ret = -1;
-        try
-        {
-            ret = Integer.parseInt(str);
-        }
-        catch(NumberFormatException nfe)
-        {
-            return(-1);
-        }
-        return(ret);
-    }
-
     public ArrayList<DownloadJob> init() throws Exception
     {
         if(!url.getProtocol().equals("http"))
@@ -61,101 +46,32 @@ public class ActibookChapter extends Chapter implements Serializable
         
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
 
-        PageDownloadJob bookXML = new PageDownloadJob("book.xml for page range and title", new URL(url, "books/db/book.xml"), "UTF-8")
+        JSoupDownloadJob bookXML = new JSoupDownloadJob("book.xml for page range and title", new URL(url, "books/db/book.xml"))
         {
             @Override
             public void run() throws Exception
             {
                 super.run();
 
-                Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(page));
-                is.setEncoding("UTF-8");
-
-                parser.setContentHandler(new DefaultHandler()
-                {
-                    private Stack<String> tags = new Stack<String>();
-
-                    @Override
-                    public void characters(char[] ch, int off, int length)
-                    {
-                        if(tags.size() == 2)
-                        {
-                            String tag = tags.peek(), str = new String(ch, off, length);
-                            if(tag.equals("name"))          title = str;
-                            else if(tag.equals("to_type"))  type = str;
-                            else if(tag.equals("w"))        w = parseInt(str);
-                            else if(tag.equals("h"))        h = parseInt(str);
-                            else if(tag.equals("start"))    start = parseInt(str);
-                            else if(tag.equals("total"))    total = parseInt(str);
-                        }
-                    }
-
-                    @Override
-                    public void startElement(String uri, String localName, String qName, Attributes atts)
-                    {
-                        tags.push(localName);
-                    }
-
-                    @Override
-                    public void endElement(String uri, String localName, String qName)
-                    {
-                        tags.pop();
-                    }
-                });
-                parser.setEntityResolver(new DefaultEntityResolver());
-                parser.parse(is);
+                Document d = response.parse();
+                title = JSoupUtils.elementText(d, "name");
+                type = JSoupUtils.elementText(d, "to_type");
+                w = JSoupUtils.elementTextFloat(d, "w");
+                h = JSoupUtils.elementTextFloat(d, "h");
+                start = JSoupUtils.elementTextInt(d, "start");
+                total = JSoupUtils.elementTextInt(d, "total");
             }
         };
-        PageDownloadJob viewerXML = new PageDownloadJob("viewer.xml for zoom level", new URL(url, "books/db/viewer.xml"), "UTF-8")
+        JSoupDownloadJob viewerXML = new JSoupDownloadJob("viewer.xml for zoom level", new URL(url, "books/db/viewer.xml"))
         {
             @Override
             public void run() throws Exception
             {
                 super.run();
 
-                Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(page));
-                is.setEncoding("UTF-8");
-
-                parser.setContentHandler(new DefaultHandler()
-                {
-                    private boolean inZoomSTag = false;
-
-                    @Override
-                    public void characters(char[] ch, int start, int length)
-                    {
-                        if(inZoomSTag)
-                        {
-                            String zooms = new String(ch, start, length);
-                            String[] zoomLevels = zooms.split(",");
-                            zoom = zoomLevels[zoomLevels.length - 1];
-                        }
-                    }
-
-                    @Override
-                    public void startElement(String uri, String localName, String qName, Attributes atts)
-                    {
-                        if(localName.equals("zoom_s"))
-                            inZoomSTag = true;
-                    }
-                    @Override
-                    public void endElement(String uri, String localName, String qName) throws SAXException
-                    {
-                        if(localName.equals("zoom_s"))
-                            throw DownloaderUtils.DONE;
-                    }
-                });
-                parser.setEntityResolver(new DefaultEntityResolver());
-                try
-                {
-                    parser.parse(is);
-                }
-                catch(SAXException e)
-                {
-                    if(!e.equals(DownloaderUtils.DONE))
-                        throw e;
-                }
+                String zooms = JSoupUtils.elementText(response.parse(), "zoom_s");
+                String[] zoomLevels = zooms.split(",");
+                zoom = zoomLevels[zoomLevels.length - 1];
             }
         };
         list.add(bookXML);
@@ -167,7 +83,6 @@ public class ActibookChapter extends Chapter implements Serializable
     {
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
 
-        final File finalDirectory = directory;
         if(type.equals("normal"))
         {
             if(w == -1 || h == -1)
@@ -177,7 +92,9 @@ public class ActibookChapter extends Chapter implements Serializable
             final int gridH = (int)Math.ceil(h * zoomVal / DOKI_GRID_H);
             for(int i = start; i < start + total; i++)
             {
-                final int finalIndex = i;
+                final File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+                 if(f.exists())
+                    continue;
                 final ImageDownloadJob grid[][] = new ImageDownloadJob[gridW][gridH];
                 for(int y = 0; y < gridH; y++)
                 {
@@ -204,7 +121,7 @@ public class ActibookChapter extends Chapter implements Serializable
                                 g.drawImage(grid[x][y].getImage(), x * DOKI_GRID_W, y * DOKI_GRID_H, null);
                             }
                         }
-                        ImageIO.write(complete, "JPEG", DownloaderUtils.fileName(finalDirectory, title, finalIndex, "jpg"));
+                        ImageIO.write(complete, "JPEG", f);
                     }
                 };
                 list.add(combine);

@@ -31,13 +31,14 @@ public class WebYoungJumpChapter extends Chapter
     {
         DownloaderUtils.checkHTTP(url);
         
-        PageDownloadJob check = new PageDownloadJob("Check if it's a Young Jump viewer", url, "UTF-8")
+        JSoupDownloadJob check = new JSoupDownloadJob("Check if it's a Young Jump viewer", url)
         {
             @Override
             public void run() throws Exception
             {
                 super.run();
-                
+
+                String page = response.body();
                 int index = page.indexOf("ln=");
                 if(index == -1)
                     throw new Exception("Parameters not found in page");
@@ -48,7 +49,7 @@ public class WebYoungJumpChapter extends Chapter
                 titleURL = params.get("worksuri");
             }
         };
-        PageDownloadJob getTitle = new PageDownloadJob("Get title URL", null, "UTF-8")
+        JSoupDownloadJob getTitle = new JSoupDownloadJob("Get title URL", null)
         {
             @Override
             public void run() throws Exception
@@ -59,7 +60,8 @@ public class WebYoungJumpChapter extends Chapter
                 
                 url = new URL(titleURL);
                 super.run();
-                
+
+                String page = response.body();
                 int index = page.indexOf("images/title.png");
                 if(index == -1)
                     return;

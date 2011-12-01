@@ -10,7 +10,7 @@ import anonscanlations.downloader.*;
  *
  * @author /a/non <anonymousscanlations@gmail.com>
  */
-public abstract class EPubDownloadJob extends ByteArrayDownloadJob
+public abstract class EPubDownloadJob extends JSoupDownloadJob
 {
     protected HttpURLConnection conn;
     public EPubDownloadJob(String _desc, URL _url)
@@ -24,10 +24,11 @@ public abstract class EPubDownloadJob extends ByteArrayDownloadJob
     {
         super.run();
 
+        byte[] bytes = response.bodyAsBytes();
+
         ByteArrayInputStream byte_input = new ByteArrayInputStream(bytes);
         doByteInput(byte_input);
         byte_input.close();
-        
         ZipInputStream input = new ZipInputStream(new ByteArrayInputStream(bytes));
         ZipEntry e;
         

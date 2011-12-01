@@ -9,7 +9,7 @@ import anonscanlations.downloader.chapter.*;
  *
  * @author /a/non <anonymousscanlations@gmail.com>
  */
-public class PCViewerDownloadJob extends ByteArrayDownloadJob
+public class PCViewerDownloadJob extends JSoupDownloadJob
 {
     protected File file;
     public PCViewerDownloadJob(String _description, URL _url, File _file)
@@ -21,6 +21,7 @@ public class PCViewerDownloadJob extends ByteArrayDownloadJob
     public void run() throws Exception
     {
         super.run();
+        byte[] bytes = response.bodyAsBytes();
         PCViewerDecrypt.decrypt(bytes);
         FileOutputStream out = new FileOutputStream(file);
         out.write(bytes, 8, bytes.length - 8);

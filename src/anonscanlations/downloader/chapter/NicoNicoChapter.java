@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.regex.*;
 import java.net.*;
 
+// Still uses Piccolo due to Jsoup's inability to parse html without cleaning it
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 import com.bluecast.xml.*;
@@ -18,7 +19,7 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class NicoNicoChapter extends Chapter
 {
-    public static final Pattern IDMATCH = Pattern.compile("mg([0-9]+)$");
+    public static final Pattern IDMATCH = Pattern.compile(".*?mg([0-9]+)$");
 
     private URL url;
 
@@ -70,35 +71,38 @@ public class NicoNicoChapter extends Chapter
     public ArrayList<DownloadJob> init() throws Exception
     {
         DownloaderUtils.checkHTTP(url);
-        
-        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         Matcher matcher = IDMATCH.matcher(url.toString());
         if(!matcher.matches())
             throw new Exception("ID not found");
         id = matcher.group(1);
+
+        ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         final NicoNicoLoginDownloadJob login = new NicoNicoLoginDownloadJob(username, password);
-        PageDownloadJob info = new PageDownloadJob("Get info", new URL("http://seiga.nicovideo.jp/api/theme/info?id=" + id), "UTF-8")
+        JSoupDownloadJob info = new JSoupDownloadJob("Get info", new URL("http://seiga.nicovideo.jp/api/theme/info?id=" + id))
         {
             @Override
             public void run() throws Exception
             {
-                addRequestProperty("Cookie", login.getCookies());
+                setCookies(login.getCookies());
                 super.run();
 
+                String page = response.body();
                 int index = page.indexOf("<title>");
                 if(index == -1)
                     throw new Exception("Title not found");
                 title = page.substring(index + 7, page.indexOf("</", index));
             }
         };
-        PageDownloadJob data = new PageDownloadJob("Get data", new URL("http://seiga.nicovideo.jp/api/theme/data?theme_id=" + id), "UTF-8")
+        JSoupDownloadJob data = new JSoupDownloadJob("Get data", new URL("http://seiga.nicovideo.jp/api/theme/data?theme_id=" + id))
         {
             @Override
             public void run() throws Exception
             {
-                addRequestProperty("Cookie", login.getCookies());
+                DownloaderUtils.debug("Login: " + login.getCookies());
+                setCookies(login.getCookies());
                 super.run();
-                parseData(page);
+                
+                parseData(response.body());
             }
         };
         list.add(login);

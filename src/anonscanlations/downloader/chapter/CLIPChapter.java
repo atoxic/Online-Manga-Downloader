@@ -22,8 +22,9 @@ public class CLIPChapter extends Chapter
     private String title;
     private ArrayList<Integer> pages;
     private byte[] key, time, decodeKey;
-    
-    private transient String username, cookies;
+
+    private transient Map<String, String> cookies;
+    private transient String username;
     private transient char[] password;
     
     public CLIPChapter(URL _url)
@@ -66,31 +67,18 @@ public class CLIPChapter extends Chapter
         if(url.getPath().contains("login"))
         {
             list.add(new ComicRushLoginDownloadJob());
-            DownloadJob redirect = new DownloadJob("Redirect to page")
+            JSoupDownloadJob redirect = new JSoupDownloadJob("Redirect to page", originalURL)
             {
                 @Override
                 public void run() throws Exception
                 {
-                    DownloaderUtils.debug("url: " + originalURL);
-                    
-                    HttpURLConnection conn = (HttpURLConnection) originalURL.openConnection();
-                    conn.setRequestProperty("Cookie", cookies);
-                    conn.setInstanceFollowRedirects(false);
-                    DownloaderUtils.debug("Response: " + conn.getResponseCode());
-                    if(conn.getResponseCode() < 300 || conn.getResponseCode() > 302)
-                    {
+                    conn.followRedirects(false);
+                    setCookies(CLIPChapter.this.cookies);
+                    super.run();
+                    if(response.statusCode() < 300 || response.statusCode() > 302)
+                        url = new URL(originalURL, response.headers().get("Location"));
+                    else
                         url = originalURL;
-                        return;
-                    }
-                    String headerName = null;
-                    for(int i = 1; (headerName = conn.getHeaderFieldKey(i)) != null; i++)
-                    {
-                        if(headerName.equals("Location"))
-                        {
-                            DownloaderUtils.debug("Redirect to: " + conn.getHeaderField(i));
-                            url = new URL(originalURL, conn.getHeaderField(i));
-                        }
-                    }
                 }
             };
             list.add(redirect);
@@ -113,7 +101,7 @@ public class CLIPChapter extends Chapter
         };
         list.add(queryMap);
         
-        PageDownloadJob metadata = new PageDownloadJob("Get metadata", null, "UTF-8")
+        JSoupDownloadJob metadata = new JSoupDownloadJob("Get metadata", null)
         {
             @Override
             public void run() throws Exception
@@ -125,7 +113,7 @@ public class CLIPChapter extends Chapter
                 
                 super.run();
                 Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(page));
+                InputSource is = new InputSource(new StringReader(response.body()));
                 is.setEncoding("UTF-8");
 
                 parser.setContentHandler(new DefaultHandler()
@@ -160,7 +148,7 @@ public class CLIPChapter extends Chapter
         };
         list.add(metadata);
         
-        PageDownloadJob pageList = new PageDownloadJob("Get page list", null, "UTF-8")
+        JSoupDownloadJob pageList = new JSoupDownloadJob("Get page list", null)
         {
             @Override
             public void run() throws Exception
@@ -173,7 +161,7 @@ public class CLIPChapter extends Chapter
                 
                 super.run();
                 Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(page));
+                InputSource is = new InputSource(new StringReader(response.body()));
                 is.setEncoding("UTF-8");
 
                 parser.setContentHandler(new DefaultHandler()
@@ -203,8 +191,8 @@ public class CLIPChapter extends Chapter
             DownloaderUtils.debug("page: " + page);
         
         // Have to get the first page, get the hash, then decode the first page
-        final ByteArrayDownloadJob firstPage = 
-                new ByteArrayDownloadJob("Page 1",
+        final JSoupDownloadJob firstPage =
+                new JSoupDownloadJob("Page 1",
                     new URL("http://release-stg.clip-studio.com/api/getExpandedImageFile?" +
                         "password=&hostname=&content%5Fid=" + params.get("content_id") + 
                         "&path=/" + params.get("service_id") + "/" 
@@ -212,8 +200,8 @@ public class CLIPChapter extends Chapter
                                     + params.get("site_id") + "/" 
                                     + String.format("%03d", pages.get(0)) + "-1.jpg" +
                         "&service%5Fid=" + params.get("service_id")));
-        ByteArrayDownloadJob getTime = 
-                new ByteArrayDownloadJob("Get time key", null)
+        JSoupDownloadJob getTime =
+                new JSoupDownloadJob("Get time key", null)
         {
             @Override
             public void run() throws Exception
@@ -222,12 +210,12 @@ public class CLIPChapter extends Chapter
                             "hash=" + CLIPDecrypt.createHash(firstPage.getBytes()) +
                             "&getTime=" + System.currentTimeMillis());
                 super.run();
-                time = bytes;
+                time = response.bodyAsBytes();
                 DownloaderUtils.debug("time: " + Arrays.toString(time));
             }
         };
-        ByteArrayDownloadJob getKey = 
-                new ByteArrayDownloadJob("Get key", null)
+        JSoupDownloadJob getKey =
+                new JSoupDownloadJob("Get key", null)
         {
             @Override
             public void run() throws Exception
@@ -237,7 +225,7 @@ public class CLIPChapter extends Chapter
                             "&getKey=" + System.currentTimeMillis());
                 
                 super.run();
-                key = bytes;
+                key = response.bodyAsBytes();
                 DownloaderUtils.debug("key: " + Arrays.toString(key));
                 decodeKey = CLIPDecrypt.decodeKey(key, time);
                 DownloaderUtils.debug("key: " + Arrays.toString(key));
@@ -273,8 +261,8 @@ public class CLIPChapter extends Chapter
             if(f.exists())
                 continue;
 
-            ByteArrayDownloadJob pageJob = 
-                new ByteArrayDownloadJob("Page " + page,
+            JSoupDownloadJob pageJob =
+                new JSoupDownloadJob("Page " + page,
                     new URL("http://release-stg.clip-studio.com/api/getExpandedImageFile?" +
                         "password=&hostname=&content%5Fid=" + params.get("content_id") + 
                         "&path=/" + params.get("service_id") + "/" 
@@ -287,7 +275,7 @@ public class CLIPChapter extends Chapter
                 public void run() throws Exception
                 {
                     super.run();
-                    byte[] dec = CLIPDecrypt.decodeBinary(bytes, decodeKey);
+                    byte[] dec = CLIPDecrypt.decodeBinary(response.bodyAsBytes(), decodeKey);
                     FileOutputStream fos = new FileOutputStream(f);
                     fos.write(dec);
                     fos.close();
@@ -299,11 +287,11 @@ public class CLIPChapter extends Chapter
         return(list);
     }
     
-    private class ComicRushLoginDownloadJob extends DownloadJob
+    private class ComicRushLoginDownloadJob extends JSoupDownloadJob
     {
         public ComicRushLoginDownloadJob()
         {
-            super("Login to Comic Rush");
+            super("Login to Comic Rush", null);
         }
         
         @Override
@@ -312,6 +300,16 @@ public class CLIPChapter extends Chapter
             if(username == null || password == null)
                 throw new Exception("No login");
 
+            url = new URL("https://www.comic-rush.jp/login");
+            addPOSTData("do", "1");
+            addPOSTData("x", Integer.toString((int)(Math.random() * 180)));
+            addPOSTData("y", Integer.toString((int)(Math.random() * 60)));
+            addPOSTData("mailaddress", username);
+            addPOSTData("password", new String(password));
+            super.run();
+            CLIPChapter.this.cookies = response.cookies();
+
+            /*
             URL url = new URL("https://www.comic-rush.jp/login");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             setRequestProperties(conn);
@@ -335,6 +333,7 @@ public class CLIPChapter extends Chapter
                     DownloaderUtils.debug("cookies: " + cookies);
                 }
             }
+            // */
         }
     }
 }

@@ -10,7 +10,7 @@ import javax.crypto.spec.*;
  *
  * @author /a/non <anonymousscanlations@gmail.com>
  */
-public class YahooBookstoreDownloadJob extends ByteArrayDownloadJob
+public class YahooBookstoreDownloadJob extends JSoupDownloadJob
 {
     //final byte[] publicIV = Base64.decode("8nrcUKAHo7latHeMq3k/Bg==");
     //final byte[] publicKey = Base64.decode("9iA9KscKT7bdRHNDeblXqA==");
@@ -36,7 +36,15 @@ public class YahooBookstoreDownloadJob extends ByteArrayDownloadJob
     @Override
     public void run() throws Exception
     {
+        OutputStream temp;
+
         super.run();
+
+        byte[] bytes = response.bodyAsBytes();
+
+        temp = new FileOutputStream(new File(file.toString() + ".1"));
+        temp.write(bytes);
+        temp.close();
 
         SecretKeySpec k = new SecretKeySpec(publicKey, "AES");
         int i1 = 0;
@@ -84,18 +92,15 @@ public class YahooBookstoreDownloadJob extends ByteArrayDownloadJob
             }
         }
         memoryStream.close();
-
         byte[] decrypted = memoryStream.toByteArray();
+
         int i5 = decrypted[decrypted.length - 1] & 0xff;
         byte[] decrypted2 = new byte[decrypted.length - i5];
         System.arraycopy(decrypted, 0, decrypted2, 0, decrypted2.length);
 
-        InputStream inflater = new ByteArrayInputStream(decrypted2);
-        OutputStream fos = new InflaterOutputStream(new FileOutputStream(file), new Inflater(true));
-        byte[] buf = new byte[1024];
-        while(inflater.read(buf) != -1)
-            fos.write(buf);
-        inflater.close();
+        OutputStream fos = new InflaterOutputStream(new FileOutputStream(file),
+                                                new Inflater(true));
+        fos.write(decrypted2);
         fos.close();
     }
 }

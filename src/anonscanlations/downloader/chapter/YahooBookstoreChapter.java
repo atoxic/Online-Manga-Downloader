@@ -42,13 +42,14 @@ public class YahooBookstoreChapter extends Chapter
 
         if(url.getProtocol().equals("http"))
         {
-            PageDownloadJob page = new PageDownloadJob("Get page and find id", url, "UTF-8")
+            JSoupDownloadJob page = new JSoupDownloadJob("Get page and find id", url)
             {
                 @Override
                 public void run() throws Exception
                 {
                     super.run();
 
+                    String page = response.body();
                     int index = page.indexOf("ybookstore://");
                     if(index == -1)
                         throw new Exception("URI not found");
@@ -66,7 +67,7 @@ public class YahooBookstoreChapter extends Chapter
         else
             throw new Exception("Unknown protocol");
 
-        PageDownloadJob ePubData = new PageDownloadJob("Get info on ePub file", null, "UTF-8")
+        JSoupDownloadJob ePubData = new JSoupDownloadJob("Get info on ePub file", null)
         {
             @Override
             public void run() throws Exception
@@ -78,6 +79,7 @@ public class YahooBookstoreChapter extends Chapter
 
                 super.run();
 
+                String page = response.body();
                 Piccolo parser = new Piccolo();
                 InputSource is = new InputSource(new StringReader(page));
                 is.setEncoding("UTF-8");

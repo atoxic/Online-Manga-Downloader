@@ -41,7 +41,7 @@ public class PocoChapter extends Chapter implements Serializable
         if(partid == null)
             throw new Exception("Invalid URL: partid not found");
 
-        PageDownloadJob load = new PageDownloadJob("Get data", new URL("http://www.poco2.jp/viewerset/common/load.php"), "UTF-8")
+        JSoupDownloadJob load = new JSoupDownloadJob("Get data", new URL("http://www.poco2.jp/viewerset/common/load.php"))
         {
             @Override
             public void run() throws Exception
@@ -49,7 +49,7 @@ public class PocoChapter extends Chapter implements Serializable
                 super.run();
 
                 Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(page));
+                InputSource is = new InputSource(new StringReader(response.body()));
                 is.setEncoding("UTF-8");
 
                 parser.setContentHandler(new DefaultHandler()
@@ -72,7 +72,7 @@ public class PocoChapter extends Chapter implements Serializable
                 parser.parse(is);
             }
         };
-        load.setPOSTData("partid=" + partid);
+        load.addPOSTData("partid", partid);
 
         list.add(load);
 

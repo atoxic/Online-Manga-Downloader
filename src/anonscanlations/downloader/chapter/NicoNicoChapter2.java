@@ -4,9 +4,7 @@ import java.util.*;
 import java.io.*;
 import java.net.*;
 
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
-import com.bluecast.xml.*;
+import org.jsoup.nodes.*;
 
 import anonscanlations.downloader.*;
 import anonscanlations.downloader.downloadjobs.*;
@@ -20,14 +18,14 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
 {
     protected URL url;
     protected String title, themeID;
-    protected ArrayList<String> images;
+    protected TreeSet<String> images;
 
     protected NicoNicoChapter2(){}
     public NicoNicoChapter2(URL _url)
     {
         url = _url;
         title = themeID = null;
-        images = new ArrayList<String>();
+        images = new TreeSet<String>();
     }
 
     @Override
@@ -36,13 +34,13 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
         DownloaderUtils.checkHTTP(url);
         
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
-        PageDownloadJob index = new PageDownloadJob("Get the given url", url, "UTF-8")
+        JSoupDownloadJob index = new JSoupDownloadJob("Get the given url", url)
         {
             @Override
             public void run() throws Exception
             {
                 super.run();
-
+                String page = response.body();
                 int index = page.indexOf("theme_id");
                 if(index == -1)
                     throw new Exception("theme_id not found");
@@ -53,7 +51,7 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
             }
         };
 
-        PageDownloadJob theme = new PageDownloadJob("Get theme XML", null, "UTF-8")
+        JSoupDownloadJob theme = new JSoupDownloadJob("Get theme XML", null)
         {
             @Override
             public void run() throws Exception
@@ -62,8 +60,11 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
 
                 super.run();
 
+                Document d = response.parse();
+                title = JSoupUtils.elementText(d, "title");
+                /*
                 Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(page));
+                InputSource is = new InputSource(new StringReader(response.body()));
                 is.setEncoding("UTF-8");
 
                 parser.setContentHandler(new DefaultHandler()
@@ -101,10 +102,11 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
                     if(!e.equals(DownloaderUtils.DONE))
                         throw e;
                 }
+                // */
             }
         };
 
-        PageDownloadJob data = new PageDownloadJob("Get data XML", null, "UTF-8")
+        JSoupDownloadJob data = new JSoupDownloadJob("Get data XML", null)
         {
             @Override
             public void run() throws Exception
@@ -113,35 +115,9 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
 
                 super.run();
 
-                Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(page));
-                is.setEncoding("UTF-8");
-
-                parser.setContentHandler(new DefaultHandler()
-                {
-                    private Stack<String> tags = new Stack<String>();
-
-                    @Override
-                    public void characters(char[] ch, int start, int length)
-                    {
-                        if(tags.peek().equals("key"))
-                            images.add(images.size() / 2 * 2, new String(ch, start, length));
-                    }
-
-                    @Override
-                    public void startElement(String uri, String localName, String qName, Attributes atts)
-                    {
-                        tags.push(localName);
-                    }
-
-                    @Override
-                    public void endElement(String uri, String localName, String qName)
-                    {
-                        tags.pop();
-                    }
-                });
-                parser.setEntityResolver(new DefaultEntityResolver());
-                parser.parse(is);
+                Document d = response.parse();
+                for(Element e : d.select("key"))
+                    images.add(e.ownText());
             }
         };
 
@@ -188,14 +164,15 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
             final File f = DownloaderUtils.fileName(directory, title, i, "jpg");
             if(f.exists())
                 continue;
-            ByteArrayDownloadJob page = new ByteArrayDownloadJob("Page " + i, new URL("http://eco.nicoseiga.jp/comic/" + image))
+            JSoupDownloadJob page = new JSoupDownloadJob("Page " + i, new URL("http://eco.nicoseiga.jp/comic/" + image))
             {
                 @Override
                 public void run() throws Exception
                 {
                     super.run();
+
+                    byte[] bytes = response.bodyAsBytes();
                     decrypt(bytes);
-                    
                     FileOutputStream fos = new FileOutputStream(f);
                     fos.write(bytes);
                     fos.close();

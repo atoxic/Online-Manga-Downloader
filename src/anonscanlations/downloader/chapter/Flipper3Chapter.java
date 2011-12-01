@@ -41,7 +41,7 @@ public class Flipper3Chapter extends Chapter
     {
         DownloaderUtils.checkHTTP(url);
         
-        PageDownloadJob page = new PageDownloadJob("Get book.xml", new URL(url, "book.xml"), "UTF-8")
+        JSoupDownloadJob page = new JSoupDownloadJob("Get book.xml", new URL(url, "book.xml"))
         {
             @Override
             public void run() throws Exception
@@ -49,7 +49,7 @@ public class Flipper3Chapter extends Chapter
                 super.run();
                 
                 Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(page));
+                InputSource is = new InputSource(new StringReader(response.body()));
                 is.setEncoding("UTF-8");
 
                 parser.setContentHandler(new DefaultHandler()

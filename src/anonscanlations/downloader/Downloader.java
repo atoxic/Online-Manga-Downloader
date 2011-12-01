@@ -196,7 +196,6 @@ public class Downloader extends Thread
                     currentThread.pause();
                     currentThread.addJobs(chapter.init());
                     currentThread.unpause();
-                    Thread.sleep(100);
                     currentThread.waitUntilFinished();
                     
                     DownloaderUtils.debug("run Spot 3");
@@ -310,6 +309,7 @@ public class Downloader extends Thread
     public static void init() throws Exception
     {
         currentThread = new Downloader();
+        
         currentThread.start();
     }
 
@@ -320,9 +320,6 @@ public class Downloader extends Thread
         // in order to handle custom protocols
         System.setProperty("java.protocol.handler.pkgs", "anonscanlations.downloader.chapter");
 
-        // initialize backend
-        init();
-        
         // Try to use native look and feel
         try
         {
@@ -335,5 +332,8 @@ public class Downloader extends Thread
         }
         frame = TempDownloaderFrame.getFrame();
         frame.setVisible(true);
+
+        // initialize backend
+        init();
     }
 }

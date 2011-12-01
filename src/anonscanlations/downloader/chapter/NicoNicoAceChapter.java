@@ -120,7 +120,7 @@ public class NicoNicoAceChapter extends Chapter
                 }
                 catch(IOException e)
                 {
-                    if(conn.getResponseCode() == 401)
+                    if(response.statusCode() == 401)
                         throw new IOException("Your NicoNico account isn't registered to view BookWalker chapters");
                     throw e;
                 }
@@ -147,7 +147,10 @@ public class NicoNicoAceChapter extends Chapter
             @Override
             public void run() throws Exception
             {
-                setPOSTData("streaming=init&trial=" + is_trial + "&bookid=" + bookid + "&userid=" + userid);
+                addPOSTData("streaming", "init");
+                addPOSTData("trial", is_trial ? "true" : "false");
+                addPOSTData("bookid", bookid);
+                addPOSTData("userid", userid);
                 url = new URL(maki_address);
 
                 addRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
@@ -238,7 +241,7 @@ public class NicoNicoAceChapter extends Chapter
                     }
                     catch(IOException e)
                     {
-                        if(conn.getResponseCode() == 401)
+                        if(response.statusCode() == 401)
                             throw new IOException("Your NicoNico account isn't registered to view BookWalker chapters");
                         throw e;
                     }
@@ -300,8 +303,15 @@ public class NicoNicoAceChapter extends Chapter
                     fout.close();
                 }
             };
+            file.addPOSTData("streaming", "resources");
+            file.addPOSTData("trial", is_trial ? "true" : "false");
+            file.addPOSTData("bookid", bookid);
+            file.addPOSTData("userid", userid);
+            file.addPOSTData("resources", "contents/" + images.get(i));
+            /*
             file.setPOSTData("streaming=resources&trial=" + is_trial + "&bookid=" + bookid +
                             "&resources=" + URLEncoder.encode("contents/" + images.get(i), "UTF-8") + "&userid=" + userid);
+            // */
             file.addRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
             file.addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             file.addRequestProperty("x-nicobook-dl-key", dl_key);
@@ -312,24 +322,24 @@ public class NicoNicoAceChapter extends Chapter
         return(list);
     }
 
-    private class JSONDownloadJob extends PageDownloadJob
+    private class JSONDownloadJob extends JSoupDownloadJob
     {
         protected JSONObject obj;
 
         public JSONDownloadJob(String _desc, URL _url)
         {
-            super(_desc, _url, "UTF-8");
+            super(_desc, _url);
         }
 
         @Override
         public void run() throws Exception
         {
-            addRequestProperty("Cookie", login.getCookies());
             url = new URL(url.toString() + "?" + System.currentTimeMillis());
+            setCookies(login.getCookies());
 
             super.run();
 
-            obj = new JSONObject(page);
+            obj = new JSONObject(response.body());
         }
     }
 

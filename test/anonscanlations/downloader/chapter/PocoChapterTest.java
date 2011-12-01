@@ -41,7 +41,7 @@ public class PocoChapterTest extends PocoChapter        // So I can access priva
         PocoChapter instance = new PocoChapter(new URL("http://www.poco2.jp/viewer/play.php?partid=f4b9ec30ad9f68f89b29639786cb62ef"));
         Downloader.getDownloader().pause();
         Downloader.getDownloader().addJobs(instance.init());
-        Downloader.getDownloader().pause();
+        Downloader.getDownloader().unpause();
         Downloader.getDownloader().waitUntilFinished();
 
         assertTrue(instance.images.get(0).equals("http://www.poco2.jp/viewerset/story/0033/0069/00000094/1120.jpg"));
@@ -58,14 +58,14 @@ public class PocoChapterTest extends PocoChapter        // So I can access priva
 
         Downloader.getDownloader().pause();
         Downloader.getDownloader().addJobs(instance.init());
-        Downloader.getDownloader().pause();
+        Downloader.getDownloader().unpause();
         Downloader.getDownloader().waitUntilFinished();
 
         assertTrue(instance.images.get(0).equals("http://www.poco2.jp/viewerset/story/0033/0069/00000094/1120.jpg"));
 
         Downloader.getDownloader().pause();
         Downloader.getDownloader().addJobs(instance.download(directory));
-        Downloader.getDownloader().pause();
+        Downloader.getDownloader().unpause();
         Downloader.getDownloader().waitUntilFinished();
 
         assertTrue(CRC32.length >= directory.listFiles().length);

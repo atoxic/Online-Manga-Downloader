@@ -59,8 +59,15 @@ public class DownloaderUtils
     private static void addToLog(String message)
     {
         LOG.add(message);
-        if(LOGEDITOR != null)
-            LOGEDITOR.setText(LOGEDITOR.getText() + message + '\n');
+        try
+        {
+            if(LOGEDITOR != null)
+                LOGEDITOR.setText(LOGEDITOR.getText() + message + '\n');
+        }
+        catch(Exception e)
+        {
+            // Sometimes the log just isn't ready
+        }
     }
 
     private static boolean addException(String msg, Exception e)
@@ -148,6 +155,7 @@ public class DownloaderUtils
         return(source);
     }
 
+    //*
     public static byte[] readAllBytes(InputStream in) throws IOException
     {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -159,6 +167,7 @@ public class DownloaderUtils
         bos.close();
         return(array);
     }
+    // */
 
     public static String readAllLines(InputStream in, String encoding) throws IOException
     {

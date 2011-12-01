@@ -11,6 +11,8 @@ import javax.imageio.*;
 import java.awt.*;
 import java.net.*;
 
+import org.jsoup.nodes.*;
+
 import anonscanlations.downloader.*;
 import anonscanlations.downloader.downloadjobs.*;
 
@@ -41,62 +43,63 @@ public class PluginFreeChapter extends Chapter implements Serializable
         
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
 
-        PageDownloadJob index = new PageDownloadJob("Get index page", new URL(url, "index.shtml"), "Shift_JIS")
+        JSoupDownloadJob index = new JSoupDownloadJob("Get index page", new URL(url, "index.shtml"))
         {
             @Override
             public void run() throws Exception
             {
                 super.run();
 
-                DownloaderUtils.debug("index");
+                Document d = response.parse();
 
                 // content Key Value
-                String cKV = title(page, "'cKV'");
+                String cKV = JSoupUtils.elementAttr(d, "#cKV", "title"); //title(page, "'cKV'");
                 if(cKV == null)
                     throw new Exception("no cKV");
                 cKVInt = Integer.parseInt(cKV);
+                DownloaderUtils.debug("PFC: cKV: " + cKV);
 
                 // root directory
-                hCN = title(page, "'hCN'");
+                hCN = JSoupUtils.elementAttr(d, "#hCN", "title"); // title(page, "'hCN'");
                 if(hCN == null)
                     throw new Exception("no hCN");
+                DownloaderUtils.debug("PFC: hCN: " + hCN);
             }
         };
         list.add(index);
 
-        PageDownloadJob initVal = new PageDownloadJob("Get initVal page", new URL(url, "InitVal.html"), "Shift_JIS")
+        JSoupDownloadJob initVal = new JSoupDownloadJob("Get initVal page", new URL(url, "InitVal.html"))
         {
             @Override
             public void run() throws Exception
             {
                 super.run();
 
-                int index = page.indexOf("<DIV ID='DATA'>");
-                if(index == -1)
-                    throw new Exception("No data");
-                String initVal = PluginFreeDecrypt.expand(page.substring(index + 15, page.indexOf("</DIV>", index)), cKVInt);
+                Document encoded = response.parse();
+                String initVal = PluginFreeDecrypt.expand(JSoupUtils.elementText(encoded, "#DATA"), cKVInt);
+                Document d = org.jsoup.Jsoup.parseBodyFragment(initVal);
 
                 // page number
-                String tPN = title(initVal, "'tPN'");
+                String tPN = JSoupUtils.elementAttr(d, "#tPN", "title"); //title(initVal, "'tPN'");
                 if(tPN == null)
                     throw new Exception("No total page number");
                 total = Integer.parseInt(tPN);
 
                 // for decoding page individual files
-                String sISString = title(initVal, "'sIS'");
+                String sISString = JSoupUtils.elementAttr(d, "#sIS", "title"); //title(initVal, "'sIS'");
                 if(sISString == null)
                     throw new Exception("No sIS");
                 sIS = Integer.parseInt(sISString);
 
                 // title
-                title = title(initVal, "'sHN'");
+                title = JSoupUtils.elementAttr(d, "#sHN", "title"); //title(initVal, "'sHN'");
                 if(title == null)
                     throw new Exception("No sHN");
 
                 // zoom values and dimensions
-                zoom = titleList(initVal, "'sFN'");
-                zoomWidthS = titleList(initVal, "'iWS'");
-                zoomHeightS = titleList(initVal, "'iHS'");
+                zoom = titleList(d, "#sFN");
+                zoomWidthS = titleList(d, "#iWS");
+                zoomHeightS = titleList(d, "#iHS");
                 if(zoom == null || zoomWidthS == null || zoomHeightS == null)
                     throw new Exception("No zoom data");
 
@@ -158,21 +161,9 @@ public class PluginFreeChapter extends Chapter implements Serializable
         return(list);
     }
 
-    private String title(String page, String ID)
+    private String titleList(Document d, String selector)
     {
-        int index = page.indexOf("ID=" + ID);
-        if(index != -1)
-        {
-            index = page.indexOf("title='", index);
-            if(index != -1)
-                return(page.substring(index + 7, page.indexOf('\'', index + 7)));
-        }
-        return(null);
-    }
-
-    private String titleList(String page, String ID)
-    {
-        String ret = title(page, ID);
+        String ret = JSoupUtils.elementAttr(d, selector, "title");
         if(ret != null && ret.indexOf(',') != -1)
         {
             return(ret.substring(0, ret.indexOf(',')));

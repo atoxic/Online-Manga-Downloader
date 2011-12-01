@@ -5,19 +5,16 @@ import java.io.*;
 import java.net.*;
 import javax.imageio.*;
 
-import anonscanlations.downloader.*;
-
 /**
  *
  * @author /a/non <anonymousscanlations@gmail.com>
  */
-public class ImageDownloadJob extends DownloadJob
+public class ImageDownloadJob extends JSoupDownloadJob
 {
-    protected URL url;
     protected BufferedImage image;
     public ImageDownloadJob(String _description, URL _url)
     {
-        super(_description);
+        super(_description, _url);
         url = _url;
         image = null;
     }
@@ -25,18 +22,14 @@ public class ImageDownloadJob extends DownloadJob
     {
         return(image);
     }
+    @Override
     public void run() throws Exception
     {
-        DownloaderUtils.debug("ImageDownloadJob: " + url);
+        super.run();
 
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        setRequestProperties(conn);
-        sendPOSTData(conn);
-        if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
-            throw new Exception("404 File Not Found: " + url);
-
-        InputStream in = conn.getInputStream();
-        image = ImageIO.read(in);
+        ByteArrayInputStream bais = new ByteArrayInputStream(response.bodyAsBytes());
+        image = ImageIO.read(bais);
+        bais.close();
     }
 }
 
