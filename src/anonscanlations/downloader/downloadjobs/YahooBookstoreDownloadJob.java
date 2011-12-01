@@ -41,7 +41,7 @@ public class YahooBookstoreDownloadJob extends JSoupDownloadJob
         super.run();
         byte[] bytes = response.bodyAsBytes();
 
-        DownloaderUtils.safeWrite(bytes, new File(file.toString() + ".1"));
+        //DownloaderUtils.safeWrite(bytes, new File(file.toString() + ".1"));
 
         SecretKeySpec k = new SecretKeySpec(publicKey, "AES");
         int i1 = 0;
@@ -91,13 +91,13 @@ public class YahooBookstoreDownloadJob extends JSoupDownloadJob
         memoryStream.close();
         byte[] decrypted = memoryStream.toByteArray();
 
-        DownloaderUtils.safeWrite(decrypted, new File(file.toString() + ".2"));
+        //DownloaderUtils.safeWrite(decrypted, new File(file.toString() + ".2"));
 
         int i5 = decrypted[decrypted.length - 1] & 0xff;
         byte[] decrypted2 = new byte[decrypted.length - i5];
         System.arraycopy(decrypted, 0, decrypted2, 0, decrypted2.length);
 
-        DownloaderUtils.safeWrite(decrypted2, new File(file.toString() + ".3"));
+        //DownloaderUtils.safeWrite(decrypted2, new File(file.toString() + ".3"));
         
         OutputStream fos = null;
         try
