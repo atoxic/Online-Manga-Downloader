@@ -38,7 +38,7 @@ public class WebYoungJumpChapter extends Chapter
             {
                 super.run();
                 // in case of redirects
-                url = response.url();
+                WebYoungJumpChapter.this.url = response.url();
                 Document d = response.parse();
                 String str = JSoupUtils.elementAttr(d, "param[name=FlashVars]", "value");
                 HashMap<String, String> params = 

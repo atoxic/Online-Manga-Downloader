@@ -98,9 +98,17 @@ public class NicoNicoChapter extends Chapter
             @Override
             public void run() throws Exception
             {
-                DownloaderUtils.debug("Login: " + login.getCookies());
                 setCookies(login.getCookies());
-                super.run();
+                try
+                {
+                    super.run();
+                }
+                catch(IOException e)
+                {
+                    if(e.getMessage().startsWith("401"))
+                        throw new IOException("Incorrect login");
+                    throw e;
+                }
                 
                 parseData(response.body());
             }
