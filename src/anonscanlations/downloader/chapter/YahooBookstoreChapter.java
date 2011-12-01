@@ -79,9 +79,8 @@ public class YahooBookstoreChapter extends Chapter
 
                 super.run();
 
-                String page = response.body();
                 Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(page));
+                InputSource is = new InputSource(new StringReader(response.body()));
                 is.setEncoding("UTF-8");
 
                 parser.setContentHandler(new DefaultHandler()
@@ -132,17 +131,15 @@ public class YahooBookstoreChapter extends Chapter
 
             public void doByteInput(ByteArrayInputStream byte_input) throws Exception {}
             public void doZipEntryInput(ZipInputStream input, ZipEntry e) throws Exception
-            {
-                String page = DownloaderUtils.readAllLines(input, "UTF-8");
-                
-                DownloaderUtils.debug("Spot 3");
-                
-                DownloaderUtils.debug("=== File: " + e.getName() + " ===");
-                DownloaderUtils.debug(page);
-                
+            {                
                 if(!e.getName().equals("META-INF/encryption.xml") && !e.getName().equals("OEBPS/content.opf"))
                     return;
-                
+
+                String page = DownloaderUtils.readAllLines(input, "UTF-8");
+
+                DownloaderUtils.debug("Spot 3");
+                DownloaderUtils.debug("=== File: " + e.getName() + " ===");
+
                 Piccolo parser = new Piccolo();
                 InputSource is = new InputSource(new StringReader(page));
                 is.setEncoding("UTF-8");

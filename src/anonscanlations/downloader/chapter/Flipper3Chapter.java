@@ -7,9 +7,7 @@ import java.util.*;
 import java.net.*;
 import javax.imageio.*;
 
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
-import com.bluecast.xml.*;
+import org.jsoup.nodes.*;
 
 import anonscanlations.downloader.*;
 import anonscanlations.downloader.downloadjobs.*;
@@ -48,51 +46,15 @@ public class Flipper3Chapter extends Chapter
             {
                 super.run();
                 
-                Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(response.body()));
-                is.setEncoding("UTF-8");
-
-                parser.setContentHandler(new DefaultHandler()
-                {
-                    private Stack<String> tags = new Stack<String>();
-
-                    @Override
-                    public void characters(char[] ch, int start, int length)
-                    {
-                        String tag = tags.peek(), str = new String(ch, start, length);
-                        if(tag.equals("bookTitle"))
-                            title = str;
-                        else if(tag.equals("total"))
-                            total = Integer.parseInt(str);
-                        else if(tag.equals("maxMagnification"))
-                        {
-                            maxMag = Float.parseFloat(str);
-                            maxMagString = str;
-                        }
-                        else if(tag.equals("pageWidth"))
-                            pageWidth = Integer.parseInt(str);
-                        else if(tag.equals("pageHeight"))
-                            pageHeight = Integer.parseInt(str);
-                        else if(tag.equals("sliceWidth"))
-                            sliceWidth = Integer.parseInt(str);
-                        else if(tag.equals("sliceHeight"))
-                            sliceHeight = Integer.parseInt(str);
-                    }
-
-                    @Override
-                    public void startElement(String uri, String localName, String qName, Attributes atts)
-                    {
-                        tags.push(localName);
-                    }
-
-                    @Override
-                    public void endElement(String uri, String localName, String qName)
-                    {
-                        tags.pop();
-                    }
-                });
-                parser.setEntityResolver(new DefaultEntityResolver());
-                parser.parse(is);
+                Document d = response.parse();
+                title = JSoupUtils.elementText(d, "bookTitle");
+                total = JSoupUtils.elementTextInt(d, "total");
+                maxMagString = JSoupUtils.elementText(d, "maxMagnification");
+                maxMag = Float.parseFloat(maxMagString);
+                pageWidth = JSoupUtils.elementTextInt(d, "pageWidth");
+                pageHeight = JSoupUtils.elementTextInt(d, "pageHeight");
+                sliceWidth = JSoupUtils.elementTextInt(d, "sliceWidth");
+                sliceHeight = JSoupUtils.elementTextInt(d, "sliceHeight");
             }
         };
         

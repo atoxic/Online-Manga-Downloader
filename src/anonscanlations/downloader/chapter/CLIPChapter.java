@@ -4,9 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.net.*;
 
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
-import com.bluecast.xml.*;
+import org.jsoup.nodes.*;
 
 import anonscanlations.downloader.*;
 import anonscanlations.downloader.downloadjobs.*;
@@ -72,13 +70,15 @@ public class CLIPChapter extends Chapter
                 @Override
                 public void run() throws Exception
                 {
-                    conn.followRedirects(false);
                     setCookies(CLIPChapter.this.cookies);
+                    super.init();
+                    conn.followRedirects(false);
                     super.run();
+
                     if(response.statusCode() < 300 || response.statusCode() > 302)
-                        url = new URL(originalURL, response.headers().get("Location"));
+                        CLIPChapter.this.url = originalURL;
                     else
-                        url = originalURL;
+                        CLIPChapter.this.url = new URL(originalURL, response.headers().get("Location"));
                 }
             };
             list.add(redirect);
@@ -112,38 +112,11 @@ public class CLIPChapter extends Chapter
                             "&option" + System.currentTimeMillis());
                 
                 super.run();
-                Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(response.body()));
-                is.setEncoding("UTF-8");
-
-                parser.setContentHandler(new DefaultHandler()
-                {
-                    private boolean getTitle = false;
-                    @Override
-                    public void characters(char[] ch, int start, int length)
-                    {
-                        if(getTitle)
-                            title = new String(ch, start, length);
-                    }
-                    @Override
-                    public void startElement(String uri, String localName, String qName, Attributes atts)
-                            throws SAXException
-                    {
-                        if(localName.equals("response") && atts.getValue("errno") != null
-                                && !atts.getValue("errno").equals("0"))
-                            throw new SAXException("browsePermission returned error");
-                        if(localName.equals("title"))
-                            getTitle = true;
-                    }
-                    @Override
-                    public void endElement(String uri, String localName, String qName)
-                    {
-                        if(localName.equals("title"))
-                            getTitle = false;
-                    }
-                });
-                parser.setEntityResolver(new DefaultEntityResolver());
-                parser.parse(is);
+                Document d = response.parse();
+                String errno = JSoupUtils.elementAttr(d, "response", "errno");
+                if(errno != null && !errno.equals("0"))
+                    throw new Exception("browsePermission returned error");
+                title = JSoupUtils.elementText(d, "title");
             }
         };
         list.add(metadata);
@@ -160,22 +133,12 @@ public class CLIPChapter extends Chapter
                             "&hostname=&password=&option" + System.currentTimeMillis());
                 
                 super.run();
-                Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(response.body()));
-                is.setEncoding("UTF-8");
-
-                parser.setContentHandler(new DefaultHandler()
+                Document d = org.jsoup.Jsoup.parseBodyFragment(response.body());
+                for(Element e : d.select("page"))
                 {
-                    @Override
-                    public void startElement(String uri, String localName, String qName, Attributes atts)
-                            throws SAXException
-                    {
-                        if(localName.equals("page") && atts.getValue("no") != null)
-                            pages.add(Integer.parseInt(atts.getValue("no")));
-                    }
-                });
-                parser.setEntityResolver(new DefaultEntityResolver());
-                parser.parse(is);
+                    if(e.hasAttr("no"))
+                        pages.add(Integer.parseInt(e.attr("no")));
+                }
             }
         };
         list.add(pageList);
@@ -308,32 +271,6 @@ public class CLIPChapter extends Chapter
             addPOSTData("password", new String(password));
             super.run();
             CLIPChapter.this.cookies = response.cookies();
-
-            /*
-            URL url = new URL("https://www.comic-rush.jp/login");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            setRequestProperties(conn);
-
-            conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-            wr.write("do=1&x=" + (int)(Math.random() * 180) +
-                    "&y=" + (int)(Math.random() * 60) +
-                    "&mailaddress=" + username + "&password=");
-            wr.write(password);
-            wr.flush();
-
-            if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
-                throw new Exception("404 Page Not Found: " + url);
-            String headerName = null;
-            for(int i = 1; (headerName = conn.getHeaderFieldKey(i)) != null; i++)
-            {
-                if(headerName.equals("Set-Cookie") && !conn.getHeaderField(i).contains("deleted"))
-                {
-                    cookies = conn.getHeaderField(i);
-                    DownloaderUtils.debug("cookies: " + cookies);
-                }
-            }
-            // */
         }
     }
 }

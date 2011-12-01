@@ -7,10 +7,8 @@ import java.util.regex.*;
 import java.net.*;
 import java.security.*;
 
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
-import com.bluecast.xml.*;
-
+import org.jsoup.*;
+import org.jsoup.nodes.*;
 import org.json.*;
 
 import anonscanlations.downloader.*;
@@ -191,24 +189,12 @@ public class NicoNicoAceChapter extends Chapter
                         page += line;
                 }
 
-                Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(page));
-                is.setEncoding("UTF-8");
-
-                parser.setContentHandler(new DefaultHandler()
+                Document d = Jsoup.parse(page);
+                for(Element elm : d.select("img"))
                 {
-                    @Override
-                    public void startElement(String uri, String localName, String qName, Attributes atts)
-                    {
-                        if(localName.equals("img") && atts.getValue("class") != null
-                                && atts.getValue("class").equals("img-screen"))
-                            images.add(atts.getValue("src"));
-                    }
-                });
-                // make it not get the dtd file
-                parser.setEntityResolver(new DefaultEntityResolver());
-
-                parser.parse(is);
+                    if(elm.hasAttr("class") && elm.attr("class").equals("img-screen"))
+                        images.add(elm.attr("src"));
+                }
             }
         };
 

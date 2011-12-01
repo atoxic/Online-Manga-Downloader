@@ -2,8 +2,9 @@ package anonscanlations.downloader.chapter;
 
 import java.io.*;
 import java.util.*;
-
 import java.net.*;
+
+import org.jsoup.nodes.*;
 import com.flagstone.transform.*;
 import com.flagstone.transform.image.*;
 
@@ -37,12 +38,8 @@ public class WebYoungJumpChapter extends Chapter
             public void run() throws Exception
             {
                 super.run();
-
-                String page = response.body();
-                int index = page.indexOf("ln=");
-                if(index == -1)
-                    throw new Exception("Parameters not found in page");
-                String str = page.substring(index, page.indexOf('"', index));
+                Document d = response.parse();
+                String str = JSoupUtils.elementAttr(d, "param[name=FlashVars]", "value");
                 HashMap<String, String> params = 
                         DownloaderUtils.getQueryMapFromQueryString(str);
                 numPages = Integer.parseInt(params.get("ln"));
@@ -54,23 +51,18 @@ public class WebYoungJumpChapter extends Chapter
             @Override
             public void run() throws Exception
             {
-                title = WebYoungJumpChapter.this.url.toString();
-                if(titleURL == null)
-                    return;
-                
-                url = new URL(titleURL);
-                super.run();
+                if(titleURL != null)
+                {
+                    url = new URL(titleURL);
+                    super.run();
 
-                String page = response.body();
-                int index = page.indexOf("images/title.png");
-                if(index == -1)
-                    return;
-                index = page.indexOf("alt=\"", index);
-                if(index == -1)
-                    return;
-                index += 5;
-                
-                title = page.substring(index, page.indexOf('"', index));
+                    Document d = response.parse();
+                    title = JSoupUtils.elementAttr(d, "img[src=images/title.png]", "alt");
+                    if(title == null)
+                        title = JSoupUtils.elementText(d, "title");
+                }
+                if(title == null)
+                    title = WebYoungJumpChapter.this.url.toString();
                 
                 DownloaderUtils.debug("title: " + title);
             }

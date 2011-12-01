@@ -94,9 +94,17 @@ public class YahooBookstoreDownloadJob extends JSoupDownloadJob
         memoryStream.close();
         byte[] decrypted = memoryStream.toByteArray();
 
+        temp = new FileOutputStream(new File(file.toString() + ".2"));
+        temp.write(decrypted);
+        temp.close();
+
         int i5 = decrypted[decrypted.length - 1] & 0xff;
         byte[] decrypted2 = new byte[decrypted.length - i5];
         System.arraycopy(decrypted, 0, decrypted2, 0, decrypted2.length);
+
+        temp = new FileOutputStream(new File(file.toString() + ".3"));
+        temp.write(decrypted2);
+        temp.close();
 
         OutputStream fos = new InflaterOutputStream(new FileOutputStream(file),
                                                 new Inflater(true));
