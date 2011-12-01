@@ -75,7 +75,7 @@ public class CrochetTimeChapter extends Chapter
                 DownloaderUtils.debug("path: " + path);
             }
         };
-        JSoupDownloadJob getList = new JSoupDownloadJob("Get the file list", null)
+        ByteArrayDownloadJob getList = new ByteArrayDownloadJob("Get the file list", null)
         {
             @Override
             public void run() throws Exception
@@ -86,7 +86,6 @@ public class CrochetTimeChapter extends Chapter
                 
                 super.run();
 
-                byte[] bytes = response.bodyAsBytes();
                 list = CrochetTimeDecrypt.fileList(bytes);
                 if(list.isEmpty())
                     throw new Exception("No file list");
@@ -111,15 +110,14 @@ public class CrochetTimeChapter extends Chapter
             if(f.exists())
                 continue;
 
-            JSoupDownloadJob page = new JSoupDownloadJob("Page " + i,
+            ByteArrayDownloadJob page = new ByteArrayDownloadJob("Page " + i,
                                         new URL(dbmd + CrochetTimeDecrypt.scrambleURL(filepath + list.get(i))))
             {
                 @Override
                 public void run() throws Exception
                 {
                     super.run();
-
-                    byte[] bytes = response.bodyAsBytes();
+                    
                     CrochetTimeDecrypt.decrypt(bytes);
                     
                     BufferedInputStream input = new BufferedInputStream(new InflaterInputStream(new ByteArrayInputStream(bytes)));

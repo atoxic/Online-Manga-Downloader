@@ -91,7 +91,7 @@ public class MangaOnWebChapter extends Chapter
             if(f.exists())
                 continue;
             // rid is just a random number from 0-9999
-            JSoupDownloadJob page = new JSoupDownloadJob("Page " + i,
+            ByteArrayDownloadJob page = new ByteArrayDownloadJob("Page " + i,
                                             new URL("http://mangaonweb.com/page.do?cdn=" + cdn
                                                     + "&cpn=" + paths.get(i) + "&crcod=" + crcod
                                                     + "&rid=" + (int)(Math.random() * 10000)))
@@ -100,8 +100,7 @@ public class MangaOnWebChapter extends Chapter
                 public void run() throws Exception
                 {
                     super.run();
-                    
-                    byte[] bytes = response.bodyAsBytes();
+
                     bfkey.decrypt(bytes, 0);
                     DownloaderUtils.safeWrite(bytes, f);
                 }

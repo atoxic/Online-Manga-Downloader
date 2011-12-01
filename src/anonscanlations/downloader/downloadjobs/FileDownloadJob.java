@@ -9,7 +9,7 @@ import anonscanlations.downloader.*;
  *
  * @author /a/non <anonymousscanlations@gmail.com>
  */
-public class FileDownloadJob extends JSoupDownloadJob
+public class FileDownloadJob extends ByteArrayDownloadJob
 {
     protected File file;
     public FileDownloadJob(String _description, URL _url, File _file)
@@ -22,7 +22,7 @@ public class FileDownloadJob extends JSoupDownloadJob
     {
         super.run();
 
-        DownloaderUtils.safeWrite(response.bodyAsBytes(), file);
+        DownloaderUtils.safeWrite(bytes, file);
     }
 }
 

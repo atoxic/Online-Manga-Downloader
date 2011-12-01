@@ -1,8 +1,11 @@
 package anonscanlations.downloader.downloadjobs;
 
 import java.io.*;
+import java.math.*;
 import java.net.*;
+import java.util.*;
 import java.util.zip.*;
+import java.security.*;
 import javax.crypto.*;
 import javax.crypto.spec.*;
 
@@ -12,7 +15,7 @@ import anonscanlations.downloader.*;
  *
  * @author /a/non <anonymousscanlations@gmail.com>
  */
-public class YahooBookstoreDownloadJob extends JSoupDownloadJob
+public class YahooBookstoreDownloadJob extends ByteArrayDownloadJob
 {
     //final byte[] publicIV = Base64.decode("8nrcUKAHo7latHeMq3k/Bg==");
     //final byte[] publicKey = Base64.decode("9iA9KscKT7bdRHNDeblXqA==");
@@ -39,9 +42,14 @@ public class YahooBookstoreDownloadJob extends JSoupDownloadJob
     public void run() throws Exception
     {
         super.run();
-        byte[] bytes = response.bodyAsBytes();
 
-        //DownloaderUtils.safeWrite(bytes, new File(file.toString() + ".1"));
+        if(response.hasHeader("x-oct-md5"))
+        {
+            byte[] hash = MessageDigest.getInstance("MD5").digest(bytes);
+            String hashString = (new BigInteger(1, hash)).toString(16);
+            if(!hashString.equals(response.header("x-oct-md5")))
+                throw new Exception("Download error; hash doesn't match");
+        }
 
         SecretKeySpec k = new SecretKeySpec(publicKey, "AES");
         int i1 = 0;
@@ -91,13 +99,9 @@ public class YahooBookstoreDownloadJob extends JSoupDownloadJob
         memoryStream.close();
         byte[] decrypted = memoryStream.toByteArray();
 
-        //DownloaderUtils.safeWrite(decrypted, new File(file.toString() + ".2"));
-
         int i5 = decrypted[decrypted.length - 1] & 0xff;
         byte[] decrypted2 = new byte[decrypted.length - i5];
         System.arraycopy(decrypted, 0, decrypted2, 0, decrypted2.length);
-
-        //DownloaderUtils.safeWrite(decrypted2, new File(file.toString() + ".3"));
         
         OutputStream fos = null;
         try

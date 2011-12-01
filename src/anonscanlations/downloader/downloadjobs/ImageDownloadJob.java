@@ -9,7 +9,7 @@ import javax.imageio.*;
  *
  * @author /a/non <anonymousscanlations@gmail.com>
  */
-public class ImageDownloadJob extends JSoupDownloadJob
+public class ImageDownloadJob extends ByteArrayDownloadJob
 {
     protected BufferedImage image;
     public ImageDownloadJob(String _description, URL _url)
@@ -30,7 +30,7 @@ public class ImageDownloadJob extends JSoupDownloadJob
         ByteArrayInputStream bais = null;
         try
         {
-            bais = new ByteArrayInputStream(response.bodyAsBytes());
+            bais = new ByteArrayInputStream(bytes);
             image = ImageIO.read(bais);
         }
         finally

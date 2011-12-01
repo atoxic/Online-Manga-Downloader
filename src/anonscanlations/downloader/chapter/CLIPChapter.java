@@ -226,8 +226,8 @@ public class CLIPChapter extends Chapter
             if(f.exists())
                 continue;
 
-            JSoupDownloadJob pageJob =
-                new JSoupDownloadJob("Page " + page,
+            ByteArrayDownloadJob pageJob =
+                new ByteArrayDownloadJob("Page " + page,
                     new URL("http://release-stg.clip-studio.com/api/getExpandedImageFile?" +
                         "password=&hostname=&content%5Fid=" + params.get("content_id") + 
                         "&path=/" + params.get("service_id") + "/" 
@@ -240,7 +240,7 @@ public class CLIPChapter extends Chapter
                 public void run() throws Exception
                 {
                     super.run();
-                    byte[] dec = CLIPDecrypt.decodeBinary(response.bodyAsBytes(), decodeKey);
+                    byte[] dec = CLIPDecrypt.decodeBinary(bytes, decodeKey);
                     DownloaderUtils.safeWrite(dec, f);
                 }
             };

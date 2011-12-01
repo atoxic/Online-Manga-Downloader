@@ -167,14 +167,13 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
                 i++;
                 continue;
             }
-            JSoupDownloadJob page = new JSoupDownloadJob("Page " + i, new URL("http://eco.nicoseiga.jp/comic/" + image))
+            ByteArrayDownloadJob page = new ByteArrayDownloadJob("Page " + i, new URL("http://eco.nicoseiga.jp/comic/" + image))
             {
                 @Override
                 public void run() throws Exception
                 {
                     super.run();
 
-                    byte[] bytes = response.bodyAsBytes();
                     decrypt(bytes);
                     DownloaderUtils.safeWrite(bytes, f);
                 }
