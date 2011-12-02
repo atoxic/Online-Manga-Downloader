@@ -22,6 +22,7 @@ import anonscanlations.downloader.downloadjobs.*;
 public class NicoNicoAceChapter extends Chapter
 {
     public static final Pattern IDMATCH = Pattern.compile("bk([0-9]+)$");
+    private static final int RENEW_TIME = 3300000;
 
     private URL url;
 
@@ -115,34 +116,7 @@ public class NicoNicoAceChapter extends Chapter
             }
         };
 
-        JSONDownloadJob bookDownload = new JSONDownloadJob("Get book download info",
-                                            new URL("http://bkapi.seiga.nicovideo.jp/book/" + bookid + "/download"))
-        {
-            @Override
-            public void run() throws Exception
-            {
-                try
-                {
-                    super.run();
-                }
-                catch(IOException e)
-                {
-                    if(e.getMessage().startsWith("401"))
-                        throw new IOException("Your NicoNico account isn't registered to view BookWalker chapters");
-                    throw e;
-                }
-
-                dl_key = obj.getString("dl_key");
-                dl_key_time = System.currentTimeMillis();
-                maki_address = obj.getString("maki_address");
-                is_trial = obj.getBoolean("is_trial");
-                use_drm = obj.getBoolean("use_drm");
-                DownloaderUtils.debug("dl_key: " + dl_key);
-                DownloaderUtils.debug("maki_address: " + maki_address);
-                DownloaderUtils.debug("is_trial: " + is_trial);
-                DownloaderUtils.debug("use_drm: " + use_drm);
-            }
-        };
+        BookInfoDownloadJob bookDownload = new BookInfoDownloadJob();
 
         JSONDownloadJob lastRead = new JSONDownloadJob("Get last read",
                                             new URL("http://bkapi.seiga.nicovideo.jp/user/last_read?book_id=" + bookid));
@@ -154,16 +128,9 @@ public class NicoNicoAceChapter extends Chapter
             @Override
             public void run() throws Exception
             {
+                setupDJ(this);
                 addPOSTData("streaming", "init");
-                addPOSTData("trial", is_trial ? "true" : "false");
-                addPOSTData("bookid", bookid);
-                addPOSTData("userid", userid);
                 url = new URL(maki_address);
-
-                addRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
-                addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                addRequestProperty("x-nicobook-dl-key", dl_key);
-                
                 super.run();
             }
 
@@ -172,7 +139,7 @@ public class NicoNicoAceChapter extends Chapter
                 if(use_drm)
                 {
                     byte[] array = DownloaderUtils.readAllBytes(byte_input);
-                    key = createKey(array);
+                    key = NicoNicoAceDecrypt.createKey(array, userid.getBytes("UTF-8"), bookid.getBytes("UTF-8"));
                 }
             }
 
@@ -181,25 +148,12 @@ public class NicoNicoAceChapter extends Chapter
                 if(!e.getName().endsWith(".xhtml"))
                     return;
 
-                String page;
-
-                if(use_drm)
-                {
-                    byte[] array = DownloaderUtils.readAllBytes(input);
-                    ARC4 arc4 = new ARC4(key);
-                    page = new String(arc4.arc4Crypt(array));
-                }
-                else
-                {
-                    page = DownloaderUtils.readAllLines(input, "UTF-8");
-                }
-
+                String page = use_drm ? new String(NicoNicoAceDecrypt.decrypt(DownloaderUtils.readAllBytes(input), key))
+                                    : DownloaderUtils.readAllLines(input, "UTF-8");
                 Document d = Jsoup.parse(page);
                 for(Element elm : d.select("img"))
-                {
                     if(elm.hasAttr("class") && elm.attr("class").equals("img-screen"))
                         images.add(elm.attr("src"));
-                }
             }
         };
 
@@ -217,29 +171,32 @@ public class NicoNicoAceChapter extends Chapter
     {
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         URL maki = new URL(maki_address);
-        
-        final JSONDownloadJob renewKey = new JSONDownloadJob("Renew key",
-                                            new URL("http://bkapi.seiga.nicovideo.jp/book/" + bookid + "/download"))
+
+        final NicoNicoLoginDownloadJob renewLogin = new NicoNicoLoginDownloadJob(username, password)
         {
+            {
+                description = "Renew login";
+            }
             @Override
             public void run() throws Exception
             {
-                if(System.currentTimeMillis() - dl_key_time >= 3300000)
+                if(System.currentTimeMillis() - dl_key_time >= RENEW_TIME)
                 {
-                    try
-                    {
-                        super.run();
-                    }
-                    catch(IOException e)
-                    {
-                        if(e.getMessage().startsWith("401"))
-                            throw new IOException("Your NicoNico account isn't registered to view BookWalker chapters");
-                        throw e;
-                    }
-
-                    dl_key = obj.getString("dl_key");
-                    dl_key_time = System.currentTimeMillis();
-                    DownloaderUtils.debug("dl_key: " + dl_key);
+                    super.run();
+                }
+            }
+        };
+        final BookInfoDownloadJob renewKey = new BookInfoDownloadJob()
+        {
+            {
+                description = "Renew download key";
+            }
+            @Override
+            public void run() throws Exception
+            {
+                if(System.currentTimeMillis() - dl_key_time >= RENEW_TIME)
+                {
+                    super.run();
                 }
             }
         };
@@ -266,7 +223,7 @@ public class NicoNicoAceChapter extends Chapter
                     if(use_drm)
                     {
                         byte[] array = DownloaderUtils.readAllBytes(byte_input);
-                        key = createKey(array);
+                        key = NicoNicoAceDecrypt.createKey(array, userid.getBytes("UTF-8"), bookid.getBytes("UTF-8"));
                     }
                 }
 
@@ -277,30 +234,28 @@ public class NicoNicoAceChapter extends Chapter
                     read = true;
 
                     byte[] array = DownloaderUtils.readAllBytes(input);
-                    if(use_drm)
-                    {
-                        ARC4 arc4 = new ARC4(key);
-                        DownloaderUtils.safeWrite(arc4.arc4Crypt(array), f);
-                    }
-                    else
-                    {
-                        DownloaderUtils.safeWrite(array, f);
-                    }
+                    DownloaderUtils.safeWrite(use_drm ? NicoNicoAceDecrypt.decrypt(array, key) : array, f);
                 }
             };
+            setupDJ(file);
             file.addPOSTData("streaming", "resources");
-            file.addPOSTData("trial", is_trial ? "true" : "false");
-            file.addPOSTData("bookid", bookid);
-            file.addPOSTData("userid", userid);
             file.addPOSTData("resources", "contents/" + images.get(i));
-            file.addRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
-            file.addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            file.addRequestProperty("x-nicobook-dl-key", dl_key);
+            list.add(renewLogin);
             list.add(renewKey);
             list.add(file);
         }
 
         return(list);
+    }
+
+    private void setupDJ(DownloadJob dj)
+    {
+        dj.addPOSTData("trial", is_trial ? "true" : "false");
+        dj.addPOSTData("bookid", bookid);
+        dj.addPOSTData("userid", userid);
+        dj.addRequestProperty("Referer", "http://seiga.nicovideo.jp/book/static/swf/nicobookplayer.swf?1.0.5");
+        dj.addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        dj.addRequestProperty("x-nicobook-dl-key", dl_key);
     }
 
     private class JSONDownloadJob extends JSoupDownloadJob
@@ -317,50 +272,42 @@ public class NicoNicoAceChapter extends Chapter
         {
             url = new URL(url.toString() + "?" + System.currentTimeMillis());
             setCookies(login.getCookies());
-
             super.run();
-
             obj = new JSONObject(response.body());
         }
     }
 
-    private static final int FIXED_LOCAL_FILE_HEADER_LENGTH = 30,
-                            FILENAME_LENGTH_POSITION = 26,
-                            EXTRAFIELD_LENGTH_POSITION = 28;
-    private static final String SEED = "ojtDYr93p-h-9yt-ghOUG08fwigap1u0fnV";
-
-    private byte[] createKey(byte[] array) throws Exception
+    private class BookInfoDownloadJob extends JSONDownloadJob
     {
-        int start = ((int)array[FILENAME_LENGTH_POSITION + 1] << 8) +
-                            (int)array[FILENAME_LENGTH_POSITION];
+        public BookInfoDownloadJob()
+        {
+            super("Get book download info", null);
+        }
 
-        int length = ((int)array[EXTRAFIELD_LENGTH_POSITION + 1] << 8) +
-                        (int)array[EXTRAFIELD_LENGTH_POSITION];
+        @Override
+        public void run() throws Exception
+        {
+            url = new URL("http://bkapi.seiga.nicovideo.jp/book/" + bookid + "/download");
+            try
+            {
+                super.run();
+            }
+            catch(IOException e)
+            {
+                if(e.getMessage().startsWith("401"))
+                    throw new IOException("Your NicoNico account isn't registered to view BookWalker chapters");
+                throw e;
+            }
 
-        byte[] salt = new byte[length];
-        for(int i = 0; i < length; i++)
-            salt[i] = array[FIXED_LOCAL_FILE_HEADER_LENGTH + start + i];
-
-        int _loc_5 = salt[0] & 0xff;
-        int userIdIndex = (_loc_5 & 192) >> 6;
-        int identifierBookIdIndex = (_loc_5 & 48) >> 4;
-        int seedIndex = (_loc_5 & 12) >> 2;
-        int saltIndex = _loc_5 & 3;
-
-        byte[][] _loc_4 = new byte[4][];
-        _loc_4[userIdIndex] = userid.getBytes("UTF-8");
-        _loc_4[identifierBookIdIndex] = bookid.getBytes("UTF-8");
-        _loc_4[seedIndex] = SEED.getBytes("UTF-8");
-        _loc_4[saltIndex] = salt;
-
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        for(byte[] ba : _loc_4)
-            bos.write(ba);
-        byte[] bytes = bos.toByteArray();
-        bos.close();
-
-        return(MessageDigest.getInstance("MD5").digest(bytes));
+            dl_key = obj.getString("dl_key");
+            dl_key_time = System.currentTimeMillis();
+            maki_address = obj.getString("maki_address");
+            is_trial = obj.getBoolean("is_trial");
+            use_drm = obj.getBoolean("use_drm");
+            DownloaderUtils.debug("dl_key: " + dl_key);
+            DownloaderUtils.debug("maki_address: " + maki_address);
+            DownloaderUtils.debug("is_trial: " + is_trial);
+            DownloaderUtils.debug("use_drm: " + use_drm);
+        }
     }
-
-    
 }
