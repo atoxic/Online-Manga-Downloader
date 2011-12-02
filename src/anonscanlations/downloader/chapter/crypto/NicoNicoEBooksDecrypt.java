@@ -1,15 +1,14 @@
-package anonscanlations.downloader.chapter;
+package anonscanlations.downloader.chapter.crypto;
 
 import java.io.*;
 import java.security.*;
 
 import anonscanlations.downloader.extern.*;
 
-/**
- *
+/** Decryption functions for NicoNico E-Books
  * @author /a/non <anonymousscanlations@gmail.com>
  */
-public class NicoNicoAceDecrypt
+public class NicoNicoEBooksDecrypt
 {
     private static final int FIXED_LOCAL_FILE_HEADER_LENGTH = 30,
                             FILENAME_LENGTH_POSITION = 26,

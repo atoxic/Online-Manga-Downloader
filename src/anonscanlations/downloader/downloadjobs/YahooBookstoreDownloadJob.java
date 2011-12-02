@@ -3,7 +3,6 @@ package anonscanlations.downloader.downloadjobs;
 import java.io.*;
 import java.math.*;
 import java.net.*;
-import java.util.*;
 import java.util.zip.*;
 import java.security.*;
 import javax.crypto.*;

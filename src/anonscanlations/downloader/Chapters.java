@@ -12,7 +12,7 @@ public enum Chapters
     FLIPPER3("Flipper3"),
     MANGAONWEB("Manga On Web"),
     NICONICOACE("NicoNico E-Books"),
-    NICONICO2("NicoNico Official"),
+    NICONICO2("NicoNico Event"),
     NICONICO("NicoNico User-published"),
     PCVIEWER("PCViewer/DOR"),
     PLUGINFREE("PluginFree"),

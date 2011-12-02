@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 
 import anonscanlations.downloader.*;
-import anonscanlations.downloader.chapter.*;
+import anonscanlations.downloader.chapter.crypto.*;
 
 /**
  *

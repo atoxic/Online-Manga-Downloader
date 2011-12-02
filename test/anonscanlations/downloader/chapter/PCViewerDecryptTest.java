@@ -1,5 +1,6 @@
 package anonscanlations.downloader.chapter;
 
+import anonscanlations.downloader.chapter.crypto.PCViewerDecrypt;
 import java.util.*;
 import org.junit.Test;
 import static org.junit.Assert.*;

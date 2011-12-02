@@ -1,4 +1,4 @@
-package anonscanlations.downloader.chapter;
+package anonscanlations.downloader.chapter.crypto;
 
 /**
  *

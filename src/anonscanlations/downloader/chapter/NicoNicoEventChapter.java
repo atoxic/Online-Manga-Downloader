@@ -7,21 +7,23 @@ import java.net.*;
 import org.jsoup.nodes.*;
 
 import anonscanlations.downloader.*;
+import anonscanlations.downloader.chapter.crypto.*;
 import anonscanlations.downloader.downloadjobs.*;
 
 /**
  * Special free stuff on Nico like http://seiga.nicovideo.jp/nanoace/watch/5001
  * as opposed to original, user-drawn stuff
+ * Update (0.1.6+): Since Nico seems to have abandoned this viewer, it is now renamed "NicoNico Event"
  * @author /a/non <anonymousscanlations@gmail.com>
  */
-public class NicoNicoChapter2 extends Chapter implements Serializable
+public class NicoNicoEventChapter extends Chapter implements Serializable
 {
     protected URL url;
     protected String title, themeID;
     protected TreeSet<String> images;
 
-    protected NicoNicoChapter2(){}
-    public NicoNicoChapter2(URL _url)
+    protected NicoNicoEventChapter(){}
+    public NicoNicoEventChapter(URL _url)
     {
         url = _url;
         title = themeID = null;
@@ -62,47 +64,6 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
 
                 Document d = response.parse();
                 title = JSoupUtils.elementText(d, "title");
-                /*
-                Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(response.body()));
-                is.setEncoding("UTF-8");
-
-                parser.setContentHandler(new DefaultHandler()
-                {
-                    private boolean inTitleTag = false;
-
-                    @Override
-                    public void characters(char[] ch, int start, int length)
-                    {
-                        if(inTitleTag)
-                            title = new String(ch, start, length);
-                    }
-
-                    @Override
-                    public void startElement(String uri, String localName, String qName, Attributes atts)
-                    {
-                        if(localName.equals("title"))
-                            inTitleTag = true;
-                    }
-                    @Override
-                    public void endElement(String uri, String localName, String qName) throws SAXException
-                    {
-                        if(localName.equals("title"))
-                            throw DownloaderUtils.DONE;
-                    }
-                });
-
-                parser.setEntityResolver(new DefaultEntityResolver());
-                try
-                {
-                    parser.parse(is);
-                }
-                catch(SAXException e)
-                {
-                    if(!e.equals(DownloaderUtils.DONE))
-                        throw e;
-                }
-                // */
             }
         };
 
@@ -127,32 +88,6 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
         return(list);
     }
 
-    public static void decrypt(byte[] bytes) throws Exception
-    {
-        java.security.MessageDigest md5 = java.security.MessageDigest.getInstance("MD5");
-        long _loc_4 = 0;
-        md5.reset();
-        md5.update(("" + bytes.length).getBytes());
-        String _loc_2 = "";
-        for(byte b : md5.digest())
-        {
-            _loc_2 += String.format("%02x", b);
-        }
-        ArrayList<Integer> _loc_3 = new ArrayList<Integer>();
-        while(_loc_4 < 8)
-        {
-            _loc_3.add(Integer.parseInt(_loc_2.substring((int)(_loc_4 * 2), (int)(_loc_4 * 2) + 2), 16));
-            _loc_4 = _loc_4 + 1;
-        }
-        int _loc_5 = _loc_3.size();
-        _loc_4 = 0;
-        while(_loc_4 < bytes.length)
-        {
-            bytes[(int)_loc_4] = (byte)(bytes[(int)_loc_4] ^ _loc_3.get((int)(_loc_4 % _loc_5)));
-            _loc_4 = _loc_4 + 1;
-        }
-    }
-
     @Override
     public ArrayList<DownloadJob> download(File directory) throws Exception
     {
@@ -174,7 +109,7 @@ public class NicoNicoChapter2 extends Chapter implements Serializable
                 {
                     super.run();
 
-                    decrypt(bytes);
+                    NicoNicoEventDecrypt.decrypt(bytes);
                     DownloaderUtils.safeWrite(bytes, f);
                 }
             };

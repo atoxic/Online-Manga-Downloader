@@ -5,21 +5,19 @@ import java.util.*;
 import java.util.zip.*;
 import java.util.regex.*;
 import java.net.*;
-import java.security.*;
 
 import org.jsoup.*;
 import org.jsoup.nodes.*;
 import org.json.*;
 
 import anonscanlations.downloader.*;
-import anonscanlations.downloader.extern.*;
 import anonscanlations.downloader.downloadjobs.*;
+import anonscanlations.downloader.chapter.crypto.*;
 
-/**
- *
+/** Downloader for NicoNico E-Books, such as NicoNico Ace
  * @author /a/non <anonymousscanlations@gmail.com>
  */
-public class NicoNicoAceChapter extends Chapter
+public class NicoNicoEBooksChapter extends Chapter
 {
     public static final Pattern IDMATCH = Pattern.compile("bk([0-9]+)$");
     private static final int RENEW_TIME = 3300000;
@@ -33,11 +31,11 @@ public class NicoNicoAceChapter extends Chapter
     private transient boolean is_trial, use_drm;
     private transient long dl_key_time;
 
-    public NicoNicoAceChapter(URL _url)
+    public NicoNicoEBooksChapter(URL _url)
     {
         this(_url, null, null);
     }
-    public NicoNicoAceChapter(URL _url, String _username, char[] _password)
+    public NicoNicoEBooksChapter(URL _url, String _username, char[] _password)
     {
         url = _url;
         username = _username;
@@ -139,7 +137,7 @@ public class NicoNicoAceChapter extends Chapter
                 if(use_drm)
                 {
                     byte[] array = DownloaderUtils.readAllBytes(byte_input);
-                    key = NicoNicoAceDecrypt.createKey(array, userid.getBytes("UTF-8"), bookid.getBytes("UTF-8"));
+                    key = NicoNicoEBooksDecrypt.createKey(array, userid.getBytes("UTF-8"), bookid.getBytes("UTF-8"));
                 }
             }
 
@@ -148,7 +146,7 @@ public class NicoNicoAceChapter extends Chapter
                 if(!e.getName().endsWith(".xhtml"))
                     return;
 
-                String page = use_drm ? new String(NicoNicoAceDecrypt.decrypt(DownloaderUtils.readAllBytes(input), key))
+                String page = use_drm ? new String(NicoNicoEBooksDecrypt.decrypt(DownloaderUtils.readAllBytes(input), key))
                                     : DownloaderUtils.readAllLines(input, "UTF-8");
                 Document d = Jsoup.parse(page);
                 for(Element elm : d.select("img"))
@@ -223,7 +221,7 @@ public class NicoNicoAceChapter extends Chapter
                     if(use_drm)
                     {
                         byte[] array = DownloaderUtils.readAllBytes(byte_input);
-                        key = NicoNicoAceDecrypt.createKey(array, userid.getBytes("UTF-8"), bookid.getBytes("UTF-8"));
+                        key = NicoNicoEBooksDecrypt.createKey(array, userid.getBytes("UTF-8"), bookid.getBytes("UTF-8"));
                     }
                 }
 
@@ -234,7 +232,7 @@ public class NicoNicoAceChapter extends Chapter
                     read = true;
 
                     byte[] array = DownloaderUtils.readAllBytes(input);
-                    DownloaderUtils.safeWrite(use_drm ? NicoNicoAceDecrypt.decrypt(array, key) : array, f);
+                    DownloaderUtils.safeWrite(use_drm ? NicoNicoEBooksDecrypt.decrypt(array, key) : array, f);
                 }
             };
             setupDJ(file);

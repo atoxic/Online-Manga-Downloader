@@ -12,6 +12,7 @@ import java.net.*;
 
 import anonscanlations.downloader.*;
 import anonscanlations.downloader.downloadjobs.*;
+import anonscanlations.downloader.chapter.crypto.*;
 
 /**
  *

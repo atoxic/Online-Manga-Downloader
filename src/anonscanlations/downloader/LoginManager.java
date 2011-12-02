@@ -46,7 +46,7 @@ public class LoginManager
     {
         // Trying Nico; need login (only once)
         if((chapter instanceof NicoNicoChapter
-            || chapter instanceof NicoNicoAceChapter)
+            || chapter instanceof NicoNicoEBooksChapter)
             && !showed(NICO_KEY))
         {
             checked.put(NICO_KEY, true);

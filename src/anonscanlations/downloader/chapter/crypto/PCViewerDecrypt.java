@@ -2,7 +2,7 @@
  * Coded by /a/non, for /a/non
  */
 
-package anonscanlations.downloader.chapter;
+package anonscanlations.downloader.chapter.crypto;
 
 import java.io.*;
 

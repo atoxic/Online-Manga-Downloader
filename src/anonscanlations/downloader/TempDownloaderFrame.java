@@ -1533,7 +1533,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 case PCVIEWER:          chapter = new PCViewerChapter(viewerURL);           break;
                 case PLUGINFREE:        chapter = new PluginFreeChapter(viewerURL);         break;
                 case POCO:              chapter = new PocoChapter(viewerURL);               break;
-                case NICONICO2:         chapter = new NicoNicoChapter2(viewerURL);          break;
+                case NICONICO2:         chapter = new NicoNicoEventChapter(viewerURL);          break;
                 case WEBYOUNGJUMP:      chapter = new WebYoungJumpChapter(viewerURL);       break;
                 case YAHOOBOOKSTORE:    chapter = new YahooBookstoreChapter(viewerURL);     break;
                 case CLUBSUNDAY:
@@ -1563,7 +1563,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 }
                 case NICONICOACE:
                 {
-                    chapter = new NicoNicoAceChapter(viewerURL, nicoNicoAceEMail.getText(),nicoNicoAcePassword.getPassword());
+                    chapter = new NicoNicoEBooksChapter(viewerURL, nicoNicoAceEMail.getText(),nicoNicoAcePassword.getPassword());
                     break;
                 }
             }
@@ -1584,9 +1584,9 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             chapters.add(new WebYoungJumpChapter(viewerURL));
             chapters.add(new MangaOnWebChapter(viewerURL));
             chapters.add(new PocoChapter(viewerURL));
-            chapters.add(new NicoNicoChapter2(viewerURL));
+            chapters.add(new NicoNicoEventChapter(viewerURL));
             chapters.add(new SundayChapter(viewerURL));
-            chapters.add(new NicoNicoAceChapter(viewerURL));
+            chapters.add(new NicoNicoEBooksChapter(viewerURL));
             chapters.add(new NicoNicoChapter(viewerURL));
             chapters.add(new CLIPChapter(viewerURL));
 
