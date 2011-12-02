@@ -71,4 +71,8 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <target name="-post-jar">
+        <copy file="LICENSE.txt" todir="${dist.dir}" overwrite="true"/>
+        <copy file="README.txt" todir="${dist.dir}" overwrite="true"/>
+    </target>
 </project>
