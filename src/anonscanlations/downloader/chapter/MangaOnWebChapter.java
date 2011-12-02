@@ -102,6 +102,7 @@ public class MangaOnWebChapter extends Chapter
                 {
                     super.run();
 
+                    byte[] bytes = getBytes();
                     bfkey.decrypt(bytes, 0);
                     DownloaderUtils.safeWrite(bytes, f);
                 }

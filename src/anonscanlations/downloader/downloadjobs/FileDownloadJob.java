@@ -22,7 +22,7 @@ public class FileDownloadJob extends ByteArrayDownloadJob
     {
         super.run();
 
-        DownloaderUtils.safeWrite(bytes, file);
+        DownloaderUtils.safeWrite(getBytes(), file);
     }
 }
 

@@ -27,7 +27,7 @@ public abstract class EPubDownloadJob extends ByteArrayDownloadJob
         ByteArrayInputStream byte_input = null;
         try
         {
-            byte_input = new ByteArrayInputStream(bytes);
+            byte_input = new ByteArrayInputStream(getBytes());
             doByteInput(byte_input);
         }
         finally
@@ -39,7 +39,7 @@ public abstract class EPubDownloadJob extends ByteArrayDownloadJob
         ZipInputStream input = null;
         try
         {
-            input = new ZipInputStream(new ByteArrayInputStream(bytes));
+            input = new ZipInputStream(new ByteArrayInputStream(getBytes()));
             ZipEntry e;
             while((e = input.getNextEntry()) != null)
             {

@@ -109,6 +109,7 @@ public class NicoNicoEventChapter extends Chapter implements Serializable
                 {
                     super.run();
 
+                    byte[] bytes = getBytes();
                     NicoNicoEventDecrypt.decrypt(bytes);
                     DownloaderUtils.safeWrite(bytes, f);
                 }

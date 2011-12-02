@@ -87,7 +87,7 @@ public class CrochetTimeChapter extends Chapter
                 
                 super.run();
 
-                list = CrochetTimeDecrypt.fileList(bytes);
+                list = CrochetTimeDecrypt.fileList(getBytes());
                 if(list.isEmpty())
                     throw new Exception("No file list");
             }
@@ -118,7 +118,8 @@ public class CrochetTimeChapter extends Chapter
                 public void run() throws Exception
                 {
                     super.run();
-                    
+
+                    byte[] bytes = getBytes();
                     CrochetTimeDecrypt.decrypt(bytes);
                     
                     BufferedInputStream input = new BufferedInputStream(new InflaterInputStream(new ByteArrayInputStream(bytes)));

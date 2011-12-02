@@ -22,6 +22,7 @@ public class PCViewerDownloadJob extends ByteArrayDownloadJob
     public void run() throws Exception
     {
         super.run();
+        byte[] bytes = getBytes();
         PCViewerDecrypt.decrypt(bytes);
         DownloaderUtils.safeWrite(bytes, 8, bytes.length - 8, file);
     }

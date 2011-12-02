@@ -241,8 +241,7 @@ public class CLIPChapter extends Chapter
                 public void run() throws Exception
                 {
                     super.run();
-                    byte[] dec = CLIPDecrypt.decodeBinary(bytes, decodeKey);
-                    DownloaderUtils.safeWrite(dec, f);
+                    DownloaderUtils.safeWrite(CLIPDecrypt.decodeBinary(getBytes(), decodeKey), f);
                 }
             };
             list.add(pageJob);

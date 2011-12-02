@@ -103,7 +103,6 @@ public class CrochetTimeDecrypt
             i += 4;
             blockSize = bigEndianInt(bytes, i) - 8;
             i += 4;
-            DownloaderUtils.debug("blockSize: " + blockSize);
 
             if(blockType.equals("IMGI"))
             {

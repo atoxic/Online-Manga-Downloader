@@ -30,7 +30,7 @@ public class ImageDownloadJob extends ByteArrayDownloadJob
         ByteArrayInputStream bais = null;
         try
         {
-            bais = new ByteArrayInputStream(bytes);
+            bais = new ByteArrayInputStream(getBytes());
             image = ImageIO.read(bais);
         }
         finally

@@ -2,18 +2,25 @@ package anonscanlations.downloader.downloadjobs;
 
 import java.io.*;
 
-/** This BADJ keeps trying until it finishes downloading
+/** 
+ * Downloads to bytes.  Keeps retrying until it finishes downloading.
  * @author /a/non <anonymousscanlations@gmail.com>
  */
 public class ByteArrayDownloadJob extends JSoupDownloadJob
 {
+    /**
+     * Maximum number of retries.
+     */
     protected int maxRetries;
-    protected byte[] bytes;
+    /**
+     * Saved bytes.
+     */
+    private byte[] bytes;
     public ByteArrayDownloadJob(String _desc, java.net.URL _url)
     {
         super(_desc, _url);
         bytes = null;
-        maxRetries = 15;
+        maxRetries = 16;
     }
     @Override
     public void run() throws Exception
@@ -43,5 +50,10 @@ public class ByteArrayDownloadJob extends JSoupDownloadJob
                 baos.close();
         }
         bytes = baos.toByteArray();
+    }
+    @Override
+    public byte[] getBytes()
+    {
+        return(bytes);
     }
 }

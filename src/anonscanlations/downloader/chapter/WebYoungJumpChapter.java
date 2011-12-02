@@ -95,7 +95,7 @@ public class WebYoungJumpChapter extends Chapter
                     Movie m = null;
                     try
                     {
-                        bais = new ByteArrayInputStream(bytes);
+                        bais = new ByteArrayInputStream(getBytes());
                         m = new Movie();
                         m.decodeFromStream(bais);
                     }
@@ -105,13 +105,8 @@ public class WebYoungJumpChapter extends Chapter
                             bais.close();
                     }
                     for(MovieTag tag : m.getObjects())
-                    {
                         if(tag.getClass() == DefineJPEGImage.class)
-                        {
-                            byte[] bytes = ((DefineJPEGImage)tag).getImage();
-                            DownloaderUtils.safeWrite(bytes, f);
-                        }
-                    }
+                            DownloaderUtils.safeWrite(((DefineJPEGImage)tag).getImage(), f);
                 }
             });
         }

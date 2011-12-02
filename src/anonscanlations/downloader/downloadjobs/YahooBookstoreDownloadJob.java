@@ -42,12 +42,17 @@ public class YahooBookstoreDownloadJob extends ByteArrayDownloadJob
     {
         super.run();
 
+        byte[] bytes = getBytes();
         if(response.hasHeader("x-oct-md5"))
         {
             byte[] hash = MessageDigest.getInstance("MD5").digest(bytes);
             String hashString = (new BigInteger(1, hash)).toString(16);
+            if(hashString.length() % 2 == 1)
+                hashString = "0" + hashString;
             if(!hashString.equals(response.header("x-oct-md5")))
-                throw new Exception("Download error; hash doesn't match");
+            {
+                throw new Exception("Download error; hash doesn't match: " + response.header("x-oct-md5") + ", " + hashString);
+            }
         }
 
         SecretKeySpec k = new SecretKeySpec(publicKey, "AES");
@@ -105,7 +110,6 @@ public class YahooBookstoreDownloadJob extends ByteArrayDownloadJob
         OutputStream fos = null;
         try
         {
-            anonscanlations.downloader.DownloaderUtils.debug("length: " + decrypted2.length);
             fos = new InflaterOutputStream(new FileOutputStream(file),
                                                     new Inflater(true));
             fos.write(decrypted2);
