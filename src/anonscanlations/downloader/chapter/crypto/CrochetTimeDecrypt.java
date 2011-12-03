@@ -107,7 +107,8 @@ public class CrochetTimeDecrypt
             if(blockType.equals("IMGI"))
             {
                 int urlPart1 = 0, urlPart2 = 0, filenameSize = 0;
-
+                
+                // url part 2 = size of image
                 i += 0x2c;
                 urlPart2 = bigEndianInt(bytes, i);
                 i += 12;
@@ -120,7 +121,8 @@ public class CrochetTimeDecrypt
                 i += filenameSize;
 
                 String result = String.format("%s&D&%d&%d%08x", fname, urlPart1, urlPart2, (int)(32767 * Math.random()) + 0x4000);
-                ret.add(result);
+                if(urlPart2 != 0)
+                    ret.add(result);
 
                 // eat up a NUL
                 i++;
@@ -137,6 +139,7 @@ public class CrochetTimeDecrypt
 
     public static String scrambleURL(String src)
     {
+        //DownloaderUtils.debug("CrochetTimeDecrypt: scramble: " + src);
         char[] str = src.toCharArray();
 
         int strHash = 0, idx, strLen, p1, p2;

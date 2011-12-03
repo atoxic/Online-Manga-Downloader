@@ -7,6 +7,7 @@ package anonscanlations.downloader.chapter;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.*;
 import java.util.zip.*;
 import java.net.*;
 
@@ -20,16 +21,16 @@ import anonscanlations.downloader.chapter.crypto.*;
  */
 public class CrochetTimeChapter extends Chapter
 {
-    private String dbmd, basePath, suffix;
-
     private URL url;
-    private String path, filepath, getImage;
+    private String getImage, cgi, dir, src;
     private ArrayList<String> list;
+    private Map<String, String> cookies;
 
     public CrochetTimeChapter(URL _url)
     {
         url = _url;
         getImage = null;
+        cookies = new HashMap<String, String>();
     }
 
     public ArrayList<DownloadJob> init() throws Exception
@@ -44,58 +45,44 @@ public class CrochetTimeChapter extends Chapter
             {
                 super.run();
                 String page = response.body();
-                int index = page.indexOf("var book"), start = -1, end = -1;
-                // Voyager
-                if(index != -1)
-                {
-                    start = page.indexOf('\'', index) + 1;
-                    end = page.indexOf('_', start);
-                    path = page.substring(start, end);
-                    
-                    //dbmd = "http://shangrila.voyager-store.com/dBmd?";
-                    dbmd = "http://voyager-store.com/dBmd?";
-                    //basePath = "/home/dotbook/rs2_contents/voyager-store_contents/";
-                    basePath = "/var/www/vhosts/voyager-store.com/contents//";
-                    suffix = "_pc_image_crochet";
-                    filepath = basePath + path + "/";
-                    
-                    if(page.contains("openTTCrochetForImage"))
-                    {
-                        start = page.indexOf('"', page.indexOf("openTTCrochetForImage")) + 1;
-                        end = page.indexOf('"', start);
-                        getImage = page.substring(start, end);
-                        DownloaderUtils.debug("getImage: " + getImage);
-                    }
-                }
-                // Kondansha Bitway
-                else
-                {
-                    index = page.indexOf("BOOK=");
-                    if(index == -1)
-                        throw new Exception("Book path not found");
-
-                    start = page.indexOf('=', index) + 1;
-                    end = page.indexOf('.', start);
-                    path = page.substring(start, end);
-
-                    dbmd = "http://comic.bitway.ne.jp/kc/cgi-bin/dBmd.cgi?";
-                    basePath = "/opt/pccs/share2/cplus/t_files//";
-                    suffix = "";
-                    filepath = basePath;
-                }
-
-                DownloaderUtils.debug("path: " + path);
+                
+                if(!page.contains("openTTCrochet"))
+                    throw new Exception("Parameter unknown");
+                
+                int start = page.indexOf('"', page.indexOf("openTTCrochet")) + 1;
+                int end = page.indexOf('"', start);
+                getImage = page.substring(start, end);
+                DownloaderUtils.debug("getImage: " + getImage);
+                
+                cookies.putAll(response.cookies());
+                DownloaderUtils.debug("cookies: " + cookies);
             }
         };
-        JSoupDownloadJob getImageDJ = new JSoupDownloadJob("Get get_image_crochet", null)
+        JSoupDownloadJob getImageDJ = new JSoupDownloadJob("Get T-Time script", null)
         {
             @Override
             public void run() throws Exception
             {
                 if(getImage != null)
                 {
-                    url = new URL(getImage);
+                    setCookies(cookies);
+                    url = new URL(CrochetTimeChapter.this.url, getImage);
                     super.run();
+                    cookies.putAll(response.cookies());
+                    
+                    byte[] bytes = getBytes();
+                    byte[] decBytes = new byte[bytes.length - 4];
+                    System.arraycopy(bytes, 4, decBytes, 0, bytes.length - 4);
+                    CrochetTimeDecrypt.unscramble(decBytes);
+                    String script = new String(decBytes);
+                    DownloaderUtils.debug("script: " + script);
+                    
+                    cgi = getVariable(script, "cgi");
+                    dir = getVariable(script, "dir");
+                    src = getVariable(script, "src");
+                    DownloaderUtils.debug("cgi: " + cgi);
+                    DownloaderUtils.debug("dir: " + dir);
+                    DownloaderUtils.debug("src: " + src);
                 }
             }
         };
@@ -104,10 +91,12 @@ public class CrochetTimeChapter extends Chapter
             @Override
             public void run() throws Exception
             {
-                String filelistURL = CrochetTimeDecrypt.scrambleURL(filepath + path + suffix +
-                                        ".book.bmit&B" + String.format("%08x", (int)(32767 * Math.random())));
-                url = new URL(dbmd + filelistURL);
+                setCookies(cookies);
+                String filelistURL = CrochetTimeDecrypt.scrambleURL(dir + "/" + src 
+                                        + "&B" + String.format("%08x", (int)(32767 * Math.random())));
+                url = new URL(cgi + "?" + filelistURL);
                 super.run();
+                cookies.putAll(response.cookies());
 
                 list = CrochetTimeDecrypt.fileList(getBytes());
                 if(list.isEmpty())
@@ -119,28 +108,34 @@ public class CrochetTimeChapter extends Chapter
         ret.add(getList);
         return(ret);
     }
+    
+    private static String getVariable(String script, String var)
+    {
+        Pattern varMatch = Pattern.compile(var + "\\s*=\\s*\"([^\"]+)\"");
+        Matcher matcher = varMatch.matcher(script);
+        while(matcher.find())
+            return(matcher.group(1));
+        return(null);
+    }
 
     public ArrayList<DownloadJob> download(File directory) throws Exception
     {
         ArrayList<DownloadJob> jobsList = new ArrayList<DownloadJob>();
-
-        // for the file list and downloaded files
-        final File finalDirectory = directory;
-
         for(int i = 0; i < list.size(); i++)
         {
-            final int finalIndex = i;
-            final File f = DownloaderUtils.fileName(finalDirectory, path, finalIndex, "jpg");
+            final File f = DownloaderUtils.fileName(directory, src.split("[.]")[0], i, "jpg");
             if(f.exists())
                 continue;
 
             ByteArrayDownloadJob page = new ByteArrayDownloadJob("Page " + i,
-                                        new URL(dbmd + CrochetTimeDecrypt.scrambleURL(filepath + list.get(i))))
+                                        new URL(cgi + "?" + CrochetTimeDecrypt.scrambleURL(dir + "/" + list.get(i))))
             {
                 @Override
                 public void run() throws Exception
                 {
+                    setCookies(cookies);
                     super.run();
+                    cookies.putAll(response.cookies());
 
                     byte[] bytes = getBytes();
                     CrochetTimeDecrypt.decrypt(bytes);
