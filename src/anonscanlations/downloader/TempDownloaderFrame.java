@@ -193,7 +193,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jEditorPane11 = new javax.swing.JEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Online Manga Downloader 0.1.6");
+        setTitle("Online Manga Downloader 0.1.6.1 Test");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
