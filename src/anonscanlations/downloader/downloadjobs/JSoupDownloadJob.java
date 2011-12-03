@@ -20,7 +20,7 @@ public class JSoupDownloadJob extends DownloadJob
     protected URL url;
     protected Connection conn;
     protected Connection.Response response;
-    protected Map<String, String> cookies;
+    private Map<String, String> cookies;
 
     public JSoupDownloadJob(String _desc, URL _url)
     {
@@ -31,6 +31,7 @@ public class JSoupDownloadJob extends DownloadJob
 
     protected void init() throws Exception
     {
+        DownloaderUtils.debug("JSoupDJ (" + getClass() + "): Init");
         init = true;
         conn = Jsoup.connect(url.toString()).followRedirects(true).timeout(10000);
         for(Map.Entry<String, String> e : headers.entrySet())
@@ -38,7 +39,10 @@ public class JSoupDownloadJob extends DownloadJob
         if(cookies != null)
         {
             for(Map.Entry<String, String> cookie : cookies.entrySet())
+            {
+                DownloaderUtils.debug("JSoupDJ (" + getClass() + "): Cookie: " + cookie.getKey() + ", " + cookie.getValue());
                 conn.cookie(cookie.getKey(), cookie.getValue());
+            }
         }
         if(!data.isEmpty())
             conn.data(data).method(Connection.Method.POST);
@@ -48,6 +52,7 @@ public class JSoupDownloadJob extends DownloadJob
 
     public void run() throws Exception
     {
+        DownloaderUtils.debug("JSoupDJ (" + getClass() + "): Run: " + init);
         if(!init)
             init();
         DownloaderUtils.debug("JSoupDJ (" + getClass() + "): URL: " + url);

@@ -23,12 +23,13 @@ public class CrochetTimeChapter extends Chapter
     private String dbmd, basePath, suffix;
 
     private URL url;
-    private String path, filepath;
+    private String path, filepath, getImage;
     private ArrayList<String> list;
 
     public CrochetTimeChapter(URL _url)
     {
         url = _url;
+        getImage = null;
     }
 
     public ArrayList<DownloadJob> init() throws Exception
@@ -51,10 +52,20 @@ public class CrochetTimeChapter extends Chapter
                     end = page.indexOf('_', start);
                     path = page.substring(start, end);
                     
-                    dbmd = "http://shangrila.voyager-store.com/dBmd?";
-                    basePath = "/home/dotbook/rs2_contents/voyager-store_contents/";
+                    //dbmd = "http://shangrila.voyager-store.com/dBmd?";
+                    dbmd = "http://voyager-store.com/dBmd?";
+                    //basePath = "/home/dotbook/rs2_contents/voyager-store_contents/";
+                    basePath = "/var/www/vhosts/voyager-store.com/contents//";
                     suffix = "_pc_image_crochet";
                     filepath = basePath + path + "/";
+                    
+                    if(page.contains("openTTCrochetForImage"))
+                    {
+                        start = page.indexOf('"', page.indexOf("openTTCrochetForImage")) + 1;
+                        end = page.indexOf('"', start);
+                        getImage = page.substring(start, end);
+                        DownloaderUtils.debug("getImage: " + getImage);
+                    }
                 }
                 // Kondansha Bitway
                 else
@@ -76,6 +87,18 @@ public class CrochetTimeChapter extends Chapter
                 DownloaderUtils.debug("path: " + path);
             }
         };
+        JSoupDownloadJob getImageDJ = new JSoupDownloadJob("Get get_image_crochet", null)
+        {
+            @Override
+            public void run() throws Exception
+            {
+                if(getImage != null)
+                {
+                    url = new URL(getImage);
+                    super.run();
+                }
+            }
+        };
         ByteArrayDownloadJob getList = new ByteArrayDownloadJob("Get the file list", null)
         {
             @Override
@@ -84,7 +107,6 @@ public class CrochetTimeChapter extends Chapter
                 String filelistURL = CrochetTimeDecrypt.scrambleURL(filepath + path + suffix +
                                         ".book.bmit&B" + String.format("%08x", (int)(32767 * Math.random())));
                 url = new URL(dbmd + filelistURL);
-                
                 super.run();
 
                 list = CrochetTimeDecrypt.fileList(getBytes());
@@ -93,6 +115,7 @@ public class CrochetTimeChapter extends Chapter
             }
         };
         ret.add(mainPage);
+        ret.add(getImageDJ);
         ret.add(getList);
         return(ret);
     }

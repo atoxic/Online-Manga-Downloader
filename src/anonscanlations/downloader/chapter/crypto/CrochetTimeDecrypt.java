@@ -207,6 +207,66 @@ public class CrochetTimeDecrypt
 
         return(ret);
     }
+    
+    public static void scramble(byte[] str)
+    {
+        int strHash = 0, idx, strLen, p1, p2;
+        for(byte c : str)
+            strHash += (int)c & 0xff;
+
+        idx = strHash;
+        strLen = str.length;
+
+        // scramble
+        for(int i=0; i < strLen; i++)
+        {
+            int t = SCRAMBLE_KEY_TABLE[(idx+i)&0xff];
+            t += i;
+
+            p1 = t % strLen;
+            t /= strLen;
+            t = ((t|0xffffffff)-i)&0xff;
+
+            t = SCRAMBLE_KEY_TABLE[t];
+            t += i;
+            p2 = t % strLen;
+
+
+            if(p1 != p2) // same positions, don't swap bytes
+            {
+                byte c = str[p1];
+                str[p1] = str[p2];
+                str[p2] = c;
+            }
+        }
+        
+        // replace
+	for(int i=0; i < strLen; i++)
+	{
+            int stri = (int)str[i] & 0xff;
+            if((stri-0x61) <= 0x19 && (stri-0x61) >= 0) // lower case
+            {
+                int t = SCRAMBLE_KEY_TABLE[(strLen + i) & 0xff];
+                t += stri-0x61;
+
+                str[i] = (byte)((t % 0x1a) + 0x61);
+            }
+            else if((stri-0x41) <= 0x19 && (stri-0x41) >= 0) // upper case
+            {
+                int t = SCRAMBLE_KEY_TABLE[(strLen + i) & 0xff];
+                t += stri-0x41;
+
+                str[i] = (byte)((t % 0x1a) + 0x41);
+            }
+            else if((stri-0x30) <= 0x9 && (stri-0x30) >= 0) // number
+            {
+                int t = SCRAMBLE_KEY_TABLE[(strLen + i) & 0xff];
+                t += stri-0x30;
+
+                str[i] = (byte)((t % 0x0a) + 0x30);
+            }
+	}
+    }
 
     public static String unscrambleURL(String src)
     {
@@ -278,6 +338,65 @@ public class CrochetTimeDecrypt
 	}
 
         return(new String(str));
+    }
+    
+    public static void unscramble(byte[] str)
+    {
+        int strLen;
+        strLen = str.length;
+
+        for(int i = 0; i < strLen; i++)
+	{
+	    int k = SCRAMBLE_KEY_TABLE[(strLen + i) & 0xff], m, a;
+            int stri = (int)str[i] & 0xff;
+            if((stri-0x61) <= 0x19 && (stri-0x61) >= 0) // lower case
+            {
+                m = stri - 0x61;
+                a = (k - m) / 0x1a;
+
+                str[i] = (byte)((m - k + 0x1a * (a + 1)) % 0x1a + 0x61);
+            }
+            else if((stri-0x41) <= 0x19 && (stri-0x41) >= 0) // upper case
+            {
+                m = stri - 0x41;
+                a = (k - m) / 0x1a;
+
+                str[i] = (byte)((m - k + 0x1a * (a + 1)) % 0x1a + 0x41);
+            }
+            else if((stri-0x30) <= 0x9 && (stri-0x30) >= 0) // number
+            {
+                m = stri - 0x30;
+                a = (k - m) / 0x0a;
+
+                str[i] = (byte)((m - k + 0x0a * (a + 1)) % 0x0a + 0x30);
+            }
+	}
+        
+        int strHash = 0, p1, p2;
+	for(int i=0; i<strLen; i++)
+            strHash += str[i];
+        int idx = strHash;
+
+	for(int i = strLen - 1; i >= 0; i--)
+	{
+            int t = SCRAMBLE_KEY_TABLE[(idx+i)&0xff];
+            t += i;
+
+            p1 = t % strLen;
+            t /= strLen;
+            t = ((t|0xffffffff)-i)&0xff;
+
+            t = SCRAMBLE_KEY_TABLE[t];
+            t += i;
+            p2 = t % strLen;
+
+            if(p1 != p2) // same positions, don't swap bytes
+            {
+                byte c = str[p1];
+                str[p1] = str[p2];
+                str[p2] = c;
+            }
+	}
     }
     
     public static void decrypt(byte[] input) throws IOException
