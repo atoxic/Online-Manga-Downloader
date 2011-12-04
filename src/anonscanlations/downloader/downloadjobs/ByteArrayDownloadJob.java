@@ -23,6 +23,12 @@ public class ByteArrayDownloadJob extends JSoupDownloadJob
         maxRetries = 16;
     }
     @Override
+    public void init() throws Exception
+    {
+        super.init();
+        conn.ignoreReadError(true);
+    }
+    @Override
     public void run() throws Exception
     {
         ByteArrayOutputStream baos = null;

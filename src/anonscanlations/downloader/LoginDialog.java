@@ -10,17 +10,20 @@ package anonscanlations.downloader;
  *
  * @author /a/non <anonymousscanlations@gmail.com>
  */
-public class ComicRushLoginDialog extends javax.swing.JFrame {
+public class LoginDialog extends javax.swing.JFrame {
 
-    private String email;
-    private char[] password;
+    private String label, title;
+    private transient String email;
+    private transient char[] password;
 
     /** Creates new form KeyURLDialog */
-    public ComicRushLoginDialog() {
+    public LoginDialog(String _title, String _label) {
         email = null;
         password = null;
+        label = _label;
+        title = _title;
         initComponents();
-        PreferencesManager.registerWindow("OMD0.1.0_comicRushLogin", this, false);
+        PreferencesManager.registerWindow("OMD0.1.0_login", this, false);
     }
 
     /** This method is called from within the constructor to
@@ -40,7 +43,7 @@ public class ComicRushLoginDialog extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         PasswordField = new javax.swing.JPasswordField();
 
-        setTitle("CLIP (Comic Rush) Handler: Comic Rush Login Information May Be Needed");
+        setTitle(title);
         setResizable(false);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
@@ -48,7 +51,7 @@ public class ComicRushLoginDialog extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("<html>Is it an item bought from Comic Rush?<br/> If so, please input your Comic Rush login information and press \"OK\" in order to authenticate.<br/> If not, press \"Cancel.\"</html>");
+        jLabel1.setText(label);
 
         OKButton.setText("OK");
         OKButton.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +97,7 @@ public class ComicRushLoginDialog extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EMailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -103,7 +106,7 @@ public class ComicRushLoginDialog extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelButton)
                     .addComponent(OKButton))
@@ -145,7 +148,7 @@ public class ComicRushLoginDialog extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ComicRushLoginDialog().setVisible(true);
+                new LoginDialog("Title", "Label").setVisible(true);
             }
         });
     }

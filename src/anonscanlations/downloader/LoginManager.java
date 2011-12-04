@@ -12,20 +12,28 @@ import anonscanlations.downloader.chapter.*;
 public class LoginManager
 {
     private static final String NICO_KEY = "NICO", KEY_KEY = "KEY", RUSH_KEY = "RUSH";
+    private static final String NICO_LABEL = "<html>Is it from NicoNico Seiga?<br/>"
+                                        + "If so, please input your NicoNico login information and press \"OK\" in order to authenticate.<br/>"
+                                        + "If not, press \"Cancel.\"</html>",
+                            RUSH_LABEL = "<html>Is it an item bought from Comic Rush?<br/>"
+                                        + "If so, please input your Comic Rush login information and press \"OK\" in order to authenticate.<br/>"
+                                        + "If not, press \"Cancel.\"</html>";
 
-    private NicoLoginDialog         nico;
-    private KeyURLDialog            key;
-    private ComicRushLoginDialog    rush;
+    private LoginDialog         nico;
+    private KeyURLDialog        key;
+    private LoginDialog         rush;
     private Map<String, Boolean>    checked;
 
     public LoginManager()
     {
         checked = new HashMap<String, Boolean>();
-        nico = new NicoLoginDialog();
+        nico = new LoginDialog("NicoNico Handler: Nico Login Information Needed",
+                            NICO_LABEL);
         key = new KeyURLDialog();
-        rush = new ComicRushLoginDialog();
+        rush = new LoginDialog("Comic Rush Handler: Comic Rush Login Information May Be Needed",
+                            RUSH_LABEL);
     }
-    public NicoLoginDialog getNicoLogin()
+    public LoginDialog getNicoLogin()
     {
         return(nico);
     }
@@ -33,7 +41,7 @@ public class LoginManager
     {
         return(key);
     }
-    public ComicRushLoginDialog getComicRushLogin()
+    public LoginDialog getComicRushLogin()
     {
         return(rush);
     }
