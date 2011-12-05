@@ -6,10 +6,10 @@ import java.net.*;
 import java.awt.image.*;
 import javax.imageio.*;
 
-import org.jsoup.nodes.*;
 import com.flagstone.transform.*;
 import com.flagstone.transform.image.*;
 import com.flagstone.transform.util.image.*;
+import com.flagstone.transform.movieclip.*;
 import com.flagstone.transform.text.*;
 import com.flagstone.transform.font.*;
 
@@ -74,27 +74,56 @@ public class SMangaChapter extends Chapter
         return(list);
     }
     
+    private ArrayList<Integer> getTitleIDs(Movie m) throws Exception
+    {
+        ArrayList<Integer> ret = new ArrayList<Integer>();
+        for(MovieTag tag : m.getObjects())
+        {
+            if(tag instanceof DefineMovieClip)
+            {
+                for(MovieTag tag2 : ((DefineMovieClip)tag).getObjects())
+                {
+                    if(tag2 instanceof Place2)
+                    {
+                        Place2 p = (Place2)tag2;
+                        if(p.getTransform() != null &&
+                                Math.abs(p.getTransform().getTranslateY() + 2720) <= 40)
+                            ret.add(p.getIdentifier());
+                    }
+                }
+            }
+        }
+        return(ret);
+    }
+    
     private void getTitle(Movie m) throws Exception
     {
         int fontID = -1;
         ArrayList<TextSpan> titleSpans = new ArrayList<TextSpan>();
+        ArrayList<Integer> titleIDs = getTitleIDs(m);
         for(MovieTag tag : m.getObjects())
         {
-            if(tag instanceof DefineText && ((DefineText)tag).getIdentifier() == 73)
+            if(tag instanceof DefineText && titleIDs.contains(((DefineText)tag).getIdentifier()))
             {
+                DownloaderUtils.debug("tag: " + tag);
                 for(TextSpan span : ((DefineText)tag).getSpans())
                 {
+                    DownloaderUtils.debug("\t\tspan: " + span);
                     if(span.getIdentifier() != null)
                         fontID = span.getIdentifier();
                     titleSpans.add(span);
                 }
             }
         }
+        java.util.List<Integer> fontCodes = null;
         for(MovieTag tag : m.getObjects())
         {
-            if(tag instanceof DefineFont2 && ((DefineFont2)tag).getIdentifier() == fontID)
+            if(tag instanceof DefineFont3 && ((DefineFont3)tag).getIdentifier() == fontID)
+                fontCodes = ((DefineFont3)tag).getCodes();
+            else if(tag instanceof DefineFont2 && ((DefineFont2)tag).getIdentifier() == fontID)
+                fontCodes = ((DefineFont2)tag).getCodes();
+            if(fontCodes != null)
             {
-                List<Integer> fontCodes = ((DefineFont2)tag).getCodes();
                 ArrayList<Integer> titleCodes = new ArrayList<Integer>();
                 for(TextSpan titleSpan : titleSpans)
                     for(GlyphIndex i : titleSpan.getCharacters())
@@ -105,6 +134,7 @@ public class SMangaChapter extends Chapter
                 title = new String(titleCodeArray, 0, titleCodeArray.length);
 
                 DownloaderUtils.debug("title: " + title);
+                return;
             }
         }
     }

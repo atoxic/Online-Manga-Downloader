@@ -17,6 +17,7 @@ public enum Chapters
     PCVIEWER("PCViewer/DOR"),
     PLUGINFREE("PluginFree"),
     POCO("Poco"),
+    SMANGA("S-Manga"),
     CLUBSUNDAY("Shogakukan"),
     WEBYOUNGJUMP("Web Young Jump"),
     YAHOOBOOKSTORE("Yahoo Bookstore");
