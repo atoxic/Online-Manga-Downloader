@@ -93,6 +93,7 @@ public class PocoChapter extends Chapter implements Serializable
             }
             FileDownloadJob page = new FileDownloadJob("Page " + i, new URL(image), f);
             list.add(page);
+            i++;
         }
 
         return(list);

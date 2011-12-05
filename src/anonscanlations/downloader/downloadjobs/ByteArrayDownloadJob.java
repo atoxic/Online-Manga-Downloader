@@ -1,6 +1,7 @@
 package anonscanlations.downloader.downloadjobs;
 
 import java.io.*;
+import anonscanlations.downloader.*;
 
 /** 
  * Downloads to bytes.  Keeps retrying until it finishes downloading.
@@ -39,6 +40,7 @@ public class ByteArrayDownloadJob extends JSoupDownloadJob
             int numTries = 0;
             do
             {
+                DownloaderUtils.debug("BADJ: Try #" + numTries + "; Size: " + baos.size());
                 init();
                 if(contentLength != -1)
                     conn.range(baos.size(), -1);

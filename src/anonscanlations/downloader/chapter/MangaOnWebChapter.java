@@ -88,7 +88,7 @@ public class MangaOnWebChapter extends Chapter
         final BlowfishKey bfkey = new BlowfishKey(keyBytes);
         for(int i = 0; i < paths.size(); i++)
         {
-            final File f = DownloaderUtils.fileName(directory, ctsn, i, "jpg");
+            final File f = DownloaderUtils.fileName(directory, ctsn, i, "png");
             if(f.exists())
                 continue;
             // rid is just a random number from 0-9999
