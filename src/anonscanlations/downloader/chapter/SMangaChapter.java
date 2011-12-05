@@ -6,12 +6,10 @@ import java.net.*;
 import java.awt.image.*;
 import javax.imageio.*;
 
+import org.jsoup.nodes.*;
 import com.flagstone.transform.*;
 import com.flagstone.transform.image.*;
 import com.flagstone.transform.util.image.*;
-import com.flagstone.transform.movieclip.*;
-import com.flagstone.transform.text.*;
-import com.flagstone.transform.font.*;
 
 import anonscanlations.downloader.*;
 import anonscanlations.downloader.downloadjobs.*;
@@ -37,8 +35,20 @@ public class SMangaChapter extends Chapter
         // TODO what about proxies?
         if(!url.getHost().contains("s-manga") || !url.toString().endsWith(".html"))
             throw new Exception("Malformed URL");
-        // Do nothing
+        JSoupDownloadJob getTitle = new JSoupDownloadJob("Get title", url)
+        {
+            @Override
+            public void run() throws Exception
+            {
+                super.run();
+                Document d = response.parse();
+                String[] s = d.title().split("｜");
+                title = s[s.length - 1];
+                DownloaderUtils.debug("title: " + title);
+            }
+        };
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
+        list.add(getTitle);
         return(list);
     }
     
@@ -67,76 +77,10 @@ public class SMangaChapter extends Chapter
                     if(bais != null)
                         bais.close();
                 }
-                getTitle(m);
                 saveImages(m, finalDirectory);
             }
         });
         return(list);
-    }
-    
-    private ArrayList<Integer> getTitleIDs(Movie m) throws Exception
-    {
-        ArrayList<Integer> ret = new ArrayList<Integer>();
-        for(MovieTag tag : m.getObjects())
-        {
-            if(tag instanceof DefineMovieClip)
-            {
-                for(MovieTag tag2 : ((DefineMovieClip)tag).getObjects())
-                {
-                    if(tag2 instanceof Place2)
-                    {
-                        Place2 p = (Place2)tag2;
-                        if(p.getTransform() != null &&
-                                Math.abs(p.getTransform().getTranslateY() + 2720) <= 40)
-                            ret.add(p.getIdentifier());
-                    }
-                }
-            }
-        }
-        return(ret);
-    }
-    
-    private void getTitle(Movie m) throws Exception
-    {
-        int fontID = -1;
-        ArrayList<TextSpan> titleSpans = new ArrayList<TextSpan>();
-        ArrayList<Integer> titleIDs = getTitleIDs(m);
-        for(MovieTag tag : m.getObjects())
-        {
-            if(tag instanceof DefineText && titleIDs.contains(((DefineText)tag).getIdentifier()))
-            {
-                DownloaderUtils.debug("tag: " + tag);
-                for(TextSpan span : ((DefineText)tag).getSpans())
-                {
-                    DownloaderUtils.debug("\t\tspan: " + span);
-                    if(span.getIdentifier() != null)
-                        fontID = span.getIdentifier();
-                    titleSpans.add(span);
-                }
-            }
-        }
-        java.util.List<Integer> fontCodes = null;
-        for(MovieTag tag : m.getObjects())
-        {
-            if(tag instanceof DefineFont3 && ((DefineFont3)tag).getIdentifier() == fontID)
-                fontCodes = ((DefineFont3)tag).getCodes();
-            else if(tag instanceof DefineFont2 && ((DefineFont2)tag).getIdentifier() == fontID)
-                fontCodes = ((DefineFont2)tag).getCodes();
-            if(fontCodes != null)
-            {
-                ArrayList<Integer> titleCodes = new ArrayList<Integer>();
-                for(TextSpan titleSpan : titleSpans)
-                    for(GlyphIndex i : titleSpan.getCharacters())
-                        titleCodes.add(fontCodes.get(i.getGlyphIndex()));
-                int[] titleCodeArray = new int[titleCodes.size()];
-                for(int i = 0; i < titleCodes.size(); i++)
-                    titleCodeArray[i] = titleCodes.get(i);
-                title = new String(titleCodeArray, 0, titleCodeArray.length);
-
-                DownloaderUtils.debug("title: " + title);
-                return;
-            }
-        }
     }
     
     private void saveImages(Movie m, File directory) throws Exception
