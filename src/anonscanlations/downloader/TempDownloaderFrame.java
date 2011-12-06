@@ -1293,7 +1293,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jEditorPane15.setContentType("text/html");
         jEditorPane15.setEditable(false);
         jEditorPane15.setFont(jEditorPane15.getFont());
-        jEditorPane15.setText("<html>Flash-based viewer used on <a href=\"http://www.s-manga.net/\">S-Manga.net</a>, Shueisha's trial reading site.</html>");
+        jEditorPane15.setText("<html>Flash-based viewer used primarily on <a href=\"http://www.s-manga.net/\">S-Manga.net</a>, Shueisha's trial reading site.  Can work with certain other Shueisha sites.</html>");
         ((javax.swing.text.html.HTMLDocument)jEditorPane15.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane15.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
@@ -1308,10 +1308,10 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jTextField31.setText("http://www.s-manga.net/comics_new/cn_20111118_uj_yjc_9784088791661_moon-edge-1k_Mh4f8QlG.html");
 
         jTextField32.setEditable(false);
-        jTextField32.setText("http://www.s-manga.net/comics_new/cn_20111202_wj_jpc_9784088703572_akimotoosamu-sf-tanpenshu_YPk7ONwk.html");
+        jTextField32.setText("http://www.s-manga.net/comics_new/cn_20111004_sq_jpc_9784088702162_time-killers.html");
 
         jTextField33.setEditable(false);
-        jTextField33.setText("http://www.s-manga.net/comics_new/cn_20111004_sq_jpc_9784088702162_time-killers.html");
+        jTextField33.setText("http://www.shonenjump.com/j/manga-shou/treasure/comics/12ketsu_senka-ni-saku.html");
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);

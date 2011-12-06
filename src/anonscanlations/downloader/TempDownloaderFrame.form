@@ -2148,7 +2148,7 @@
                             <Font component="jEditorPane15" property="font" relativeSize="true" size="0"/>
                           </FontInfo>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="&lt;html&gt;Flash-based viewer used on &lt;a href=&quot;http://www.s-manga.net/&quot;&gt;S-Manga.net&lt;/a&gt;, Shueisha&apos;s trial reading site.&lt;/html&gt;"/>
+                        <Property name="text" type="java.lang.String" value="&lt;html&gt;Flash-based viewer used primarily on &lt;a href=&quot;http://www.s-manga.net/&quot;&gt;S-Manga.net&lt;/a&gt;, Shueisha&apos;s trial reading site.  Can work with certain other Shueisha sites.&lt;/html&gt;"/>
                       </Properties>
                       <Events>
                         <EventHandler event="hyperlinkUpdate" listener="javax.swing.event.HyperlinkListener" parameters="javax.swing.event.HyperlinkEvent" handler="hyperlink"/>
@@ -2205,13 +2205,13 @@
                     <Component class="javax.swing.JTextField" name="jTextField32">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="text" type="java.lang.String" value="http://www.s-manga.net/comics_new/cn_20111202_wj_jpc_9784088703572_akimotoosamu-sf-tanpenshu_YPk7ONwk.html"/>
+                        <Property name="text" type="java.lang.String" value="http://www.s-manga.net/comics_new/cn_20111004_sq_jpc_9784088702162_time-killers.html"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTextField33">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="text" type="java.lang.String" value="http://www.s-manga.net/comics_new/cn_20111004_sq_jpc_9784088702162_time-killers.html"/>
+                        <Property name="text" type="java.lang.String" value="http://www.shonenjump.com/j/manga-shou/treasure/comics/12ketsu_senka-ni-saku.html"/>
                       </Properties>
                     </Component>
                   </SubComponents>

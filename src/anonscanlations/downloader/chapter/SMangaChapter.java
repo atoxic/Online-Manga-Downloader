@@ -33,8 +33,10 @@ public class SMangaChapter extends Chapter
     {
         DownloaderUtils.checkHTTP(url);
         // TODO what about proxies?
+        /*
         if(!url.getHost().contains("s-manga") || !url.toString().endsWith(".html"))
             throw new Exception("Malformed URL");
+        // */
         JSoupDownloadJob getTitle = new JSoupDownloadJob("Get title", url)
         {
             @Override

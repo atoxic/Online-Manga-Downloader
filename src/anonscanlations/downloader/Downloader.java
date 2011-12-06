@@ -6,8 +6,6 @@ package anonscanlations.downloader;
 
 import java.io.*;
 import java.util.*;
-import java.net.*;
-
 import java.util.concurrent.locks.*;
 
 import anonscanlations.downloader.chapter.*;
@@ -53,7 +51,7 @@ public class Downloader extends Thread
         }
         DownloaderUtils.debug("Downloader Operation: Exit AJ");
     }
-    private void kill()
+    public void kill()
     {
         synchronized(waitForJobs)
         {
