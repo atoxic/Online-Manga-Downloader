@@ -47,7 +47,7 @@ public class YahooBookstoreDownloadJob extends ByteArrayDownloadJob
         {
             byte[] hash = MessageDigest.getInstance("MD5").digest(bytes);
             String hashString = (new BigInteger(1, hash)).toString(16);
-            if(hashString.length() % 2 == 1)
+            while(hashString.length() < 32)
                 hashString = "0" + hashString;
             if(!hashString.equals(response.header("x-oct-md5")))
             {

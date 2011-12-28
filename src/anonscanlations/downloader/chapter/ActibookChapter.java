@@ -95,33 +95,24 @@ public class ActibookChapter extends Chapter implements Serializable
                 final File f = DownloaderUtils.fileName(directory, title, i, "jpg");
                  if(f.exists())
                     continue;
-                final ImageDownloadJob grid[][] = new ImageDownloadJob[gridW][gridH];
+                final ImageDownloadJob _grid[][] = new ImageDownloadJob[gridW][gridH];
                 for(int y = 0; y < gridH; y++)
                 {
                     for(int x = 0; x < gridW; x++)
                     {
-                        grid[x][y] = new ImageDownloadJob("Page " + i + " (" + x + ", " + y + ")",
+                        _grid[x][y] = new ImageDownloadJob("Page " + i + " (" + x + ", " + y + ")",
                                         new URL(url, "books/images/" + zoom + "/g_" + i + "/x" + (x + 1) + "y" + (y + 1) + ".jpg"));
-                        list.add(grid[x][y]);
+                        list.add(_grid[x][y]);
                     }
                 }
-                DownloadJob combine = new DownloadJob("Combine page " + i)
+                CombineDownloadJob combine = new CombineDownloadJob("Combine page " + i, f, (int)(w * zoomVal),
+                                                                    (int)(h * zoomVal), DOKI_GRID_W, DOKI_GRID_H)
                 {
+                    @Override
                     public void run() throws Exception
                     {
-                        BufferedImage complete = new BufferedImage((int)(w * zoomVal),
-                                                                    (int)(h * zoomVal),
-                                                                    BufferedImage.TYPE_INT_RGB);
-
-                        Graphics2D g = complete.createGraphics();
-                        for(int y = 0; y < gridH; y++)
-                        {
-                            for(int x = 0; x < gridW; x++)
-                            {
-                                g.drawImage(grid[x][y].getImage(), x * DOKI_GRID_W, y * DOKI_GRID_H, null);
-                            }
-                        }
-                        ImageIO.write(complete, "JPEG", f);
+                        this.grid = _grid;
+                        super.run();
                     }
                 };
                 list.add(combine);

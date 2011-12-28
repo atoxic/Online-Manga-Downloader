@@ -77,33 +77,24 @@ public class Flipper3Chapter extends Chapter
             if(f.exists())
                 continue;
             
-            final ImageDownloadJob grid[][] = new ImageDownloadJob[gridW][gridH];
+            final ImageDownloadJob _grid[][] = new ImageDownloadJob[gridW][gridH];
             for(int y = 0; y < gridH; y++)
             {
                 for(int x = 0; x < gridW; x++)
                 {
-                    grid[x][y] = new ImageDownloadJob("Page " + i + " (" + x + ", " + y + ")",
+                    _grid[x][y] = new ImageDownloadJob("Page " + i + " (" + x + ", " + y + ")",
                                     new URL(url, "page" + i + "/x" + maxMagString + "/" + (x + 1 + y * gridW) + ".jpg"));
-                    list.add(grid[x][y]);
+                    list.add(_grid[x][y]);
                 }
             }
-            DownloadJob combine = new DownloadJob("Combine page " + i)
+            CombineDownloadJob combine = new CombineDownloadJob("Combine page " + i, f, (int)(pageWidth * maxMag),
+                                                                (int)(pageHeight * maxMag), sliceWidth, sliceHeight)
             {
+                @Override
                 public void run() throws Exception
                 {
-                    BufferedImage complete = new BufferedImage((int)(pageWidth * maxMag),
-                                                                (int)(pageHeight * maxMag),
-                                                                BufferedImage.TYPE_INT_RGB);
-
-                    Graphics2D g = complete.createGraphics();
-                    for(int y = 0; y < gridH; y++)
-                    {
-                        for(int x = 0; x < gridW; x++)
-                        {
-                            g.drawImage(grid[x][y].getImage(), x * sliceWidth, y * sliceHeight, null);
-                        }
-                    }
-                    ImageIO.write(complete, "JPEG", f);
+                    this.grid = _grid;
+                    super.run();
                 }
             };
             list.add(combine);

@@ -128,32 +128,23 @@ public class PluginFreeChapter extends Chapter implements Serializable
                         h = Integer.parseInt(zoomHeightS);
             final int gridW = (int)Math.ceil(1.0 * w / GRID_W);
             final int gridH = (int)Math.ceil(1.0 * h / GRID_H);
-            final ImageDownloadJob grid[][] = new ImageDownloadJob[gridW][gridH];
+            final ImageDownloadJob _grid[][] = new ImageDownloadJob[gridW][gridH];
             for(int y = 0; y < gridH; y++)
             {
                 for(int x = 0; x < gridW; x++)
                 {
-                    grid[x][y] = new ImageDownloadJob("Page " + i + " (" + x + ", " + y + ")",
+                    _grid[x][y] = new ImageDownloadJob("Page " + i + " (" + x + ", " + y + ")",
                                     new URL(prefix + PluginFreeDecrypt.getIpntStr(sIS, i, zoomVal, x, y) + ".jpg"));
-                    list.add(grid[x][y]);
+                    list.add(_grid[x][y]);
                 }
             }
-            DownloadJob combine = new DownloadJob("Combine page " + i)
+            CombineDownloadJob combine = new CombineDownloadJob("Combine page " + i, f, w, h, GRID_W, GRID_H)
             {
+                @Override
                 public void run() throws Exception
                 {
-                    BufferedImage complete = new BufferedImage(w, h,
-                                                                BufferedImage.TYPE_INT_RGB);
-
-                    Graphics2D g = complete.createGraphics();
-                    for(int y = 0; y < gridH; y++)
-                    {
-                        for(int x = 0; x < gridW; x++)
-                        {
-                            g.drawImage(grid[x][y].getImage(), x * GRID_W, y * GRID_H, null);
-                        }
-                    }
-                    ImageIO.write(complete, "JPEG", f);
+                    this.grid = _grid;
+                    super.run();
                 }
             };
             list.add(combine);
