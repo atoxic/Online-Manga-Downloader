@@ -206,7 +206,7 @@ public class NicoNicoEBooksChapter extends Chapter
             if(f.exists())
                 continue;
             
-            EPubDownloadJob file = new EPubDownloadJob("Page " + (i + 1), maki)
+            EPubDownloadJob file = new EPubDownloadJob(DownloaderUtils.pageOutOf(i, 0, images.size()), maki)
             {
                 byte[] key;
                 boolean read;

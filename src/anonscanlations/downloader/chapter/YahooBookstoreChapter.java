@@ -203,7 +203,11 @@ public class YahooBookstoreChapter extends Chapter
                 continue;
             }
             
-            YahooBookstoreDownloadJob page = new YahooBookstoreDownloadJob("Page " + i, new URL(base, image), f);
+            YahooBookstoreDownloadJob page = 
+                    new YahooBookstoreDownloadJob(
+                            DownloaderUtils.pageOutOf(i, 1, images.size()), 
+                            new URL(base, image), 
+                            f);
             list.add(page);
             i++;
         }

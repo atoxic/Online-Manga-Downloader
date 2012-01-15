@@ -17,7 +17,7 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class Downloader extends Thread
 {
-    public static final String VERSION = "Online Manga Downloader 0.1.6.5 Test";
+    public static final String VERSION = "Online Manga Downloader 0.1.6.6 Test";
     
     private static TempDownloaderFrame frame;
     private static Downloader currentThread;
@@ -335,5 +335,7 @@ public class Downloader extends Thread
 
         // initialize backend
         init();
+        
+        runChapter(new DaumChapter(new java.net.URL("http://cartoon.media.daum.net/webtoon/viewer/14845")), new File("D:\\test"));
     }
 }

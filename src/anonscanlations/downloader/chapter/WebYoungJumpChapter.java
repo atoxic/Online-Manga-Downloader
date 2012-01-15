@@ -85,7 +85,8 @@ public class WebYoungJumpChapter extends Chapter
             final File f = DownloaderUtils.fileName(directory, title, i, "jpeg");
             if(f.exists())
                 continue;
-            list.add(new ByteArrayDownloadJob("Page " + i, new URL(url, "page/" + i + ".swf"))
+            list.add(new ByteArrayDownloadJob(DownloaderUtils.pageOutOf(i, 1, numPages), 
+                                            new URL(url, "page/" + i + ".swf"))
             {
                 @Override
                 public void run() throws Exception

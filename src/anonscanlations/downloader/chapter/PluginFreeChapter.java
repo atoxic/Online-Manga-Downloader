@@ -129,16 +129,17 @@ public class PluginFreeChapter extends Chapter implements Serializable
             final int gridW = (int)Math.ceil(1.0 * w / GRID_W);
             final int gridH = (int)Math.ceil(1.0 * h / GRID_H);
             final ImageDownloadJob _grid[][] = new ImageDownloadJob[gridW][gridH];
+            final String page = DownloaderUtils.pageOutOf(i, 1, total);
             for(int y = 0; y < gridH; y++)
             {
                 for(int x = 0; x < gridW; x++)
                 {
-                    _grid[x][y] = new ImageDownloadJob("Page " + i + " (" + x + ", " + y + ")",
+                    _grid[x][y] = new ImageDownloadJob(page + " (" + x + ", " + y + ")",
                                     new URL(prefix + PluginFreeDecrypt.getIpntStr(sIS, i, zoomVal, x, y) + ".jpg"));
                     list.add(_grid[x][y]);
                 }
             }
-            CombineDownloadJob combine = new CombineDownloadJob("Combine page " + i, f, w, h, GRID_W, GRID_H)
+            CombineDownloadJob combine = new CombineDownloadJob("Combine " + page.toLowerCase(), f, w, h, GRID_W, GRID_H)
             {
                 @Override
                 public void run() throws Exception

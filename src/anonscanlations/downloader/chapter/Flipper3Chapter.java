@@ -76,18 +76,18 @@ public class Flipper3Chapter extends Chapter
             final File f = DownloaderUtils.fileName(directory, title, i, "jpg");
             if(f.exists())
                 continue;
-            
+            final String page = DownloaderUtils.pageOutOf(i, 1, total);
             final ImageDownloadJob _grid[][] = new ImageDownloadJob[gridW][gridH];
             for(int y = 0; y < gridH; y++)
             {
                 for(int x = 0; x < gridW; x++)
                 {
-                    _grid[x][y] = new ImageDownloadJob("Page " + i + " (" + x + ", " + y + ")",
+                    _grid[x][y] = new ImageDownloadJob(page + " (" + x + ", " + y + ")",
                                     new URL(url, "page" + i + "/x" + maxMagString + "/" + (x + 1 + y * gridW) + ".jpg"));
                     list.add(_grid[x][y]);
                 }
             }
-            CombineDownloadJob combine = new CombineDownloadJob("Combine page " + i, f, (int)(pageWidth * maxMag),
+            CombineDownloadJob combine = new CombineDownloadJob("Combine " + page.toLowerCase(), f, (int)(pageWidth * maxMag),
                                                                 (int)(pageHeight * maxMag), sliceWidth, sliceHeight)
             {
                 @Override

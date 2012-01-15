@@ -127,7 +127,7 @@ public class CrochetTimeChapter extends Chapter
             if(f.exists())
                 continue;
 
-            ByteArrayDownloadJob page = new ByteArrayDownloadJob("Page " + i,
+            ByteArrayDownloadJob page = new ByteArrayDownloadJob(DownloaderUtils.pageOutOf(i, 0, list.size()),
                                         new URL(cgi + "?" + CrochetTimeDecrypt.scrambleURL(dir + "/" + list.get(i))))
             {
                 @Override

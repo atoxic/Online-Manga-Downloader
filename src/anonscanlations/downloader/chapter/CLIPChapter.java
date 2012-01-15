@@ -160,7 +160,7 @@ public class CLIPChapter extends Chapter
         
         // Have to get the first page, get the hash, then decode the first page
         final JSoupDownloadJob firstPage =
-                new JSoupDownloadJob("Page 1",
+                new JSoupDownloadJob(DownloaderUtils.pageOutOf(1, 1, pages.size()),
                     new URL("http://release-stg.clip-studio.com/api/getExpandedImageFile?" +
                         "password=&hostname=&content%5Fid=" + params.get("content_id") + 
                         "&path=/" + params.get("service_id") + "/" 
@@ -228,7 +228,7 @@ public class CLIPChapter extends Chapter
                 continue;
 
             ByteArrayDownloadJob pageJob =
-                new ByteArrayDownloadJob("Page " + page,
+                new ByteArrayDownloadJob(DownloaderUtils.pageOutOf(page, 1, pages.size()),
                     new URL("http://release-stg.clip-studio.com/api/getExpandedImageFile?" +
                         "password=&hostname=&content%5Fid=" + params.get("content_id") + 
                         "&path=/" + params.get("service_id") + "/" 

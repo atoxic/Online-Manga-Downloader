@@ -265,5 +265,10 @@ public class DownloaderUtils
         return(new File(directory, saveTitle));
     }
     
+    public static String pageOutOf(int i, int start, int total)
+    {
+        return(String.format("Page %d out of %d", i - start + 1, total));
+    }
+    
     public static final SAXException DONE = new SAXException("Sax parsing done");
 }

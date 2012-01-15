@@ -102,7 +102,7 @@ public class NicoNicoEventChapter extends Chapter implements Serializable
                 i++;
                 continue;
             }
-            ByteArrayDownloadJob page = new ByteArrayDownloadJob("Page " + i, new URL("http://eco.nicoseiga.jp/comic/" + image))
+            ByteArrayDownloadJob page = new ByteArrayDownloadJob(DownloaderUtils.pageOutOf(i, 1, images.size()), new URL("http://eco.nicoseiga.jp/comic/" + image))
             {
                 @Override
                 public void run() throws Exception

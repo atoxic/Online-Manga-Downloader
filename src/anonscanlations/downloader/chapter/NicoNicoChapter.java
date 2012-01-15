@@ -198,13 +198,14 @@ public class NicoNicoChapter extends Chapter
                 i++;
                 continue;       // yes, ignore the mp3 as well
             }
-            FileDownloadJob page = new FileDownloadJob("Page " + i,
+            String pageName = DownloaderUtils.pageOutOf(i, 1, images.size());
+            FileDownloadJob page = new FileDownloadJob(pageName,
                             new URL("http://lohas.nicoseiga.jp/thumb/" + image.id + "l?"),
                             f);
             list.add(page);
             if(image.se_path != null)
             {
-                FileDownloadJob sfx = new FileDownloadJob("Page " + i + " SFX",
+                FileDownloadJob sfx = new FileDownloadJob(pageName + " SFX",
                             new URL("http://lohas.nicoseiga.jp/" + image.se_path),
                             DownloaderUtils.fileName(directory, title, i, "mp3"));
                 list.add(sfx);

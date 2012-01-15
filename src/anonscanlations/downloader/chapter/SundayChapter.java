@@ -105,7 +105,7 @@ public class SundayChapter extends Chapter
 
             imageURL += "&h=" + hashedURL;
 
-            PCViewerDownloadJob file = new PCViewerDownloadJob("Page " + i, new URL(imageURL), f);
+            PCViewerDownloadJob file = new PCViewerDownloadJob(DownloaderUtils.pageOutOf(i, min, max - min), new URL(imageURL), f);
             list.add(file);
         }
 

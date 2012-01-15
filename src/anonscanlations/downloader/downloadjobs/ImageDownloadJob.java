@@ -25,13 +25,16 @@ public class ImageDownloadJob extends ByteArrayDownloadJob
     @Override
     public void run() throws Exception
     {
-        super.run();
-
         ByteArrayInputStream bais = null;
         try
         {
+            super.run();
             bais = new ByteArrayInputStream(getBytes());
             image = ImageIO.read(bais);
+        }
+        catch(IOException e)
+        {
+            image = null;
         }
         finally
         {
