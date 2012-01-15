@@ -335,7 +335,5 @@ public class Downloader extends Thread
 
         // initialize backend
         init();
-        
-        runChapter(new DaumChapter(new java.net.URL("http://cartoon.media.daum.net/webtoon/viewer/14845")), new File("D:\\test"));
     }
 }
