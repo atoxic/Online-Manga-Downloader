@@ -1,17 +1,11 @@
 package anonscanlations.downloader.chapter;
 
-import java.awt.*;
-import java.awt.image.*;
 import java.io.*;
 import java.util.*;
 import java.util.regex.*;
 import java.net.*;
-import javax.imageio.*;
-
-import org.jsoup.nodes.*;
 
 import org.xml.sax.*;
-import org.xml.sax.helpers.*;
 import com.bluecast.xml.*;
 
 import anonscanlations.downloader.*;
@@ -74,10 +68,8 @@ public class DaumChapter extends Chapter
                 InputSource is = new InputSource(new StringReader(response.body()));
                 is.setEncoding("UTF-8");
 
-                parser.setContentHandler(new DefaultHandler()
+                parser.setContentHandler(new TagContentHandler()
                 {
-                    private Stack<String> tags = new Stack<String>();
-
                     @Override
                     public void characters(char[] ch, int start, int length)
                     {
@@ -86,18 +78,6 @@ public class DaumChapter extends Chapter
                             images.add(str);
                         else if(tag.equals("title"))
                             title = str;
-                    }
-
-                    @Override
-                    public void startElement(String uri, String localName, String qName, org.xml.sax.Attributes atts)
-                    {
-                        tags.push(localName);
-                    }
-
-                    @Override
-                    public void endElement(String uri, String localName, String qName)
-                    {
-                        tags.pop();
                     }
                 });
                 parser.setEntityResolver(new DefaultEntityResolver());

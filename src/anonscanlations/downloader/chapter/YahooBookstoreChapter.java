@@ -6,7 +6,6 @@ import java.util.*;
 import java.util.zip.*;
 
 import org.xml.sax.*;
-import org.xml.sax.helpers.*;
 import com.bluecast.xml.*;
 
 import anonscanlations.downloader.*;
@@ -83,10 +82,8 @@ public class YahooBookstoreChapter extends Chapter
                 InputSource is = new InputSource(new StringReader(response.body()));
                 is.setEncoding("UTF-8");
 
-                parser.setContentHandler(new DefaultHandler()
+                parser.setContentHandler(new TagContentHandler()
                 {
-                    private Stack<String> tags = new Stack<String>();
-
                     @Override
                     public void characters(char[] ch, int start, int length)
                     {
@@ -97,18 +94,6 @@ public class YahooBookstoreChapter extends Chapter
                             publicPath = str;
                         else if(tag.equals("pageRootPath"))
                             path = str;
-                    }
-
-                    @Override
-                    public void startElement(String uri, String localName, String qName, Attributes atts)
-                    {
-                        tags.push(localName);
-                    }
-
-                    @Override
-                    public void endElement(String uri, String localName, String qName)
-                    {
-                        tags.pop();
                     }
                 });
                 parser.setEntityResolver(new DefaultEntityResolver());
@@ -140,9 +125,8 @@ public class YahooBookstoreChapter extends Chapter
                 Piccolo parser = new Piccolo();
                 InputSource is = new InputSource(new StringReader(page));
                 is.setEncoding("UTF-8");
-                parser.setContentHandler(new DefaultHandler()
+                parser.setContentHandler(new TagContentHandler()
                 {
-                    private Stack<String> tags = new Stack<String>();
                     private String key, URI;
 
                     @Override
@@ -155,7 +139,7 @@ public class YahooBookstoreChapter extends Chapter
                     @Override
                     public void startElement(String uri, String localName, String qName, Attributes atts)
                     {
-                        tags.push(localName);
+                        super.startElement(uri, localName, qName, atts);
                         if(localName.equals("EncryptedData"))
                         {
                             key = null;
@@ -170,7 +154,7 @@ public class YahooBookstoreChapter extends Chapter
                     @Override
                     public void endElement(String uri, String localName, String qName)
                     {
-                        tags.pop();
+                        super.endElement(uri, localName, qName);
                         if(localName.equals("EncryptedData"))
                         {
                             if(key != null && key.equals("1")

@@ -335,5 +335,7 @@ public class Downloader extends Thread
 
         // initialize backend
         init();
+        
+        runChapter(new PapyChapter(new java.net.URL("http://dcbe2.ebookbank.jp/dl/sc/be_smpl/sample_1-157674-22/1/1")), new File("D:\\test"));
     }
 }
