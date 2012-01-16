@@ -17,13 +17,13 @@ import anonscanlations.downloader.downloadjobs.*;
  *
  * @author /a/non <anonymousscanlations@gmail.com>
  */
-public class PapyChapter extends Chapter
+public class BookendChapter extends Chapter
 {
-    private static final Exception E = new Exception("PDF URL not found");
+    private static final Exception URLNOTFOUND = new Exception("PDF URL not found");
     
     private URL url;
     private String pdf, title;
-    public PapyChapter(URL _url)
+    public BookendChapter(URL _url)
     {
         url = _url;
         pdf = null;
@@ -37,16 +37,26 @@ public class PapyChapter extends Chapter
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         JSoupDownloadJob page = new JSoupDownloadJob("Get page", url)
         {
+            // Todo: more robust URL extraction?
             @Override
             public void run() throws Exception
             {
                 super.run();
+                DownloaderUtils.debug("File: " + response.url().getFile());
+                if(response.url().getFile().contains("install.html"))
+                {
+                    this.url = new URL(DownloaderUtils.getQueryMap(response.url()).get("successurl"));
+                    DownloaderUtils.debug("New URL: " + this.url);
+                    super.init();
+                    super.run();
+                }
+                
                 int index = response.body().indexOf("src:");
-                if(index == -1)     throw E;
+                if(index == -1)     throw URLNOTFOUND;
                 index = response.body().indexOf('"', index) + 1;
-                if(index == 0)      throw E;
+                if(index == 0)      throw URLNOTFOUND;
                 int endIndex = response.body().indexOf('"', index);
-                if(endIndex == -1)  throw E;
+                if(endIndex == -1)  throw URLNOTFOUND;
                 pdf = response.body().substring(index, endIndex);
             }
         };
