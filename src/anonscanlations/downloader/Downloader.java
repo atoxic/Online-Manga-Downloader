@@ -26,10 +26,12 @@ public class Downloader
     
     public static void status(int index, String s)
     {
-        frame.setStatus(index, s);
+        DownloaderUtils.debug("Status: " + s);
+        if(frame != null)
+            frame.setStatus(index, s);
     }
     
-    private static void execute(int index, Chapter c, File d) throws Exception
+    public static void execute(int index, Chapter c, File d) throws Exception
     {
         status(index, "Initializing");
         ArrayList<DownloadJob> jobs = c.init();
@@ -112,18 +114,8 @@ public class Downloader
         });
     }
 
-    public static void init() throws Exception
+    public static void initGUI()
     {
-        executor = (ThreadPoolExecutor)Executors.newFixedThreadPool(3);
-    }
-
-    public static void main(String[] args) throws Exception
-    {
-        // unnecessary, but just to appear like a real viewer
-        System.setProperty("http.agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0");
-        // in order to handle custom protocols
-        System.setProperty("java.protocol.handler.pkgs", "anonscanlations.downloader.chapter");
-
         // Try to use native look and feel
         try
         {
@@ -136,8 +128,24 @@ public class Downloader
         }
         frame = TempDownloaderFrame.getFrame();
         frame.setVisible(true);
+    }
+    
+    public static void init() throws Exception
+    {
+        // unnecessary, but just to appear like a real viewer
+        System.setProperty("http.agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0");
+        // in order to handle custom protocols
+        System.setProperty("java.protocol.handler.pkgs", "anonscanlations.downloader.chapter");
+        
+        executor = (ThreadPoolExecutor)Executors.newFixedThreadPool(3);
+    }
 
+    public static void main(String[] args) throws Exception
+    {
         // initialize backend
         init();
+        
+        // initialize frontend
+        initGUI();
     }
 }
