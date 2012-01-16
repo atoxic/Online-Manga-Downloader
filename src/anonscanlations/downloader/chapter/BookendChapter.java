@@ -19,8 +19,6 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class BookendChapter extends Chapter
 {
-    private static final Exception URLNOTFOUND = new Exception("PDF URL not found");
-    
     private URL url;
     private String pdf, title;
     public BookendChapter(URL _url)
@@ -52,11 +50,11 @@ public class BookendChapter extends Chapter
                 }
                 
                 int index = response.body().indexOf("src:");
-                if(index == -1)     throw URLNOTFOUND;
+                if(index == -1)     throw new Exception("PDF URL not found");
                 index = response.body().indexOf('"', index) + 1;
-                if(index == 0)      throw URLNOTFOUND;
+                if(index == 0)      throw new Exception("PDF URL not found");
                 int endIndex = response.body().indexOf('"', index);
-                if(endIndex == -1)  throw URLNOTFOUND;
+                if(endIndex == -1)  throw new Exception("PDF URL not found");
                 pdf = response.body().substring(index, endIndex);
             }
         };

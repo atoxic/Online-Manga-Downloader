@@ -75,7 +75,7 @@ public class Downloader
                 }
                 catch(Exception e)
                 {
-                    DownloaderUtils.error("Error while running chapter", e, true);
+                    DownloaderUtils.error("Error while running chapter", e, false);
                     status(index, "Error: " + e.getLocalizedMessage());
                 }
             }
