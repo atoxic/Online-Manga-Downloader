@@ -77,7 +77,6 @@ public class ChapterTest
                                     1735256010L, 361631088L, 562778741L, 1674556494L,
                                     2406686717L, 685363998L, 934753219L, 3073342046L,
                                     2704109636L, 1906777089L};
-        //getChapterCRCs(new PocoChapter(url));
         testChapterCRCs(new PocoChapter(url), CRC32);
     }
 }

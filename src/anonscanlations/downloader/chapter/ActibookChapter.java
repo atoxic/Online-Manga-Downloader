@@ -5,9 +5,6 @@
 package anonscanlations.downloader.chapter;
 
 import java.util.*;
-import java.awt.*;
-import java.awt.image.*;
-import javax.imageio.*;
 import java.io.*;
 import java.net.*;
 

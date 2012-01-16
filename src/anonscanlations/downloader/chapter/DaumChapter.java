@@ -37,7 +37,7 @@ public class DaumChapter extends Chapter
     {
         DownloaderUtils.checkHTTP(url);
         if(!url.toString().contains("cartoon.media.daum.net/webtoon/viewer"))
-            throw new Exception("Not a supported Daum viewer");
+            throw new Exception("Invalid URL");
         String file = url.getPath().substring(url.getPath().lastIndexOf('/') + 1);
         Matcher matcher = IDMATCH.matcher(file);
         if(!matcher.matches())

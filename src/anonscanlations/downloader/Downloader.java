@@ -12,7 +12,6 @@ import anonscanlations.downloader.chapter.*;
 import anonscanlations.downloader.downloadjobs.*;
 
 /**
- * This is the thread that processes all download jobs
  * @author /a/non
  */
 public class Downloader
