@@ -144,12 +144,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         nicoNicoEMail = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        Nico2 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jTextField18 = new javax.swing.JTextField();
-        jTextField19 = new javax.swing.JTextField();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        jEditorPane9 = new javax.swing.JEditorPane();
         NicoAce = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jTextField20 = new javax.swing.JTextField();
@@ -911,73 +905,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
 
         tabPane.addTab(Chapters.NICONICO.getName(), Nico);
 
-        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
-
-        jTextField18.setEditable(false);
-        jTextField18.setText("http://seiga.nicovideo.jp/nanoace/watch/5001");
-
-        jTextField19.setEditable(false);
-        jTextField19.setText("http://seiga.nicovideo.jp/sdandgo/watch/7001");
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField18, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
-                    .addComponent(jTextField19, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jScrollPane9.setBorder(null);
-
-        jEditorPane9.setBackground(editorPaneColor);
-        jEditorPane9.setBorder(null);
-        jEditorPane9.setContentType("text/html");
-        jEditorPane9.setEditable(false);
-        jEditorPane9.setFont(jEditorPane9.getFont());
-        jEditorPane9.setText("<html>Viewer used for tie-ins with official magazines such as <a href=\"http://info.nicovideo.jp/seiga/nanoace/\">Nano Ace (from Oct 3, 2011 to Nov 7)</a> and the now-defunct <a href=\"http://info.nicovideo.jp/seiga/sdandgo/\">SDMP (from Oct 21, 2011 to Nov 18)</a>.  The examples below may have expired.</html>");
-        ((javax.swing.text.html.HTMLDocument)jEditorPane9.getDocument()).getStyleSheet().addRule(bodyRule);
-        jEditorPane9.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
-            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
-                hyperlink(evt);
-            }
-        });
-        jScrollPane9.setViewportView(jEditorPane9);
-
-        javax.swing.GroupLayout Nico2Layout = new javax.swing.GroupLayout(Nico2);
-        Nico2.setLayout(Nico2Layout);
-        Nico2Layout.setHorizontalGroup(
-            Nico2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Nico2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Nico2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        Nico2Layout.setVerticalGroup(
-            Nico2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Nico2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(226, Short.MAX_VALUE))
-        );
-
-        tabPane.addTab(Chapters.NICONICO2.getName(), Nico2);
-
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Example"));
 
         jTextField20.setEditable(false);
@@ -1733,7 +1660,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(manual)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exitButton)
@@ -1796,7 +1723,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 case PCVIEWER:          chapter = new PCViewerChapter(viewerURL);           break;
                 case PLUGINFREE:        chapter = new PluginFreeChapter(viewerURL);         break;
                 case POCO:              chapter = new PocoChapter(viewerURL);               break;
-                case NICONICO2:         chapter = new NicoNicoEventChapter(viewerURL);      break;
+                //case NICONICO2:         chapter = new NicoNicoEventChapter(viewerURL);      break;
                 case SMANGA:            chapter = new SMangaChapter(viewerURL);             break;
                 case WEBYOUNGJUMP:      chapter = new WebYoungJumpChapter(viewerURL);       break;
                 case YAHOOBOOKSTORE:    chapter = new YahooBookstoreChapter(viewerURL);     break;
@@ -1851,7 +1778,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             chapters.add(new MangaOnWebChapter(viewerURL));
             chapters.add(new PocoChapter(viewerURL));
             chapters.add(new BookendChapter(viewerURL));
-            chapters.add(new NicoNicoEventChapter(viewerURL));
+            //chapters.add(new NicoNicoEventChapter(viewerURL));
             chapters.add(new SundayChapter(viewerURL));
             chapters.add(new NicoNicoEBooksChapter(viewerURL));
             chapters.add(new NicoNicoChapter(viewerURL));
@@ -1925,7 +1852,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JPanel Flipper3;
     private javax.swing.JPanel MangaOnWeb;
     private javax.swing.JPanel Nico;
-    private javax.swing.JPanel Nico2;
     private javax.swing.JPanel NicoAce;
     private javax.swing.JPanel PCViewer;
     private javax.swing.JPanel PluginFree;
@@ -1958,7 +1884,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JEditorPane jEditorPane6;
     private javax.swing.JEditorPane jEditorPane7;
     private javax.swing.JEditorPane jEditorPane8;
-    private javax.swing.JEditorPane jEditorPane9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1977,7 +1902,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
@@ -2013,7 +1937,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -2027,8 +1950,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField21;

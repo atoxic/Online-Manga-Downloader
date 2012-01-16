@@ -76,6 +76,7 @@ public class Downloader
                 catch(Exception e)
                 {
                     DownloaderUtils.error("Error while running chapter", e, true);
+                    status(index, "Error: " + e.getLocalizedMessage());
                 }
             }
         });
@@ -104,6 +105,7 @@ public class Downloader
                                 e instanceof ExecutionException ? 
                                     ((ExecutionException)e).getException() :
                                     e, false);
+                        status(index, "Handler \"" + c.getClass() + "\" error: " + e.getLocalizedMessage());
                     }
                 }
             }
