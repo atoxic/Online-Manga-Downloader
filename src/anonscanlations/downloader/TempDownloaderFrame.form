@@ -33,18 +33,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jPanel23" alignment="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="downloadButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="468" max="32767" attributes="0"/>
-                      <Component id="logButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="exitButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Component id="auto" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -88,16 +80,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="manual" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" pref="419" max="32767" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="exitButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="logButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="downloadButton" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel23" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jPanel1" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -129,31 +112,7 @@
         <Property name="text" type="java.lang.String" value="Viewer URL"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="downloadButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Download"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="downloadButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="exitButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Exit"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="viewerURLField">
-    </Component>
-    <Component class="javax.swing.JButton" name="logButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Log"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logButtonActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="manual">
       <Properties>
@@ -178,11 +137,31 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="tabPane" alignment="0" pref="653" max="32767" attributes="0"/>
+              <Component id="jPanel23" alignment="1" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="downloadButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="467" max="-2" attributes="0"/>
+                  <Component id="logButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="exitButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="tabPane" min="-2" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Component id="tabPane" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel23" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="downloadButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="exitButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="logButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -2589,52 +2568,76 @@
             </Container>
           </SubComponents>
         </Container>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JPanel" name="jPanel23">
-      <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Thread Statuses"/>
-          </Border>
-        </Property>
-      </Properties>
+        <Container class="javax.swing.JPanel" name="jPanel23">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder title="Thread Statuses"/>
+              </Border>
+            </Property>
+          </Properties>
 
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="status0" alignment="0" pref="641" max="32767" attributes="0"/>
-              <Component id="status1" alignment="0" pref="641" max="32767" attributes="0"/>
-              <Component id="status2" alignment="0" pref="641" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="status0" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="status1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="status2" min="-2" max="-2" attributes="0"/>
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="status0" alignment="0" pref="641" max="32767" attributes="0"/>
+                  <Component id="status1" alignment="0" pref="641" max="32767" attributes="0"/>
+                  <Component id="status2" alignment="0" pref="641" max="32767" attributes="0"/>
               </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JTextField" name="status0">
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="status0" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="status1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="status2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JTextField" name="status0">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="status1">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="status2">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="downloadButton">
           <Properties>
-            <Property name="editable" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="Download"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="downloadButtonActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="status1">
+        <Component class="javax.swing.JButton" name="logButton">
           <Properties>
-            <Property name="editable" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="Log"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logButtonActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="status2">
+        <Component class="javax.swing.JButton" name="exitButton">
           <Properties>
-            <Property name="editable" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="Exit"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
