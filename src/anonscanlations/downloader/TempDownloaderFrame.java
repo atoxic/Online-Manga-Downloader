@@ -43,10 +43,19 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             FRAME = new TempDownloaderFrame();
         return(FRAME);
     }
-
-    public void setStatus(String status)
+    
+    private JTextField getStatusBar(int index)
     {
-        statusBar.setText("Status: " + status);
+        if(index <= 0)
+            return(status0);
+        else if(index == 1)
+            return(status1);
+        else
+            return(status2);
+    }
+    public void setStatus(int index, String status)
+    {
+        getStatusBar(index).setText(status);
     }
 
     /** This method is called from within the constructor to
@@ -67,7 +76,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         downloadButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         viewerURLField = new javax.swing.JTextField();
-        statusBar = new javax.swing.JTextField();
         logButton = new javax.swing.JButton();
         manual = new javax.swing.JRadioButton();
         auto = new javax.swing.JRadioButton();
@@ -210,6 +218,10 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jTextField24 = new javax.swing.JTextField();
         jScrollPane11 = new javax.swing.JScrollPane();
         jEditorPane11 = new javax.swing.JEditorPane();
+        jPanel23 = new javax.swing.JPanel();
+        status0 = new javax.swing.JTextField();
+        status1 = new javax.swing.JTextField();
+        status2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(Downloader.VERSION);
@@ -247,9 +259,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 exitButtonActionPerformed(evt);
             }
         });
-
-        statusBar.setEditable(false);
-        statusBar.setText("Status:");
 
         logButton.setText("Log");
         logButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1650,6 +1659,32 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        jPanel23.setBorder(javax.swing.BorderFactory.createTitledBorder("Thread Statuses"));
+
+        status0.setEditable(false);
+
+        status1.setEditable(false);
+
+        status2.setEditable(false);
+
+        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
+        jPanel23.setLayout(jPanel23Layout);
+        jPanel23Layout.setHorizontalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(status0, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
+            .addComponent(status1, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
+            .addComponent(status2, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
+        );
+        jPanel23Layout.setVerticalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel23Layout.createSequentialGroup()
+                .addComponent(status0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(status1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(status2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1657,6 +1692,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel23, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(downloadButton)
@@ -1664,7 +1700,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                         .addComponent(logButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(exitButton))
-                    .addComponent(statusBar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
                     .addComponent(auto, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1705,7 +1740,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                     .addComponent(logButton)
                     .addComponent(downloadButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(statusBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1954,6 +1989,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -2029,7 +2065,9 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
     private javax.swing.JPasswordField nicoNicoPassword2;
     private javax.swing.JTextField rushEMail;
     private javax.swing.JPasswordField rushPassword;
-    private javax.swing.JTextField statusBar;
+    private javax.swing.JTextField status0;
+    private javax.swing.JTextField status1;
+    private javax.swing.JTextField status2;
     private javax.swing.JTabbedPane tabPane;
     private javax.swing.JTextField viewerURLField;
     private javax.swing.JLabel viewerURLLabel;

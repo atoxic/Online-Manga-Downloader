@@ -30,12 +30,12 @@ public class DownloaderUtils
     public static final ArrayList<String> LOG = new ArrayList<String>();
     public static JEditorPane LOGEDITOR = null;
 
-    public static void debug(String message)
+    public static synchronized void debug(String message)
     {
         System.out.println("DEBUG: " + message);
         addToLog(message);
     }
-    public static void error(String message, Exception e, boolean fatal)
+    public static synchronized void error(String message, Exception e, boolean fatal)
     {
         String msg = (fatal ? "" : "NON-") + "FATAL ERROR: " + message;
         System.err.println(msg);
@@ -44,7 +44,7 @@ public class DownloaderUtils
         if(fatal)
             System.exit(1);
     }
-    public static void errorGUI(String message, Exception e, boolean fatal)
+    public static synchronized void errorGUI(String message, Exception e, boolean fatal)
     {
         String msg = (fatal ? "" : "NON-") + "FATAL ERROR: " + message;
         addToLog("!!!!! " + msg);
@@ -57,7 +57,7 @@ public class DownloaderUtils
             System.exit(1);
     }
 
-    private static void addToLog(String message)
+    private static synchronized void addToLog(String message)
     {
         LOG.add(message);
         try
@@ -71,7 +71,7 @@ public class DownloaderUtils
         }
     }
 
-    private static boolean addException(String msg, Exception e)
+    private static synchronized boolean addException(String msg, Exception e)
     {
         if(ERRORS.containsValue(e))
             return(false);

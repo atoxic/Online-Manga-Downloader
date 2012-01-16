@@ -6,7 +6,7 @@ package anonscanlations.downloader;
 
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.locks.*;
+import java.util.concurrent.*;
 
 import anonscanlations.downloader.chapter.*;
 import anonscanlations.downloader.downloadjobs.*;
@@ -15,302 +15,104 @@ import anonscanlations.downloader.downloadjobs.*;
  * This is the thread that processes all download jobs
  * @author /a/non
  */
-public class Downloader extends Thread
+public class Downloader
 {
     public static final String VERSION = "Online Manga Downloader 0.1.6.6 Test";
-    
+    public static final int NUMTHREADS = 3;
     private static TempDownloaderFrame frame;
-    private static Downloader currentThread;
+    private static ThreadPoolExecutor executor;
     
-    private List<List<DownloadJob>> jobs;
-    private boolean die, suspended;
-    private Exception error;
-    private final Object waitForJobs;
-    private final Lock processing;
-    private final Condition notProcessing;
-    private Downloader()
+    private Downloader(){}
+    
+    public static void status(int index, String s)
     {
-        jobs = Collections.synchronizedList(new ArrayList<List<DownloadJob>>());
-        
-        die = false;
-        suspended = false;
-        error = null;
-        
-        waitForJobs = new Object();
-        processing = new ReentrantLock();
-        notProcessing = processing.newCondition();
-        setPriority(MAX_PRIORITY);
+        frame.setStatus(index, s);
     }
-    public void addJobs(ArrayList<DownloadJob> job)
+    
+    private static void execute(int index, Chapter c, File d) throws Exception
     {
-        DownloaderUtils.debug("Downloader Operation: Enter AJ");
-        jobs.add(job);
-        synchronized(waitForJobs)
+        status(index, "Initializing");
+        ArrayList<DownloadJob> jobs = c.init();
+        for(DownloadJob j : jobs)
         {
-            waitForJobs.notify();
+            status(index, j.toString());
+            j.run();
         }
-        DownloaderUtils.debug("Downloader Operation: Exit AJ");
-    }
-    public void kill()
-    {
-        synchronized(waitForJobs)
+        status(index, "Downloading");
+        jobs = c.download(d);
+        for(DownloadJob j : jobs)
         {
-            die = true;
-            waitForJobs.notify();
+            status(index, j.toString());
+            j.run();
         }
+        status(index, "Finished");
     }
-    public void pause()
+    
+    private static int getIndex()
     {
-        DownloaderUtils.debug("Downloader Operation: Enter Pause");
-        synchronized(waitForJobs)
+        int index = executor.getActiveCount() - 1;
+        if(index < 0)
+            index = 0;
+        else if(index >= NUMTHREADS)
+            index = NUMTHREADS - 1;
+        DownloaderUtils.debug("Thread Index: " + index);
+        return(index);
+    }
+    
+    public static void runChapter(Chapter _chapter, File _directory)
+    {
+        final Chapter c = _chapter;
+        final File d = _directory;
+        executor.execute(new Runnable()
         {
-            suspended = true;
-            waitForJobs.notify();
-        }
-        DownloaderUtils.debug("Downloader Operation: Exit Pause");
-    }
-    public void unpause()
-    {
-        DownloaderUtils.debug("Downloader Operation: Enter Unpause");
-        synchronized(waitForJobs)
-        {
-            suspended = false;
-            waitForJobs.notify();
-        }
-        DownloaderUtils.debug("Downloader Operation: Exit Unpause");
-    }
-    public void waitUntilFinished() throws Exception
-    {
-        while(true)
-        {
-            try
-            {
-                processing.lock();
-                DownloaderUtils.debug("WUF Lock Acquired");
-                if(error != null)
-                {
-                    DownloaderUtils.debug("WUF Throwing Error");
-                    ExecutionException e = new ExecutionException(error);
-                    error = null;
-                    throw e;
-                }
-                if(jobs.isEmpty())
-                {
-                    DownloaderUtils.debug("WUF Thread Finished");
-                    return;
-                }
-                DownloaderUtils.debug("WUF notProcessing Waiting");
-                notProcessing.await();
-                DownloaderUtils.debug("WUF notProcessing Waking");
-            }
-            finally
-            {
-                DownloaderUtils.debug("WUF Lock Released");
-                processing.unlock();
-            }
-        }
-    }
-    @Override
-    public void run()
-    {
-        while(!die)
-        {
-            try
-            {
-                /*
-                 * So everything done to the thread after this
-                 * (adding jobs, suspending) happens after I start waiting.
-                 * This is important if those actions were triggered by
-                 * the downloader finishing the queue.
-                 */
-                synchronized(waitForJobs)
-                {
-                    while(!die && (jobs.isEmpty() || suspended))
-                    {
-                        DownloaderUtils.debug("Thread Wait");
-                        waitForJobs.wait();
-                        DownloaderUtils.debug("Thread Wake");
-                    }
-                    if(die)
-                        break;
-                }
-            }
-            catch(InterruptedException ie)
-            {
-                DownloaderUtils.error("Waiting loop interrupted", ie, false);
-            }
-            
-            try
-            {
-                DownloaderUtils.debug("Thread Locking");
-                processing.lock();
-                DownloaderUtils.debug("Thread Locked; Signalling notProcessing");
-                notProcessing.signalAll();
-                DownloaderUtils.debug("Thread Removing Job");
-                List<DownloadJob> top = jobs.remove(0);
-                DownloaderUtils.debug("Thread Running Jobset");
-                for(DownloadJob job : top)
-                {
-                    DownloaderUtils.debug("Running job: " + job);
-                    if(frame != null)
-                        frame.setStatus(job.toString());
-                    job.run();
-                }
-            }
-            catch(Exception e)
-            {
-                DownloaderUtils.debug("Thread Reached Error: " + e);
-                error = e;
-            }
-            finally
-            {
-                DownloaderUtils.debug("Thread Releasing Lock");
-                processing.unlock();
-            }
-        }
-    }
-
-    public static Downloader getDownloader()
-    {
-        return(currentThread);
-    }
-
-    public static Thread runChapter(Chapter _chapter, File _directory)
-    {
-        final Chapter chapter = _chapter;
-        final File directory = _directory;
-        Thread t = new Thread()
-        {
-            @Override
             public void run()
             {
+                int index = getIndex();
+                
                 try
                 {
-                    DownloaderUtils.debug("run Spot 1");
-                    
-                    if(frame != null)
-                        frame.setStatus("Initializing");
-                    
-                    DownloaderUtils.debug("run Spot 2");
-                    
-                    currentThread.pause();
-                    currentThread.addJobs(chapter.init());
-                    currentThread.unpause();
-                    currentThread.waitUntilFinished();
-                    
-                    DownloaderUtils.debug("run Spot 3");
-
-                    if(frame != null)
-                        frame.setStatus("Downloading");
-                    
-                    DownloaderUtils.debug("run Spot 4");
-
-                    currentThread.pause();
-                    currentThread.addJobs(chapter.download(directory));
-                    currentThread.unpause();
-                    currentThread.waitUntilFinished();
-                    
-                    DownloaderUtils.debug("run Spot 5");
-
-                    if(frame != null)
-                        frame.setStatus("Finished");
-                    
-                    DownloaderUtils.debug("run Spot 6");
-                }
-                catch(ExecutionException e)
-                {
-                    DownloaderUtils.errorGUI("Error in executing download jobs", e.getException(), false);
-
-                    if(frame != null)
-                        frame.setStatus("Error: " + e.getException().getMessage());
+                    execute(index, c, d);
                 }
                 catch(Exception e)
                 {
-                    DownloaderUtils.errorGUI("Error in spawning download jobs", e, false);
-
-                    if(frame != null)
-                        frame.setStatus("Error: " + e.getMessage());
+                    DownloaderUtils.error("Error while running chapter", e, true);
                 }
-                
             }
-        };
-        t.setPriority(MIN_PRIORITY);
-        t.start();
-        return(t);
+        });
     }
 
-    public static Thread autodetectChapter(ArrayList<Chapter> _chapters, File _directory)
+    public static void autodetectChapter(ArrayList<Chapter> _chapters, File _directory)
     {
         final ArrayList<Chapter> chapters = _chapters;
-        final File directory = _directory;
-        Thread t = new Thread()
+        final File d = _directory;
+        executor.execute(new Runnable()
         {
-            @Override
             public void run()
             {
-                LoginManager s = new LoginManager();
-
-                for(Chapter chapter : chapters)
+                int index = getIndex();
+                
+                for(Chapter c : chapters)
                 {
                     try
                     {
-                        Object lock = s.showDialog(chapter);
-                        if(lock != null)
-                        {
-                            synchronized(lock)
-                            {
-                                lock.wait();
-                            }
-                        }
-                        chapter.getRequiredInfo(s);
-
-                        DownloaderUtils.debug("Trying handler: " + chapter.getClass());
-                        if(frame != null)
-                            frame.setStatus("Trying handler: " + chapter.getClass());
-
-                        currentThread.pause();
-                        currentThread.addJobs(chapter.init());
-                        currentThread.unpause();
-                        currentThread.waitUntilFinished();
-                        
-                        DownloaderUtils.debug("autodetect Spot 2");
-                        
-                        if(frame != null)
-                            frame.setStatus("Downloading");
-
-                        currentThread.pause();
-                        currentThread.addJobs(chapter.download(directory));
-                        currentThread.unpause();
-                        currentThread.waitUntilFinished();
-                        
-                        DownloaderUtils.debug("autodetect Spot 3");
-                        
-                        if(frame != null)
-                            frame.setStatus("Finished");
+                        execute(index, c, d);
                         return;
                     }
                     catch(Exception e)
                     {
-                        DownloaderUtils.error("Handler failed: " + chapter.getClass(),
+                        DownloaderUtils.error("Handler failed: " + c.getClass(),
                                 e instanceof ExecutionException ? 
                                     ((ExecutionException)e).getException() :
                                     e, false);
                     }
                 }
-                if(frame != null)
-                    frame.setStatus("Error: could not autodetect");
             }
-        };
-        t.setPriority(MIN_PRIORITY);
-        t.start();
-        return(t);
+        });
     }
 
     public static void init() throws Exception
     {
-        currentThread = new Downloader();
-        
-        currentThread.start();
+        executor = (ThreadPoolExecutor)Executors.newFixedThreadPool(3);
     }
 
     public static void main(String[] args) throws Exception
