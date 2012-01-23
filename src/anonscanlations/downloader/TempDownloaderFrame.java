@@ -1679,10 +1679,10 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 case PCVIEWER:          chapter = new PCViewerChapter(viewerURL);           break;
                 case PLUGINFREE:        chapter = new PluginFreeChapter(viewerURL);         break;
                 case POCO:              chapter = new PocoChapter(viewerURL);               break;
-                //case NICONICO2:         chapter = new NicoNicoEventChapter(viewerURL);      break;
                 case SMANGA:            chapter = new SMangaChapter(viewerURL);             break;
                 case WEBYOUNGJUMP:      chapter = new WebYoungJumpChapter(viewerURL);       break;
                 case YAHOOBOOKSTORE:    chapter = new YahooBookstoreChapter(viewerURL);     break;
+                case COMICRUSH:         chapter = new MCSChapter(viewerURL);                break;
                 case CLUBSUNDAY:
                 {
                     URL keyURL;
@@ -1696,11 +1696,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                         return;
                     }
                     chapter = new SundayChapter(viewerURL, keyURL);
-                    break;
-                }
-                case COMICRUSH:
-                {
-                    chapter = new MCSChapter(viewerURL, rushEMail.getText(), rushPassword.getPassword());
                     break;
                 }
                 case NICONICO:
