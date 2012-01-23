@@ -16,7 +16,7 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class Downloader
 {
-    public static final String VERSION = "Online Manga Downloader 0.1.6.6 Test";
+    public static final String VERSION = "Online Manga Downloader 0.1.6.7 Test";
     public static final int NUMTHREADS = 3;
     private static TempDownloaderFrame frame;
     private static ThreadPoolExecutor executor;
@@ -92,11 +92,22 @@ public class Downloader
             public void run()
             {
                 int index = getIndex();
+                LoginManager s = new LoginManager();
                 
                 for(Chapter c : chapters)
                 {
                     try
                     {
+                        Object lock = s.showDialog(c);
+                        if(lock != null)
+                        {
+                            synchronized(lock)
+                            {
+                                lock.wait();
+                            }
+                        }
+                        c.getRequiredInfo(s);
+                        
                         execute(index, c, d);
                         return;
                     }
@@ -146,5 +157,7 @@ public class Downloader
         
         // initialize frontend
         initGUI();
+        
+        runChapter(new MCSChapter(new java.net.URL("http://comic-rush.jp/viewer/sample?contentId=398&product_id=0000000008-00-0000")), new File("D:\\test"));
     }
 }

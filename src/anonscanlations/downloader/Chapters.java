@@ -7,8 +7,8 @@ package anonscanlations.downloader;
 public enum Chapters
 {
     ACTIBOOK("Actibook"),
-    BOOKEND("bookend"),
-    COMICRUSH("Comic Rush (CLIP)"),
+    BOOKEND("Papy"),
+    COMICRUSH("Comic Rush (MCS)"),
     CROCHETTIME("CrochetTime"),
     DAUM("Daum"),
     FLIPPER3("Flipper3"),
