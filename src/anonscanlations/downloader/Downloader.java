@@ -16,7 +16,7 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class Downloader
 {
-    public static final String VERSION = "Online Manga Downloader 0.1.6.7 Test";
+    public static final String VERSION = "Online Manga Downloader 0.1.7";
     public static final int NUMTHREADS = 3;
     private static TempDownloaderFrame frame;
     private static ThreadPoolExecutor executor;

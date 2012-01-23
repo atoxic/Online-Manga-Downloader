@@ -11,13 +11,13 @@ import anonscanlations.downloader.chapter.*;
  */
 public class LoginManager
 {
-    private static final String NICO_KEY = "NICO", KEY_KEY = "KEY", RUSH_KEY = "RUSH";
+    private static final String NICO_KEY = "NICO", KEY_KEY = "KEY";
     private static final String NICO_LABEL = "<html>Is it from NicoNico Seiga?<br/>"
                                         + "If so, please input your NicoNico login information and press \"OK\" in order to authenticate.<br/>"
                                         + "If not, press \"Cancel.\"</html>";
 
-    private LoginDialog         nico;
-    private KeyURLDialog        key;
+    private LoginDialog             nico;
+    private KeyURLDialog            key;
     private Map<String, Boolean>    checked;
 
     public LoginManager()

@@ -1,4 +1,4 @@
-Online Manga Downloader 0.1.6
+Online Manga Downloader 0.1.7
 Written by /a/non <anonymousscanlations@gmail.com> and Nagato
 
 === What is this? ===
@@ -21,7 +21,7 @@ and much more.
 === Usage ===
 
 Put the URL of the viewer in "Viewer URL" and press "Download."
-Press "Example" to see what the URLs should look like.
+Look at the examples in the tabs to see what the URLs should look like.
 If you have an error, send me a mail with the text in "Log."
 
 === Files ===
