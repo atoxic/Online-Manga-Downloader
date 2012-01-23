@@ -157,7 +157,5 @@ public class Downloader
         
         // initialize frontend
         initGUI();
-        
-        runChapter(new MCSChapter(new java.net.URL("http://comic-rush.jp/viewer/sample?contentId=398&product_id=0000000008-00-0000")), new File("D:\\test"));
     }
 }

@@ -38,10 +38,12 @@ public class ChapterTest
         Downloader.execute(0, instance, directory);
         
         System.out.print("long CRC32[] = new long[]{");
+        int i = 0;
         for(File file : directory.listFiles())
         {
             System.out.printf("%dL, ", TestUtils.doChecksum(file));
-
+            if((i++) % 4 == 3)
+                System.out.println();
             assertTrue(file.delete());
         }
         System.out.println("};");
@@ -78,5 +80,17 @@ public class ChapterTest
                                     2406686717L, 685363998L, 934753219L, 3073342046L,
                                     2704109636L, 1906777089L};
         testChapterCRCs(new PocoChapter(url), CRC32);
+    }
+    
+    @Test
+    public void testMCSChapter() throws Exception
+    {
+        URL url = new URL("http://comic-rush.jp/viewer/sample?contentId=398&product_id=0000000008-00-0000");
+        long CRC32[] = new long[]{2766193580L, 127162681L, 2384547131L, 1271547731L, 
+                                    1585750090L, 2876598844L, 423447643L, 172077421L, 
+                                    3409156279L, 1327683888L, 1424545672L, 361830919L, 
+                                    2431235423L, 268000575L, 4157293085L, 3564055179L, 
+                                    442942882L, 424692177L};
+        testChapterCRCs(new MCSChapter(url), CRC32);
     }
 }
