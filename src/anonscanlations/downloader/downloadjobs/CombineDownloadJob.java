@@ -44,6 +44,6 @@ public class CombineDownloadJob extends DownloadJob
                     g.drawImage(grid[x][y].getImage(), x * gridW, y * gridH, null);
             }
         }
-        ImageIO.write(complete, "JPEG", f);
+        ImageIO.write(complete, "PNG", f);
     }
 }

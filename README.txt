@@ -1,4 +1,4 @@
-Online Manga Downloader 0.1.7
+Online Manga Downloader 0.1.9
 Written by /a/non <anonymousscanlations@gmail.com> and Nagato
 
 === What is this? ===
@@ -23,6 +23,22 @@ and much more.
 Put the URL of the viewer in "Viewer URL" and press "Download."
 Look at the examples in the tabs to see what the URLs should look like.
 If you have an error, send me a mail with the text in "Log."
+
+=== Passwords ===
+
+If you're tired of filling out your Nico account information over and over,
+you can save it by creating a file named "passwords.properties" and putting these
+two lines in it (and changing the account information, of course):
+
+nicoUsername=email@lol.com
+nicoPassword=password
+
+The rationale for storing the password in plain text is explained here:
+http://developer.pidgin.im/wiki/PlainTextPasswords
+
+I recommend that you exercise caution using this feature.  Make sure that
+your Nico password isn't the same as everything, or make another Nico account
+with another password.
 
 === Files ===
 

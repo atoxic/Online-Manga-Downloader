@@ -26,6 +26,7 @@ public class NicoNicoChapter extends Chapter
     private transient String username, title, id;
     private transient char[] password;
     private transient HashMap<String, NicoImage> images;
+    
     public NicoNicoChapter(URL _url)
     {
         this(_url, null, null);
@@ -36,6 +37,14 @@ public class NicoNicoChapter extends Chapter
         username = _username;
         password = _password;
         title = null;
+    }
+    
+    @Override
+    public void finalize() throws Throwable
+    {
+        super.finalize();
+        Arrays.fill(password, ' ');
+        password = null;
     }
 
     private class NicoImage

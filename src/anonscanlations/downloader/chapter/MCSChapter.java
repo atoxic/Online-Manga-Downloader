@@ -26,6 +26,7 @@ public class MCSChapter extends Chapter
     {
         this(_url, null, null);
     }
+    
     public MCSChapter(URL _url, String _username, char[] _password)
     {
         url = originalURL = _url;

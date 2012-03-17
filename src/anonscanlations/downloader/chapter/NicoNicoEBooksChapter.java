@@ -35,6 +35,7 @@ public class NicoNicoEBooksChapter extends Chapter
     {
         this(_url, null, null);
     }
+    
     public NicoNicoEBooksChapter(URL _url, String _username, char[] _password)
     {
         url = _url;
@@ -50,6 +51,14 @@ public class NicoNicoEBooksChapter extends Chapter
         login = null;
         is_trial = true;
         use_drm = false;
+    }
+    
+    @Override
+    public void finalize() throws Throwable
+    {
+        super.finalize();
+        Arrays.fill(password, ' ');
+        password = null;
     }
 
     @Override

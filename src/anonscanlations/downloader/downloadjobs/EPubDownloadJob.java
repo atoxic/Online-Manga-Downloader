@@ -4,26 +4,22 @@ import java.io.*;
 import java.net.*;
 import java.util.zip.*;
 
-import anonscanlations.downloader.*;
-
 /**
  *
  * @author /a/non <anonymousscanlations@gmail.com>
  */
 public abstract class EPubDownloadJob extends ByteArrayDownloadJob
 {
-    protected HttpURLConnection conn;
     public EPubDownloadJob(String _desc, URL _url)
     {
         super(_desc, _url);
-        conn = null;
     }
 
     @Override
     public void run() throws Exception
     {
         super.run();
-
+        
         ByteArrayInputStream byte_input = null;
         try
         {

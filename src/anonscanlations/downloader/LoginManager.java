@@ -1,5 +1,6 @@
 package anonscanlations.downloader;
 
+import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
@@ -49,6 +50,8 @@ public class LoginManager
         {
             checked.put(NICO_KEY, true);
             nico.setVisible(true);
+            nico.setEMail(PasswordManager.nicoUsername);
+            nico.setPassword(PasswordManager.nicoPassword);
             return(nico);
         }
         else if(chapter instanceof SundayChapter

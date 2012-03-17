@@ -141,6 +141,16 @@ public class LoginDialog extends javax.swing.JFrame {
     {
         return(password);
     }
+    
+    public void setEMail(String s)
+    {
+        EMailField.setText(s);
+    }
+    
+    public void setPassword(char[] c)
+    {
+        PasswordField.setText(new String(c));
+    }
 
     /**
     * @param args the command line arguments

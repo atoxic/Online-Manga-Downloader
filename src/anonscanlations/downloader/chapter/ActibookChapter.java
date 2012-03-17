@@ -89,7 +89,7 @@ public class ActibookChapter extends Chapter implements Serializable
             final int gridH = (int)Math.ceil(h * zoomVal / DOKI_GRID_H);
             for(int i = start; i < start + total; i++)
             {
-                final File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+                final File f = DownloaderUtils.fileName(directory, title, i, "png");
                  if(f.exists())
                     continue;
                 final ImageDownloadJob _grid[][] = new ImageDownloadJob[gridW][gridH];

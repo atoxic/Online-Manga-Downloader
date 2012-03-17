@@ -118,7 +118,7 @@ public class PluginFreeChapter extends Chapter implements Serializable
 
         for(int i = 1; i <= total; i++)
         {
-            final File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+            final File f = DownloaderUtils.fileName(directory, title, i, "png");
             if(f.exists())
                 continue;
 

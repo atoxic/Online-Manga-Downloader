@@ -73,7 +73,7 @@ public class Flipper3Chapter extends Chapter
         DownloaderUtils.debug("grid: " + gridW + ", " + gridH);
         for(int i = 1; i <= total; i++)
         {
-            final File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+            final File f = DownloaderUtils.fileName(directory, title, i, "png");
             if(f.exists())
                 continue;
             final String page = DownloaderUtils.pageOutOf(i, 1, total);

@@ -16,7 +16,7 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class Downloader
 {
-    public static final String VERSION = "Online Manga Downloader 0.1.7";
+    public static final String VERSION = "Online Manga Downloader 0.1.8";
     public static final int NUMTHREADS = 3;
     private static TempDownloaderFrame frame;
     private static ThreadPoolExecutor executor;
@@ -120,12 +120,16 @@ public class Downloader
                         status(index, "Handler \"" + c.getClass() + "\" error: " + e.getLocalizedMessage());
                     }
                 }
+                
+                status(index, "Sorry, couldn't autodetect");
             }
         });
     }
 
     public static void initGUI()
     {
+        PasswordManager.load();
+        
         // Try to use native look and feel
         try
         {

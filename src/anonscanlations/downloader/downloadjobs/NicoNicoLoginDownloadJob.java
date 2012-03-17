@@ -9,7 +9,6 @@ import java.net.*;
 public class NicoNicoLoginDownloadJob extends JSoupDownloadJob
 {
     public String username;
-    // TODO: make password handling absolutely secure
     public char[] password;
 
     public NicoNicoLoginDownloadJob(String _username, char[] _password)
@@ -18,6 +17,14 @@ public class NicoNicoLoginDownloadJob extends JSoupDownloadJob
 
         username = _username;
         password = _password;
+    }
+    
+    @Override
+    public void finalize() throws Throwable
+    {
+        super.finalize();
+        Arrays.fill(password, ' ');
+        password = null;
     }
 
     @Override
