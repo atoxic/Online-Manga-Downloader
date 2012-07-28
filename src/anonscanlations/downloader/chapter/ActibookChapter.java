@@ -21,7 +21,16 @@ public class ActibookChapter extends Chapter implements Serializable
 {
     private static final int DOKI_GRID_W = 400, DOKI_GRID_H = 400;
 
-    private String zoom, type;
+    // What kind of Actibook is this?
+    // Whole: GanGan Online, Blade, Kadokawa, Meteor
+    // Part: Houbunsha (DokiDokiVisual.com)
+    private enum Type
+    {
+        WHOLE, PART;
+    };
+    
+    private Type type;
+    private String zoom;
     private int start, total;
     private float w, h;
 
@@ -30,7 +39,7 @@ public class ActibookChapter extends Chapter implements Serializable
         super(_url);
         
         zoom = "1";
-        type = null;
+        type = Type.WHOLE;
         start = total = 0;
         w = h = 0;
     }
@@ -51,11 +60,14 @@ public class ActibookChapter extends Chapter implements Serializable
 
                 Document d = response.parse();
                 title = JSoupUtils.elementText(d, "name");
-                type = JSoupUtils.elementText(d, "to_type");
                 w = JSoupUtils.elementTextFloat(d, "w");
                 h = JSoupUtils.elementTextFloat(d, "h");
                 start = JSoupUtils.elementTextInt(d, "start");
                 total = JSoupUtils.elementTextInt(d, "total");
+                
+                // TODO: Maybe there are chapters that are mixed (both whole and part)?
+                if(JSoupUtils.elementText(d, "ActiBookPageNumber") == null)
+                    type = Type.PART;
             }
         };
         JSoupDownloadJob viewerXML = new JSoupDownloadJob("viewer.xml for zoom level", new URL(url, "books/db/viewer.xml"))
@@ -79,7 +91,7 @@ public class ActibookChapter extends Chapter implements Serializable
     {
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
 
-        if(type.equals("normal"))
+        if(type == Type.PART)
         {
             if(w == -1 || h == -1)
                 throw new Exception("No dimensions");
@@ -114,7 +126,7 @@ public class ActibookChapter extends Chapter implements Serializable
                 list.add(combine);
             }
         }
-        else if(type.equals("rich"))
+        else if(type == Type.WHOLE)
         {
             for(int i = start; i < start + total; i++)
             {
