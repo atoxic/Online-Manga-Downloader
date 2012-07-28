@@ -21,15 +21,16 @@ import anonscanlations.downloader.chapter.crypto.*;
  */
 public class CrochetTimeChapter extends Chapter
 {
-    private URL url;
     private String getImage, cgi, dir, src;
     private ArrayList<String> list;
     private Map<String, String> cookies;
 
     public CrochetTimeChapter(URL _url)
     {
-        url = _url;
-        getImage = null;
+        super(_url);
+        
+        getImage = cgi = dir = src = null;
+        list = null;
         cookies = new HashMap<String, String>();
     }
 
@@ -65,7 +66,7 @@ public class CrochetTimeChapter extends Chapter
             {
                 if(getImage != null)
                 {
-                    setCookies(cookies);
+                    addRequestCookies(cookies);
                     url = new URL(CrochetTimeChapter.this.url, getImage);
                     super.run();
                     cookies.putAll(response.cookies());
@@ -80,9 +81,11 @@ public class CrochetTimeChapter extends Chapter
                     cgi = getVariable(script, "cgi");
                     dir = getVariable(script, "dir");
                     src = getVariable(script, "src");
+                    title = src.split("[.]")[0];
                     DownloaderUtils.debug("cgi: " + cgi);
                     DownloaderUtils.debug("dir: " + dir);
                     DownloaderUtils.debug("src: " + src);
+                    DownloaderUtils.debug("title: " + title);
                 }
             }
         };
@@ -91,7 +94,7 @@ public class CrochetTimeChapter extends Chapter
             @Override
             public void run() throws Exception
             {
-                setCookies(cookies);
+                addRequestCookies(cookies);
                 String filelistURL = CrochetTimeDecrypt.scrambleURL(dir + "/" + src 
                                         + "&B" + String.format("%08x", (int)(32767 * Math.random())));
                 url = new URL(cgi + "?" + filelistURL);
@@ -123,7 +126,7 @@ public class CrochetTimeChapter extends Chapter
         ArrayList<DownloadJob> jobsList = new ArrayList<DownloadJob>();
         for(int i = 0; i < list.size(); i++)
         {
-            final File f = DownloaderUtils.fileName(directory, src.split("[.]")[0], i, "jpg");
+            final File f = DownloaderUtils.fileName(directory, i, "jpg");
             if(f.exists())
                 continue;
 
@@ -133,7 +136,7 @@ public class CrochetTimeChapter extends Chapter
                 @Override
                 public void run() throws Exception
                 {
-                    setCookies(cookies);
+                    addRequestCookies(cookies);
                     super.run();
                     cookies.putAll(response.cookies());
 

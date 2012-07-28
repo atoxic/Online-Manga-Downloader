@@ -20,12 +20,9 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class SMangaChapter extends Chapter
 {
-    private URL url;
-    private String title;
     public SMangaChapter(URL _url)
     {
-        url = _url;
-        title = null;
+        super(_url);
     }
     
     @Override
@@ -124,7 +121,7 @@ public class SMangaChapter extends Chapter
             }
             if(bytes != null)
             {
-                final File f = DownloaderUtils.fileName(directory, title, i, ext);
+                final File f = DownloaderUtils.fileName(directory, i, ext);
                 if(!f.exists())
                     DownloaderUtils.safeWrite(bytes, f);
                 i++;

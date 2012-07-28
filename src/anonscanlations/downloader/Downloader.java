@@ -5,6 +5,7 @@
 package anonscanlations.downloader;
 
 import java.io.*;
+import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -16,10 +17,12 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class Downloader
 {
-    public static final String VERSION = "Online Manga Downloader 0.1.8";
+    public static final String VERSION = "Online Manga Downloader 0.1.9 Electric Boogaloo";
     public static final int NUMTHREADS = 3;
     private static TempDownloaderFrame frame;
     private static ThreadPoolExecutor executor;
+    // Which status bars are free?
+    private static final boolean statusFree[] = new boolean[NUMTHREADS];
     
     private Downloader(){}
     
@@ -30,7 +33,33 @@ public class Downloader
             frame.setStatus(index, s);
     }
     
-    public static void execute(int index, Chapter c, File d) throws Exception
+    private static int getFreeStatus()
+    {
+        int r = -1;
+        synchronized(statusFree)
+        {
+            for(int i = 0; i < NUMTHREADS; i++)
+            {
+                if(statusFree[i])
+                {
+                    statusFree[i] = false;
+                    r = i;
+                    break;
+                }
+            }
+        }
+        return(r);
+    }
+    
+    private static void freeStatus(int i)
+    {
+        synchronized(statusFree)
+        {
+            statusFree[i] = true;
+        }
+    }
+    
+    public static void execute(int index, Chapter c, File baseDirectory) throws Exception
     {
         status(index, "Initializing");
         ArrayList<DownloadJob> jobs = c.init();
@@ -39,25 +68,21 @@ public class Downloader
             status(index, j.toString());
             j.run();
         }
+        File directory = baseDirectory;
+        String title = c.getTitle();
+        if(title != null)
+        {
+            directory = new File(baseDirectory, DownloaderUtils.sanitizeFileName(title));
+            DownloaderUtils.tryMkdirs(directory);
+        }
         status(index, "Downloading");
-        jobs = c.download(d);
+        jobs = c.download(directory);
         for(DownloadJob j : jobs)
         {
             status(index, j.toString());
             j.run();
         }
         status(index, "Finished");
-    }
-    
-    private static int getIndex()
-    {
-        int index = executor.getActiveCount() - 1;
-        if(index < 0)
-            index = 0;
-        else if(index >= NUMTHREADS)
-            index = NUMTHREADS - 1;
-        DownloaderUtils.debug("Thread Index: " + index);
-        return(index);
     }
     
     public static void runChapter(Chapter _chapter, File _directory)
@@ -68,7 +93,7 @@ public class Downloader
         {
             public void run()
             {
-                int index = getIndex();
+                int index = getFreeStatus();
                 
                 try
                 {
@@ -79,6 +104,8 @@ public class Downloader
                     DownloaderUtils.error("Error while running chapter", e, false);
                     status(index, "Error: " + e.getLocalizedMessage());
                 }
+                
+                freeStatus(index);
             }
         });
     }
@@ -91,7 +118,7 @@ public class Downloader
         {
             public void run()
             {
-                int index = getIndex();
+                int index = getFreeStatus();
                 LoginManager s = new LoginManager();
                 
                 for(Chapter c : chapters)
@@ -122,6 +149,7 @@ public class Downloader
                 }
                 
                 status(index, "Sorry, couldn't autodetect");
+                freeStatus(index);
             }
         });
     }
@@ -147,11 +175,14 @@ public class Downloader
     public static void init() throws Exception
     {
         // unnecessary, but just to appear like a real viewer
-        System.setProperty("http.agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:8.0) Gecko/20100101 Firefox/8.0");
+        System.setProperty("http.agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0");
         // in order to handle custom protocols
         System.setProperty("java.protocol.handler.pkgs", "anonscanlations.downloader.chapter");
         
-        executor = (ThreadPoolExecutor)Executors.newFixedThreadPool(3);
+        executor = (ThreadPoolExecutor)Executors.newFixedThreadPool(NUMTHREADS);
+        
+        for(int i = 0; i < NUMTHREADS; i++)
+            statusFree[i] = true;
     }
 
     public static void main(String[] args) throws Exception

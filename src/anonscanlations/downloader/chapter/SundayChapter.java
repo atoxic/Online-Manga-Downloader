@@ -21,7 +21,7 @@ import anonscanlations.downloader.downloadjobs.*;
 public class SundayChapter extends Chapter
 {
     private String key1, key2, key3, key4, shd;
-    private URL url, keyURL;
+    private URL keyURL;
 
     private transient Map<String, String> cookies;
     private transient String otk, server;
@@ -34,13 +34,12 @@ public class SundayChapter extends Chapter
     }
     public SundayChapter(URL _url, URL _keyURL)
     {
+        super(_url);
+        
+        key1 = key2 = key3 = key4 = shd = otk = server = null;
         keyURL = _keyURL;
-        url = _url;
-        key1 = null;
-        key2 = null;
-        key3 = null;
-        key4 = null;
-        shd = null;
+        cookies = null;
+        timestamp = min = max = 0;
     }
 
     @Override
@@ -63,6 +62,7 @@ public class SundayChapter extends Chapter
         key2 = params.get("key2");
         key3 = params.get("key3");
         key4 = params.get("key4");
+        title = key3 + "_c" + key4;
         shd = params.get("shd");
         
         SessionDownloadJob session = new SessionDownloadJob();
@@ -83,7 +83,7 @@ public class SundayChapter extends Chapter
 
         for(int i = min; i <= max; i++)
         {
-            final File f = DownloaderUtils.fileName(directory, key3 + "_c" + key4, i, "jpg");
+            final File f = DownloaderUtils.fileName(directory, i, "jpg");
             if(f.exists())
                 continue;
             
@@ -174,7 +174,7 @@ public class SundayChapter extends Chapter
                                 "&key4=" + key4 + "&sp=-1&re=0&shd=" + shd +
                                 "&otk=" + otk + "&vo=1");
             DownloaderUtils.debug("MainFileDJ URL: " + this.url);
-            setCookies(SundayChapter.this.cookies);
+            addRequestCookies(SundayChapter.this.cookies);
 
             super.run();
         }
@@ -193,7 +193,7 @@ public class SundayChapter extends Chapter
                             "&key2=" + key2 + "&key3=" + key3 +
                             "&key4=" + key4 + "&sp=-1&re=0&otk=" + otk);
             DownloaderUtils.debug("XMLDJ url: " + this.url);
-            setCookies(SundayChapter.this.cookies);
+            addRequestCookies(SundayChapter.this.cookies);
 
             super.run();
 

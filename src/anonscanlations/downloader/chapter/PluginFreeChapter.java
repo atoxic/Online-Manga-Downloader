@@ -25,17 +25,15 @@ public class PluginFreeChapter extends Chapter implements Serializable
 {
     private static final int GRID_W = 480, GRID_H = 480;
 
-    private URL url;
-
-    private transient String hCN, downloadURL, title, zoom, zoomWidthS, zoomHeightS;
+    private transient String hCN, downloadURL, zoom, zoomWidthS, zoomHeightS;
     private transient int cKVInt, total, sIS;
 
     public PluginFreeChapter(URL _url)
     {
-        url = _url;
-        cKVInt = 0;
-        total = 0;
-        sIS = 0;
+        super(_url);
+        
+        hCN = downloadURL = zoom = zoomWidthS = zoomHeightS = null;
+        cKVInt = total = sIS = 0;
     }
 
     public ArrayList<DownloadJob> init() throws IOException
@@ -118,7 +116,7 @@ public class PluginFreeChapter extends Chapter implements Serializable
 
         for(int i = 1; i <= total; i++)
         {
-            final File f = DownloaderUtils.fileName(directory, title, i, "png");
+            final File f = DownloaderUtils.fileName(directory, i, "png");
             if(f.exists())
                 continue;
 

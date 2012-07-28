@@ -17,7 +17,6 @@ import anonscanlations.downloader.chapter.crypto.*;
 public class MangaOnWebChapter extends Chapter
 {
     private String ctsn;
-    private URL url;
 
     private transient Map<String, String> cookies;
     private transient String cdn, crcod;
@@ -25,7 +24,11 @@ public class MangaOnWebChapter extends Chapter
 
     public MangaOnWebChapter(URL _url)
     {
-        url = _url;
+        super(_url);
+        
+        ctsn = cdn = crcod = null;
+        cookies = null;
+        paths = null;
     }
 
     public ArrayList<DownloadJob> init() throws Exception
@@ -40,7 +43,7 @@ public class MangaOnWebChapter extends Chapter
         int endIndex = urlString.indexOf('&', index);
         if(endIndex == -1)
             endIndex = urlString.length();
-        ctsn = urlString.substring(urlString.indexOf('=', index) + 1, endIndex);
+        title = ctsn = urlString.substring(urlString.indexOf('=', index) + 1, endIndex);
         JSoupDownloadJob mainPage = new JSoupDownloadJob("Get the main page", new URL("http://mangaonweb.com/viewer.do?ctsn=" + ctsn))
         {
             @Override
@@ -66,7 +69,7 @@ public class MangaOnWebChapter extends Chapter
             public void run() throws Exception
             {
                 this.url = new URL("http://mangaonweb.com/page.do?cdn=" + cdn + "&cpn=book.xml&crcod=" + crcod + "&rid=" + (int)(Math.random() * 10000));
-                setCookies(MangaOnWebChapter.this.cookies);
+                addRequestCookies(MangaOnWebChapter.this.cookies);
 
                 super.run();
 
@@ -88,7 +91,7 @@ public class MangaOnWebChapter extends Chapter
         final BlowfishKey bfkey = new BlowfishKey(keyBytes);
         for(int i = 0; i < paths.size(); i++)
         {
-            final File f = DownloaderUtils.fileName(directory, ctsn, i, "png");
+            final File f = DownloaderUtils.fileName(directory, i, "png");
             if(f.exists())
                 continue;
             // rid is just a random number from 0-9999
@@ -107,7 +110,7 @@ public class MangaOnWebChapter extends Chapter
                     DownloaderUtils.safeWrite(bytes, f);
                 }
             };
-            page.setCookies(cookies);
+            page.addRequestCookies(cookies);
             list.add(page);
         }
         return(list);

@@ -258,11 +258,30 @@ public class DownloaderUtils
     }
     
     private static final String BAD_CHARS ="[\\\\/:*?\"<>\\|]";
-
+    
     public static File fileName(File directory, String title, int page, String ext)
     {
-        String saveTitle = String.format("%s_%03d.%s", title, page, ext).replace(' ', '_').replaceAll(BAD_CHARS, "");
-        return(new File(directory, saveTitle));
+        return(new File(directory, String.format("%s_%03d.%s", sanitizeFileName(title), page, ext)));
+    }
+
+    public static File fileName(File directory, int page, String ext)
+    {
+        return(new File(directory, String.format("%03d.%s", page, ext)));
+    }
+    
+    public static String sanitizeFileName(String fname)
+    {
+        return(fname.replace(' ', '_').replaceAll(BAD_CHARS, ""));
+    }
+    
+    public static void tryMkdirs(File directory) throws Exception
+    {
+        if(directory.exists())
+            if(!directory.isDirectory())
+                directory.delete();
+        if(!directory.exists())
+            if(!directory.mkdirs())
+                throw new Exception("Unable to create new directory");
     }
     
     public static String pageOutOf(int i, int start, int total)

@@ -20,18 +20,16 @@ public class YahooBookstoreChapter extends Chapter
     public static final String APPID = "h9Qsaf6kzaJ.EqJij8Ec.J7_NagjVdMdN4Ot0L0TAPf5";
     //http://ebook.yahooapis.jp/v1/epubdata/public?appid=h9Qsaf6kzaJ.EqJij8Ec.J7_NagjVdMdN4Ot0L0TAPf5&goods_id=135393&bookshelf_id=1&public=TRUE&update=FALSE&refereeing=FALSE
 
-    private URL url;
     private Map<String, String> params;
-    private String ePubURI, publicPath, path, title;
+    private String ePubURI, publicPath, path;
     private ArrayList<String> images;
 
     public YahooBookstoreChapter(URL _url)
     {
-        url = _url;
-        ePubURI = null;
-        publicPath = null;
-        path = null;
-        title = null;
+        super(_url);
+        
+        params = null;
+        ePubURI = publicPath = path = null;
         images = new ArrayList<String>();
     }
 
@@ -180,7 +178,7 @@ public class YahooBookstoreChapter extends Chapter
         for(String image : images)
         {
             String extension = image.substring(image.lastIndexOf('.') + 1);
-            File f = DownloaderUtils.fileName(directory, title, i, extension);
+            File f = DownloaderUtils.fileName(directory, i, extension);
             if(f.exists())
             {
                 i++;

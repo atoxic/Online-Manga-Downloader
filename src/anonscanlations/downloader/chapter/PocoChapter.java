@@ -17,15 +17,12 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class PocoChapter extends Chapter implements Serializable
 {
-    protected URL url;
-    protected String title, story;
     protected ArrayList<String> images;
 
-    protected PocoChapter(){}
     public PocoChapter(URL _url)
     {
-        url = _url;
-        title = story = null;
+        super(_url);
+        
         images = new ArrayList<String>();
     }
 
@@ -47,9 +44,12 @@ public class PocoChapter extends Chapter implements Serializable
             public void run() throws Exception
             {
                 super.run();
+                
+                // 2012-07-27: Found out that some dumbasses who work at Poco don't encode ampersands
+                String cleaned = response.body().replace("&", "%24");
 
                 Piccolo parser = new Piccolo();
-                InputSource is = new InputSource(new StringReader(response.body()));
+                InputSource is = new InputSource(new StringReader(cleaned));
                 is.setEncoding("UTF-8");
 
                 parser.setContentHandler(new DefaultHandler()
@@ -59,8 +59,7 @@ public class PocoChapter extends Chapter implements Serializable
                     {
                         if(localName.equals("File"))
                         {
-                            title = atts.getValue("title");
-                            story = atts.getValue("story");
+                            title = atts.getValue("title") + "_" + atts.getValue("story");
                         }
                         else if(localName.equals("Page"))
                         {
@@ -85,7 +84,7 @@ public class PocoChapter extends Chapter implements Serializable
         int i = 1;
         for(String image : images)
         {
-            File f = DownloaderUtils.fileName(directory, title + "_" + story, i, "jpg");
+            File f = DownloaderUtils.fileName(directory, i, "jpg");
             if(f.exists())
             {
                 i++;

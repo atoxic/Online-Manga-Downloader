@@ -18,15 +18,14 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class NicoNicoEventChapter extends Chapter implements Serializable
 {
-    protected URL url;
-    protected String title, themeID;
+    protected String themeID;
     protected TreeSet<String> images;
 
-    protected NicoNicoEventChapter(){}
     public NicoNicoEventChapter(URL _url)
     {
-        url = _url;
-        title = themeID = null;
+        super(_url);
+        
+        themeID = null;
         images = new TreeSet<String>();
     }
 
@@ -96,7 +95,7 @@ public class NicoNicoEventChapter extends Chapter implements Serializable
         int i = 1;
         for(String image : images)
         {
-            final File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+            final File f = DownloaderUtils.fileName(directory, i, "jpg");
             if(f.exists())
             {
                 i++;

@@ -21,19 +21,18 @@ public class ActibookChapter extends Chapter implements Serializable
 {
     private static final int DOKI_GRID_W = 400, DOKI_GRID_H = 400;
 
-    private URL url;
-    private String zoom, title, type;
+    private String zoom, type;
     private int start, total;
     private float w, h;
 
-    public ActibookChapter(URL myURL)
+    public ActibookChapter(URL _url)
     {
-        url = myURL;
-        total = 0;
-        start = 0;
+        super(_url);
+        
         zoom = "1";
-        w = 0;
-        h = 0;
+        type = null;
+        start = total = 0;
+        w = h = 0;
     }
 
     public ArrayList<DownloadJob> init() throws Exception
@@ -89,7 +88,7 @@ public class ActibookChapter extends Chapter implements Serializable
             final int gridH = (int)Math.ceil(h * zoomVal / DOKI_GRID_H);
             for(int i = start; i < start + total; i++)
             {
-                final File f = DownloaderUtils.fileName(directory, title, i, "png");
+                final File f = DownloaderUtils.fileName(directory, i, "png");
                  if(f.exists())
                     continue;
                 final ImageDownloadJob _grid[][] = new ImageDownloadJob[gridW][gridH];
@@ -119,7 +118,7 @@ public class ActibookChapter extends Chapter implements Serializable
         {
             for(int i = start; i < start + total; i++)
             {
-                File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+                File f = DownloaderUtils.fileName(directory, i, "jpg");
                 if(f.exists())
                     continue;
                 FileDownloadJob page = new FileDownloadJob(DownloaderUtils.pageOutOf(i, start, total),

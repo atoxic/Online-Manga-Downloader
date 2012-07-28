@@ -16,22 +16,17 @@ import anonscanlations.downloader.chapter.crypto.*;
  */
 public class MCSChapter extends Chapter
 {
-    private URL url, originalURL;
+    private URL originalURL;
     private Map<String, String> params;
-    private String title;
     private ArrayList<Integer> pages;
     private byte[] key, time, decodeKey;
     
     public MCSChapter(URL _url)
     {
-        this(_url, null, null);
-    }
-    
-    public MCSChapter(URL _url, String _username, char[] _password)
-    {
-        url = originalURL = _url;
+        super(_url);
+        
+        originalURL = _url;
         params = null;
-        title = null;
         pages = new ArrayList<Integer>();
         key = time = decodeKey = null;
     }
@@ -166,7 +161,7 @@ public class MCSChapter extends Chapter
         list.add(getTime);
         list.add(getKey);
 
-        final File firstPageFile = DownloaderUtils.fileName(directory, title, pages.get(0), "jpg");
+        final File firstPageFile = DownloaderUtils.fileName(directory, pages.get(0), "jpg");
         if(!firstPageFile.exists())
         {
             DownloadJob firstPageDecode = new DownloadJob("Decode page 1")
@@ -184,7 +179,7 @@ public class MCSChapter extends Chapter
         for(int i = 1; i < pages.size(); i++)
         {
             final int page = pages.get(i);
-            final File f = DownloaderUtils.fileName(directory, title, page, "jpg");
+            final File f = DownloaderUtils.fileName(directory, page, "jpg");
             if(f.exists())
                 continue;
 

@@ -21,10 +21,7 @@ public class NicoNicoChapter extends Chapter
 {
     public static final Pattern IDMATCH = Pattern.compile(".*?mg([0-9]+)$");
 
-    private URL url;
-
-    private transient String username, title, id;
-    private transient char[] password;
+    private transient String id;
     private transient HashMap<String, NicoImage> images;
     
     public NicoNicoChapter(URL _url)
@@ -33,18 +30,10 @@ public class NicoNicoChapter extends Chapter
     }
     public NicoNicoChapter(URL _url, String _username, char[] _password)
     {
-        url = _url;
-        username = _username;
-        password = _password;
-        title = null;
-    }
-    
-    @Override
-    public void finalize() throws Throwable
-    {
-        super.finalize();
-        Arrays.fill(password, ' ');
-        password = null;
+        super(_url, _username, _password);
+        
+        id = null;
+        images = null;
     }
 
     private class NicoImage
@@ -86,13 +75,13 @@ public class NicoNicoChapter extends Chapter
         id = matcher.group(1);
 
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
-        final NicoNicoLoginDownloadJob login = new NicoNicoLoginDownloadJob(username, password);
+        final LoginDownloadJob login = new LoginDownloadJob("Login to NicoNico", LoginDownloadJob.Type.NICONICO, username, password);
         JSoupDownloadJob info = new JSoupDownloadJob("Get info", new URL("http://seiga.nicovideo.jp/api/theme/info?id=" + id))
         {
             @Override
             public void run() throws Exception
             {
-                setCookies(login.getCookies());
+                addRequestCookies(login.getResponseCookies());
                 super.run();
 
                 String page = response.body();
@@ -107,7 +96,7 @@ public class NicoNicoChapter extends Chapter
             @Override
             public void run() throws Exception
             {
-                setCookies(login.getCookies());
+                addRequestCookies(login.getResponseCookies());
                 try
                 {
                     super.run();
@@ -201,7 +190,7 @@ public class NicoNicoChapter extends Chapter
         int i = 1;
         for(NicoImage image : images.values())
         {
-            File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+            File f = DownloaderUtils.fileName(directory, i, "jpg");
             if(f.exists())
             {
                 i++;
@@ -216,7 +205,7 @@ public class NicoNicoChapter extends Chapter
             {
                 FileDownloadJob sfx = new FileDownloadJob(pageName + " SFX",
                             new URL("http://lohas.nicoseiga.jp/" + image.se_path),
-                            DownloaderUtils.fileName(directory, title, i, "mp3"));
+                            DownloaderUtils.fileName(directory, i, "mp3"));
                 list.add(sfx);
             }
             

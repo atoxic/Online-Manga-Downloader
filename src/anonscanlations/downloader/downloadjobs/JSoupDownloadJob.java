@@ -17,6 +17,7 @@ public class JSoupDownloadJob extends DownloadJob
 {
     private boolean init;
 
+    protected boolean postOverride;
     protected URL url;
     protected Connection conn;
     protected Connection.Response response;
@@ -25,8 +26,10 @@ public class JSoupDownloadJob extends DownloadJob
     public JSoupDownloadJob(String _desc, URL _url)
     {
         super(_desc);
+        postOverride = false;
         url = _url;
         init = false;
+        cookies = new HashMap<String, String>();
     }
 
     protected void init() throws Exception
@@ -35,7 +38,10 @@ public class JSoupDownloadJob extends DownloadJob
         init = true;
         conn = Jsoup.connect(url.toString()).followRedirects(true).timeout(10000);
         for(Map.Entry<String, String> e : headers.entrySet())
+        {
+            DownloaderUtils.debug("JSoupDJ (" + getClass() + "): Header: " + e.getKey() + ", " + e.getValue());
             conn.header(e.getKey(), e.getValue());
+        }
         if(cookies != null)
         {
             for(Map.Entry<String, String> cookie : cookies.entrySet())
@@ -44,7 +50,7 @@ public class JSoupDownloadJob extends DownloadJob
                 conn.cookie(cookie.getKey(), cookie.getValue());
             }
         }
-        if(!data.isEmpty())
+        if(!data.isEmpty() || postOverride)
             conn.data(data).method(Connection.Method.POST);
         else
             conn.method(Connection.Method.GET);
@@ -66,8 +72,18 @@ public class JSoupDownloadJob extends DownloadJob
         return(response.bodyAsBytes());
     }
 
-    public void setCookies(Map<String, String> _cookies)
+    public void addRequestCookies(Map<String, String> _cookies)
     {
-        cookies = _cookies;
+        cookies.putAll(_cookies);
+    }
+    
+    protected Map<String, String> getRequestCookies()
+    {
+        return(cookies);
+    }
+    
+    public Map<String, String> getResponseCookies()
+    {
+        return(response.cookies());
     }
 }

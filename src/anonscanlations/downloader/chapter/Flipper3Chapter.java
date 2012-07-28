@@ -18,20 +18,18 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class Flipper3Chapter extends Chapter
 {
-    private URL url;
-    private String title, maxMagString;
-    private int total, pageWidth, pageHeight, sliceWidth, sliceHeight;
+    private String maxMagString;
     // float just in case
     private float maxMag;
+    private int total, pageWidth, pageHeight, sliceWidth, sliceHeight;
     
     public Flipper3Chapter(URL _url)
     {
-        url = _url;
-        title = null;
-        total = 0;
-        maxMag = 1;
+        super(_url);
+        
         maxMagString = "1";
-        pageWidth = pageHeight = sliceWidth = sliceHeight = 0;
+        maxMag = 1;
+        total = pageWidth = pageHeight = sliceWidth = sliceHeight = 0;
     }
     
     @Override
@@ -73,7 +71,7 @@ public class Flipper3Chapter extends Chapter
         DownloaderUtils.debug("grid: " + gridW + ", " + gridH);
         for(int i = 1; i <= total; i++)
         {
-            final File f = DownloaderUtils.fileName(directory, title, i, "png");
+            final File f = DownloaderUtils.fileName(directory, i, "png");
             if(f.exists())
                 continue;
             final String page = DownloaderUtils.pageOutOf(i, 1, total);

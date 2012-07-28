@@ -17,13 +17,13 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class WebYoungJumpChapter extends Chapter
 {
-    private URL url;
-    private String title, titleURL;
+    private String titleURL;
     private int numPages;
     public WebYoungJumpChapter(URL _url)
     {
-        url = _url;
-        title = titleURL = null;
+        super(_url);
+        
+        titleURL = null;
         numPages = 0;
     }
     
@@ -82,7 +82,7 @@ public class WebYoungJumpChapter extends Chapter
         
         for(int i = 1; i <= numPages; i++)
         {
-            final File f = DownloaderUtils.fileName(directory, title, i, "jpeg");
+            final File f = DownloaderUtils.fileName(directory, i, "jpeg");
             if(f.exists())
                 continue;
             list.add(new ByteArrayDownloadJob(DownloaderUtils.pageOutOf(i, 1, numPages), 

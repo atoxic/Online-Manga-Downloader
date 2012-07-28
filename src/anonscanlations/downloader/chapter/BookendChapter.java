@@ -19,13 +19,13 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class BookendChapter extends Chapter
 {
-    private URL url;
-    private String pdf, title;
+    private String pdf;
+    
     public BookendChapter(URL _url)
     {
-        url = _url;
+        super(_url);
+        
         pdf = null;
-        title = null;
     }
     
     @Override
@@ -63,9 +63,9 @@ public class BookendChapter extends Chapter
     }
     
     @Override
-    public ArrayList<DownloadJob> download(File directory) throws Exception
+    public ArrayList<DownloadJob> download(File baseDirectory) throws Exception
     {
-        final File finalDirectory = directory;
+        final File fBaseDirectory = baseDirectory;
         ArrayList<DownloadJob> list = new ArrayList<DownloadJob>();
         list.add(new ByteArrayDownloadJob("All Pages", new URL(pdf))
         {
@@ -75,6 +75,10 @@ public class BookendChapter extends Chapter
                 super.run();
                 PdfReader r = new PdfReader(getBytes());
                 parseMetadata(r.getMetadata());
+                
+                final File directory = new File(fBaseDirectory, DownloaderUtils.sanitizeFileName(title));
+                DownloaderUtils.tryMkdirs(directory);
+                
                 PdfReaderContentParser parser = new PdfReaderContentParser(r);
                 RenderListener listener = new RenderListener()
                 {
@@ -84,7 +88,7 @@ public class BookendChapter extends Chapter
                         try
                         {
                             DownloaderUtils.safeWrite(renderInfo.getImage().getImageAsBytes(), 
-                                    DownloaderUtils.fileName(finalDirectory, title, i, renderInfo.getImage().getFileType()));
+                                    DownloaderUtils.fileName(directory, i, renderInfo.getImage().getFileType()));
                         }
                         catch(IOException e)
                         {

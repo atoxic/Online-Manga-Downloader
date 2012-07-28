@@ -18,16 +18,16 @@ import anonscanlations.downloader.downloadjobs.*;
 public class DaumChapter extends Chapter
 {
     public static final Pattern IDMATCH = Pattern.compile("^([0-9]+)$");
-    private URL url;
-    private String ID, title;
+    
+    private String ID;
     private Map<String, String> cookies;
     private ArrayList<String> images;
     
     public DaumChapter(URL _url)
     {
-        url = _url;
+        super(_url);
+        
         ID = null;
-        title = null;
         cookies = null;
         images = new ArrayList<String>();
     }
@@ -62,7 +62,7 @@ public class DaumChapter extends Chapter
             @Override
             public void run() throws Exception
             {
-                this.setCookies(DaumChapter.this.cookies);
+                this.addRequestCookies(DaumChapter.this.cookies);
                 super.run();
                 Piccolo parser = new Piccolo();
                 InputSource is = new InputSource(new StringReader(response.body()));
@@ -96,7 +96,7 @@ public class DaumChapter extends Chapter
         int i = 1;
         for(String image : images)
         {
-            File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+            File f = DownloaderUtils.fileName(directory, i, "jpg");
             if(f.exists())
             {
                 i++;

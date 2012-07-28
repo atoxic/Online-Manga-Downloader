@@ -20,16 +20,17 @@ import anonscanlations.downloader.downloadjobs.*;
 public class PCViewerChapter extends Chapter implements Serializable
 {
     protected HashMap<String, String> params;
-    private String dataFolder, title;
+    private String dataFolder;
     private int rangeStart, rangeEnd;
-    private URL url;
 
     public PCViewerChapter(URL _url)
     {
-        url = _url;
-        params = null;
-        rangeStart = rangeEnd = 0;
+        super(_url);
+        
         title = "";
+        params = null;
+        dataFolder = null;
+        rangeStart = rangeEnd = 0;
     }
 
     // generate params for URL query string
@@ -106,7 +107,7 @@ public class PCViewerChapter extends Chapter implements Serializable
 
         for(int i = rangeStart; i <= rangeEnd; i++)
         {
-            final File f = DownloaderUtils.fileName(directory, title, i, "jpg");
+            final File f = DownloaderUtils.fileName(directory, i, "jpg");
             if(f.exists())
                 continue;
             PCViewerDownloadJob job = new PCViewerDownloadJob(DownloaderUtils.pageOutOf(i, rangeStart, rangeEnd - rangeStart + 1),
