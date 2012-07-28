@@ -61,6 +61,10 @@ public class Downloader
     
     public static void execute(int index, Chapter c, File baseDirectory) throws Exception
     {
+        execute(index, c, baseDirectory, false);
+    }
+    public static void execute(int index, Chapter c, File baseDirectory, boolean noSubDir) throws Exception
+    {
         status(index, "Initializing");
         ArrayList<DownloadJob> jobs = c.init();
         for(DownloadJob j : jobs)
@@ -70,7 +74,7 @@ public class Downloader
         }
         File directory = baseDirectory;
         String title = c.getTitle();
-        if(title != null)
+        if(!noSubDir && title != null)
         {
             directory = new File(baseDirectory, DownloaderUtils.sanitizeFileName(title));
             DownloaderUtils.tryMkdirs(directory);

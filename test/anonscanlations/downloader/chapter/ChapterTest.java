@@ -18,7 +18,8 @@ public class ChapterTest
     private void testChapterCRCs(Chapter instance, long[] CRC32) throws Exception
     {
         File directory = TestUtils.createTempDirectory();
-        Downloader.execute(0, instance, directory);
+        directory.deleteOnExit();
+        Downloader.execute(0, instance, directory, true);
 
         assertTrue(CRC32.length == directory.listFiles().length);
         int i = 0;
@@ -35,7 +36,8 @@ public class ChapterTest
     private void getChapterCRCs(Chapter instance) throws Exception
     {
         File directory = TestUtils.createTempDirectory();
-        Downloader.execute(0, instance, directory);
+        directory.deleteOnExit();
+        Downloader.execute(0, instance, directory, true);
         
         System.out.print("long CRC32[] = new long[]{");
         int i = 0;
@@ -65,9 +67,9 @@ public class ChapterTest
     public void testActibookNormal() throws Exception
     {
         URL doki = new URL("http://www.dokidokivisual.com/comics/book/actibook/wb79414/_SWF_Window.html");
-        long dokiCRC32[] = new long[]{4133593396L, 3379590262L, 4266094118L, 3801813761L, 
-                                    1406744991L, 1444933050L, 2778004089L, 2587291625L, 
-                                    1777625553L, 2075726667L, 2271434115L, 1099511803L};
+        long dokiCRC32[] = new long[]{3760306193L, 2228918759L, 2591779391L, 3832333511L, 
+                                    2054715754L, 97390896L, 2251394709L, 1995319103L, 
+                                    3667164662L, 3840079627L, 2837765636L, 4233292560L};
         testChapterCRCs(new ActibookChapter(doki), dokiCRC32);
     }
     
