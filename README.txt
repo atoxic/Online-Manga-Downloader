@@ -26,19 +26,21 @@ If you have an error, send me a mail with the text in "Log."
 
 === Passwords ===
 
-If you're tired of filling out your Nico account information over and over,
+If you're tired of filling out your Nico and Pixiv account information over and over,
 you can save it by creating a file named "passwords.properties" and putting these
 two lines in it (and changing the account information, of course):
 
 nicoUsername=email@lol.com
 nicoPassword=password
+pixivUsername=email@lol.com
+pixivPassword=password
 
 The rationale for storing the password in plain text is explained here:
 http://developer.pidgin.im/wiki/PlainTextPasswords
 
 I recommend that you exercise caution using this feature.  Make sure that
-your Nico password isn't the same as everything, or make another Nico account
-with another password.
+your Nico and Pixiv password isn't the same as everything, or make another Nico
+or Pixiv account with another password.
 
 === Files ===
 
