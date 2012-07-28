@@ -17,6 +17,7 @@ public enum Chapters
     NICONICO2("NicoNico Event"),
     NICONICO("NicoNico User-published"),
     PCVIEWER("PCViewer/DOR"),
+    PIXIV("Pixiv"),
     PLUGINFREE("PluginFree"),
     POCO("Poco"),
     SMANGA("S-Manga"),

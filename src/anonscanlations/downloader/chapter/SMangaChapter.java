@@ -29,11 +29,11 @@ public class SMangaChapter extends Chapter
     public ArrayList<DownloadJob> init() throws Exception
     {
         DownloaderUtils.checkHTTP(url);
-        // TODO what about proxies?
-        /*
-        if(!url.getHost().contains("s-manga") || !url.toString().endsWith(".html"))
-            throw new Exception("Malformed URL");
-        // */
+        if((!url.getHost().contains("s-manga") 
+                    && !url.getHost().contains("jump") 
+                    && !url.getHost().contains("shueisha")) 
+                || !url.toString().endsWith(".html"))
+            throw new Exception("Not from a domain with \"s-manga\", \"jump\" or \"shueisha\".");
         JSoupDownloadJob getTitle = new JSoupDownloadJob("Get title", url)
         {
             @Override

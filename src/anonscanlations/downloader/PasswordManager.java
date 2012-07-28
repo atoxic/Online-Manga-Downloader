@@ -9,13 +9,15 @@ import java.util.*;
  */
 public class PasswordManager
 {
-    public static transient String nicoUsername;
-    public static transient char[] nicoPassword;
+    public static transient String nicoUsername, pixivUsername;
+    public static transient char[] nicoPassword, pixivPassword;
     
     public static void load()
     {
         nicoUsername = "";
+        pixivUsername = "";
         nicoPassword = new char[0];
+        pixivPassword = new char[0];
         
         Properties properties = new Properties();
         FileInputStream in = null;
@@ -32,6 +34,10 @@ public class PasswordManager
                     nicoUsername = value;
                 else if(key.equals("nicoPassword"))
                     nicoPassword = value.toCharArray();
+                else if(key.equals("pixivUsername"))
+                    pixivUsername = value;
+                else if(key.equals("pixivPassword"))
+                    pixivPassword = value.toCharArray();
             }
         }
         catch(Exception e)

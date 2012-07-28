@@ -36,6 +36,16 @@ public class PixivChapter extends Chapter
         images = new ArrayList<String>();
     }
     
+    @Override
+    public void getRequiredInfo(LoginManager s) throws Exception
+    {
+        if(username == null || password == null)
+        {
+            username = s.getPixivLogin().getEMail();
+            password = s.getPixivLogin().getPassword();
+        }
+    }
+    
     public ArrayList<DownloadJob> init() throws Exception
     {
         if(!url.toString().contains("comic.pixiv.net/viewer/stories/"))
