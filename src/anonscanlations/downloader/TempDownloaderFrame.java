@@ -111,6 +111,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jPanel18 = new javax.swing.JPanel();
         jTextField25 = new javax.swing.JTextField();
         jTextField26 = new javax.swing.JTextField();
+        jTextField41 = new javax.swing.JTextField();
         MangaOnWeb = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jTextField9 = new javax.swing.JTextField();
@@ -156,7 +157,6 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         PCViewer = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
         jEditorPane6 = new javax.swing.JEditorPane();
         Pixiv = new javax.swing.JPanel();
@@ -228,6 +228,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         logButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         downloadButton = new javax.swing.JButton();
+        openButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(Downloader.VERSION);
@@ -561,7 +562,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jEditorPane13.setContentType("text/html");
         jEditorPane13.setEditable(false);
         jEditorPane13.setFont(jEditorPane13.getFont());
-        jEditorPane13.setText("<html>Flash-based viewer used on <a href=\"http://grandjump.shueisha.co.jp/original/index.html\">Grand Jump</a> and <a href=\"http://www.heros-web.com/\">Monthly Heroes</a>.</html>");
+        jEditorPane13.setText("<html>Flash-based viewer used on <a href=\"http://grandjump.shueisha.co.jp/original/index.html\">Grand Jump</a>, <a href=\"http://www.heros-web.com/\">Monthly Heroes</a> and <a href=\"http://www.famitsu.com/comic_clear/\">Famitsu Comic Clear</a>.</html>");
         ((javax.swing.text.html.HTMLDocument)jEditorPane13.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane13.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
@@ -578,6 +579,9 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jTextField26.setEditable(false);
         jTextField26.setText("http://www.heros-web.com/works/viewer/ultraman_001/index.html");
 
+        jTextField41.setEditable(false);
+        jTextField41.setText("http://ct.webcomic-eb.com/viewer/EB/kamu_001/kokorokone_001/0001-0/index.html");
+
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
@@ -586,7 +590,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
-                    .addComponent(jTextField26, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                    .addComponent(jTextField26, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(jTextField41, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel18Layout.setVerticalGroup(
@@ -595,6 +600,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -616,7 +623,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addContainerGap(266, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.FLIPPER3.getName(), Flipper3);
@@ -1027,26 +1034,19 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jTextField12.setEditable(false);
         jTextField12.setText("http://view.books.yahoo.co.jp/dor/drm/dor_main.php?key1=blood-mikotoka01-0001&sp=-1&ad=1&re=0&xmlurl=http://stream01.books.yahoo.co.jp:8001/&shd=62862185b216b95c956c6c06b2af2e9b2a2aeb88");
 
-        jTextField13.setEditable(false);
-        jTextField13.setText("http://ct.eb-webcomic.com/dor/pcviewer_main.php?key1=EB&key2=umetanitig_001&key3=evahsebunt_001&key4=0001-0&sp=-1&ad=1&re=1&otp=1&xmlurl=http://ct.eb-webcomic.com/stream/&shd=1ccefd53ebe69ff204c60dba9ade4b6334282e61");
-
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                .addComponent(jTextField12, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1057,7 +1057,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
         jEditorPane6.setContentType("text/html");
         jEditorPane6.setEditable(false);
         jEditorPane6.setFont(jEditorPane6.getFont());
-        jEditorPane6.setText("<html>Flash-based viewer used on sites suched as <a href=\"http://comics.yahoo.co.jp\">Yahoo Comics</a> and <a href=\"http://www.famitsu.com/comic_clear/\">Famitsu Comic Clear (series that start with \"se_\")</a>.</html>");
+        jEditorPane6.setText("<html>Flash-based viewer used on sites suched as <a href=\"http://comics.yahoo.co.jp\">Yahoo Comics</a>.</html>");
         ((javax.swing.text.html.HTMLDocument)jEditorPane6.getDocument()).getStyleSheet().addRule(bodyRule);
         jEditorPane6.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
@@ -1084,7 +1084,7 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addContainerGap(318, Short.MAX_VALUE))
         );
 
         tabPane.addTab(Chapters.PCVIEWER.getName(), PCViewer);
@@ -1773,6 +1773,13 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
             }
         });
 
+        openButton.setText("Open...");
+        openButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1790,12 +1797,16 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                             .addComponent(auto))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(viewerURLField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(downloadButton))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(downloadDirectoryField)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(browseButton))
-                            .addComponent(viewerURLField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(downloadButton))))
+                                .addComponent(browseButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(openButton)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1805,7 +1816,8 @@ public class TempDownloaderFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(downloadDirectoryLabel)
                     .addComponent(downloadDirectoryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(browseButton))
+                    .addComponent(browseButton)
+                    .addComponent(openButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewerURLField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1986,6 +1998,10 @@ private void download(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloa
         // TODO add your handling code here:
     }//GEN-LAST:event_pixivPassworddownload
 
+    private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openButtonActionPerformed
+        DownloaderUtils.openDir(new File(downloadDirectoryField.getText()));
+    }//GEN-LAST:event_openButtonActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -2105,7 +2121,6 @@ private void download(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloa
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
@@ -2136,6 +2151,7 @@ private void download(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloa
     private javax.swing.JTextField jTextField39;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField40;
+    private javax.swing.JTextField jTextField41;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
@@ -2150,6 +2166,7 @@ private void download(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloa
     private javax.swing.JPasswordField nicoNicoPassword1;
     private javax.swing.JPasswordField nicoNicoPassword2;
     private javax.swing.JPasswordField nicoNicoPassword3;
+    private javax.swing.JButton openButton;
     private javax.swing.JTextField pixivEMail;
     private javax.swing.JPasswordField pixivPassword;
     private javax.swing.JTextField status0;

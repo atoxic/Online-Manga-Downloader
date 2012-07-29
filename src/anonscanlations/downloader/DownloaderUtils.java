@@ -221,6 +221,25 @@ public class DownloaderUtils
             }
         }
     }
+    
+    public static void openDir(File f)
+    {
+        if(!f.isDirectory())
+            return;
+        java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+
+        if(desktop.isSupported(java.awt.Desktop.Action.OPEN))
+        {
+            try
+            {
+                desktop.open(f);
+            }
+            catch(Exception e)
+            {
+                DownloaderUtils.errorGUI("Couldn't open dir: " + f, e, false);
+            }
+        }
+    }
 
     public static HashMap<String, String> getQueryMap(java.net.URL url)
             throws UnsupportedEncodingException

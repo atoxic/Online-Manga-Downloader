@@ -45,7 +45,7 @@ public class Flipper3Chapter extends Chapter
                 super.run();
                 
                 Document d = response.parse();
-                title = JSoupUtils.elementText(d, "bookTitle");
+                title = JSoupUtils.elementText(d, "bookTitle") + "_id-" + JSoupUtils.elementText(d, "bookID");
                 total = JSoupUtils.elementTextInt(d, "total");
                 maxMagString = JSoupUtils.elementText(d, "maxMagnification");
                 maxMag = Float.parseFloat(maxMagString);

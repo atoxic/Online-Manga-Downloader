@@ -17,10 +17,10 @@ import anonscanlations.downloader.downloadjobs.*;
  */
 public class PixivChapter extends Chapter
 {
-    public static final Pattern IDMATCH = Pattern.compile("^([0-9]+)$");
+    public static final Pattern IDMATCH = Pattern.compile("^\\/viewer\\/(?:magazines\\/\\d+\\/)?(issues|stories)\\/(\\d+)");
     
     private transient LoginDownloadJob login;
-    private transient String tokenURL, token, ID, csrfToken;
+    private transient String tokenURL, token, ID, csrfToken, type;
     private transient ArrayList<String> images;
     
     public PixivChapter(URL _url)
@@ -32,7 +32,7 @@ public class PixivChapter extends Chapter
         super(_url, _username, _password);
         
         login = null;
-        tokenURL = token = ID = csrfToken = null;
+        tokenURL = token = ID = csrfToken = type = null;
         images = new ArrayList<String>();
     }
     
@@ -48,13 +48,15 @@ public class PixivChapter extends Chapter
     
     public ArrayList<DownloadJob> init() throws Exception
     {
-        if(!url.toString().contains("comic.pixiv.net/viewer/stories/"))
-            throw new Exception("Not a Pixiv URL (no \"comic.pixiv.net/viewer/stories/\")");
-        String file = url.getPath().substring(url.getPath().lastIndexOf('/') + 1);
+        if(!url.toString().contains("comic.pixiv.net/viewer"))
+            throw new Exception("Not a Pixiv URL (no \"comic.pixiv.net/viewer\")");
+        String file = url.getPath();
         Matcher matcher = IDMATCH.matcher(file);
         if(!matcher.matches())
             throw new Exception("ID not found");
-        ID = matcher.group(1);
+        type = matcher.group(1);
+        ID = matcher.group(2);
+        DownloaderUtils.debug("type: " + type);
         DownloaderUtils.debug("ID: " + ID);
         
         login = new LoginDownloadJob("Login to Pixiv", LoginDownloadJob.Type.PIXIV, username, password);
@@ -109,7 +111,7 @@ public class PixivChapter extends Chapter
                 addRequestProperty("Referer", PixivChapter.this.url.toString());
                 addRequestProperty("X-CSRF-Token", csrfToken);
                 addRequestProperty("X-Requested-With", "XMLHttpRequest");
-                url = new URL("http://comic.pixiv.net/api/viewer/stories/" + token + "/" + ID + ".json");
+                url = new URL("http://comic.pixiv.net/api/viewer/" + type + "/" + token + "/" + ID + ".json");
                 
                 super.run();
                 JSONObject obj = new JSONObject(response.body());
@@ -117,14 +119,18 @@ public class PixivChapter extends Chapter
                 title = dataObj.getString("title") + "_id-" + ID + "_" + dataObj.getString("sub_title");
                 DownloaderUtils.debug("title: " + title);
                 
-                JSONArray pages = dataObj.getJSONArray("contents").getJSONObject(0).getJSONArray("pages");
-                for(int i = 0; i < pages.length(); i++)
+                JSONArray contents = dataObj.getJSONArray("contents");
+                for(int i = 0; i < contents.length(); i++)
                 {
-                    JSONObject page = pages.getJSONObject(i);
-                    if(page.has("right"))
-                        images.add(page.getJSONObject("right").getJSONObject("data").getString("url"));
-                    if(page.has("left"))
-                        images.add(page.getJSONObject("left").getJSONObject("data").getString("url"));
+                    JSONArray pages = contents.getJSONObject(i).getJSONArray("pages");
+                    for(int j = 0; j < pages.length(); j++)
+                    {
+                        JSONObject page = pages.getJSONObject(j);
+                        if(page.has("right"))
+                            images.add(page.getJSONObject("right").getJSONObject("data").getString("url"));
+                        if(page.has("left"))
+                            images.add(page.getJSONObject("left").getJSONObject("data").getString("url"));
+                    }
                 }
             }
         };

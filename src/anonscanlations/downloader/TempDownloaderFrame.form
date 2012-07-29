@@ -48,13 +48,18 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="viewerURLField" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="downloadButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="downloadDirectoryField" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="browseButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="openButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="viewerURLField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="downloadButton" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -70,6 +75,7 @@
                   <Component id="downloadDirectoryLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="downloadDirectoryField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="browseButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="openButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -736,7 +742,7 @@
                           <Component id="jScrollPane13" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel18" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="292" max="32767" attributes="0"/>
+                          <EmptySpace pref="266" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -769,7 +775,7 @@
                             <Font component="jEditorPane13" property="font" relativeSize="true" size="0"/>
                           </FontInfo>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="&lt;html&gt;Flash-based viewer used on &lt;a href=&quot;http://grandjump.shueisha.co.jp/original/index.html&quot;&gt;Grand Jump&lt;/a&gt; and &lt;a href=&quot;http://www.heros-web.com/&quot;&gt;Monthly Heroes&lt;/a&gt;.&lt;/html&gt;"/>
+                        <Property name="text" type="java.lang.String" value="&lt;html&gt;Flash-based viewer used on &lt;a href=&quot;http://grandjump.shueisha.co.jp/original/index.html&quot;&gt;Grand Jump&lt;/a&gt;, &lt;a href=&quot;http://www.heros-web.com/&quot;&gt;Monthly Heroes&lt;/a&gt; and &lt;a href=&quot;http://www.famitsu.com/comic_clear/&quot;&gt;Famitsu Comic Clear&lt;/a&gt;.&lt;/html&gt;"/>
                       </Properties>
                       <Events>
                         <EventHandler event="hyperlinkUpdate" listener="javax.swing.event.HyperlinkListener" parameters="javax.swing.event.HyperlinkEvent" handler="hyperlink"/>
@@ -792,11 +798,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField25" alignment="1" pref="596" max="32767" attributes="0"/>
                                   <Component id="jTextField26" alignment="0" pref="596" max="32767" attributes="0"/>
+                                  <Component id="jTextField41" alignment="0" pref="596" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -808,6 +815,8 @@
                               <Component id="jTextField25" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jTextField26" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextField41" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -824,6 +833,12 @@
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="text" type="java.lang.String" value="http://www.heros-web.com/works/viewer/ultraman_001/index.html"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="jTextField41">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                        <Property name="text" type="java.lang.String" value="http://ct.webcomic-eb.com/viewer/EB/kamu_001/kokorokone_001/0001-0/index.html"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1583,7 +1598,7 @@
                           <Component id="jScrollPane6" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="292" max="32767" attributes="0"/>
+                          <EmptySpace pref="318" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1603,10 +1618,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField12" alignment="1" pref="596" max="32767" attributes="0"/>
-                                  <Component id="jTextField13" alignment="0" pref="596" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="jTextField12" pref="596" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -1615,8 +1627,6 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jTextField12" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField13" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -1627,12 +1637,6 @@
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="text" type="java.lang.String" value="http://view.books.yahoo.co.jp/dor/drm/dor_main.php?key1=blood-mikotoka01-0001&amp;sp=-1&amp;ad=1&amp;re=0&amp;xmlurl=http://stream01.books.yahoo.co.jp:8001/&amp;shd=62862185b216b95c956c6c06b2af2e9b2a2aeb88"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField13">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="text" type="java.lang.String" value="http://ct.eb-webcomic.com/dor/pcviewer_main.php?key1=EB&amp;key2=umetanitig_001&amp;key3=evahsebunt_001&amp;key4=0001-0&amp;sp=-1&amp;ad=1&amp;re=1&amp;otp=1&amp;xmlurl=http://ct.eb-webcomic.com/stream/&amp;shd=1ccefd53ebe69ff204c60dba9ade4b6334282e61"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1664,7 +1668,7 @@
                             <Font component="jEditorPane6" property="font" relativeSize="true" size="0"/>
                           </FontInfo>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="&lt;html&gt;Flash-based viewer used on sites suched as &lt;a href=&quot;http://comics.yahoo.co.jp&quot;&gt;Yahoo Comics&lt;/a&gt; and &lt;a href=&quot;http://www.famitsu.com/comic_clear/&quot;&gt;Famitsu Comic Clear (series that start with &quot;se_&quot;)&lt;/a&gt;.&lt;/html&gt;"/>
+                        <Property name="text" type="java.lang.String" value="&lt;html&gt;Flash-based viewer used on sites suched as &lt;a href=&quot;http://comics.yahoo.co.jp&quot;&gt;Yahoo Comics&lt;/a&gt;.&lt;/html&gt;"/>
                       </Properties>
                       <Events>
                         <EventHandler event="hyperlinkUpdate" listener="javax.swing.event.HyperlinkListener" parameters="javax.swing.event.HyperlinkEvent" handler="hyperlink"/>
@@ -2861,6 +2865,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="download"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="openButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Open..."/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
