@@ -111,7 +111,7 @@ public class PixivChapter extends Chapter
                 addRequestProperty("Referer", PixivChapter.this.url.toString());
                 addRequestProperty("X-CSRF-Token", csrfToken);
                 addRequestProperty("X-Requested-With", "XMLHttpRequest");
-                url = new URL("http://comic.pixiv.net/api/viewer/" + type + "/" + token + "/" + ID + ".json");
+                url = new URL("http://comic.pixiv.net/api/v1/viewer/" + type + "/" + token + "/" + ID + ".json");
                 
                 super.run();
                 JSONObject obj = new JSONObject(response.body());

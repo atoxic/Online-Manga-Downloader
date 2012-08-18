@@ -60,10 +60,21 @@ public class DownloaderUtils
     private static synchronized void addToLog(String message)
     {
         LOG.add(message);
+        while(LOG.size() > 1000)
+            LOG.remove(0);
         try
         {
             if(LOGEDITOR != null)
-                LOGEDITOR.setText(LOGEDITOR.getText() + message + '\n');
+            {
+                StringBuilder sb = new StringBuilder(LOGEDITOR.getText());
+                int index;
+                sb.append(message).append('\n');
+                while(sb.length() > 50000
+                        && (index = sb.indexOf("\n")) != -1
+                        && index < sb.length())
+                    sb.delete(0, index + 1);
+                LOGEDITOR.setText(sb.toString());
+            }
         }
         catch(Exception e)
         {

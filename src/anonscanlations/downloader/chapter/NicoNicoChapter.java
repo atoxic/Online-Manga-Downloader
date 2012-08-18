@@ -22,7 +22,7 @@ public class NicoNicoChapter extends Chapter
     public static final Pattern IDMATCH = Pattern.compile(".*?mg([0-9]+)$");
 
     private transient String id;
-    private transient HashMap<String, NicoImage> images;
+    private transient LinkedHashMap<String, NicoImage> images;
     
     public NicoNicoChapter(URL _url)
     {
@@ -119,7 +119,7 @@ public class NicoNicoChapter extends Chapter
 
     private void parseData(String page) throws Exception
     {
-        images = new HashMap<String, NicoImage>();
+        images = new LinkedHashMap<String, NicoImage>();
 
         Piccolo parser = new Piccolo();
         InputSource is = new InputSource(new StringReader(page));
