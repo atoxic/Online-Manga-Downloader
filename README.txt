@@ -1,4 +1,4 @@
-Online Manga Downloader 0.1.9
+Online Manga Downloader 0.1.10
 Written by /a/non <anonymousscanlations@gmail.com> and Nagato
 
 === What is this? ===

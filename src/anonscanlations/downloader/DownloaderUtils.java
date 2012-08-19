@@ -26,8 +26,8 @@ public class DownloaderUtils
      * ===============================================
      */
     public static final boolean SPILL_GUTS = true;
-    public static final HashMap<String, Exception> ERRORS = new HashMap<String, Exception>();
-    public static final ArrayList<String> LOG = new ArrayList<String>();
+    public static final List<Exception> ERRORS = new ArrayList<Exception>();
+    public static final List<String> LOG = new ArrayList<String>();
     public static JEditorPane LOGEDITOR = null;
 
     public static synchronized void debug(String message)
@@ -84,9 +84,11 @@ public class DownloaderUtils
 
     private static synchronized boolean addException(String msg, Exception e)
     {
-        if(ERRORS.containsValue(e))
+        if(ERRORS.contains(e))
             return(false);
-        ERRORS.put(msg, e);
+        ERRORS.add(e);
+        while(ERRORS.size() > 500)
+            ERRORS.remove(0);
         if(SPILL_GUTS)
         {
             System.err.println("LOGGER: Exception added");
